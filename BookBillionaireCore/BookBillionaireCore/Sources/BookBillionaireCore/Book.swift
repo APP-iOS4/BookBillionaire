@@ -37,7 +37,7 @@ public struct Book: Identifiable, Codable {
         self.bookCategory = bookCategory
         self.rental = rental
     }
-
+    
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
