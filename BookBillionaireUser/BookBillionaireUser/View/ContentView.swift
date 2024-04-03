@@ -30,7 +30,7 @@ struct ContentView: View {
             }
             
             NavigationStack {
-                MessageView()
+                ChatListView()
             }
             .tag(2)
             .tabItem {
