@@ -25,6 +25,8 @@
 		EF0F74D02BBD297B00E37D0D /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74CF2BBD297B00E37D0D /* CategoryView.swift */; };
 		EF0F74D22BBD38FA00E37D0D /* MyBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */; };
 		EF0F74D42BBD472D00E37D0D /* RentalBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */; };
+		EF8178CB2BBD748400ADAE2E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = EF8178CA2BBD748400ADAE2E /* BookBillionaireCore */; };
+		EF8178CD2BBD749700ADAE2E /* RentalPeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,7 @@
 		EF0F74CF2BBD297B00E37D0D /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookListView.swift; sourceTree = "<group>"; };
 		EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookListView.swift; sourceTree = "<group>"; };
+		EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalPeriodView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +57,7 @@
 				EF0F74CC2BBD0E6C00E37D0D /* FirebaseFirestoreCombine-Community in Frameworks */,
 				EF0F74C82BBD0E6C00E37D0D /* FirebaseAuthCombine-Community in Frameworks */,
 				EF0F74CA2BBD0E6C00E37D0D /* FirebaseFirestore in Frameworks */,
+				EF8178CB2BBD748400ADAE2E /* BookBillionaireCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +77,7 @@
 			children = (
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
+				EF8178C92BBD748400ADAE2E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +153,7 @@
 				EF0F74CF2BBD297B00E37D0D /* CategoryView.swift */,
 				EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */,
 				EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */,
+				EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -158,6 +164,13 @@
 				EF0F74B82BBCFA6200E37D0D /* MessageView.swift */,
 			);
 			path = Message;
+			sourceTree = "<group>";
+		};
+		EF8178C92BBD748400ADAE2E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +195,7 @@
 				EF0F74C92BBD0E6C00E37D0D /* FirebaseFirestore */,
 				EF0F74CB2BBD0E6C00E37D0D /* FirebaseFirestoreCombine-Community */,
 				EF0F74CD2BBD0E6C00E37D0D /* FirebaseFirestoreSwift */,
+				EF8178CA2BBD748400ADAE2E /* BookBillionaireCore */,
 			);
 			productName = BookBillionaireUser;
 			productReference = EF0F74842BBCF7C500E37D0D /* BookBillionaireUser.app */;
@@ -251,6 +265,7 @@
 				088260352BBD1C99007BEA25 /* UserStore.swift in Sources */,
 				EF0F74BD2BBCFA7F00E37D0D /* LibraryView.swift in Sources */,
 				EF0F74882BBCF7C500E37D0D /* BookBillionaireUserApp.swift in Sources */,
+				EF8178CD2BBD749700ADAE2E /* RentalPeriodView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +516,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EF0F74C42BBD0E6C00E37D0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		EF8178CA2BBD748400ADAE2E /* BookBillionaireCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BookBillionaireCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
