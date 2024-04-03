@@ -23,7 +23,7 @@ struct BookBillionaireUserApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CategoryView(selectedIndex: .constant(0))
+            MyBookListView()
         }
     }
 }
