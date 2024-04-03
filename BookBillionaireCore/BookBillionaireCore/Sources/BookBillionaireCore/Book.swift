@@ -9,7 +9,7 @@ import Foundation
 
 /// 도서정보에 대한 구조체
 public struct Book: Identifiable, Codable {
-    public var id: String
+    public var id: String = UUID().uuidString
     public var ownerID: String
     public var isbn: String?
     public var title: String
@@ -22,9 +22,8 @@ public struct Book: Identifiable, Codable {
     public var bookCategory: BookCategory?
     public var rental: String //Rental ID
     
-    public init(id: String = UUID().uuidString, owenerID: String, isbn: String? = nil, title: String, contents: String, publisher: String? = nil, authors: [String], translators: [String]? = nil, price: Int? = nil, thumbnail: String, bookCategory: BookCategory? = nil, rental: String) {
+    public init(owenerID: String, isbn: String? = nil, title: String, contents: String, publisher: String? = nil, authors: [String], translators: [String]? = nil, price: Int? = nil, thumbnail: String, bookCategory: BookCategory? = nil, rental: String) {
         
-        self.id = id
         self.ownerID = owenerID
         self.isbn = isbn
         self.title = title
@@ -38,21 +37,7 @@ public struct Book: Identifiable, Codable {
         self.rental = rental
     }
     
-    public init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
-        self.ownerID = try container.decode(String.self, forKey: .ownerID)
-        self.isbn = try container.decodeIfPresent(String.self, forKey: .isbn)
-        self.title = try container.decode(String.self, forKey: .title)
-        self.contents = try container.decode(String.self, forKey: .contents)
-        self.publisher = try container.decodeIfPresent(String.self, forKey: .publisher)
-        self.authors = try container.decode([String].self, forKey: .authors)
-        self.translators = try container.decodeIfPresent([String].self, forKey: .translators)
-        self.price = try container.decodeIfPresent(Int.self, forKey: .price)
-        self.thumbnail = try container.decode(String.self, forKey: .thumbnail)
-        self.bookCategory = try container.decodeIfPresent(BookCategory.self, forKey: .bookCategory)
-        self.rental = try container.decode(String.self, forKey: .rental)
-    }
+    
 }
 
 public enum BookCategory: String, CaseIterable, Identifiable, Codable {
