@@ -41,6 +41,7 @@
 		EF0F74D42BBD472D00E37D0D /* RentalBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */; };
 		EF8178CB2BBD748400ADAE2E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = EF8178CA2BBD748400ADAE2E /* BookBillionaireCore */; };
 		EF8178CD2BBD749700ADAE2E /* RentalPeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */; };
+		EF0F74D62BBD6FF600E37D0D /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookListView.swift; sourceTree = "<group>"; };
 		EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookListView.swift; sourceTree = "<group>"; };
 		EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalPeriodView.swift; sourceTree = "<group>"; };
+		EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 				EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */,
 				EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */,
 				EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */,
+				EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				EF0F74C32BBCFA9F00E37D0D /* ProfileView.swift in Sources */,
 				EF0F74B92BBCFA6200E37D0D /* MessageView.swift in Sources */,
 				04A59A5F2BBD4F49009FBF6E /* BookStore.swift in Sources */,
+				EF0F74D62BBD6FF600E37D0D /* DescriptionView.swift in Sources */,
 				EF0F74C12BBCFA9500E37D0D /* LoginView.swift in Sources */,
 				35537C5C2BBD8CBC00FE8354 /* BookDetailView.swift in Sources */,
 				EF0F74D42BBD472D00E37D0D /* RentalBookListView.swift in Sources */,
