@@ -24,6 +24,7 @@
 		EF0F74CE2BBD0E6C00E37D0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EF0F74CD2BBD0E6C00E37D0D /* FirebaseFirestoreSwift */; };
 		EF0F74D02BBD297B00E37D0D /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74CF2BBD297B00E37D0D /* CategoryView.swift */; };
 		EF0F74D22BBD38FA00E37D0D /* MyBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */; };
+		EF0F74D42BBD472D00E37D0D /* RentalBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		EF0F74C22BBCFA9F00E37D0D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		EF0F74CF2BBD297B00E37D0D /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookListView.swift; sourceTree = "<group>"; };
+		EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				EF0F74BC2BBCFA7F00E37D0D /* LibraryView.swift */,
 				EF0F74CF2BBD297B00E37D0D /* CategoryView.swift */,
 				EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */,
+				EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				EF0F74C32BBCFA9F00E37D0D /* ProfileView.swift in Sources */,
 				EF0F74B92BBCFA6200E37D0D /* MessageView.swift in Sources */,
 				EF0F74C12BBCFA9500E37D0D /* LoginView.swift in Sources */,
+				EF0F74D42BBD472D00E37D0D /* RentalBookListView.swift in Sources */,
 				EF0F74BB2BBCFA7100E37D0D /* SearchBar.swift in Sources */,
 				EF0F74D02BBD297B00E37D0D /* CategoryView.swift in Sources */,
 				EF0F748A2BBCF7C500E37D0D /* ContentView.swift in Sources */,
