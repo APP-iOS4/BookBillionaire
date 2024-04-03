@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CategoryView: View {
-    
     @Binding var selectedIndex: Int
     @State private var selectedCategory: String = "보유도서"
     var categories = ["보유도서", "빌린도서"]
@@ -20,7 +19,7 @@ struct CategoryView: View {
                     Text("\(category)")
                         .padding(.vertical, 20)
                         .fontWeight(.medium)
-                        .foregroundColor(selectedCategory == category ? .accentColor : .black)
+                        .foregroundStyle(selectedCategory == category ? Color.accentColor : .black)
                         .overlay {
                             if selectedCategory == category {
                                 VStack {
@@ -28,7 +27,7 @@ struct CategoryView: View {
                                     Rectangle()
                                         .frame(height: 2)
                                         .fontWeight(.medium)
-                                        .foregroundColor(.accentColor)
+                                        .foregroundStyle(Color.accentColor)
                                 }
                             }
                         }
