@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Foundation
-import BookBillionaireCore
+//import BookBillionaireCore
 
 class UserStore: ObservableObject {
     
