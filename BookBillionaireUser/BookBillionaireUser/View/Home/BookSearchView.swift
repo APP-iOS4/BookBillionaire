@@ -9,10 +9,6 @@ import SwiftUI
 import WebKit
 
 struct BookSearchView: View {
-    init() {
-        print("네비")
-    }
-    
     @State private var searchBook = ""
     @State private var isSearching = false
     @State private var recentSearches: [String] = []
@@ -29,7 +25,7 @@ struct BookSearchView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color("AccentColor"),lineWidth: 1)
                 }
-        
+            
             if !searchBook.isEmpty {
                 Button(action: {
                     searchBook = ""
@@ -38,24 +34,18 @@ struct BookSearchView: View {
                         .foregroundColor(.gray)
                 }
             }
-            
-            
-            
             // 검색 버튼
             Button {
                 saveSearchHistory()
             } label: {
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(.primary)
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.primary)
             }
-            
         }
         // 최근 검색어
         recentSearchView
         
-      
         Spacer()
-        
         
         VStack(alignment: .leading, spacing: 10) {
             Text("찾는 책이 없다면? 찾아보러가기")
@@ -96,8 +86,7 @@ struct BookSearchView: View {
     }
     
 }
-
-
+// url 링크
 enum BookStoreUrl: String, CaseIterable {
     case kyobo = "교보문고"
     case yes24 = "Yes24"
@@ -145,7 +134,6 @@ extension BookSearchView {
                 Text("최근 검색어")
                     .font(.headline)
                     .padding(.top)
-                
             }
             
             if recentSearches.isEmpty {

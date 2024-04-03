@@ -8,23 +8,20 @@
 import SwiftUI
 
 struct BottomSheet: View {
-
     @Binding var isShowingSheet: Bool
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             List {
                 Section {
                     Button {
-                        
+                     // 함수
                     } label: {
                         Label("게시물 숨기기", systemImage: "eye.slash")
-
                     }
                     .foregroundStyle(.primary)
-
                 }
-                
+
                 Section {
                     Button {
                         isShowingSheet = false
@@ -35,9 +32,7 @@ struct BottomSheet: View {
                 }
             }
             .scrollDisabled(true)
-            
         }
-        
     }
 }
 

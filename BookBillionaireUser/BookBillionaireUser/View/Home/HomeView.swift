@@ -14,7 +14,6 @@ struct HomeView: View {
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingBottomSheet: Bool = false
     
-
     var body: some View {
         NavigationStack {
             HStack(alignment: .center) {
@@ -32,7 +31,6 @@ struct HomeView: View {
                 
             }
             .padding(.bottom, 12)
-            
             // 메뉴 버튼
             HStack(alignment: .center) {
                 ForEach(BookCategory.allCases, id: \.self) { menu in
@@ -45,8 +43,7 @@ struct HomeView: View {
                 }
             }
             .padding(.bottom, 12)
-            
-            
+            // 리스트
             ScrollView(showsIndicators: false) {
                 // 메뉴 타이틀
                 VStack(alignment: .leading) {
@@ -55,17 +52,15 @@ struct HomeView: View {
                         .padding(.bottom, 12)
                     
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(0...3, id: \.self) {
-                            book in
-                            
+                        ForEach(0...3, id: \.self) { book in
                             HStack(alignment: .top, spacing: 0) {
                                 NavigationLink(value: book) {
+                                    
                                     HStack(alignment: .center) {
                                         Image(systemName: "person.fill")
                                             .resizable()
                                             .frame(width: 100, height: 120)
                                             .background(Color.gray)
-                                        
                                         
                                         VStack(alignment: .leading) {
                                             Text("책 이름")
@@ -82,7 +77,7 @@ struct HomeView: View {
                                 .foregroundStyle(.primary)
                                 Spacer()
                                 
-                                Button{
+                                Button {
                                     isShowingBottomSheet.toggle()
                                     
                                 } label: {
