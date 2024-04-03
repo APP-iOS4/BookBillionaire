@@ -34,13 +34,13 @@ struct MyBookListView: View {
                             }
                         }
                     }
-                    // DetailView 미구현, 추후 변경
-                    .navigationDestination(for: Int.self) { value in
-                        Text("안녕 DetailView")
-                    }
-                    .foregroundStyle(Color.black)
                 }
+                .foregroundStyle(Color.black)
             }
+        }
+        // DetailView 미구현, 추후 변경
+        .navigationDestination(for: Int.self) { value in
+            Text("안녕 DetailView")
         }
         .padding()
     }
