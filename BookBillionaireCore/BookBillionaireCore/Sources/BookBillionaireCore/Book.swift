@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by YUJIN JEON on 3/21/24.
 //
@@ -8,8 +8,8 @@
 import Foundation
 
 /// 도서정보에 대한 구조체
-public struct Book: Identifiable, Codable {
-    public var id: String
+public struct Book: Identifiable, Codable, Hashable {
+    public var id: String = UUID().uuidString
     public var ownerID: String
     public var isbn: String?
     public var title: String
@@ -21,10 +21,12 @@ public struct Book: Identifiable, Codable {
     public var thumbnail: String
     public var bookCategory: BookCategory?
     public var rental: String //Rental ID
+    public var rentalState: RentalStateType
+
     
-    public init(id: String = UUID().uuidString, owenerID: String, isbn: String? = nil, title: String, contents: String, publisher: String? = nil, authors: [String], translators: [String]? = nil, price: Int? = nil, thumbnail: String, bookCategory: BookCategory? = nil, rental: String) {
+    /// 일반 초기화
+    public init(owenerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", bookCategory: BookCategory? = nil, rental: String = "", rentalState: RentalStateType = .rentalAvailable) {
         
-        self.id = id
         self.ownerID = owenerID
         self.isbn = isbn
         self.title = title
@@ -36,8 +38,12 @@ public struct Book: Identifiable, Codable {
         self.thumbnail = thumbnail
         self.bookCategory = bookCategory
         self.rental = rental
+        self.rentalState = rentalState
     }
-
+    
+    
+    
+    /// 디코딩을 위한 초기화
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
@@ -52,9 +58,28 @@ public struct Book: Identifiable, Codable {
         self.thumbnail = try container.decode(String.self, forKey: .thumbnail)
         self.bookCategory = try container.decodeIfPresent(BookCategory.self, forKey: .bookCategory)
         self.rental = try container.decode(String.self, forKey: .rental)
+        self.rentalState = try container.decodeIfPresent(RentalStateType.self, forKey: .rentalState) ?? .rentalAvailable
     }
+    
+    // 샘플 Book 생성
+        public static var sample: Book {
+            Book(owenerID: "ownerID", title: "샘플 제목", contents: "샘플 내용", authors: ["샘플 작가"], thumbnail: "샘플 썸네일", rental: "샘플 렌탈")
+        }
 }
 
+/// 코딩키
+public enum CodingKeys: String, CodingKey {
+    case id, ownerID, title, contents, thumbnail, rental
+    case isbn, publisher
+    case price
+    case authors
+    case translators
+    case bookCategory
+    case rentalState
+    case bookCatagory
+}
+
+///책 카테고리에 대한 enum
 public enum BookCategory: String, CaseIterable, Identifiable, Codable {
     
     public var id: String {
@@ -78,3 +103,22 @@ public enum BookCategory: String, CaseIterable, Identifiable, Codable {
         }
     }
 }
+
+/// 렌탈 가능여부에 대한 enum
+public enum RentalStateType: Int, Equatable, Codable{
+    case rentalAvailable
+    case rentalNotPossible
+    case renting
+    
+    public var description: String {
+        switch self {
+        case .rentalAvailable:
+            return "대여 가능"
+        case .rentalNotPossible:
+            return "대여 불가능"
+        case .renting:
+            return "대여 중"
+        }
+    }
+}
+
