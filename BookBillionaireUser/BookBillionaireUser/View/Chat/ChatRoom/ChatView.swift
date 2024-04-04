@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct ChatView: View {
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("채팅 뷰")
+    }
+}
+
+struct ChatBubble: View {
+  
+    var body: some View {
+        Text("채팅 버블 블라블라")
     }
 }
 

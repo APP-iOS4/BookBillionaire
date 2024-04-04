@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		086DB55D2BBE282B0060E481 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DB55C2BBE282B0060E481 /* ChatViewModel.swift */; };
 		088260352BBD1C99007BEA25 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260342BBD1C99007BEA25 /* UserStore.swift */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		086DB55C2BBE282B0060E481 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		088260342BBD1C99007BEA25 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		086DB55B2BBE27BD0060E481 /* ChatViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				086DB55C2BBE282B0060E481 /* ChatViewModel.swift */,
+			);
+			path = ChatViewModel;
+			sourceTree = "<group>";
+		};
 		088260332BBD1C8A007BEA25 /* Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +224,7 @@
 		EF0F74B72BBCFA1300E37D0D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				086DB55B2BBE27BD0060E481 /* ChatViewModel */,
 				088260372BBD2793007BEA25 /* ChatList */,
 				088260362BBD277D007BEA25 /* ChatRoom */,
 				088260382BBD27FC007BEA25 /* PlusTab */,
@@ -314,6 +325,7 @@
 				EF0F74BD2BBCFA7F00E37D0D /* LibraryView.swift in Sources */,
 				088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */,
 				088260442BBD2B5E007BEA25 /* PhotoSharedView.swift in Sources */,
+				086DB55D2BBE282B0060E481 /* ChatViewModel.swift in Sources */,
 				EF0F74882BBCF7C500E37D0D /* BookBillionaireUserApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

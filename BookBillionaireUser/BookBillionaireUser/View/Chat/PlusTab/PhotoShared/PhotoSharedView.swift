@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PhotoSharedView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("사진 공유 뷰")
     }
 }
 
