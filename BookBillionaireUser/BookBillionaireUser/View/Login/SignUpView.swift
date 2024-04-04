@@ -18,7 +18,6 @@ struct SignUpView: View {
     @State var isPasswordUnCorrectError: Bool = false
     @State var isEmailError: Bool = false
     @State var emailErrorText: String = ""
-    @State var isSecure: Bool = true
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     
@@ -27,7 +26,7 @@ struct SignUpView: View {
             Color.accentColor1
                 .edgesIgnoringSafeArea(.all)
             ScrollView {
-                VStack(spacing: 10) {
+                VStack(spacing: 30) {
                     Image("logoBookBillionaire")
                     
                     VStack(alignment: .leading) {
@@ -38,7 +37,6 @@ struct SignUpView: View {
                             .background(.thinMaterial)
                             .cornerRadius(10)
                             .textInputAutocapitalization(.never)
-                            .padding(.bottom, 10)
                         Text("이메일")
                             .font(.headline)
                         TextField("이메일을 입력해주세요", text: $emailText)
@@ -50,60 +48,27 @@ struct SignUpView: View {
                             })
                             .textInputAutocapitalization(.none)
                             .autocapitalization(.none)
-                            .padding(.bottom, 10)
+                            .padding(.bottom, 20)
                         Text(emailErrorText)
                             .font(.system(size: 15))
                             .foregroundColor(isEmailError ? .red : .clear)
                             .padding(.leading, 10)
                         Text("비밀번호")
                             .font(.headline)
-                        ZStack(alignment: .trailing) {
-                            if isSecure {
-                                SecureField("비밀번호", text: $passwordText)
-                                    .padding()
-                                    .background(.thinMaterial)
-                                    .cornerRadius(10)
-                            } else {
-                                TextField("비밀번호", text: $passwordText)
-                                    .padding()
-                                    .background(.thinMaterial)
-                                    .cornerRadius(10)
-                            }
-                            Button {
-                                isSecure.toggle()
-                            } label: {
-                                Image(systemName: isSecure ? "eye.slash" : "eye")
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.trailing, 10)
-                        }
+                        SecureField("비밀번호를 6자리 이상 입력해주세요", text: $passwordText)
+                            .padding()
+                            .background(.thinMaterial)
+                            .cornerRadius(10)
                         Text("비밀번호는 6자리 이상 입력해주세요.")
                             .font(.system(size: 15))
                             .foregroundColor(isPasswordCountError ? .red : .clear)
                             .padding(.leading, 10)
                         Text("비밀번호 확인")
-                        ZStack(alignment: .trailing) {
-                            if isSecure {
-                                SecureField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
-                                    .padding()
-                                    .background(.thinMaterial)
-                                    .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
-                                    .cornerRadius(10)
-                            } else {
-                                TextField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
-                                    .padding()
-                                    .background(.thinMaterial)
-                                    .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
-                                    .cornerRadius(10)
-                            }
-                            Button {
-                                isSecure.toggle()
-                            } label: {
-                                Image(systemName: isSecure ? "eye.slash" : "eye")
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.trailing, 10)
-                        }
+                        SecureField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
+                            .padding()
+                            .background(.thinMaterial)
+                            .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
+                            .cornerRadius(10)
                         Text("비밀번호가 서로 다릅니다.")
                             .font(.system(size: 15))
                             .foregroundColor(isPasswordUnCorrectError ? .red : .clear)

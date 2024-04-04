@@ -8,6 +8,3 @@
 import SwiftUI
 import Firebase
 import GoogleSignIn
-
-
-
