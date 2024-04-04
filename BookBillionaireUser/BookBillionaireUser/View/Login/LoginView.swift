@@ -23,27 +23,21 @@ struct LoginView: View {
                         .frame(width: 200, height: 200)
                         .padding(.top, 50)
                     ZStack {
-                        Rectangle()
-                            .fill(Color.white)
-                            .cornerRadius(10)
-                            .frame(width: 335, height: 250)
+                        Image("Rectangle 3")
                         VStack(spacing: 20) {
                             TextField("email", text: $emailText)
-                                .padding()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding(.horizontal, 20)
-                                .cornerRadius(10)
-                                .background(.thinMaterial)
                                 .foregroundColor(Color(hex: 0x014073))
-                                .textInputAutocapitalization(.never)
+                                .padding(.top, 50)
+                                .textInputAutocapitalization(.none)
                                 .autocapitalization(.none)
                             SecureField("Password", text: $passwordText)
-                                .padding()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding(.horizontal, 20)
-                                .cornerRadius(10)
-                                .background(.thinMaterial)
                                 .foregroundColor(Color(hex: 0x014073))
                             
-                            HStack(spacing: 10) {
+                            HStack(spacing: 20) {
                                 Spacer()
                                 NavigationLink {
                                     SignUpView()
@@ -81,7 +75,6 @@ struct LoginView: View {
                     Text("Or")
                         .foregroundColor(.white)
                         .padding()
-                    Image("SignInWithGoogle")
                     Image("SignInWithGoogle")
                     Spacer()
                 }

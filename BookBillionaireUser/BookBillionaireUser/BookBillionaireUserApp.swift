@@ -24,13 +24,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct BookBillionaireUserApp: App {
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authViewModel: AuthViewModel = AuthViewModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
                 .environmentObject(authViewModel)
         }
     }
