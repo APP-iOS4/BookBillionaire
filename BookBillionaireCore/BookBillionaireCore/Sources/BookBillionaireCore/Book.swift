@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by YUJIN JEON on 3/21/24.
 //
@@ -21,8 +21,11 @@ public struct Book: Identifiable, Codable {
     public var thumbnail: String
     public var bookCategory: BookCategory?
     public var rental: String //Rental ID
+    public var rentalState: RentalStateType
+
     
-    public init(owenerID: String, isbn: String? = nil, title: String, contents: String, publisher: String? = nil, authors: [String], translators: [String]? = nil, price: Int? = nil, thumbnail: String, bookCategory: BookCategory? = nil, rental: String) {
+    /// 일반 초기화
+    public init(owenerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", bookCategory: BookCategory? = nil, rental: String = "", rentalState: RentalStateType = .rentalAvailable) {
         
         self.ownerID = owenerID
         self.isbn = isbn
@@ -35,11 +38,43 @@ public struct Book: Identifiable, Codable {
         self.thumbnail = thumbnail
         self.bookCategory = bookCategory
         self.rental = rental
+        self.rentalState = rentalState
     }
     
     
+    
+    /// 디코딩을 위한 초기화
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.ownerID = try container.decode(String.self, forKey: .ownerID)
+        self.isbn = try container.decodeIfPresent(String.self, forKey: .isbn)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.contents = try container.decode(String.self, forKey: .contents)
+        self.publisher = try container.decodeIfPresent(String.self, forKey: .publisher)
+        self.authors = try container.decode([String].self, forKey: .authors)
+        self.translators = try container.decodeIfPresent([String].self, forKey: .translators)
+        self.price = try container.decodeIfPresent(Int.self, forKey: .price)
+        self.thumbnail = try container.decode(String.self, forKey: .thumbnail)
+        self.bookCategory = try container.decodeIfPresent(BookCategory.self, forKey: .bookCategory)
+        self.rental = try container.decode(String.self, forKey: .rental)
+        self.rentalState = try container.decodeIfPresent(RentalStateType.self, forKey: .rentalState) ?? .rentalAvailable
+    }
 }
 
+/// 코딩키
+public enum CodingKeys: String, CodingKey {
+    case id, ownerID, title, contents, thumbnail, rental
+    case isbn, publisher
+    case price
+    case authors
+    case translators
+    case bookCategory
+    case rentalState
+    case bookCatagory
+}
+
+///책 카테고리에 대한 enum
 public enum BookCategory: String, CaseIterable, Identifiable, Codable {
     
     public var id: String {
@@ -63,3 +98,22 @@ public enum BookCategory: String, CaseIterable, Identifiable, Codable {
         }
     }
 }
+
+/// 렌탈 가능여부에 대한 enum
+public enum RentalStateType: Int, Equatable, Codable{
+    case rentalAvailable
+    case rentalNotPossible
+    case renting
+    
+    public var description: String {
+        switch self {
+        case .rentalAvailable:
+            return "대여 가능"
+        case .rentalNotPossible:
+            return "대여 불가능"
+        case .renting:
+            return "대여 중"
+        }
+    }
+}
+

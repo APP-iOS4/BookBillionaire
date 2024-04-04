@@ -13,6 +13,8 @@ struct BookStore {
     
     init() {
         books = [
+            Book(owenerID: UUID().uuidString, title: "testForNill", contents: "description", authors: ["UDI"], thumbnail: "" , rental: UUID().uuidString),
+            
             Book(owenerID: UUID().uuidString, isbn: "8955617089 9788955617085", title: "침팬지 폴리틱스(리커버:K)", contents: "정치의 기원은 인류의 역사보다 오래되었다.    초판 출간 후 수십 년간 세계적인 베스트셀러의 자리를 지키며 이제는 과학저술의 고전으로 우뚝 선 《침팬지 폴리틱스》의 25주년 기념판.  세계적인 영장류학자 프란스 드 발의 《침팬지 폴리틱스》는 출간 즉시 영장류학자들로부터 그 과학적 성과를 인정받아 베스트셀러가 되었을 뿐만 아니라, 정치가, 기업경영인, 사회심리학자들로부터 인간의 가장 근본적인 본성에 대한 놀라운 통찰을 준다는 찬사를 받았다.  정치는", publisher: "바다출판사", authors: ["프란스 드 발"], translators: ["장대익"], price: 18000, thumbnail: "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F716021%3Ftimestamp%3D20240402115407", bookCategory: .none, rental: UUID().uuidString),
             
             Book(owenerID: UUID().uuidString, isbn: "1191826376 9791191826371", title: "밤티 마을 마리네 집", contents: "마을 큰돌이네 집』 출간을 시작으로 오랜 시간 스테디셀러 자리를 굳건히 지키고 있는 연작 동화 세 권은, 독자들이 끊임없이 후속작 요청을 했기에 이루어진 결실이다. 그래서 『밤티 마을 큰돌이네 집』에 이어 『밤티 마을 영미네 집』과 『밤티 마을 봄이네 집』을 출간할 수 있었고, 지금까지도 독자들의 아낌없는 지지와 사랑을 받고 있다. 이금이 작가의 ‘밤티 마을 이야기’가 한국 아동문학사에서 갖는 의미는 매우 크다. 2024년 한국 최초로 한스 크리스티안 안데르센상", publisher: "밤티", authors: ["이금이"], translators: [], price: 13500, thumbnail: "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F6589380%3Ftimestamp%3D20240402174057", bookCategory: .none, rental: UUID().uuidString),
