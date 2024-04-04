@@ -29,9 +29,9 @@ struct HomeView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 20)
                 }
-                
             }
             .padding(.bottom, 12)
+            
             // 메뉴 버튼
             HStack(alignment: .center) {
                 ForEach(BookCategory.allCases, id: \.self) { menu in

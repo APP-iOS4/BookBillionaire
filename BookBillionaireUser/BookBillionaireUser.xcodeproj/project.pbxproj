@@ -99,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				04A59A3F2BBD29C1009FBF6E /* BookService.swift */,
-				04A59A5C2BBD4D27009FBF6E /* servicetest.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -123,6 +122,7 @@
 		EF0F747B2BBCF7C500E37D0D = {
 			isa = PBXGroup;
 			children = (
+				356C8C832BBE5D0B00A508D6 /* GoogleService-Info.plist */,
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
