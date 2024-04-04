@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct LoginView: View { 
     @State var emailText: String = ""
     @State var passwordText: String = ""
     @State var signInProcessing: Bool = false

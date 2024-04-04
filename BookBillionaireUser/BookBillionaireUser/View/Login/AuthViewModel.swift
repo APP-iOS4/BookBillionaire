@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
-class AuthViewModel: ObservableObject {
+class AuthViewModel: ObservableObject { 
     
     @Published var state: SignInState = .logOut
 

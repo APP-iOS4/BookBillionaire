@@ -22,7 +22,7 @@ struct ProfileView: View {
                 VStack {
                     VStack {
                         
-                        
+                        Text("기본정보")
                         if let email = userEmail {
                             Text(email)
                                 .font(.subheadline)
