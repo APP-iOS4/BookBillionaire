@@ -60,6 +60,11 @@ public struct Book: Identifiable, Codable {
         self.rental = try container.decode(String.self, forKey: .rental)
         self.rentalState = try container.decodeIfPresent(RentalStateType.self, forKey: .rentalState) ?? .rentalAvailable
     }
+    
+    // 샘플 Book 생성
+        public static var sample: Book {
+            Book(owenerID: "ownerID", title: "샘플 제목", contents: "샘플 내용", authors: ["샘플 작가"], thumbnail: "샘플 썸네일", rental: "샘플 렌탈")
+        }
 }
 
 /// 코딩키

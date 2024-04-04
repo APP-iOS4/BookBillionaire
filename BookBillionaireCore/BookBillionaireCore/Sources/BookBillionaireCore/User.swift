@@ -36,5 +36,11 @@ public struct User: Identifiable, Codable {
         self.image = try container.decodeIfPresent(String.self, forKey: .image)
         self.myBooks = try container.decodeIfPresent([String].self, forKey: .myBooks)
         self.rentalBooks = try container.decodeIfPresent([String].self, forKey: .rentalBooks)
+  
+    }
+    
+    //샘플
+    public static var sample: User {
+        User(id: "", name: "샘플 이름", email: "샘플 메일", address: "샘플 주소")
     }
 }
