@@ -11,10 +11,12 @@ import BookBillionaireCore
 
 class BookService: ObservableObject {
     static let shared = BookService() // 싱글턴 인스턴스
+    var books: [Book]
     private let bookRef = Firestore.firestore().collection("books")
     
-    
-    private init() {} // 외부에서 인스턴스화 방지를 위한 private 초기화
+    private init() {
+        books = []
+    } // 외부에서 인스턴스화 방지를 위한 private 초기화
     
     /// 책을 등록하는 함수
     func registerBook(_ book: Book) -> Bool {
@@ -39,26 +41,23 @@ class BookService: ObservableObject {
     }
     
     /// 유저들이 등록한 모든 책을 다 가져오는 함수
-    func loadBooks() async -> [Book]{
+    func loadBooks() async -> [Book] {
         var resultBooks: [Book] = []
-        bookRef.addSnapshotListener { querySnapshot, error in
-            guard let documents = querySnapshot?.documents else {
-                print("Error fetching documents: \(String(describing: error))")
-                return
-            }
-            
-            // 문서를 Book 객체로 변환
-            let books = documents.compactMap { document -> Book? in
+        do {
+            let querySnapshot = try await bookRef.getDocuments()
+            resultBooks = querySnapshot.documents.compactMap { document -> Book? in
                 do {
                     let book = try document.data(as: Book.self)
-                    resultBooks.append(book)
                     return book
                 } catch {
                     print("Error decoding book: \(error)")
                     return nil
                 }
             }
+        } catch {
+            print("Error fetching documents: \(error)")
         }
+        print(resultBooks)
         return resultBooks
     }
     
