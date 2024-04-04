@@ -11,9 +11,10 @@ import BookBillionaireCore
 
 
 struct HomeView: View {
+    let bookService = BookService.shared
+    @State private var books: [Book] = []
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingBottomSheet: Bool = false
-    
     var body: some View {
         NavigationStack {
             HStack(alignment: .center) {
@@ -52,19 +53,28 @@ struct HomeView: View {
                         .padding(.bottom, 12)
                     
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(0...3, id: \.self) { book in
+                        ForEach(books, id: \.self) { book in
                             HStack(alignment: .top, spacing: 0) {
                                 NavigationLink(value: book) {
                                     
                                     HStack(alignment: .center) {
-                                        Image(systemName: "person.fill")
-                                            .resizable()
-                                            .frame(width: 100, height: 120)
-                                            .background(Color.gray)
-                                        
+                                        if book.thumbnail == "default" || book.thumbnail == "" {
+                                            Image("default")
+                                                .resizable()
+                                                .frame(width: 100, height: 120)
+                                                .background(Color.gray)
+                                        } else {
+                                            AsyncImage(url: URL(string: book.thumbnail)){ image in
+                                                image.resizable()
+                                                    .frame(width: 100, height: 120)
+                                                    .background(Color.gray)
+                                            } placeholder: {
+                                                ProgressView()
+                                            }
+                                        }
                                         VStack(alignment: .leading) {
-                                            Text("책 이름")
-                                            Text("작가 이름")
+                                            Text(book.title)
+                                            Text(book.authors.joined(separator: ", "))
                                             Spacer()
                                         }
                                         
@@ -100,10 +110,18 @@ struct HomeView: View {
                     }
                 }
             }
+            .onAppear {
+                fetchBooks()
+                print(books)
+            }
         }
         .padding()
         
-        
+    }
+    private func fetchBooks() {
+        Task{
+            books = await bookService.loadBooks()
+        }
     }
 }
 

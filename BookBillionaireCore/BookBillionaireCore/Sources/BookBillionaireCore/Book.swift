@@ -8,7 +8,7 @@
 import Foundation
 
 /// 도서정보에 대한 구조체
-public struct Book: Identifiable, Codable {
+public struct Book: Identifiable, Codable, Hashable {
     public var id: String = UUID().uuidString
     public var ownerID: String
     public var isbn: String?
