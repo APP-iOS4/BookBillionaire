@@ -25,5 +25,5 @@ struct RentalPeriodView: View {
 }
 
 #Preview {
-    RentalPeriodView(rental: Rental(id: "", bookOwner: "", rentalState: .rentalAvailable, rentalStartDay: Date(), rentalEndDay: Date()))
+    RentalPeriodView(rental: Rental(id: "", bookOwner: "",rentalStartDay: Date(), rentalEndDay: Date()))
 }
