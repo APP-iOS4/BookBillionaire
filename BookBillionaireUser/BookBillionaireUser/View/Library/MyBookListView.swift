@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import BookBillionaireCore
 
 struct MyBookListView: View {
+    let bookService: BookService = BookService.shared
+    @State var myBooks: [Book] = []
+    
     var body: some View {
         VStack {
             HStack {
@@ -19,17 +23,27 @@ struct MyBookListView: View {
             }
             LazyVStack(alignment: .leading, spacing: 10) {
                 // bookStore 미구현, 추후 변경
-                ForEach(0..<3, id: \.self) { book in
+                ForEach(myBooks, id: \.self) { book in
                     // ListRowView 미구현, 추후 변경
                     NavigationLink(value: book) {
                         HStack {
-                            Image(systemName: "person.fill")
-                                .resizable()
-                                .frame(width: 100, height: 120)
-                                .background(Color.gray)
+                            if book.thumbnail == "" ||  book.thumbnail.isEmpty {
+                                Image("default")
+                                    .resizable()
+                                    .frame(width: 100, height: 120)
+                                    .background(Color.gray)
+                            } else {
+                                AsyncImage(url: URL(string: book.thumbnail)) { image in
+                                    image.resizable()
+                                        .frame(width: 100, height: 120)
+                                        .background(Color.gray)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                            }
                             VStack(alignment: .leading) {
-                                Text("책 이름")
-                                Text("작가 이름")
+                                Text(book.title)
+                                Text(book.authors.joined(separator: ", "))
                                 Spacer()
                             }
                         }
@@ -43,6 +57,15 @@ struct MyBookListView: View {
             Text("안녕 DetailView")
         }
         .padding()
+        .onAppear{
+            loadMybook()
+        }
+    }
+    private func loadMybook() {
+        Task {
+            myBooks = await bookService.loadBookByID("Eyhr4YQGsATlRDUcc9rYl9PZYk52")
+            
+        }
     }
 }
 

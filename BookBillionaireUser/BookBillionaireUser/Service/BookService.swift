@@ -61,6 +61,26 @@ class BookService: ObservableObject {
         return resultBooks
     }
     
+    /// 책 owner ID로 책을 불러오는 함수
+    func loadBookByID(_ ownerID: String) async -> [Book]{
+        var resultBooks: [Book] = []
+        do {
+            let querySnapshot = try await bookRef.whereField("ownerID", isEqualTo: ownerID).getDocuments()
+            resultBooks = querySnapshot.documents.compactMap { document -> Book? in
+                do {
+                    let book = try document.data(as: Book.self)
+                    return book
+                } catch {
+                    print("Error decoding book: \(error)")
+                    return nil
+                }
+            }
+        } catch {
+            print("Error fetching documents: \(error)")
+        }
+        return resultBooks
+    }
+    
     /// 특정 책 삭제
     func deleteBook(_ book: Book) async {
         do {
