@@ -19,11 +19,10 @@ struct ServiceTestView: View {
     var body: some View {
         Button("함수 실행") {
             Task{
-                await bookService.updateRentalState("8EFFD572-5B4E-41CD-B3DA-0BA40665669F",rentalState: .rentalNotPossible)
+                await userService.loadUserByID("Eyhr4YQGsATlRDUcc9rYl9PZYk52")
             }
         }
     }
-    
 }
 
 #Preview {

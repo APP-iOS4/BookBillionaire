@@ -16,7 +16,6 @@ struct BookDetailView: View {
         ScrollView{
             // 이미지 섹션
             ZStack{
- 
                     AsyncImage(url: URL(string: book.thumbnail)){ image in
                         image.resizable(resizingMode: .stretch)
                             .ignoresSafeArea()
