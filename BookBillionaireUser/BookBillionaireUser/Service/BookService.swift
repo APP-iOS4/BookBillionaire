@@ -90,6 +90,18 @@ class BookService: ObservableObject {
             print("\(#function) Error removing document : \(error)")
         }
     }
+    
+    func updateRentalState(_ bookID: String, rentalState: RentalStateType) async {
+        let userRentalRef = bookRef.document(bookID)
+        do {
+            try await userRentalRef.updateData([
+                "rentalState" : rentalState.description
+            ])
+            print("렌탈상황 변경 성공🧚‍♀️")
+        } catch let error {
+            print("\(#function) 렌탈정보 변경 실패했음☄️ \(error)")
+        }
+    }
 }
 
 

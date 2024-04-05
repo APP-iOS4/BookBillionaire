@@ -39,25 +39,6 @@ class UserService: ObservableObject {
         return resultUsers
     }
     
-//    func loadMyBook(_ userID: String) -> [Book] {
-//        var resultBooks: [Book] = []
-//        do {
-//            let querySnapshot = try await .getDocuments()
-//            resultUsers = querySnapshot.documents.compactMap { document -> User? in
-//                do {
-//                    let user = try document.data(as: User.self)
-//                    return user
-//                } catch {
-//                    print("Error decoding user: \(error)")
-//                    return nil
-//                }
-//            }
-//        } catch {
-//            print("Error fetching documents: \(error)")
-//        }
-//        return resultUsers
-//    }
-    
     /// 유저의 책정보 등록(관리용)
     func setBooksToUser(userID: String, book: String) async {
         let userRef = allUserRef.document(userID)
