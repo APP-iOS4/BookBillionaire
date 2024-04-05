@@ -14,50 +14,55 @@ struct BookDetailView: View {
     
     var body: some View {
         ScrollView{
+            // 이미지 섹션
             ZStack{
-                AsyncImage(url: URL(string: "https://picsum.photos/id/237/200/300")){ image in
-                    image.resizable(resizingMode: .stretch)
-                        .ignoresSafeArea()
-                        .blur(radius: 8.0,opaque: true)
-                } placeholder: {
-                    Rectangle().background(.black)
-                }
-                .background(Color.gray)
+ 
+                    AsyncImage(url: URL(string: book.thumbnail)){ image in
+                        image.resizable(resizingMode: .stretch)
+                            .ignoresSafeArea()
+                            .blur(radius: 8.0,opaque: true)
+                    } placeholder: {
+                        Rectangle().background(.black)
+                    }
+                    .background(Color.gray)
+          
+                VStack(alignment: .center){
+                        UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
+                            .frame(height: 100)
+                            .foregroundStyle(Color.white)
+                            .padding(.top, 200)
+                    }
                 
-                VStack{
-                    UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
-                        .frame(height: 100)
-                        .foregroundStyle(Color.white)
-                        .padding(.top, 200)
+                GeometryReader { geometry in
+                    AsyncImage(url: URL(string: book.thumbnail)){ image in
+                        image.resizable()
+                            .ignoresSafeArea()
+                            .frame(width: 200)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)
                 }
-                
-                AsyncImage(url: URL(string: "https://picsum.photos/id/237/200/300")){ image in
-                    image.resizable()
-                        .ignoresSafeArea()
-                        .frame(width: 200)
-                } placeholder: {
-                    ProgressView()
-                }
-                .position(x:200,y:250)
             }
             
+            // 정보
             VStack(alignment: .leading) {
-                
                 Rectangle()
                     .frame(height: 100)
                     .foregroundStyle(.clear)
-                
                 HStack{
                     Text(book.title)
                         .font(.title)
                         .bold()
+                    // 렌탈 부분 설정 후 상태 버튼으로 변경
                     Button {
                         Void()
                     } label: {
-                        Text("버튼")
+                        Text("대여 가능")
                     }
                 }
-                
+                // 버튼 추후 컴포넌트 합의 후 교체
                 HStack{
                     Button("메세지 보내기"){}
                     Spacer()
@@ -81,7 +86,7 @@ struct BookDetailView: View {
                 Section{
                     Text("작품소개")
                         .font(.subheadline)
-                        .bold()
+                        .fontWeight(.bold)
                     Text(book.contents)
                         .font(.system(size: 13))
                 }
@@ -97,19 +102,20 @@ struct BookDetailView: View {
                     
                     Divider()
                     
-                    ForEach(book.translators ?? [""], id: \.self) { translator in Text("번역:\(translator)")
+                    ForEach(book.translators ?? ["번역자"], id: \.self) { translator in Text("번역:\(translator)")
                     }
                     Spacer()
-                    Text(book.bookCategory?.rawValue ?? "")
+                    Text(book.bookCategory?.rawValue ?? "카테고리")
                 }
                 .font(.caption)
                 
                 Divider()
                     .padding(.vertical)
                 
+                // 책 목록
                 Text("📖 읽고싶은 책인데 대여중이라면?")
                     .font(.title3)
-                    .bold()
+                    .fontWeight(.bold)
                     .padding(.bottom, 5)
                 
                 VStack{
@@ -120,10 +126,11 @@ struct BookDetailView: View {
                             .frame(width: 50, height: 50)
                         Text(user.name).font(.headline)
                         Spacer()
+                        // 렌탈 부분 설정 후 상태 버튼으로 변경
                         Button {
                             Void()
                         } label: {
-                            Text("버튼")
+                            Text("대여 가능")
                         }
                     }
                     
@@ -134,10 +141,11 @@ struct BookDetailView: View {
                             .frame(width: 50, height: 50)
                         Text(user.name).font(.headline)
                         Spacer()
+                        // 렌탈 부분 설정 후 상태 버튼으로 변경
                         Button {
                             Void()
                         } label: {
-                            Text("버튼")
+                            Text("대여 가능")
                         }
                     }
                     
@@ -148,10 +156,11 @@ struct BookDetailView: View {
                             .frame(width: 50, height: 50)
                         Text(user.name).font(.headline)
                         Spacer()
+                        // 렌탈 부분 설정 후 상태 버튼으로 변경
                         Button {
                             Void()
                         } label: {
-                            Text("버튼")
+                            Text("대여 가능")
                         }
                     }
                     
@@ -162,11 +171,11 @@ struct BookDetailView: View {
                             .frame(width: 50, height: 50)
                         Text(user.name).font(.headline)
                         Spacer()
-                    
+                        // 렌탈 부분 설정 후 상태 버튼으로 변경
                         Button {
                             Void()
                         } label: {
-                            Text("버튼")
+                            Text("대여 가능")
                         }
                     }
                 }
@@ -186,5 +195,8 @@ struct BookDetailView: View {
 
 
 #Preview {
-    BookDetailView(book: Book.sample, user: User.sample)
+    let bookStore = BookStore().books
+    return Group {
+        BookDetailView(book: bookStore[0], user: User.sample)
+    }
 }

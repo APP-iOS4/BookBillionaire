@@ -13,7 +13,7 @@ struct BookStore {
     
     init() {
         books = [
-            Book(owenerID: UUID().uuidString, title: "testForNill", contents: "description", authors: ["UDI"], thumbnail: "" , rental: UUID().uuidString),
+//            Book(owenerID: UUID().uuidString, title: "testForNill", contents: "description", authors: ["UDI"], thumbnail: "" , rental: UUID().uuidString),
             
             Book(owenerID: UUID().uuidString, isbn: "8955617089 9788955617085", title: "침팬지 폴리틱스(리커버:K)", contents: "정치의 기원은 인류의 역사보다 오래되었다.    초판 출간 후 수십 년간 세계적인 베스트셀러의 자리를 지키며 이제는 과학저술의 고전으로 우뚝 선 《침팬지 폴리틱스》의 25주년 기념판.  세계적인 영장류학자 프란스 드 발의 《침팬지 폴리틱스》는 출간 즉시 영장류학자들로부터 그 과학적 성과를 인정받아 베스트셀러가 되었을 뿐만 아니라, 정치가, 기업경영인, 사회심리학자들로부터 인간의 가장 근본적인 본성에 대한 놀라운 통찰을 준다는 찬사를 받았다.  정치는", publisher: "바다출판사", authors: ["프란스 드 발"], translators: ["장대익"], price: 18000, thumbnail: "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F716021%3Ftimestamp%3D20240402115407", bookCategory: .none, rental: UUID().uuidString),
             

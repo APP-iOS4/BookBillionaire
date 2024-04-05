@@ -11,12 +11,15 @@ import BookBillionaireCore
 
 
 struct HomeView: View {
-    let bookService = BookService.shared
     @State private var books: [Book] = []
+//    @State private var users: [User] = []
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingBottomSheet: Bool = false
+    let bookService = BookService.shared
+    
     var body: some View {
         NavigationStack {
+            // 헤더 & 서치
             HStack(alignment: .center) {
                 Text("BOOK BILLINAIRE")
                     .font(.largeTitle)
@@ -44,6 +47,7 @@ struct HomeView: View {
                 }
             }
             .padding(.bottom, 12)
+            
             // 리스트
             ScrollView(showsIndicators: false) {
                 // 메뉴 타이틀
@@ -51,42 +55,23 @@ struct HomeView: View {
                     Text("\(menuTitle.rawValue)")
                         .font(.title2)
                         .padding(.bottom, 12)
-                    
+                    // 책 리스트
                     LazyVStack(alignment: .leading, spacing: 10) {
                         ForEach(books, id: \.self) { book in
                             HStack(alignment: .top, spacing: 0) {
                                 NavigationLink(value: book) {
-                                    
                                     HStack(alignment: .center) {
-                                        if book.thumbnail == "default" || book.thumbnail == "" {
-                                            Image("default")
-                                                .resizable()
-                                                .frame(width: 100, height: 120)
-                                                .background(Color.gray)
-                                        } else {
-                                            AsyncImage(url: URL(string: book.thumbnail)){ image in
-                                                image.resizable()
-                                                    .frame(width: 100, height: 120)
-                                                    .background(Color.gray)
-                                            } placeholder: {
-                                                ProgressView()
-                                            }
-                                        }
-                                        VStack(alignment: .leading) {
-                                            Text(book.title)
-                                            Text(book.authors.joined(separator: ", "))
-                                            Spacer()
-                                        }
-                                        
+                                        BookListRowView(book: book)
+                                            .padding(.bottom, 12)
                                     }
                                 }
-                                .navigationDestination(for: Int.self) { value in
-                                    BookDetailView(book: Book.sample, user: User.sample)
+                                .navigationDestination(for: Book.self) { book in
+                                    BookDetailView(book: book, user: User.sample)
                                 }
-                                
                                 .foregroundStyle(.primary)
-                                Spacer()
                                 
+                                Spacer()
+                                // 설정 버튼
                                 Button {
                                     isShowingBottomSheet.toggle()
                                     
@@ -95,7 +80,7 @@ struct HomeView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 17)
-                                        .foregroundStyle(.gray.opacity(0.2))
+                                        .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
                                 }
                                 .padding(.top, 10)
@@ -104,27 +89,24 @@ struct HomeView: View {
                                         .presentationDetents([.fraction(0.2)])
                                 }
                             }
-                            
-                            
                         }
                     }
                 }
             }
-            .onAppear {
-                fetchBooks()
-                print(books)
-            }
         }
         .padding()
-        
+        // 책 불러오기
+        .onAppear {
+            fetchBooks()
+        }
     }
-    private func fetchBooks() {
-        Task{
+    // 책 데이터 호출
+    func fetchBooks() {
+        Task {
             books = await bookService.loadBooks()
         }
     }
 }
-
 
 #Preview {
     HomeView()
