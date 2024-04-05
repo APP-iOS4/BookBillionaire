@@ -12,7 +12,7 @@ struct BookSearchView: View {
     @State private var searchBook = ""
     @State private var recentSearches: [String] = []
     @State private var isWebViewPresented = false
-    @State private var selectedBookstoreURL: BookStoreUrl?
+    @State private var selectedBookstoreSettings: BookStoreSettings?
     
     var body: some View {
         VStack(alignment: .center) {
@@ -24,29 +24,34 @@ struct BookSearchView: View {
                     .fontWeight(.semibold)
                 
                 HStack(alignment: .center) {
-                    // 교보문고
-                    ForEach(BookStoreUrl.allCases, id: \.self) { bookstore in
+                    // 사이트 링크 & 아이콘
+                    ForEach(BookStoreSettings.allCases, id: \.self) { bookstore in
                         Button {
-                            selectedBookstoreURL = bookstore
+                            selectedBookstoreSettings = bookstore
                             isWebViewPresented.toggle()
+                    
                         } label: {
-                            Image(systemName: "square.fill")
+                          bookstore.image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 60, height: 60)
                         }
                     }
                     .sheet(isPresented: $isWebViewPresented) {
-                        
+                        if let selectedURL = selectedBookstoreSettings?.url {
+                            WebView(url: selectedURL)
+                        }
                     }
+                    
                 }
             }
         }
         .padding()
     }
 }
+
 // url 링크
-enum BookStoreUrl: String, CaseIterable {
+enum BookStoreSettings: String, CaseIterable {
     case kyobo = "교보문고"
     case yes24 = "Yes24"
     case aladdin = "알라딘"
@@ -61,7 +66,20 @@ enum BookStoreUrl: String, CaseIterable {
         case .aladdin:
             return URL(string: "https://www.aladin.co.kr")!
         case .books:
-            return URL(string: "https://www.kyobobook.co.kr")! // 예시로 교보문고 URL 사용! 여기 무슨 사이트 입니까? 리딩북스?
+            return URL(string: "https://www.naver.com")!
+        }
+    }
+    // 아이콘
+    var image: Image {
+        switch self {
+        case .kyobo:
+            return Image(systemName: "book")
+        case .yes24:
+            return Image(systemName: "book.fill")
+        case .aladdin:
+            return Image(systemName: "book.closed")
+        case .books:
+            return Image(systemName: "book.closed.fill")
         }
     }
 }
