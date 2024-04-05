@@ -14,6 +14,7 @@ struct BookInfoAddView: View {
     @State var isShowingSheet: Bool = false
     @State var isShowingDialog: Bool = false
     @State var isShowingPhotosPicker: Bool = false
+    @State var isShowingCamera: Bool = false
     @State private var selectedImage: UIImage?
     @State private var selectedItem: PhotosPickerItem?
     
@@ -39,20 +40,6 @@ struct BookInfoAddView: View {
                             .background(Color.gray)
                     }
                 }
-                
-                
-                //                if book.thumbnail.isEmpty {
-                ////                if selectedImage != nil {
-                //                    Button {
-                //                        isShowingDialog.toggle()
-                //                    } label: {
-                //                        Image(systemName: "plus")
-                //                            .foregroundStyle(Color.white)
-                //                            .font(.largeTitle)
-                //                            .frame(width: 100, height: 140)
-                //                            .background(Color.gray)
-                //                    }
-                //                } else {
                 //                    AsyncImage(url: URL(string: book.thumbnail)) { image in
                 //                        image.resizable()
                 //                            .frame(width: 100, height: 140)
@@ -80,7 +67,7 @@ struct BookInfoAddView: View {
             }
             .confirmationDialog("사진", isPresented: $isShowingDialog, actions: {
                 Button {
-                    
+                    isShowingCamera.toggle()
                 } label: {
                     Text("사진 촬영")
                 }
@@ -89,19 +76,25 @@ struct BookInfoAddView: View {
                 } label: {
                     Text("사진 선택")
                 }
-                
             })
             .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItem)
             .onChange(of: selectedItem) { _ in
                 Task {
-                    if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                        selectedImage = UIImage(data: data)
+                    if let selectedItem,
+                       let data = try? await selectedItem.loadTransferable(type: Data.self) {
+                        if let image = UIImage(data: data) {
+                            selectedImage = image
+                            book.thumbnail = "\(image)"
+                        }
                     }
                 }
             }
             .sheet(isPresented: $isShowingSheet) {
                 RentalStateSheetView(isShowingSheet: $isShowingSheet, rentalState: $book.rentalState)
                     .presentationDetents([.medium])
+            }
+            .fullScreenCover(isPresented: $isShowingCamera) {
+                CameraView(selectedImage: $selectedImage, isShowingCamera: $isShowingCamera)
             }
             .padding()
         }
@@ -111,3 +104,4 @@ struct BookInfoAddView: View {
 #Preview {
     BookInfoAddView(book: .constant(Book.sample))
 }
+
