@@ -50,7 +50,7 @@ struct SearchBar: View {
     func saveSearchHistory() {
         if !searchBook.isEmpty {
             recentSearches.append(searchBook)
-            // 추가 후에 검색어를 초기화합니다.
+            // 추가 후에 검색어를 초기화
             searchBook = ""
         }
     }

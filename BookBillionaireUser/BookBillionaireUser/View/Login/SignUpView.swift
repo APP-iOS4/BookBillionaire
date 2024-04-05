@@ -21,7 +21,7 @@ struct SignUpView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     
-    var body: some View {
+    var body: some View { 
         ZStack {
             Color.accentColor1
                 .edgesIgnoringSafeArea(.all)

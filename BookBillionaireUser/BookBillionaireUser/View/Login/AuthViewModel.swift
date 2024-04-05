@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-class AuthViewModel: ObservableObject {
+class AuthViewModel: ObservableObject { 
     
     @Published var state: SignInState = .logOut
 
