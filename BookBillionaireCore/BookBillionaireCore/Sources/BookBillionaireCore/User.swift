@@ -37,7 +37,11 @@ public struct User: Identifiable, Codable {
     
     //샘플
     public static var sample: User {
+<<<<<<< HEAD
         User(id: "", nickName: "샘플 이름", address: "샘플 주소")
+=======
+        User(id: "", name: "호스표", email: "mail@mail.com", address: "경기도 양주시")
+>>>>>>> d6fc92d (fix: BookDetailView 수정)
     }
 }
 
