@@ -64,7 +64,7 @@ public struct Book: Identifiable, Codable, Hashable {
         }
 }
 
-/// 코딩키
+/// 책 코딩키
 public enum BookCodingKeys: String, CodingKey {
     case id, ownerID, title, contents, thumbnail, rental
     case isbn, publisher

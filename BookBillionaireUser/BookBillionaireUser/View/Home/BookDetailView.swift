@@ -73,7 +73,7 @@ struct BookDetailView: View {
                 HStack {
                     Spacer()
                     Text("책 소유자 : ")
-                    Text(user.name)
+                    Text(user.nickName)
                     Image(user.image ?? "")
                         .resizable()
                         .clipShape(Circle())
@@ -124,7 +124,7 @@ struct BookDetailView: View {
                             .resizable()
                             .clipShape(Circle())
                             .frame(width: 50, height: 50)
-                        Text(user.name).font(.headline)
+                        Text(user.nickName).font(.headline)
                         Spacer()
                         // 렌탈 부분 설정 후 상태 버튼으로 변경
                         Button {
@@ -139,7 +139,7 @@ struct BookDetailView: View {
                             .resizable()
                             .clipShape(Circle())
                             .frame(width: 50, height: 50)
-                        Text(user.name).font(.headline)
+                        Text(user.nickName).font(.headline)
                         Spacer()
                         // 렌탈 부분 설정 후 상태 버튼으로 변경
                         Button {
@@ -154,7 +154,7 @@ struct BookDetailView: View {
                             .resizable()
                             .clipShape(Circle())
                             .frame(width: 50, height: 50)
-                        Text(user.name).font(.headline)
+                        Text(user.nickName).font(.headline)
                         Spacer()
                         // 렌탈 부분 설정 후 상태 버튼으로 변경
                         Button {
@@ -169,7 +169,7 @@ struct BookDetailView: View {
                             .resizable()
                             .clipShape(Circle())
                             .frame(width: 50, height: 50)
-                        Text(user.name).font(.headline)
+                        Text(user.nickName).font(.headline)
                         Spacer()
                         // 렌탈 부분 설정 후 상태 버튼으로 변경
                         Button {

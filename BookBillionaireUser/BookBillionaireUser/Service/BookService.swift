@@ -61,6 +61,26 @@ class BookService: ObservableObject {
         return resultBooks
     }
     
+    /// 책 owner ID로 책을 불러오는 함수
+    func loadBookByID(_ ownerID: String) async -> [Book]{
+        var resultBooks: [Book] = []
+        do {
+            let querySnapshot = try await bookRef.whereField("ownerID", isEqualTo: ownerID).getDocuments()
+            resultBooks = querySnapshot.documents.compactMap { document -> Book? in
+                do {
+                    let book = try document.data(as: Book.self)
+                    return book
+                } catch {
+                    print("Error decoding book: \(error)")
+                    return nil
+                }
+            }
+        } catch {
+            print("Error fetching documents: \(error)")
+        }
+        return resultBooks
+    }
+    
     /// 특정 책 삭제
     func deleteBook(_ book: Book) async {
         do {
@@ -68,6 +88,18 @@ class BookService: ObservableObject {
             print("삭제완료")
         } catch {
             print("\(#function) Error removing document : \(error)")
+        }
+    }
+    
+    func updateRentalState(_ bookID: String, rentalState: RentalStateType) async {
+        let userRentalRef = bookRef.document(bookID)
+        do {
+            try await userRentalRef.updateData([
+                "rentalState" : rentalState.description
+            ])
+            print("렌탈상황 변경 성공🧚‍♀️")
+        } catch let error {
+            print("\(#function) 렌탈정보 변경 실패했음☄️ \(error)")
         }
     }
 }
