@@ -10,7 +10,7 @@ import Foundation
 /// 도서정보에 대한 구조체
 public struct Book: Identifiable, Codable, Hashable {
     public var id: String = UUID().uuidString
-    public var ownerID: String
+    public var ownerID: String!
     public var isbn: String?
     public var title: String
     public var contents: String
@@ -23,7 +23,6 @@ public struct Book: Identifiable, Codable, Hashable {
     public var rental: String //Rental ID
     public var rentalState: RentalStateType
 
-    
     /// 일반 초기화
     public init(owenerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", bookCategory: BookCategory? = nil, rental: String = "", rentalState: RentalStateType = .rentalAvailable) {
         
@@ -41,11 +40,9 @@ public struct Book: Identifiable, Codable, Hashable {
         self.rentalState = rentalState
     }
     
-    
-    
     /// 디코딩을 위한 초기화
     public init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: BookCodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
         self.ownerID = try container.decode(String.self, forKey: .ownerID)
         self.isbn = try container.decodeIfPresent(String.self, forKey: .isbn)
@@ -68,7 +65,7 @@ public struct Book: Identifiable, Codable, Hashable {
 }
 
 /// 코딩키
-public enum CodingKeys: String, CodingKey {
+public enum BookCodingKeys: String, CodingKey {
     case id, ownerID, title, contents, thumbnail, rental
     case isbn, publisher
     case price
