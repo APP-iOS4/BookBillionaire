@@ -51,6 +51,20 @@ class UserService: ObservableObject {
             print("\(#function) 유저정보에 책을 넣는 걸 실패했음☄️ \(error)")
         }
     }
+    
+    /// 유저 ID로 유저 정보를 불러오는 함수
+    func loadUserByID(_ bookOwnerID: String) async -> User {
+        var user: User
+        do {
+            user = try await allUserRef.document(bookOwnerID).getDocument().data(as: User.self)
+            print("\(user)")
+            return user
+        } catch {
+            print("Error decoding book: \(error)")
+            return User(id: "", nickName: "", address: "")
+        }
+    }
 }
+
 
 
