@@ -49,6 +49,10 @@
 		EF1AA4EC2BBE7BC700B248A7 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4EB2BBE7BC700B248A7 /* FirebaseFirestoreSwift */; };
 		EF1AA4EE2BBE7BCC00B248A7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4ED2BBE7BCC00B248A7 /* GoogleSignIn */; };
 		EF1AA4F02BBE7BCC00B248A7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4EF2BBE7BCC00B248A7 /* GoogleSignInSwift */; };
+		EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */; };
+		EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7A2B942BBF99A00068D100 /* CameraView.swift */; };
+		EF7A2B962BBFB53F0068D100 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74B82BBCFA6200E37D0D /* ChatView.swift */; };
+		EF7A2B972BBFB53F0068D100 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74BC2BBCFA7F00E37D0D /* LibraryView.swift */; };
 		EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */; };
 		EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */; };
 		EF8178CD2BBD749700ADAE2E /* RentalPeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */; };
@@ -91,6 +95,8 @@
 		EF1AA4DB2BBE7B3600B248A7 /* BookStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookStore.swift; sourceTree = "<group>"; };
 		EF1AA4DC2BBE7B3600B248A7 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		EF1AA4E02BBE7B7900B248A7 /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreateView.swift; sourceTree = "<group>"; };
+		EF7A2B942BBF99A00068D100 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalStateSheetView.swift; sourceTree = "<group>"; };
 		EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoAddView.swift; sourceTree = "<group>"; };
 		EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalPeriodView.swift; sourceTree = "<group>"; };
@@ -287,6 +293,8 @@
 				EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */,
 				EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */,
 				EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */,
+				EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */,
+				EF7A2B942BBF99A00068D100 /* CameraView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -431,9 +439,11 @@
 				EF1AA4DF2BBE7B3600B248A7 /* UserStore.swift in Sources */,
 				35537C562BBD8CA100FE8354 /* BottomSheet.swift in Sources */,
 				EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */,
+				EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */,
 				EF0F74D22BBD38FA00E37D0D /* MyBookListView.swift in Sources */,
 				35537C5A2BBD8CB400FE8354 /* HomeView.swift in Sources */,
 				EF1AA4E22BBE7B7900B248A7 /* ChatViewModel.swift in Sources */,
+				EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */,
 				8C85928D2BBD23BD0082C8B8 /* SignUpView.swift in Sources */,
 				8C85928E2BBD23BD0082C8B8 /* LoginView.swift in Sources */,
 				EF0F74882BBCF7C500E37D0D /* BookBillionaireUserApp.swift in Sources */,
@@ -576,6 +586,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookBillionaireUser/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) 앱에서 책의 이미지를 촬영하기 위하여 Camera 접근권한을 요청합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "BookBillionaireUser 앱에서 책의 이미지를 사용하기 위하여 Photo Library 접근권한을 요청합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -610,6 +622,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookBillionaireUser/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) 앱에서 책의 이미지를 촬영하기 위하여 Camera 접근권한을 요청합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "BookBillionaireUser 앱에서 책의 이미지를 사용하기 위하여 Photo Library 접근권한을 요청합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

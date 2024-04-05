@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct RentalPeriodView: View {
-    @State var rental: Rental
+    @Binding var rental: Rental
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,5 +25,5 @@ struct RentalPeriodView: View {
 }
 
 #Preview {
-    RentalPeriodView(rental: Rental(id: "", bookOwner: "",rentalStartDay: Date(), rentalEndDay: Date()))
+    RentalPeriodView(rental:.constant(Rental(id: "", bookOwner: "",rentalStartDay: Date(), rentalEndDay: Date())))
 }

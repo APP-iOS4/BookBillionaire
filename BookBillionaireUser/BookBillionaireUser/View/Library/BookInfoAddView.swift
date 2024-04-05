@@ -7,18 +7,31 @@
 
 import SwiftUI
 import BookBillionaireCore
+import PhotosUI
 
 struct BookInfoAddView: View {
-    @State var book: Book = Book.sample
+    @Binding var book: Book
     @State var isShowingSheet: Bool = false
-    @State var isShowingPhoto: Bool = false
+    @State var isShowingDialog: Bool = false
+    @State var isShowingPhotosPicker: Bool = false
+    @State var isShowingCamera: Bool = false
+    @State private var selectedImage: UIImage?
+    @State private var selectedItem: PhotosPickerItem?
     
     var body: some View {
         VStack {
             HStack(alignment: .top) {
-                if book.thumbnail.isEmpty {
+                if let image = selectedImage {
                     Button {
-                        isShowingPhoto.toggle()
+                        isShowingDialog.toggle()
+                    } label: {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 100, height: 140)
+                    }
+                } else {
+                    Button {
+                        isShowingDialog.toggle()
                     } label: {
                         Image(systemName: "plus")
                             .foregroundStyle(Color.white)
@@ -26,15 +39,15 @@ struct BookInfoAddView: View {
                             .frame(width: 100, height: 140)
                             .background(Color.gray)
                     }
-                } else {
-                    AsyncImage(url: URL(string: book.thumbnail)) { image in
-                        image.resizable()
-                            .frame(width: 100, height: 140)
-                    } placeholder: {
-                        ProgressView()
-                            .frame(width: 100, height: 140)
-                    }
                 }
+                //                    AsyncImage(url: URL(string: book.thumbnail)) { image in
+                //                        image.resizable()
+                //                            .frame(width: 100, height: 140)
+                //                    } placeholder: {
+                //                        ProgressView()
+                //                            .frame(width: 100, height: 140)
+                //                    }
+                //                }
                 VStack(alignment: .leading) {
                     TextField("책 이름을 입력해주세요", text: $book.title)
                     TextField("작가 이름을 입력해주세요", text: $book.authors[0])
@@ -52,22 +65,36 @@ struct BookInfoAddView: View {
                 }
                 .textFieldStyle(.roundedBorder)
             }
-            .confirmationDialog("사진", isPresented: $isShowingPhoto, actions: {
+            .confirmationDialog("사진", isPresented: $isShowingDialog, actions: {
                 Button {
-                    
+                    isShowingCamera.toggle()
                 } label: {
                     Text("사진 촬영")
                 }
-                
                 Button {
-                    
+                    isShowingPhotosPicker.toggle()
                 } label: {
                     Text("사진 선택")
                 }
             })
+            .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItem)
+            .onChange(of: selectedItem) { _ in
+                Task {
+                    if let selectedItem,
+                       let data = try? await selectedItem.loadTransferable(type: Data.self) {
+                        if let image = UIImage(data: data) {
+                            selectedImage = image
+                            book.thumbnail = "\(image)"
+                        }
+                    }
+                }
+            }
             .sheet(isPresented: $isShowingSheet) {
                 RentalStateSheetView(isShowingSheet: $isShowingSheet, rentalState: $book.rentalState)
                     .presentationDetents([.medium])
+            }
+            .fullScreenCover(isPresented: $isShowingCamera) {
+                CameraView(selectedImage: $selectedImage, isShowingCamera: $isShowingCamera)
             }
             .padding()
         }
@@ -75,5 +102,6 @@ struct BookInfoAddView: View {
 }
 
 #Preview {
-    BookInfoAddView()
+    BookInfoAddView(book: .constant(Book.sample))
 }
+

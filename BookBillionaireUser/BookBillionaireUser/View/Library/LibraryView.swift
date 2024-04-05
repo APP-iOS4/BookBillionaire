@@ -29,7 +29,7 @@ struct LibraryView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink {
-                    Text("책 등록 뷰")
+                    BookCreateView()
                 } label: {
                     if selectedIndex == 0 {
                         Label("plus", systemImage: "plus")

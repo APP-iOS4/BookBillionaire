@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct DescriptionView: View {
-    @State var book: Book
+    @Binding var book: Book
     @State var descriptionText: String = ""
     
     var body: some View {
@@ -34,5 +34,5 @@ struct DescriptionView: View {
 }
 
 #Preview {
-    DescriptionView(book: Book(owenerID: "", title: "", contents: "", authors: [""], thumbnail: "", rental: ""))
+    DescriptionView(book: .constant(Book.sample))
 }
