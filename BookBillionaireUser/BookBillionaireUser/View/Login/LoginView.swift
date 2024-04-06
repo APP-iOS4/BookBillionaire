@@ -15,67 +15,61 @@ struct LoginView: View {
     
     var body: some View {
         NavigationStack {
+            Spacer()
             VStack {
-                Spacer()
                 Text("Book Billionaire")
                     .font(.title)
-                VStack(spacing: 20) {
-                    TextField("email", text: $emailText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding(.horizontal, 20)
-                        .foregroundColor(Color.accentColor)
-                        .padding(.top, 50)
-                        .textInputAutocapitalization(.none)
-                        .autocapitalization(.none)
-                    SecureField("Password", text: $passwordText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding(.horizontal, 20)
-                        .foregroundColor(Color.accentColor)
-                    
-                    HStack(spacing: 20) {
-                        Spacer()
-                        NavigationLink {
-                            SignUpView()
-                        } label: {
-                            HStack {
-                                Text("회원가입")
-                                    .foregroundColor(Color.accentColor)
-                            }
+                ZStack {
+                    VStack(spacing: 20) {
+                        TextField("email", text: $emailText)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.horizontal, 20)
+                            .foregroundColor(Color.accentColor)
+                            .padding(.top, 50)
+                            .textInputAutocapitalization(.none)
+                            .autocapitalization(.none)
+                        SecureField("Password", text: $passwordText)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.horizontal, 20)
+                            .foregroundColor(Color.accentColor)
+                        
+                        HStack(spacing: 5) {
+                            NavigationLink("회원가입") {
+                                SignUpView()
+                            }.buttonStyle(WhiteButtonStyle(height: 50))
+                            Spacer()
+                            Button("로그인"){
+                                signInProcessing = true
+                                authViewModel.emailAuthLogIn(email: emailText, password: passwordText)
+                            }.buttonStyle(WhiteButtonStyle(height: 50))
+                                .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
+                            
+                            //                            ZStack {
+                            //                                Text("로그인")
+                            //                                    .padding()
+                            //                                    .background(emailText.isEmpty || passwordText.isEmpty == true ? .gray : .red)
+                            //
+                            
                         }
-                        Spacer()
-                        Button(action: {
-                            signInProcessing = true
-                            authViewModel.emailAuthLogIn(email: emailText, password: passwordText)
-                        }) {
-                            ZStack {
-                                Text("로그인")
-                                    .padding()
-                                    .background(Color.white)
-                                    .foregroundColor(Color.accentColor)
-                                    .background(emailText.isEmpty || passwordText.isEmpty == true ? .gray : .red)
-                                    .cornerRadius(10)
-                                
-                                if signInProcessing {
-                                    ProgressView()
-                                }
-                            }
-                        }
-                        .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
-                        Spacer()
+                        .padding()
+                        Text("다른 방법으로 로그인")
+                            .padding()
+                        Image("SignInWithGoogle")
+                        //}
                     }
+                    .padding(.horizontal)
                     .padding(.top, 20)
+//                    if signInProcessing {
+//                        ProgressView()
+//                    }
                 }
-                
-                .padding(.horizontal, 50)
-                Text("다른 방법으로 로그인")
-                    .padding()
-                Image("SignInWithGoogle")
-                Spacer()
-                Text("Team BB")
-                SpaceBox()
             }
+            Spacer()
+            Text("Team BB")
+            SpaceBox()
         }
     }
+    
     
 }
 

@@ -11,7 +11,7 @@ import SwiftUI
 struct SpaceBox: View {
     var body: some View {
         Rectangle()
-            .frame(height: 50)
+            .frame(height: 30)
             .foregroundStyle(.clear)
     }
 }

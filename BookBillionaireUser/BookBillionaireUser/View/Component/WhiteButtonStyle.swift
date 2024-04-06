@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct WhiteButtonStyle: ButtonStyle {
+    var height: CGFloat = 60
+    var font: Font? = .system(size: 20)
+
   func makeBody(configuration: Configuration) -> some View {
       ZStack{
           Capsule(style: .continuous)
               .stroke(Color.accentColor)
               .foregroundColor(.white)
-              .frame(height: 40)
+              .frame(height: self.height)
           configuration.label
               .padding()
               .foregroundColor(.accentColor)
+              .font(font)
       }
   }
 }
