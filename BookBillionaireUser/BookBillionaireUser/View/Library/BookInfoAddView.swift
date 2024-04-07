@@ -91,7 +91,7 @@ struct BookInfoAddView: View {
             }
             .sheet(isPresented: $isShowingSheet) {
                 RentalStateSheetView(isShowingSheet: $isShowingSheet, rentalState: $book.rentalState)
-                    .presentationDetents([.medium])
+                    .presentationDetents([.fraction(0.3)])
             }
             .fullScreenCover(isPresented: $isShowingCamera) {
                 CameraView(selectedImage: $selectedImage, isShowingCamera: $isShowingCamera)
