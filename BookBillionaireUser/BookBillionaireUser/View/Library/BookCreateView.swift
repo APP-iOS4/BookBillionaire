@@ -20,7 +20,6 @@ struct BookCreateView: View {
                     RentalPeriodView(rental: $rental)
                     DescriptionView(book: $book)
                 }
-                // 추후 컴포넌트로 변경
                 Button("완료") {
                     book.title = ""
                     book.authors = [""]
@@ -28,8 +27,9 @@ struct BookCreateView: View {
                     book.thumbnail = ""
                     rental.rentalStartDay = Date()
                     rental.rentalEndDay = Date()
-                } .buttonStyle(AccentButtonStyle())
-                    .padding()
+                } 
+                .buttonStyle(AccentButtonStyle())
+                .padding()
             }
             SpaceBox()
         }
