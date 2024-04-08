@@ -21,7 +21,7 @@ struct LoginView: View {
                         .fill(Color.white)
                         .cornerRadius(10)
                         .frame(width: 335, height: 250)
-                    VStack(spacing: 20) {
+                    VStack(spacing: 10) {
                         TextField("email", text: $emailText)
                             .padding()
                             .background(.thinMaterial)
@@ -33,7 +33,7 @@ struct LoginView: View {
                             .cornerRadius(10)
                             .textInputAutocapitalization(.never)
                         
-                        HStack(spacing: 10) {
+                        HStack {
                             Spacer()
                             NavigationLink {
                                 SignUpView()
@@ -87,4 +87,8 @@ struct LoginView: View {
         }
         
     }
+}
+
+#Preview {
+    LoginView()
 }
