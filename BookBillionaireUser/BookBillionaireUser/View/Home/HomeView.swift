@@ -69,7 +69,7 @@ struct HomeView: View {
                                     }
                                 }
                                 .navigationDestination(for: Book.self) { book in
-                                    BookDetailView(book: book, user: user(for: book))
+//                                    BookDetailView(book: book, user: user(for: book))
                                 }
                                 .foregroundStyle(.primary)
                                 
@@ -117,19 +117,19 @@ struct HomeView: View {
         }
     }
     
-    // BookDetailView에 전달할 User를 가져오는 메서드
-    // User 반환
-    func user(for book: Book) -> User {
-        // book.ownerID == user.id 일치 확인 후 값 return
-        if let ownerId = book.ownerID {
-            if let user = users.first(where: { $0.id == ownerId }) {
-                return user
-            }
-        }
-        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-        // 추후 협의후 수정예정
-        return User.sample
-    }
+//    // BookDetailView에 전달할 User를 가져오는 메서드
+//    // User 반환
+//    func user(for book: Book) -> User {
+//        // book.ownerID == user.id 일치 확인 후 값 return
+//        if let ownerId = book.ownerID {
+//            if let user = users.first(where: { $0.id == ownerId }) {
+//                return user
+//            }
+//        }
+//        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
+//        // 추후 협의후 수정예정
+//        return User.sample
+//    }
 }
 
 #Preview {

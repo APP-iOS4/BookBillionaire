@@ -35,10 +35,10 @@ struct BookListRowView: View {
     }
 }
 
-#Preview {
-    let bookStore = BookStore().books
-    return Group {
-        BookListRowView(book: bookStore[0])
-        BookListRowView(book: bookStore[1])
-    }
-}
+//#Preview {
+//    let bookStore = BookStore().books
+//    return Group {
+//        BookListRowView(book: bookStore[0])
+//        BookListRowView(book: bookStore[1])
+//    }
+//}

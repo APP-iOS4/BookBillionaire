@@ -15,9 +15,9 @@ struct RentalStateSheetView: View {
     var body: some View {
         VStack {
             Picker("대여 가능 여부", selection: $rentalState) {
-                Text("\(RentalStateType.rentalAvailable.description)")
+                Text("\(RentalStateType.rentalAvailable.rawValue)")
                     .tag(RentalStateType.rentalAvailable)
-                Text("\(RentalStateType.rentalNotPossible.description)")
+                Text("\(RentalStateType.rentalNotPossible.rawValue)")
                     .tag(RentalStateType.rentalNotPossible)
             }
             .pickerStyle(.wheel)

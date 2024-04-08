@@ -29,8 +29,9 @@ struct BookBillionaireUserApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(authViewModel)
+            ServiceTestView()
+//            ContentView()
+//                .environmentObject(authViewModel)
         }
     }
 }
