@@ -30,7 +30,6 @@ struct BookBillionaireUserApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-//            LoginView()
                 .environmentObject(authViewModel)
         }
     }

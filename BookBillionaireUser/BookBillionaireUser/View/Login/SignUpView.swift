@@ -23,10 +23,7 @@ struct SignUpView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     
-    var body: some View { 
-        ZStack {
-            Color.accentColor1
-                .edgesIgnoringSafeArea(.all)
+    var body: some View {
             ScrollView {
                 VStack(spacing: 10) {
                     Image("logoBookBillionaire")
@@ -150,17 +147,14 @@ struct SignUpView: View {
                 .padding(.bottom, 15)
             }
         }
-        
-    }
-    
-    func checkSignUpCondition () -> Bool {
+    private func checkSignUpCondition () -> Bool {
         if nameText.isEmpty || emailText.isEmpty || passwordText.isEmpty || passwordConfirmText.isEmpty {
             return false
         }
         return true
     }
     
-    func isValidEmail(_ email: String) -> Bool {
+    private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPredicate.evaluate(with: email)

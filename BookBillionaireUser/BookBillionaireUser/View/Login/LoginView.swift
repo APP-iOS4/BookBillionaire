@@ -84,9 +84,12 @@ struct LoginView: View {
                 .padding(.bottom, 10)
                 Spacer()
             }
-        }
-        
+            Spacer()
+            Text("Team BB")
+            SpaceBox()
+        }        
     }
+
 }
 
 #Preview {
