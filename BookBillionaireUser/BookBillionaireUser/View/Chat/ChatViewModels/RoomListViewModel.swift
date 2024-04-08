@@ -33,8 +33,8 @@ class RoomListViewModel: ObservableObject {
     let db = Firestore.firestore()
     
     func getAllRooms() {
-        
-        db.collection("rooms")
+        // 채팅방 목록을 불러오는 함수
+        db.collection("chat")
             .getDocuments { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -53,7 +53,6 @@ class RoomListViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.rooms = rooms
                         }
-                        
                     }
                 }
             }

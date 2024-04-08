@@ -17,15 +17,15 @@ struct ChatView: View {
     @AppStorage("username") private var username = ""
     @State private var cancellables: AnyCancellable?
     
+    @State private var plusItemShowing = false
+
     var body: some View {
-        
         VStack {
             ScrollView {
                 ScrollViewReader { scrollView in
                     VStack {
                         ForEach(messageListVM.messages, id: \.messageId) { message in
                             HStack {
-                                
                                 if message.username == username {
                                     Spacer()
                                     ChatBubble(messageText: message.messageText, username: message.username, style: .from)
@@ -34,10 +34,12 @@ struct ChatView: View {
                                     Spacer()
                                 }
                             }
-                            .padding()
+                            .padding(.horizontal, 15)
                             .id(message.messageId)
                         }
-                    }.onAppear(perform: {
+                    }
+                    // MARK: - 메세지 스크롤 하단 맞춤
+                    .onAppear(perform: {
                        cancellables = messageListVM.$messages.sink { messages in
                             if messages.count > 0 {
                                 DispatchQueue.main.async {
@@ -53,22 +55,53 @@ struct ChatView: View {
             
             Spacer()
             
+           // MARK: - 텍스트 필드
             HStack {
-                TextField("Write message here", text: $message)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                Button {
+                    plusItemShowing.toggle()
+                    hideKeyboard()
+                } label: {
+                    plusItemShowing ? Image(systemName: "xmark") : Image(systemName: "plus")
+                }
+                .padding(.horizontal,10)
+                
+                
+                TextField("메세지를 입력하세요.", text: $message)
+                    .padding(10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .disableAutocorrection(true)
+                
                 Button {
                     sendMessage()
                 } label: {
-                    Image(systemName: "paperplane.fill")
+                    ZStack {
+                        RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
+                            .foregroundColor(.accentColor)
+                        Image(systemName: "paperplane")
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: 40, height: 40)
                 }
             }
-            .padding()
+            .padding(.bottom, 8)
+            .padding(.top, 0)
+            .padding(.horizontal)
+            .background(Color.white)
+            .cornerRadius(50)
+            
+            
+            if plusItemShowing {
+                ChatPlusItem()
+                    .padding(.bottom, 50)
+                    .padding(.top, 30)
+            }
         }
         .navigationTitle(room.name)
         
-        .onAppear(perform: {
+        .onAppear {
             messageListVM.registerUpdatesForRoom(room: room)
-        })
+        }
     }
     
     private func sendMessage() {
@@ -80,6 +113,14 @@ struct ChatView: View {
     }
 }
 
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+
 #Preview {
-    ChatView(room: RoomViewModel(room: Room(name: "최준영", description: "책 대여 신청합니다")))
+    ChatView(room: RoomViewModel(room: Room(name: "최준영", description: "책 대여 신청합니다"/*, users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"]*/)))
 }

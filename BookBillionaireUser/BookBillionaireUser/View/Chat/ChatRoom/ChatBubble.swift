@@ -29,7 +29,7 @@ struct ChatBubble: View {
                     
                     Text(messageText)
                         .lineLimit(nil)
-                        .padding(15)
+                        .padding(12)
                         .background(Color.yellow)
                         .cornerRadius(15)
                 }
@@ -41,7 +41,7 @@ struct ChatBubble: View {
                         //[임시] 상대방 프로필 사진 불러오기
                         Circle()
                             .foregroundColor(.accentColor)
-                            .frame(width: 60, height: 60)
+                            .frame(width: 40, height: 40)
                             .opacity(0.8)
                         
                         Image(systemName: "figure.arms.open")
@@ -56,7 +56,7 @@ struct ChatBubble: View {
                             
                             Text(messageText)
                                 .lineLimit(nil)
-                                .padding(15)
+                                .padding(12)
                                 .background(Color.gray)
                                 .foregroundStyle(.white)
                                 .cornerRadius(15)

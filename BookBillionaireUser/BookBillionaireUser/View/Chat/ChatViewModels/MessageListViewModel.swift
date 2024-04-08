@@ -39,7 +39,7 @@ class MessageListViewModel: ObservableObject {
     
     func registerUpdatesForRoom(room: RoomViewModel) {
         
-        db.collection("rooms")
+        db.collection("chat")
             .document(room.roomId)
             .collection("messages")
             .order(by: "messageDate", descending: false)
@@ -69,7 +69,7 @@ class MessageListViewModel: ObservableObject {
         let message = Message(vs: msg)
         
         do {
-        _ = try db.collection("rooms")
+        _ = try db.collection("chat")
             .document(message.roomId)
             .collection("messages")
             .addDocument(from: message, encoder: Firestore.Encoder()) { (error) in

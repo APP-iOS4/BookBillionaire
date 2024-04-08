@@ -14,13 +14,12 @@ struct Message: Codable {
     var username: String = ""      // 해당 메세지를 보낸 유저 닉네임
     var messageDate = Date()       // 메세지를 보낸 시간
     var roomId: String = ""        // [임시] 방의 Id
-//    var timestamp: Date
     
+//    var timestamp: Date
 //    var id: UUID = UUID()
 //    let message: String
 //    var received: Bool
 
-    
     init(vs: MessageViewState) {
         text = vs.message
         username = vs.username

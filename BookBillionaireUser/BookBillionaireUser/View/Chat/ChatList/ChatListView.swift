@@ -15,7 +15,7 @@ struct ChatListView: View {
         VStack {
             List(roomListVM.rooms, id: \.roomId) { room in
                 NavigationLink(
-                    destination: ChatView(room: RoomViewModel(room: Room(name: "ㅇㅇㅇ", description: "ㅇㅇ"))),
+                    destination: ChatView(room: room),
                     label: {
                         RoomCell(room: room)
                     })
@@ -29,6 +29,12 @@ struct ChatListView: View {
             isEditing = true
         } label: {
             Text("Edit")
+        })
+        
+        .sheet(isPresented: $isEditing, onDismiss: {
+            
+        }, content: {
+            AddRoomView()
         })
         
         .onAppear(perform: {
@@ -53,7 +59,7 @@ struct RoomCell: View {
                     .padding(8)
                     .foregroundColor(.white)
             }
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 5)
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(room.name)
@@ -77,7 +83,7 @@ struct RoomCell: View {
                 .foregroundColor(.orange)
                 .font(.system(size: 23))
         }
-        .padding()
+        .padding(.horizontal, 15)
         
         Divider()
     }
@@ -85,4 +91,5 @@ struct RoomCell: View {
 
 #Preview {
     RoomCell(room: RoomViewModel(room: Room(name: "최준영", description: "책 대여 블라블라 어쩌구 저쩌구")))
+//    ChatListView()
 }
