@@ -12,10 +12,12 @@ import BookBillionaireCore
 
 struct HomeView: View {
     @State private var books: [Book] = []
-//    @State private var users: [User] = []
+    @State private var users: [User] = []
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingBottomSheet: Bool = false
     let bookService = BookService.shared
+    let userService = UserService.shared
+
     
     var body: some View {
         NavigationStack {
@@ -38,9 +40,10 @@ struct HomeView: View {
             // 메뉴 버튼
             HStack(alignment: .center) {
                 ForEach(BookCategory.allCases, id: \.self) { menu in
-                    Button {
+                    Button{
                         menuTitle = menu
-                    } label: {
+                    }
+                label: {
                         Text("\(menu.buttonTitle)")
                             .fontWeight(menuTitle == menu ? .bold : .regular)
                     }
@@ -66,7 +69,7 @@ struct HomeView: View {
                                     }
                                 }
                                 .navigationDestination(for: Book.self) { book in
-                                    BookDetailView(book: book, user: User.sample)
+                                    BookDetailView(book: book, user: user(for: book))
                                 }
                                 .foregroundStyle(.primary)
                                 
@@ -98,6 +101,7 @@ struct HomeView: View {
         // 책 불러오기
         .onAppear {
             fetchBooks()
+            fetchUsers()
         }
     }
     // 책 데이터 호출
@@ -105,6 +109,26 @@ struct HomeView: View {
         Task {
             books = await bookService.loadBooks()
         }
+    }
+    // 책 소유자 유저 데이터 호출
+    func fetchUsers() {
+        Task {
+            users = await userService.loadUsers()
+        }
+    }
+    
+    // BookDetailView에 전달할 User를 가져오는 메서드
+    // User 반환
+    func user(for book: Book) -> User {
+        // book.ownerID == user.id 일치 확인 후 값 return
+        if let ownerId = book.ownerID {
+            if let user = users.first(where: { $0.id == ownerId }) {
+                return user
+            }
+        }
+        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
+        // 추후 협의후 수정예정
+        return User.sample
     }
 }
 

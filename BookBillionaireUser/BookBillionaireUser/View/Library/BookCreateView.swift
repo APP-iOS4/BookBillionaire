@@ -20,16 +20,18 @@ struct BookCreateView: View {
                     RentalPeriodView(rental: $rental)
                     DescriptionView(book: $book)
                 }
-                
-                RoundButton(text: "완료") {
+                // 추후 컴포넌트로 변경
+                Button("완료") {
                     book.title = ""
                     book.authors = [""]
                     book.contents = ""
                     book.thumbnail = ""
                     rental.rentalStartDay = Date()
                     rental.rentalEndDay = Date()
-                }
+                } .buttonStyle(AccentButtonStyle())
+                    .padding()
             }
+            SpaceBox()
         }
         .navigationTitle("책 등록")
         .navigationBarTitleDisplayMode(.inline)

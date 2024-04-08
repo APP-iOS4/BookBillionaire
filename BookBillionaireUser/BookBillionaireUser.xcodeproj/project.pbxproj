@@ -18,6 +18,9 @@
 		04A59A912BBFCF6A009FBF6E /* APISearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A8E2BBFCF6A009FBF6E /* APISearchView.swift */; };
 		04A59A922BBFCF6A009FBF6E /* APISearchListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A8F2BBFCF6A009FBF6E /* APISearchListRowView.swift */; };
 		04A59A932BBFCF6A009FBF6E /* APISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A902BBFCF6A009FBF6E /* APISearchBar.swift */; };
+		04A59A952BC143E7009FBF6E /* SpaceBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A942BC143E7009FBF6E /* SpaceBox.swift */; };
+		04A59A982BC19813009FBF6E /* AccentButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A962BC19813009FBF6E /* AccentButtonStyle.swift */; };
+		04A59A992BC19813009FBF6E /* WhiteButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A972BC19813009FBF6E /* WhiteButtonStyle.swift */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
 		088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260412BBD2B4C007BEA25 /* LocationSharedView.swift */; };
@@ -53,7 +56,6 @@
 		EF1AA4F02BBE7BCC00B248A7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4EF2BBE7BCC00B248A7 /* GoogleSignInSwift */; };
 		EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */; };
 		EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7A2B942BBF99A00068D100 /* CameraView.swift */; };
-		EF7A2B9D2BC02DFA0068D100 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF7A2B9C2BC02DFA0068D100 /* GoogleService-Info.plist */; };
 		EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */; };
 		EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */; };
 		EF8178CD2BBD749700ADAE2E /* RentalPeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */; };
@@ -69,6 +71,9 @@
 		04A59A8E2BBFCF6A009FBF6E /* APISearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISearchView.swift; sourceTree = "<group>"; };
 		04A59A8F2BBFCF6A009FBF6E /* APISearchListRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISearchListRowView.swift; sourceTree = "<group>"; };
 		04A59A902BBFCF6A009FBF6E /* APISearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISearchBar.swift; sourceTree = "<group>"; };
+		04A59A942BC143E7009FBF6E /* SpaceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceBox.swift; sourceTree = "<group>"; };
+		04A59A962BC19813009FBF6E /* AccentButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccentButtonStyle.swift; sourceTree = "<group>"; };
+		04A59A972BC19813009FBF6E /* WhiteButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiteButtonStyle.swift; sourceTree = "<group>"; };
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260412BBD2B4C007BEA25 /* LocationSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharedView.swift; sourceTree = "<group>"; };
@@ -263,9 +268,12 @@
 		EF0F74B22BBCF9D300E37D0D /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				04A59A962BC19813009FBF6E /* AccentButtonStyle.swift */,
+				04A59A972BC19813009FBF6E /* WhiteButtonStyle.swift */,
 				35537C552BBD8CA100FE8354 /* BottomSheet.swift */,
 				EF0F74BA2BBCFA7100E37D0D /* SearchBar.swift */,
 				EF964B3C2BC22D2C005F90DF /* RoundButton.swift */,
+				04A59A942BC143E7009FBF6E /* SpaceBox.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -419,7 +427,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
-				EF7A2B9D2BC02DFA0068D100 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +455,7 @@
 				EF0F74D02BBD297B00E37D0D /* CategoryView.swift in Sources */,
 				EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */,
 				04A59A922BBFCF6A009FBF6E /* APISearchListRowView.swift in Sources */,
+				04A59A992BC19813009FBF6E /* WhiteButtonStyle.swift in Sources */,
 				EF0F748A2BBCF7C500E37D0D /* ContentView.swift in Sources */,
 				EF964B3D2BC22D2C005F90DF /* RoundButton.swift in Sources */,
 				088260462BBD2B85007BEA25 /* PromiseConfirmView.swift in Sources */,
@@ -456,8 +464,10 @@
 				088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */,
 				04A59A912BBFCF6A009FBF6E /* APISearchView.swift in Sources */,
 				352D6FFF2BBE804C00D12B0F /* BookListRowView.swift in Sources */,
+				04A59A982BC19813009FBF6E /* AccentButtonStyle.swift in Sources */,
 				088260442BBD2B5E007BEA25 /* PhotoSharedView.swift in Sources */,
 				04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */,
+				04A59A952BC143E7009FBF6E /* SpaceBox.swift in Sources */,
 				EF1AA4DF2BBE7B3600B248A7 /* UserStore.swift in Sources */,
 				35537C562BBD8CA100FE8354 /* BottomSheet.swift in Sources */,
 				EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */,

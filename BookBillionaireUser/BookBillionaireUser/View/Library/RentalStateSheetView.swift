@@ -25,10 +25,13 @@ struct RentalStateSheetView: View {
             .onAppear {
                 tempRentalState = rentalState
             }
-            RoundButton(text: "완료") {
+                
+            Button("완료") {
                 isShowingSheet.toggle()
                 rentalState = tempRentalState
             }
+            .buttonStyle(AccentButtonStyle())
+            .padding()
         }
         .padding()
     }
