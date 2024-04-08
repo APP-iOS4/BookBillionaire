@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import BookBillionaireCore
 
 struct RentalBookListView: View {
+    let bookService: BookService = BookService.shared
+    @State var myBooks: [Book] = []
+    
     var body: some View {
         VStack {
             HStack {
@@ -17,35 +21,81 @@ struct RentalBookListView: View {
                     .fontWeight(.medium)
                 Spacer()
             }
-            LazyVStack(alignment: .leading, spacing: 10) {
-                // bookStore 미구현, 추후 변경
-                ForEach(0..<3, id: \.self) { book in
-                    // ListRowView 미구현, 추후 변경
-                    NavigationLink(value: book) {
-                        HStack {
-                            Image(systemName: "person.fill")
+            // 빌린도서 목록 미구현으로 보유도서 목록으로 더미데이터 사용
+            if myBooks.isEmpty {
+                VStack(spacing: 10) {
+                    Spacer()
+                    Circle()
+                        .stroke(lineWidth: 3)
+                        .overlay {
+                            Image(systemName: "book")
                                 .resizable()
-                                .frame(width: 100, height: 120)
-                                .background(Color.gray)
-                            VStack(alignment: .leading) {
-                                Text("책 이름")
-                                Text("작가 이름")
-                                Spacer()
-                            }
+                                .aspectRatio(contentMode: .fit)
+                                .padding(20)
                         }
+                        .frame(width: 70, height: 70)
+                    
+                    Text("대여중인 도서가 없습니다.")
+                    Text("대여가 완료되면 여기에 표시됩니다.")
+                    Spacer()
+                }
+                .font(.title3)
+                .fontWeight(.medium)
+                .foregroundStyle(.gray)
+            } else {
+                // 빌린도서 목록 미구현으로 보유도서 목록으로 더미데이터 사용
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 10) {
+                        ForEach(myBooks, id: \.self) { book in
+                                NavigationLink(value: book) {
+                                    HStack(alignment: .top) {
+                                        if book.thumbnail == "" ||  book.thumbnail.isEmpty {
+                                            Image("default")
+                                                .resizable()
+                                                .frame(width: 100, height: 120)
+                                                .background(Color.gray)
+                                        } else {
+                                            AsyncImage(url: URL(string: book.thumbnail)) { image in
+                                                image.resizable()
+                                                    .frame(width: 100, height: 120)
+                                                    .background(Color.gray)
+                                            } placeholder: {
+                                                ProgressView()
+                                            }
+                                        }
+                                        VStack(alignment: .leading) {
+                                            Text(book.title)
+                                            Text(book.authors.joined(separator: ", "))
+                                            Spacer()
+                                        }
+                                        .foregroundStyle(Color.black)
+                                        Spacer()
+                                    }
+                                }
+                            }
+//                         DetailView 미구현, 추후 변경
+//                        .navigationDestination(for: Book.self) { book in
+//                            Text("안녕 DetailView")
+//                        }
                     }
                 }
-                .foregroundStyle(Color.black)
             }
         }
-        // DetailView 미구현, 추후 변경
-        .navigationDestination(for: Int.self) { value in
-            Text("안녕 DetailView")
-        }
         .padding()
+        .onAppear{
+            loadMybook()
+        }
+    }
+    
+    private func loadMybook() {
+        Task {
+            myBooks = await bookService.loadBookByID("Eyhr4YQGsATlRDUcc9rYl9PZYk52")
+        }
     }
 }
 
 #Preview {
-    RentalBookListView()
+    NavigationStack {
+        RentalBookListView()
+    }
 }
