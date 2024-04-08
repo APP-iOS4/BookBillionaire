@@ -21,25 +21,17 @@ struct BookCreateView: View {
                     DescriptionView(book: $book)
                 }
                 // 추후 컴포넌트로 변경
-                Button {
+                Button("완료") {
                     book.title = ""
                     book.authors = [""]
                     book.contents = ""
                     book.thumbnail = ""
                     rental.rentalStartDay = Date()
                     rental.rentalEndDay = Date()
-                } label: {
-                    Text("완료")
-                        .fontWeight(.medium)
-                        .foregroundStyle(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 60)
-                }
-                .background(Color.accentColor)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .padding()
+                } .buttonStyle(AccentButtonStyle())
+                    .padding()
             }
+            SpaceBox()
         }
         .navigationTitle("책 등록")
         .navigationBarTitleDisplayMode(.inline)

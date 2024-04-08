@@ -40,9 +40,10 @@ struct HomeView: View {
             // 메뉴 버튼
             HStack(alignment: .center) {
                 ForEach(BookCategory.allCases, id: \.self) { menu in
-                    Button {
+                    Button{
                         menuTitle = menu
-                    } label: {
+                    }
+                label: {
                         Text("\(menu.buttonTitle)")
                             .fontWeight(menuTitle == menu ? .bold : .regular)
                     }
