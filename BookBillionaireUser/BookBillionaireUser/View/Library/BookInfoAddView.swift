@@ -55,7 +55,7 @@ struct BookInfoAddView: View {
                         Button {
                             isShowingSheet.toggle()
                         } label: {
-                            Text("\(book.rentalState.description)")
+                            Text("\(book.rentalState.rawValue)")
                             Image(systemName: "chevron.down")
                         }
                     }
@@ -101,7 +101,7 @@ struct BookInfoAddView: View {
     }
 }
 
-#Preview {
-    BookInfoAddView(book: .constant(Book.sample))
-}
+//#Preview {
+//    BookInfoAddView(book: .constant(Book.sample))
+//}
 
