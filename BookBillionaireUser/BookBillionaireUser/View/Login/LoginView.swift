@@ -15,32 +15,26 @@ struct LoginView: View {
                     .edgesIgnoringSafeArea(.all)
                 VStack {
                     Image("logo")
-                        .frame(width: 200, height: 200)
+                        .frame(width: 100, height: 100)
                         .padding(.top, 50)
                     ZStack {
                         Rectangle()
                             .fill(Color.white)
                             .cornerRadius(10)
-                            .frame(width: 335, height: 300)
+                            .frame(width: 335, height: 250)
                         VStack(spacing: 20) {
                             TextField("email", text: $emailText)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding(.horizontal, 20)
-                                .padding(.top, 50)
-                                .textInputAutocapitalization(.none)
-                                .cornerRadius(10)
+                                .padding()
                                 .background(.thinMaterial)
-                                .foregroundColor(.accentColor1)
+                                .cornerRadius(10)
                                 .textInputAutocapitalization(.never)
-                                .autocapitalization(.none)
                             SecureField("Password", text: $passwordText)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding(.horizontal, 20)
-                                .cornerRadius(10)
+                                .padding()
                                 .background(.thinMaterial)
-                                .foregroundColor(.accentColor1)
+                                .cornerRadius(10)
+                                .textInputAutocapitalization(.never)
                             
-                            HStack(spacing: 20) {
+                            HStack(spacing: 10) {
                                 Spacer()
                                 NavigationLink {
                                     SignUpView()
