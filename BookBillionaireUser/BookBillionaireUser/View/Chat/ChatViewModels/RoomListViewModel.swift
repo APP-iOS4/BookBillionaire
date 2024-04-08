@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct RoomViewModel {
+struct RoomViewModel: Hashable {
     
     let room: Room
     

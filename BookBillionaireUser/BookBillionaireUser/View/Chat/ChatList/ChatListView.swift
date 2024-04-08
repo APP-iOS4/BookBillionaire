@@ -12,34 +12,36 @@ struct ChatListView: View {
     @StateObject private var roomListVM = RoomListViewModel()
     
     var body: some View {
-        VStack {
-            List(roomListVM.rooms, id: \.roomId) { room in
-                NavigationLink(
-                    destination: ChatView(room: room),
-                    label: {
-                        RoomCell(room: room)
-                    })
+        NavigationStack {
+            VStack {
+                List(roomListVM.rooms, id: \.room.self) { room in
+                    NavigationLink(value: room){
+                        RoomCell(room: room)}
+                }
+                .navigationDestination(for: RoomViewModel.self){ room in
+                    ChatView(room: room)
+                }
+                .listStyle(PlainListStyle())
             }
-            .listStyle(PlainListStyle())
-        }
-        .navigationTitle("채팅")
-        .navigationBarTitleDisplayMode(.inline)
-        
-        .navigationBarItems(trailing: Button {
-            isEditing = true
-        } label: {
-            Text("Edit")
-        })
-        
-        .sheet(isPresented: $isEditing, onDismiss: {
+            .navigationTitle("채팅")
+            .navigationBarTitleDisplayMode(.inline)
             
-        }, content: {
-            AddRoomView()
-        })
-        
-        .onAppear(perform: {
-            roomListVM.getAllRooms()
-        })
+            .navigationBarItems(trailing: Button {
+                isEditing = true
+            } label: {
+                Text("Edit")
+            })
+            
+            .sheet(isPresented: $isEditing, onDismiss: {
+                
+            }, content: {
+                AddRoomView()
+            })
+            
+            .onAppear(perform: {
+                roomListVM.getAllRooms()
+            })
+        }
     }
 }
 
