@@ -21,18 +21,10 @@ struct RentalStateSheetView: View {
                     .tag(RentalStateType.rentalNotPossible)
             }
             .pickerStyle(.wheel)
-            Button {
+            Button("완료") {
                 isShowingSheet.toggle()
-            } label: {
-                Text("완료")
-                    .fontWeight(.medium)
-                    .foregroundStyle(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 60)
             }
-            .background(Color.accentColor)
-            .clipShape(RoundedRectangle(cornerRadius: 30))
+            .buttonStyle(AccentButtonStyle())
             .padding()
         }
         .padding()

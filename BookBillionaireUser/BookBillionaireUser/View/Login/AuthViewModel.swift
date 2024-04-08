@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import AuthenticationServices
 
 class AuthViewModel: ObservableObject { 
     
@@ -105,4 +106,5 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
+    
 }

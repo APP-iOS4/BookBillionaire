@@ -18,59 +18,88 @@ struct SignUpView: View {
     @State var isPasswordUnCorrectError: Bool = false
     @State var isEmailError: Bool = false
     @State var emailErrorText: String = ""
+    @State var isSecure: Bool = true
+
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     
-    var body: some View { 
-        ZStack {
-            Color.accentColor1
-                .edgesIgnoringSafeArea(.all)
+    var body: some View {
             ScrollView {
-                VStack(spacing: 30) {
+                VStack(spacing: 10) {
                     Image("logoBookBillionaire")
-                    
                     VStack(alignment: .leading) {
                         Text("이름")
-                            .font(.headline)
+                            .foregroundStyle(.white)
                         TextField("이름을 입력해주세요", text: $nameText)
                             .padding()
                             .background(.thinMaterial)
                             .cornerRadius(10)
                             .textInputAutocapitalization(.never)
+                            .padding(.bottom, 10)
                         Text("이메일")
-                            .font(.headline)
+                            .foregroundStyle(.white)
                         TextField("이메일을 입력해주세요", text: $emailText)
                             .padding()
                             .background(.thinMaterial)
                             .cornerRadius(10)
+                            .textInputAutocapitalization(.none)
+                            .autocapitalization(.none)
                             .onChange(of: emailText, perform: { newValue in
                                 isEmailError = !isValidEmail(newValue)
                             })
-                            .textInputAutocapitalization(.none)
-                            .autocapitalization(.none)
-                            .padding(.bottom, 20)
                         Text(emailErrorText)
-                            .font(.system(size: 15))
                             .foregroundColor(isEmailError ? .red : .clear)
                             .padding(.leading, 10)
                         Text("비밀번호")
-                            .font(.headline)
-                        SecureField("비밀번호를 6자리 이상 입력해주세요", text: $passwordText)
-                            .padding()
-                            .background(.thinMaterial)
-                            .cornerRadius(10)
+                            .foregroundStyle(.white)
+                        ZStack(alignment: .trailing) {
+                            if isSecure {
+                                SecureField("비밀번호", text: $passwordText)
+                                    .padding()
+                                    .background(.thinMaterial)
+                                    .cornerRadius(10)
+                            } else {
+                                TextField("비밀번호", text: $passwordText)
+                                    .padding()
+                                    .background(.thinMaterial)
+                                    .cornerRadius(10)
+                            }
+                            Button {
+                                isSecure.toggle()
+                            } label: {
+                                Image(systemName: isSecure ? "eye.slash" : "eye")
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.trailing, 10)
+                        }
                         Text("비밀번호는 6자리 이상 입력해주세요.")
-                            .font(.system(size: 15))
                             .foregroundColor(isPasswordCountError ? .red : .clear)
                             .padding(.leading, 10)
                         Text("비밀번호 확인")
-                        SecureField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
-                            .padding()
-                            .background(.thinMaterial)
-                            .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
-                            .cornerRadius(10)
+                            .foregroundStyle(.white)
+                        ZStack(alignment: .trailing) {
+                            if isSecure {
+                                SecureField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
+                                    .padding()
+                                    .background(.thinMaterial)
+                                    .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
+                                    .cornerRadius(10)
+                            } else {
+                                TextField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
+                                    .padding()
+                                    .background(.thinMaterial)
+                                    .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
+                                    .cornerRadius(10)
+                            }
+                            Button {
+                                isSecure.toggle()
+                            } label: {
+                                Image(systemName: isSecure ? "eye.slash" : "eye")
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.trailing, 10)
+                        }
                         Text("비밀번호가 서로 다릅니다.")
-                            .font(.system(size: 15))
                             .foregroundColor(isPasswordUnCorrectError ? .red : .clear)
                             .padding(.leading, 10)
                     }
@@ -107,7 +136,6 @@ struct SignUpView: View {
                             } message: {
                                 Text("회원가입이 완료되었습니다.")
                             }
-                            .padding()
                     }
                     .disabled(!checkSignUpCondition())
                     
@@ -119,17 +147,14 @@ struct SignUpView: View {
                 .padding(.bottom, 15)
             }
         }
-        
-    }
-    
-    func checkSignUpCondition () -> Bool {
+    private func checkSignUpCondition () -> Bool {
         if nameText.isEmpty || emailText.isEmpty || passwordText.isEmpty || passwordConfirmText.isEmpty {
             return false
         }
         return true
     }
     
-    func isValidEmail(_ email: String) -> Bool {
+    private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPredicate.evaluate(with: email)
