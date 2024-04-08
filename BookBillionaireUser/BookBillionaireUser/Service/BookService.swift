@@ -95,12 +95,44 @@ class BookService: ObservableObject {
         let userRentalRef = bookRef.document(bookID)
         do {
             try await userRentalRef.updateData([
-                "rentalState" : rentalState.description
+                "rentalState" : rentalState.rawValue
             ])
             print("렌탈상황 변경 성공🧚‍♀️")
         } catch let error {
             print("\(#function) 렌탈정보 변경 실패했음☄️ \(error)")
         }
+    }
+    
+    func updateBookCategory(_ bookID: String, bookCategory: BookCategory) async {
+        let userRentalRef = bookRef.document(bookID)
+        do {
+            try await userRentalRef.updateData([
+                "bookCategory" : bookCategory.rawValue
+            ])
+            print("카테고리 변경 성공🧚‍♀️")
+        } catch let error {
+            print("\(#function) 카테고리 변경 실패했음☄️ \(error)")
+        }
+    }
+    
+    func filteredLoadBooks(bookCategory: BookCategory) async -> [Book] {
+        var filterdBooks: [Book] = []
+        do {
+            let querySnapshot = try await bookRef.whereField("bookCategory", isEqualTo: bookCategory.rawValue).getDocuments()
+            filterdBooks = querySnapshot.documents.compactMap { document -> Book? in
+                do {
+                    let book = try document.data(as: Book.self)
+                    return book
+                } catch {
+                    print("Error decoding book: \(error)")
+                    return nil
+                }
+            }
+        } catch {
+            print("Error fetching documents: \(error)")
+        }
+        print(filterdBooks)
+        return filterdBooks
     }
 }
 
