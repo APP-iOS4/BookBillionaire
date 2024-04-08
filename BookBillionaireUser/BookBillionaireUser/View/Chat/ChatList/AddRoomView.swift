@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-// 임시 테스트용 입니다
+// [테스트용] 방 생성 뷰 입니다 - 추후 삭제 예정
 struct AddRoomView: View {
     
     @Environment(\.presentationMode) var presentationMode
@@ -14,23 +14,19 @@ struct AddRoomView: View {
    
     var body: some View {
         VStack {
-            
             Form {
-                TextField("Enter name", text: $addRoomVM.name)
-                TextField("Enter description", text: $addRoomVM.description)
-                
+                TextField("[임시] 이름", text: $addRoomVM.name)
+                TextField("[임시] 설명", text: $addRoomVM.description)
             }
             
-            Button("Save") {
+            Button("생성하기") {
                 addRoomVM.createRoom {
                     presentationMode.wrappedValue.dismiss()
                 }
-                
             }
             .padding()
             
             Spacer()
-            
         }
         .navigationTitle("채팅방 만들기 [임시]")
     }

@@ -13,6 +13,7 @@ struct MessageViewState {
     let message: String
     let roomId: String
     let username: String
+    var timestamp: Date
 }
 
 struct MessageViewModel {
@@ -30,6 +31,10 @@ struct MessageViewModel {
     var messageId: String {
         message.id ?? ""
     }
+    
+    var timestamp: Date {
+        message.timestamp
+    }
 }
 
 class MessageListViewModel: ObservableObject {
@@ -42,7 +47,7 @@ class MessageListViewModel: ObservableObject {
         db.collection("chat")
             .document(room.roomId)
             .collection("messages")
-            .order(by: "messageDate", descending: false)
+            .order(by: "timestamp", descending: false)
             .addSnapshotListener { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)

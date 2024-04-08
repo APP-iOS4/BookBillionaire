@@ -12,11 +12,12 @@ struct ChatView: View {
     let room: RoomViewModel
     
     @StateObject private var messageListVM = MessageListViewModel()
+    @State private var promiseViewShowing = false
     
     @State private var message: String = ""
-    @AppStorage("username") private var username = ""
+    @AppStorage("username") private var username = "최준영2"
+    // username 갖다 꽂기 [임시로 최준영 적어놓음]
     @State private var cancellables: AnyCancellable?
-    
     @State private var plusItemShowing = false
 
     var body: some View {
@@ -28,9 +29,9 @@ struct ChatView: View {
                             HStack {
                                 if message.username == username {
                                     Spacer()
-                                    ChatBubble(messageText: message.messageText, username: message.username, style: .from)
+                                    ChatBubble(messageText: message.messageText, username: message.username, style: .from, message: Message(vs: MessageViewState(message: "", roomId: "", username: "", timestamp: Date())))
                                 } else {
-                                    ChatBubble(messageText: message.messageText, username: message.username, style: .to)
+                                    ChatBubble(messageText: message.messageText, username: message.username, style: .to, message: Message(vs: MessageViewState(message: "", roomId: "", username: "", timestamp: Date())))
                                     Spacer()
                                 }
                             }
@@ -102,10 +103,20 @@ struct ChatView: View {
         .onAppear {
             messageListVM.registerUpdatesForRoom(room: room)
         }
+        // MARK: - 약속잡기 버튼
+        .navigationBarItems(trailing:
+        Button {
+            promiseViewShowing.toggle()
+            hideKeyboard()
+        } label: {
+            NavigationLink(destination: PromiseConfirmView()) {
+                Text("약속잡기")
+            }
+        })
     }
     
     private func sendMessage() {
-        let messageVS = MessageViewState(message: message, roomId: room.roomId, username: username)
+        let messageVS = MessageViewState(message: message, roomId: room.roomId, username: username, timestamp: Date())
         
         messageListVM.sendMessage(msg: messageVS) {
             message = ""

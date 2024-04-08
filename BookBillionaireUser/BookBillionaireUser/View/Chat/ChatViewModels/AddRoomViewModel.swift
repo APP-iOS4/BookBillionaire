@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-// 임시 테스트용 입니다
+// [테스트용] 방 생성 모델 입니다 - 추후 삭제 예정
 
 class AddRoomViewModel: ObservableObject {
     

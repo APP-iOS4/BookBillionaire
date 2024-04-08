@@ -11,17 +11,21 @@ struct ChatPlusItem: View {
     var body: some View {
         HStack {
             GridRow {
-                VStack{
-                    ZStack {
-                        RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
-                            .foregroundColor(.accentColor)
-                        Image(systemName: "photo.fill")
-                            .foregroundColor(.white)
+                Button {
+                    // 포토 피커로 이동
+                } label: {
+                    VStack{
+                        ZStack {
+                            RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
+                                .foregroundColor(.accentColor)
+                            Image(systemName: "photo.fill")
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 50, height: 40)
+                        
+                        Text("사진보내기")
+                            .foregroundStyle(.gray)
                     }
-                    .frame(width: 50, height: 40)
-                    
-                    Text("사진보내기")
-                        .foregroundStyle(.gray)
                 }
             }
             .padding(.trailing, 40)
