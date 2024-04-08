@@ -37,13 +37,23 @@ struct ProfileView: View {
                         
                         
                     }
-                    Button(action: {
-                        logout()
-                    }, label: {
-                        Text("로그아웃")
-                            .foregroundColor(.red)
-                    })
-                    .padding()
+                    if authViewModel.state == .logIn {
+                        Button(action: {
+                            logout()
+                        }, label: {
+                            Text("로그아웃")
+                                .foregroundColor(.red)
+                                .padding()
+                        })
+                    } else {
+                        Button(action: {
+                            isLoggedIn = true
+                        }, label: {
+                            Text("로그인")
+                                .foregroundColor(.blue)
+                                .padding()
+                        })
+                    }
                 }
             }
             .onAppear {
@@ -74,8 +84,17 @@ struct ProfileView: View {
                 }
             }
             .fullScreenCover(isPresented: $isLoggedIn, content: {
-                if authViewModel.state == .logOut { // Check if the user is logged in
-                    LoginView()
+                NavigationView { // NavigationView 추가
+                    if authViewModel.state == .logOut { // Check if the user is logged in
+                        LoginView()
+                            .navigationBarItems(trailing: Button(action: {
+                                isLoggedIn = false // 닫기 버튼을 누르면 fullScreenCover를 닫음
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.white)
+                                    .imageScale(.large)
+                            })
+                    }
                 }
             })
         }
@@ -87,12 +106,8 @@ struct ProfileView: View {
         do {
             try Auth.auth().signOut()
             authViewModel.state = .logOut // 로그아웃 상태로 변경
-            
-            ContentView()
-                .onAppear {
-                    // ContentView의 선택된 탭을 변경하여 tag(0) 호출
-//                    UserStore.selectedTab = 0
-                }
+            userEmail = nil // 이메일 초기화
+            userUID = nil // UID 초기화
         } catch {
             print("로그아웃 중 오류 발생:", error.localizedDescription)
         }
