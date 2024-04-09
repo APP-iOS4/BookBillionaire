@@ -52,6 +52,7 @@ struct MyBookListView: View {
                     .navigationDestination(for: Book.self) { book in
                         Text("안녕 \(book.title) 디테일 뷰")
                     }
+                    SpaceBox()
                 }
             }
         }
