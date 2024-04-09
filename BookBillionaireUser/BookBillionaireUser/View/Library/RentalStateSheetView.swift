@@ -11,10 +11,11 @@ import BookBillionaireCore
 struct RentalStateSheetView: View {
     @Binding var isShowingSheet: Bool
     @Binding var rentalState: RentalStateType
+    @State var tempRentalState: RentalStateType = .rentalAvailable
     
     var body: some View {
         VStack {
-            Picker("대여 가능 여부", selection: $rentalState) {
+            Picker("대여 가능 여부", selection: $tempRentalState) {
                 Text("\(RentalStateType.rentalAvailable.rawValue)")
                     .tag(RentalStateType.rentalAvailable)
                 Text("\(RentalStateType.rentalNotPossible.rawValue)")
@@ -26,6 +27,9 @@ struct RentalStateSheetView: View {
             }
             .buttonStyle(AccentButtonStyle())
             .padding()
+            .onAppear {
+                tempRentalState = rentalState
+            }
         }
         .padding()
     }
