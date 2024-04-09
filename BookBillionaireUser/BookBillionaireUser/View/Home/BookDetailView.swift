@@ -190,12 +190,3 @@ struct BookDetailView: View {
     }
     
 }
-
-
-
-//#Preview {
-//    let bookStore = BookStore().books
-//    return Group {
-//        BookDetailView(book: bookStore[0], user: User.sample)
-//    }
-//}
