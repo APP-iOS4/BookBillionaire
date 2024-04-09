@@ -49,6 +49,7 @@ struct RentalBookListView: View {
                             
                         }
                     }
+                    SpaceBox()
                 }
             }
         }
