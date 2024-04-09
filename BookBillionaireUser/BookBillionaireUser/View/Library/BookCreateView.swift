@@ -24,10 +24,13 @@ struct BookCreateView: View {
                     DescriptionView(book: $book)
                 }
                 Button("완료") {
+                    book.id = UUID().uuidString
                     bookService.registerBook(book)
+                    resetBook()
                     dismiss()
                 }
                 .buttonStyle(AccentButtonStyle())
+                .disabled(book.title.isEmpty || book.contents.isEmpty || book.authors.isEmpty)
                 .padding()
             }
             SpaceBox()
@@ -46,6 +49,10 @@ struct BookCreateView: View {
                 }
             }
         }
+    }
+    
+    private func resetBook() {
+        book = Book(owenerID: UUID().uuidString, title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
     }
 }
 

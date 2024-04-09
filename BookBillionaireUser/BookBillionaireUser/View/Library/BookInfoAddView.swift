@@ -40,14 +40,6 @@ struct BookInfoAddView: View {
                             .background(Color.gray)
                     }
                 }
-                //                    AsyncImage(url: URL(string: book.thumbnail)) { image in
-                //                        image.resizable()
-                //                            .frame(width: 100, height: 140)
-                //                    } placeholder: {
-                //                        ProgressView()
-                //                            .frame(width: 100, height: 140)
-                //                    }
-                //                }
                 VStack(alignment: .leading) {
                     TextField("책 이름을 입력해주세요", text: $book.title)
                     TextField("작가 이름을 입력해주세요", text: $book.authors[0])
