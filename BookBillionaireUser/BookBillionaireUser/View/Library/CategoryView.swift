@@ -48,7 +48,6 @@ struct CategoryView: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .frame(height: 56)
-        .background(Rectangle().foregroundStyle(.white))
     }
 }
 
