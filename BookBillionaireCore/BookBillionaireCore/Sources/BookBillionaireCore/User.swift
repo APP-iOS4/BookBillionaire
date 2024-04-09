@@ -34,11 +34,6 @@ public struct User: Identifiable, Codable {
         self.myBooks = try container.decodeIfPresent([String].self, forKey: .myBooks) ?? []
         self.rentalBooks = try container.decodeIfPresent([String].self, forKey: .rentalBooks) ?? []
     }
-    
-    //샘플
-    public static var sample: User {
-        User(id: "", nickName: "호스표", address: "경기도 양주시")
-    }
 }
 
 public enum UserCodingKeys: String, CodingKey {
