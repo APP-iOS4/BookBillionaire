@@ -45,36 +45,12 @@ struct MyBookListView: View {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
                         ForEach(myBooks, id: \.self) { book in
-                                NavigationLink(value: book) {
-                                    HStack(alignment: .top) {
-                                        if book.thumbnail == "" ||  book.thumbnail.isEmpty {
-                                            Image("default")
-                                                .resizable()
-                                                .frame(width: 100, height: 120)
-                                                .background(Color.gray)
-                                        } else {
-                                            AsyncImage(url: URL(string: book.thumbnail)) { image in
-                                                image.resizable()
-                                                    .frame(width: 100, height: 120)
-                                                    .background(Color.gray)
-                                            } placeholder: {
-                                                ProgressView()
-                                            }
-                                        }
-                                        VStack(alignment: .leading) {
-                                            Text(book.title)
-                                            Text(book.authors.joined(separator: ", "))
-                                            Spacer()
-                                        }
-                                        .foregroundStyle(Color.black)
-                                        Spacer()
-                                    }
-                                }
-                            }
-//                        // DetailView 미구현, 추후 변경
-//                        .navigationDestination(for: Book.self) { book in
-//                            Text("안녕 DetailView")
-//                        }
+                            BookItem(book: book)
+                        }
+                    }
+                    // DetailView 미구현, 추후 변경
+                    .navigationDestination(for: Book.self) { book in
+                        Text("안녕 \(book.title) 디테일 뷰")
                     }
                 }
             }
