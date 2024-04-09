@@ -20,6 +20,13 @@ class AuthViewModel: ObservableObject {
         case logOut
     }
     
+    var currentUser: User? {
+        if let user = Auth.auth().currentUser {
+            return user
+        }
+        return nil
+    }
+    
     func emailAuthSignUp(email: String, userName: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
