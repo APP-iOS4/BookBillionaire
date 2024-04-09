@@ -43,48 +43,19 @@ struct RentalBookListView: View {
                 .fontWeight(.medium)
                 .foregroundStyle(.gray)
             } else {
-                // 빌린도서 목록 미구현으로 보유도서 목록으로 더미데이터 사용
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
                         ForEach(myBooks, id: \.self) { book in
-                                NavigationLink(value: book) {
-                                    HStack(alignment: .top) {
-                                        if book.thumbnail == "" ||  book.thumbnail.isEmpty {
-                                            Image("default")
-                                                .resizable()
-                                                .frame(width: 100, height: 120)
-                                                .background(Color.gray)
-                                        } else {
-                                            AsyncImage(url: URL(string: book.thumbnail)) { image in
-                                                image.resizable()
-                                                    .frame(width: 100, height: 120)
-                                                    .background(Color.gray)
-                                            } placeholder: {
-                                                ProgressView()
-                                            }
-                                        }
-                                        VStack(alignment: .leading) {
-                                            Text(book.title)
-                                            Text(book.authors.joined(separator: ", "))
-                                            Spacer()
-                                        }
-                                        .foregroundStyle(Color.black)
-                                        Spacer()
-                                    }
-                                }
-                            }
-//                         DetailView 미구현, 추후 변경
-//                        .navigationDestination(for: Book.self) { book in
-//                            Text("안녕 DetailView")
-//                        }
+                            
+                        }
                     }
                 }
             }
         }
         .padding()
-        .onAppear{
-            loadMybook()
-        }
+//        .onAppear{
+//            loadMybook()
+//        }
     }
     
     private func loadMybook() {

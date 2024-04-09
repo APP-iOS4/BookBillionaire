@@ -60,6 +60,7 @@
 		EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */; };
 		EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */; };
 		EF8178CD2BBD749700ADAE2E /* RentalPeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */; };
+		EF88A1842BC4E6AC00E0EEAA /* BookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */; };
 		EF964B3D2BC22D2C005F90DF /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF964B3C2BC22D2C005F90DF /* RoundButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalStateSheetView.swift; sourceTree = "<group>"; };
 		EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoAddView.swift; sourceTree = "<group>"; };
 		EF8178CC2BBD749700ADAE2E /* RentalPeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalPeriodView.swift; sourceTree = "<group>"; };
+		EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookItem.swift; sourceTree = "<group>"; };
 		EF964B3C2BC22D2C005F90DF /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				04A59A962BC19813009FBF6E /* AccentButtonStyle.swift */,
+				EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */,
 				04A59A972BC19813009FBF6E /* WhiteButtonStyle.swift */,
 				35537C552BBD8CA100FE8354 /* BottomSheet.swift */,
 				EF0F74BA2BBCFA7100E37D0D /* SearchBar.swift */,
@@ -461,6 +464,7 @@
 				EF0F748A2BBCF7C500E37D0D /* ContentView.swift in Sources */,
 				EF964B3D2BC22D2C005F90DF /* RoundButton.swift in Sources */,
 				088260462BBD2B85007BEA25 /* PromiseConfirmView.swift in Sources */,
+				EF88A1842BC4E6AC00E0EEAA /* BookItem.swift in Sources */,
 				0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */,
 				04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */,
 				088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */,
