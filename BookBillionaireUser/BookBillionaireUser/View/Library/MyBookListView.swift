@@ -21,51 +21,55 @@ struct MyBookListView: View {
                     .fontWeight(.medium)
                 Spacer()
             }
-            LazyVStack(alignment: .leading, spacing: 10) {
-                // bookStore 미구현, 추후 변경
-                ForEach(myBooks, id: \.self) { book in
-                    // ListRowView 미구현, 추후 변경
-                    NavigationLink(value: book) {
-                        HStack {
-                            if book.thumbnail == "" ||  book.thumbnail.isEmpty {
-                                Image("default")
-                                    .resizable()
-                                    .frame(width: 100, height: 120)
-                                    .background(Color.gray)
-                            } else {
-                                AsyncImage(url: URL(string: book.thumbnail)) { image in
-                                    image.resizable()
-                                        .frame(width: 100, height: 120)
-                                        .background(Color.gray)
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                            }
-                            VStack(alignment: .leading) {
-                                Text(book.title)
-                                Text(book.authors.joined(separator: ", "))
-                                Spacer()
-                            }
+            if myBooks.isEmpty {
+                VStack(spacing: 10) {
+                    Spacer()
+                    Circle()
+                        .stroke(lineWidth: 3)
+                        .overlay {
+                            Image(systemName: "book")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(20)
+                        }
+                        .frame(width: 70, height: 70)
+                    
+                    Text("보유중인 도서가 없습니다.")
+                    Text("책을 추가하면 여기에 표시됩니다.")
+                    Spacer()
+                }
+                .font(.title3)
+                .fontWeight(.medium)
+                .foregroundStyle(.gray)
+            } else {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 10) {
+                        ForEach(myBooks, id: \.self) { book in
+                            BookItem(book: book)
                         }
                     }
+                    // DetailView 미구현, 추후 변경
+                    .navigationDestination(for: Book.self) { book in
+                        Text("안녕 \(book.title) 디테일 뷰")
+                    }
+                    SpaceBox()
                 }
-                .foregroundStyle(Color.black)
             }
-        }
-        // DetailView 미구현, 추후 변경
-        .navigationDestination(for: Int.self) { value in
-            Text("안녕 DetailView")
         }
         .padding()
         .onAppear{
             loadMybook()
         }
     }
+    
     private func loadMybook() {
         Task {
             myBooks = await bookService.loadBookByID("Eyhr4YQGsATlRDUcc9rYl9PZYk52")
-            
         }
+    }
+    
+    private func removeList(at offsets: IndexSet) {
+        myBooks.remove(atOffsets: offsets)
     }
 }
 
