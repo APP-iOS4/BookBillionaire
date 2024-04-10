@@ -5,47 +5,49 @@
 //  Created by 최준영 on 4/7/24.
 //
 
-import BookBillionaireCore
+//import BookBillionaireCore
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct RoomViewModel {
+struct RoomViewModel: Hashable {
     
-    let room: ChatRoom
+    let room: Room
     
-//    var users: [User] {
-//        room.users
-//    }
+    var name: String {
+        room.name
+    }
     
-    var latestMessage: [LatestMessageInChat] {
-        room.latestMessage
+    var description: String {
+        room.description
     }
     
     var roomId: String {
-        room.id
+        room.id ?? ""
     }
 }
 
 class RoomListViewModel: ObservableObject {
     
-//    @Published var rooms: [ChatRoom] = []
-    let db = Firestore.firestore().collection("chat")
+    @Published var rooms: [RoomViewModel] = []
+    let db = Firestore.firestore()
     
     func getAllRooms() {
         // 채팅방 목록을 불러오는 함수
-        db.getDocuments { (snapshot, error) in
+        db.collection("chat")
+            .getDocuments { (snapshot, error) in
                 if let error = error {
-                    print("채팅방 목록 불러오기를 실패했습니다.")
+                    print(error.localizedDescription)
                 } else {
                     if let snapshot = snapshot {
-                        let rooms: [ChatRoom] = snapshot.documents.compactMap { doc in
-                            guard var room = try? doc.data(as: ChatRoom) else {
+                        
+                        let rooms: [RoomViewModel] = snapshot.documents.compactMap { doc in
+                            guard var room = try? doc.data(as: Room.self) else {
                                 return nil
                             }
                             
                             room.id = doc.documentID
-                            return ChatRoom(room: room)
+                            return RoomViewModel(room: room)
                         }
                         
                         DispatchQueue.main.async {
