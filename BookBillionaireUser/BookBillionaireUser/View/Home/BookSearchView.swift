@@ -54,7 +54,7 @@ struct BookSearchView: View {
 enum BookStoreSettings: String, CaseIterable {
     case kyobo = "교보문고"
     case yes24 = "Yes24"
-    case aladdin = "알라딘"
+    case aladin = "알라딘"
     case books = "북스"
     
     var url: URL {
@@ -63,7 +63,7 @@ enum BookStoreSettings: String, CaseIterable {
             return URL(string: "https://www.kyobobook.co.kr")!
         case .yes24:
             return URL(string: "https://www.yes24.com")!
-        case .aladdin:
+        case .aladin:
             return URL(string: "https://www.aladin.co.kr")!
         case .books:
             return URL(string: "https://www.naver.com")!
@@ -73,13 +73,13 @@ enum BookStoreSettings: String, CaseIterable {
     var image: Image {
         switch self {
         case .kyobo:
-            return Image(systemName: "book")
+            return Image("kyobo")
         case .yes24:
-            return Image(systemName: "book.fill")
-        case .aladdin:
-            return Image(systemName: "book.closed")
+            return Image("yes24")
+        case .aladin:
+            return Image("aladin")
         case .books:
-            return Image(systemName: "book.closed.fill")
+            return Image("books")
         }
     }
 }

@@ -26,6 +26,9 @@ struct SearchBar: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color("AccentColor"),lineWidth: 1)
                     }
+                    .onChange(of: searchBook) { _ in
+                         isSearching = false
+                     }
                 
                 if !searchBook.isEmpty {
                     Button {
@@ -40,6 +43,7 @@ struct SearchBar: View {
                     if !searchBook.isEmpty {
                         saveSearchHistory()
                         searchBooksByTitle(title: searchBook)
+                        isSearching = true
                     }
                     
                 } label: {
