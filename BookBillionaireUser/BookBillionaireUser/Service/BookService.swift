@@ -115,6 +115,7 @@ class BookService: ObservableObject {
         }
     }
     
+    // 카테고리 별 책 리스트 나열
     func filteredLoadBooks(bookCategory: BookCategory) async -> [Book] {
         var filterdBooks: [Book] = []
         do {
@@ -133,6 +134,27 @@ class BookService: ObservableObject {
         }
         print(filterdBooks)
         return filterdBooks
+    }
+    
+    // 책 검색 필터 (서치바)
+    func searchBooksByTitle(title: String) async -> [Book] {
+        var searchResult: [Book] = []
+        do {
+            let querySnapshot = try await bookRef.whereField("title", isEqualTo: title).getDocuments()
+            searchResult = querySnapshot.documents.compactMap { document -> Book? in
+                do {
+                    let book = try document.data(as: Book.self)
+                    return book
+                } catch {
+                    print("디코딩 오류: \(error)")
+                    return nil
+                }
+            }
+            print("검색 결과: \(searchResult)")
+        } catch {
+            print("문서를 가져오는 중에 오류가 발생했습니다: \(error)")
+        }
+        return searchResult
     }
 }
 

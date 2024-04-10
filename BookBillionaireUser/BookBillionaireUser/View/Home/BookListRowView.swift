@@ -24,7 +24,7 @@ struct BookListRowView: View {
                 VStack(alignment:.leading) {
                     Text(book.title)
                         .font(.subheadline)
-                    Text("\(book.title) \(book.authors)")
+                    Text("\(book.title) \(book.authors.joined(separator: ""))")
                         .font(.caption)
                         .padding(.bottom, 10)
                 }
@@ -34,11 +34,3 @@ struct BookListRowView: View {
         }
     }
 }
-
-//#Preview {
-//    let bookStore = BookStore().books
-//    return Group {
-//        BookListRowView(book: bookStore[0])
-//        BookListRowView(book: bookStore[1])
-//    }
-//}
