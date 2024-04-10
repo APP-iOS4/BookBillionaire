@@ -63,7 +63,9 @@ struct BookDetailView: View {
                 }
                 // 버튼 추후 컴포넌트 합의 후 교체
                 HStack{
-                    Button("메세지 보내기"){}
+                    Button("메세지 보내기"){
+                        
+                    }
                     Spacer()
                     Button("대여 신청") { }
                 }
