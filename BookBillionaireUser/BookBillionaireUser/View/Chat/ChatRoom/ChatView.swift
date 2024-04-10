@@ -15,7 +15,7 @@ struct ChatView: View {
     @State private var promiseViewShowing = false
     
     @State private var message: String = ""
-    @AppStorage("username") private var username = "최준영2"
+    @AppStorage("username") private var username = "최준영3"
     // username 갖다 꽂기 [임시로 최준영 적어놓음]
     @State private var cancellables: AnyCancellable?
     @State private var plusItemShowing = false
