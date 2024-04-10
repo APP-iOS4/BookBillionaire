@@ -9,10 +9,10 @@ import SwiftUI
 import BookBillionaireCore
 
 struct BookListRowView: View {
-    var book: Book
+    let book: Book
     
     var body: some View {
-        HStack {
+        VStack(alignment: .leading) {
             HStack(alignment:.top, spacing: 15) {
                 AsyncImage(url: URL(string: book.thumbnail)){ image in
                     image.resizable()
@@ -20,15 +20,21 @@ struct BookListRowView: View {
                 } placeholder: {
                     ProgressView()
                 }
-
-                VStack(alignment:.leading) {
+                
+                VStack(alignment: .leading) {
                     Text(book.title)
                         .font(.subheadline)
-                    Text("\(book.title) \(book.authors.joined(separator: ""))")
-                        .font(.caption)
-                        .padding(.bottom, 10)
+                    
+                    if book.authors.isEmpty {
+                        Text("\(book.title) \n \(book.translators?.joined(separator: ", ") ?? "")")
+                            .font(.caption)
+                            .padding(.bottom, 10)
+                    } else {
+                        Text("\(book.title) \n \(book.authors.joined(separator: ", "))")
+                            .font(.caption)
+                            .padding(.bottom, 10)
+                    }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 30)
             }
         }

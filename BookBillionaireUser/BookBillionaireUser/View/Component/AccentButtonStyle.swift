@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AccentButtonStyle: ButtonStyle {
     var height: CGFloat = 60
-    var font: Double = 20
+    var font: Font? = .system(size: 20)
   func makeBody(configuration: Configuration) -> some View {
       ZStack{
           Capsule(style: .continuous)
@@ -18,7 +18,7 @@ struct AccentButtonStyle: ButtonStyle {
           configuration.label
               .padding()
               .foregroundColor(.white)
-              .font(.system(size: font))
+              .font(font)
       }
   }
 }
