@@ -93,7 +93,7 @@ struct BookInfoAddView: View {
     }
 }
 
-//#Preview {
-//    BookInfoAddView(book: .constant(Book.sample))
-//}
+#Preview {
+    BookInfoAddView(book: .constant(Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)))
+}
 

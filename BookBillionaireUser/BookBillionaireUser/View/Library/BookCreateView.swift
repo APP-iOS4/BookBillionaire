@@ -10,7 +10,8 @@ import BookBillionaireCore
 
 struct BookCreateView: View {
     let bookService: BookService = BookService.shared
-    @State var book: Book = Book(owenerID: UUID().uuidString, title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
+    let rentalService: RentalService = RentalService.shared
+    @State var book: Book = Book(owenerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
     @State var rental: Rental = Rental(id: "", bookOwner: "", rentalStartDay: Date(), rentalEndDay: Date())
     @Environment(\.dismiss) var dismiss
     @State var isShowingSheet: Bool = false
@@ -24,9 +25,15 @@ struct BookCreateView: View {
                     DescriptionView(book: $book)
                 }
                 Button("완료") {
+                    if let user = AuthViewModel().currentUser {
+                        book.ownerID = user.uid
+                        rental.bookOwner = user.uid
+                    }
                     book.id = UUID().uuidString
-                    bookService.registerBook(book)
-                    resetBook()
+                    rental.id = UUID().uuidString
+                    book.rental = rental.id
+                    _ = bookService.registerBook(book)
+                    _ = rentalService.registerRental(rental)
                     dismiss()
                 }
                 .buttonStyle(AccentButtonStyle())
@@ -36,7 +43,7 @@ struct BookCreateView: View {
             SpaceBox()
         }
         .sheet(isPresented: $isShowingSheet) {
-            APISearchView()
+            APISearchView(isShowing: $isShowingSheet)
         }
         .navigationTitle("책 등록")
         .navigationBarTitleDisplayMode(.inline)
@@ -49,10 +56,6 @@ struct BookCreateView: View {
                 }
             }
         }
-    }
-    
-    private func resetBook() {
-        book = Book(owenerID: UUID().uuidString, title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
     }
 }
 
