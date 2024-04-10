@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import AuthenticationServices
 
 class AuthViewModel: ObservableObject { 
     
@@ -17,6 +18,13 @@ class AuthViewModel: ObservableObject {
     enum SignInState{
         case logIn
         case logOut
+    }
+    
+    var currentUser: User? {
+        if let user = Auth.auth().currentUser {
+            return user
+        }
+        return nil
     }
     
     func emailAuthSignUp(email: String, userName: String, password: String) {
@@ -105,4 +113,5 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
+    
 }

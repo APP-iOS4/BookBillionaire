@@ -22,7 +22,8 @@ struct ServiceTestView: View {
     var body: some View {
         Button("함수 실행") {
             Task{
-                await userService.loadUserByID("Eyhr4YQGsATlRDUcc9rYl9PZYk52")
+                books = await bookService.filteredLoadBooks(bookCategory: .best)
+
             }
         }
     }

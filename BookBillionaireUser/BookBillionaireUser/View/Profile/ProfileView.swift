@@ -62,6 +62,7 @@ struct ProfileView: View {
             userUID = nil // UID 초기화
         } catch {
             print("로그아웃 중 오류 발생:", error.localizedDescription)
+
         }
     }
 }
@@ -69,4 +70,5 @@ struct ProfileView: View {
 
 #Preview {
     ProfileView()
+        .environmentObject(AuthViewModel())
 }

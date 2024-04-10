@@ -1,79 +1,77 @@
-//
-//  Login.swift
-//  BookBillionaire
-//
-//  Created by Seungjae Yu on 3/20/24.
-//
-
 import SwiftUI
+import GoogleSignIn
+import AuthenticationServices
 
 struct LoginView: View {
     @State var emailText: String = ""
     @State var passwordText: String = ""
-    @State var signInProcessing: Bool = false
     @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment (\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationStack {
-            Spacer()
+        NavigationStack{
             VStack {
-                Text("Book Billionaire")
+                Text("Book Billionare")
                     .font(.title)
-                ZStack {
-                    VStack(spacing: 20) {
+                    .padding(.top, 100)
+                Section {
+                    VStack(spacing: 10) {
                         TextField("email", text: $emailText)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.horizontal, 20)
-                            .foregroundColor(Color.accentColor)
-                            .padding(.top, 50)
-                            .textInputAutocapitalization(.none)
-                            .autocapitalization(.none)
-                        SecureField("Password", text: $passwordText)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.horizontal, 20)
-                            .foregroundColor(Color.accentColor)
-                        
-                        HStack(spacing: 5) {
-                            NavigationLink("회원가입") {
-                                SignUpView()
-                            }.buttonStyle(WhiteButtonStyle(height: 50))
-                            Spacer()
-                            Button("로그인"){
-                                signInProcessing = true
-                                authViewModel.emailAuthLogIn(email: emailText, password: passwordText)
-                            }.buttonStyle(WhiteButtonStyle(height: 50))
-                                .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
-                            
-                            //                            ZStack {
-                            //                                Text("로그인")
-                            //                                    .padding()
-                            //                                    .background(emailText.isEmpty || passwordText.isEmpty == true ? .gray : .red)
-                            //
-                            
-                        }
-                        .padding()
-                        Text("다른 방법으로 로그인")
                             .padding()
-                        Image("SignInWithGoogle")
-                        //}
+                            .background(.thinMaterial)
+                            .cornerRadius(10)
+                            .textInputAutocapitalization(.never)
+                        SecureField("Password", text: $passwordText)
+                            .padding()
+                            .background(.thinMaterial)
+                            .cornerRadius(10)
+                            .textInputAutocapitalization(.never)
                     }
-                    .padding(.horizontal)
-                    .padding(.top, 20)
-//                    if signInProcessing {
-//                        ProgressView()
-//                    }
                 }
+                .padding(.top, 50)
+                HStack(spacing: 20) {
+                    NavigationLink {
+                        SignUpView()
+                    } label: {
+                        Text("회원가입")
+                            .foregroundStyle(Color.accentColor)
+                    }
+                    Button{
+                        authViewModel.emailAuthLogIn(email: emailText, password: passwordText)
+                        dismiss()
+                    } label: {
+                        Text("로그인")
+                            .padding()
+                            .background(Color.white)
+                            .foregroundColor(.accentColor)
+                            .background(emailText.isEmpty || passwordText.isEmpty ? .gray : .red)
+                            .cornerRadius(10)
+                    }
+                    .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
+                }
+                
+                Text("다른 방법으로 로그인")
+                    .padding()
+                
+                Button {
+                    // 구글 로그인 버튼 눌렀을 때의 동작
+                } label: {
+                    Image("SignInWithGoogle")
+                        .resizable()
+                        .frame(width: 335, height: 50)
+                }
+                .padding(.bottom, 10)
+                Spacer()
+                Spacer()
+                Text("Team BB")
+                SpaceBox()
             }
-            Spacer()
-            Text("Team BB")
-            SpaceBox()
+            .padding(.horizontal, 30)
         }
+
     }
-    
-    
 }
 
 #Preview {
     LoginView()
 }
-

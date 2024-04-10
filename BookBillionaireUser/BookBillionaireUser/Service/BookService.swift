@@ -95,12 +95,66 @@ class BookService: ObservableObject {
         let userRentalRef = bookRef.document(bookID)
         do {
             try await userRentalRef.updateData([
-                "rentalState" : rentalState.description
+                "rentalState" : rentalState.rawValue
             ])
             print("렌탈상황 변경 성공🧚‍♀️")
         } catch let error {
             print("\(#function) 렌탈정보 변경 실패했음☄️ \(error)")
         }
+    }
+    
+    func updateBookCategory(_ bookID: String, bookCategory: BookCategory) async {
+        let userRentalRef = bookRef.document(bookID)
+        do {
+            try await userRentalRef.updateData([
+                "bookCategory" : bookCategory.rawValue
+            ])
+            print("카테고리 변경 성공🧚‍♀️")
+        } catch let error {
+            print("\(#function) 카테고리 변경 실패했음☄️ \(error)")
+        }
+    }
+    
+    // 카테고리 별 책 리스트 나열
+    func filteredLoadBooks(bookCategory: BookCategory) async -> [Book] {
+        var filterdBooks: [Book] = []
+        do {
+            let querySnapshot = try await bookRef.whereField("bookCategory", isEqualTo: bookCategory.rawValue).getDocuments()
+            filterdBooks = querySnapshot.documents.compactMap { document -> Book? in
+                do {
+                    let book = try document.data(as: Book.self)
+                    return book
+                } catch {
+                    print("Error decoding book: \(error)")
+                    return nil
+                }
+            }
+        } catch {
+            print("Error fetching documents: \(error)")
+        }
+        print(filterdBooks)
+        return filterdBooks
+    }
+    
+    // 책 검색 필터 (서치바)
+    func searchBooksByTitle(title: String) async -> [Book] {
+        var searchResult: [Book] = []
+        do {
+            let querySnapshot = try await bookRef.whereField("title", isEqualTo: title).getDocuments()
+            searchResult = querySnapshot.documents.compactMap { document -> Book? in
+                do {
+                    let book = try document.data(as: Book.self)
+                    return book
+                } catch {
+                    print("디코딩 오류: \(error)")
+                    return nil
+                }
+            }
+            print("검색 결과: \(searchResult)")
+        } catch {
+            print("문서를 가져오는 중에 오류가 발생했습니다: \(error)")
+        }
+        return searchResult
     }
 }
 

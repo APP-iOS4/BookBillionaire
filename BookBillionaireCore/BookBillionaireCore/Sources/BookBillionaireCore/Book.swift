@@ -10,7 +10,7 @@ import Foundation
 /// 도서정보에 대한 구조체
 public struct Book: Identifiable, Codable, Hashable {
     public var id: String = UUID().uuidString
-    public var ownerID: String!
+    public var ownerID: String
     public var isbn: String?
     public var title: String
     public var contents: String
@@ -24,7 +24,7 @@ public struct Book: Identifiable, Codable, Hashable {
     public var rentalState: RentalStateType
 
     /// 일반 초기화
-    public init(owenerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", bookCategory: BookCategory? = nil, rental: String = "", rentalState: RentalStateType = .rentalAvailable) {
+    public init(owenerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", bookCategory: BookCategory? = nil, rental: String = "", rentalState: RentalStateType) {
         
         self.ownerID = owenerID
         self.isbn = isbn
@@ -57,11 +57,6 @@ public struct Book: Identifiable, Codable, Hashable {
         self.rental = try container.decode(String.self, forKey: .rental)
         self.rentalState = try container.decodeIfPresent(RentalStateType.self, forKey: .rentalState) ?? .rentalAvailable
     }
-    
-    // 샘플 Book 생성
-        public static var sample: Book {
-            Book(owenerID: "ownerID", title: "샘플 제목", contents: "샘플 내용", authors: ["샘플 작가"], thumbnail: "샘플 썸네일", rental: "샘플 렌탈")
-        }
 }
 
 /// 책 코딩키
@@ -102,20 +97,9 @@ public enum BookCategory: String, CaseIterable, Identifiable, Codable {
 }
 
 /// 렌탈 가능여부에 대한 enum
-public enum RentalStateType: Int, Equatable, Codable{
-    case rentalAvailable
-    case rentalNotPossible
-    case renting
-    
-    public var description: String {
-        switch self {
-        case .rentalAvailable:
-            return "대여 가능"
-        case .rentalNotPossible:
-            return "대여 불가능"
-        case .renting:
-            return "대여 중"
-        }
-    }
+public enum RentalStateType: String, Equatable, Codable{
+    case rentalAvailable = "대여 가능"
+    case rentalNotPossible = "대여 불가능"
+    case renting = "대여 중"
 }
 

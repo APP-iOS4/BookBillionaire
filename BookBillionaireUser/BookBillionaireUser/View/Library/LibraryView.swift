@@ -11,14 +11,12 @@ struct LibraryView: View {
     @State private var selectedIndex: Int = 0
     
     var body: some View {
-        ScrollView {
-            LazyVStack(pinnedViews: [.sectionHeaders]) {
-                Section(header: CategoryView(selectedIndex: $selectedIndex)) {
-                    if selectedIndex == 0 {
-                        MyBookListView()
-                    } else {
-                        RentalBookListView()
-                    }
+        VStack {
+            Section(header: CategoryView(selectedIndex: $selectedIndex)) {
+                if selectedIndex == 0 {
+                    MyBookListView()
+                } else {
+                    RentalBookListView()
                 }
                 Spacer()
             }
