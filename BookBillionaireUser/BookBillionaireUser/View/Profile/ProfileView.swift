@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import TipKit
 import FirebaseAuth
 
 struct ProfileView: View {
@@ -15,84 +14,52 @@ struct ProfileView: View {
     @State private var userEmail: String? // New state variable to hold user's email
     @State private var userUID: String? // New state variable to hold user's UID
     
-    
     var body: some View {
-        VStack {
-            NavigationStack {
-                VStack {
-                    VStack {
-                        
-                        Text("기본정보")
-                        if let email = userEmail {
-                            Text(email)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                        if let UID = userUID {
-                            Text(UID)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                                .padding(.bottom, 10)
-                        }
-                        
-                        
-                    }
-                    Button(action: {
-                        logout()
-                    }, label: {
-                        Text("로그아웃")
-                            .foregroundColor(.red)
-                    })
-                    .padding()
-                }
-            }
-            .onAppear {
-                // Check if the user is logged in
-                authViewModel.state = Auth.auth().currentUser != nil ? .logIn : .logOut
-                isLoggedIn = authViewModel.state == .logOut ? true : false
-                
-                // If user is logged in, fetch and store user's email
-                if authViewModel.state == .logIn {
-                    if let user = Auth.auth().currentUser {
-                        userEmail = user.email
-                        userUID = user.uid
-                    }
-                }
-            }
-            .onReceive(authViewModel.$state) { newState in
-                isLoggedIn = newState == .logOut ? true : false
-                
-                // If user is logged in, fetch and store user's email
-                if newState == .logIn {
-                    if let user = Auth.auth().currentUser {
-                        userEmail = user.email
-                        userUID = user.uid
-                        
-                    }
+    NavigationStack{
+            VStack(alignment: .leading){
+                if authViewModel.state == .logOut {
+                    UnlogginedView()
                 } else {
-                    userEmail = nil // Clear email if user logs out
+                    HStack(spacing: 20) {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        VStack(alignment: .leading) {
+                            Text("닉네임")
+                            Text("불러온 닉네임")
+                        }
+                    }
+                    .padding()
+                    Divider()
+                        .padding(.bottom)
+                    Text("최근 살펴본 책 내역")
+                    HStack {
+                        Rectangle()
+                        Rectangle()
+                        Rectangle()
+                    }
+                    .frame(height: 100)
+                    .padding(.vertical)
+                    Section("환경설정"){
+                        List{
+                            Text("개인정보 처리방침")
+                            Button("로그아웃") {
+                                logout()
+                            }
+                        }.listStyle(.plain)
+                    }
+                    
+                    
                 }
-            }
-            .fullScreenCover(isPresented: $isLoggedIn, content: {
-                if authViewModel.state == .logOut { // Check if the user is logged in
-                    LoginView()
-                }
-            })
+            }.padding()
         }
-        
-
     }
-    
     func logout() {
         do {
             try Auth.auth().signOut()
             authViewModel.state = .logOut // 로그아웃 상태로 변경
-            
-            ContentView()
-                .onAppear {
-                    // ContentView의 선택된 탭을 변경하여 tag(0) 호출
-//                    UserStore.selectedTab = 0
-                }
+            userEmail = nil // 이메일 초기화
+            userUID = nil // UID 초기화
         } catch {
             print("로그아웃 중 오류 발생:", error.localizedDescription)
         }
