@@ -9,8 +9,8 @@ import SwiftUI
 import BookBillionaireCore
 
 struct BookDetailView: View {
-    var book: Book
-    var user: User
+    let book: Book
+    let user: User
     
     var body: some View {
         ScrollView{
@@ -54,20 +54,32 @@ struct BookDetailView: View {
                     Text(book.title)
                         .font(.title)
                         .bold()
-                    // 렌탈 부분 설정 후 상태 버튼으로 변경
+             
                     Button {
                         Void()
                     } label: {
                         Text("대여 가능")
                     }
                 }
-                // 버튼 추후 컴포넌트 합의 후 교체
+         
                 HStack{
-                    Button("메세지 보내기"){}
+                    Button {
+                        
+                    } label: {
+                        Text("메세지 보내기")
+                    }
+                    .buttonStyle(WhiteButtonStyle(height: 40.0, font: .headline))
+                    
                     Spacer()
-                    Button("대여 신청") { }
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("대여 신청")
+                    }
+                    .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
                 }
-                .padding(.top, -20)
+
                 
                 HStack {
                     Spacer()
@@ -189,4 +201,8 @@ struct BookDetailView: View {
         .ignoresSafeArea()
     }
     
+}
+
+#Preview {
+    BookDetailView(book: Book(owenerID: "", title: "책이름", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(id: "책유저", nickName: "닉네임", address: "주소"))
 }

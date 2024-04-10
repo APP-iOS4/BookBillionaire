@@ -42,7 +42,6 @@ struct BookSearchView: View {
                             WebView(url: selectedURL)
                         }
                     }
-                    
                 }
             }
         }
