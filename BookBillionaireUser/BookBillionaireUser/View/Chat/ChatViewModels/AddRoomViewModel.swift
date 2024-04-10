@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import BookBillionaireCore
 
 // [테스트용] 방 생성 모델 입니다 - 추후 삭제 예정
 
@@ -19,12 +20,12 @@ class AddRoomViewModel: ObservableObject {
     
     func createRoom(completion: @escaping () -> Void) {
         
-        let room = Room(name: name, description: description)
+        let room = (name: name, description: description)
         
         do {
         
         _ = try db.collection("chat")
-            .addDocument(from: room, encoder: Firestore.Encoder()) { (error) in
+            .addDocument(from: ChatRoom, encoder: Firestore.Encoder()) { (error) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {

@@ -11,7 +11,7 @@ import Combine
 struct ChatView: View {
     let room: RoomViewModel
     
-    @StateObject private var messageListVM = MessageListViewModel()
+    @StateObject private var messageListVM = MessageViewModel()
     @State private var promiseViewShowing = false
     
     @State private var message: String = ""
