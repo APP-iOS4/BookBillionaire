@@ -10,7 +10,6 @@ import Foundation
 enum AuthState {
     case loggedIn
     case loggedOut
-    case signingIn
 }
 
 enum SignInMethod {

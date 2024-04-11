@@ -11,6 +11,12 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
     
     @Published var state: AuthState = .loggedOut
     let signInMethod: SignInMethod = .email
+    var currentUser: User? {
+            if let user = Auth.auth().currentUser {
+                return user
+            }
+            return nil
+        }
     
     func signUp(email: String, userName: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in

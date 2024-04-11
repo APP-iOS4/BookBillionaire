@@ -13,7 +13,7 @@ struct LibraryView: View {
     
     var body: some View {
         switch authViewModel.state {
-        case .logIn:
+        case .loggedIn:
             VStack {
                 Section(header: CategoryView(selectedIndex: $selectedIndex)) {
                     if selectedIndex == 0 {
@@ -40,7 +40,7 @@ struct LibraryView: View {
                     }
                 }
             }
-        case .logOut:
+        case .loggedOut:
             UnlogginedView()
         }
     }

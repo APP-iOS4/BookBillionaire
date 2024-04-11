@@ -21,10 +21,10 @@ struct UnlogginedView: View {
             LoginView()
         })
         Button("로그아웃 하기"){
-            isPresentedSheet = true
+            isPresentedLogin = true
         }.buttonStyle(WhiteButtonStyle(height: 40))
             .padding(40)
-        .fullScreenCover(isPresented: $isPresentedSheet, content: {
+        .fullScreenCover(isPresented: $isPresentedLogin, content: {
             LoginView()
         })
     }
