@@ -2,27 +2,40 @@
 //  File.swift
 //  
 //
-//  Created by YUJIN JEON on 3/21/24.
+//  Created by 최준영 on 4/10/24.
 //
 
 import Foundation
 
-public struct Message: Identifiable, Codable{
-    public var id: String = UUID().uuidString
-    public let message: String
-    public var received: Bool
-    public var timestamp: Date = Date()
-    
-    public init(message: String, received: Bool) {
-        self.message = message
-        self.received = received
-    }
-    
-    public init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
-        self.message = try container.decode(String.self, forKey: .message)
-        self.received = try container.decode(Bool.self, forKey: .received)
-        self.timestamp = try container.decode(Date.self, forKey: .timestamp)
-    }
+public struct Room: Identifiable, Codable {
+    public var id: String?
+    let lastMessage: String        // 마지막 메세지 (채팅방 목록 메세지 미리보기)
+    let sender: String             // 발신자
+    let receiver: String           // 수신자
 }
+
+public struct Message: Identifiable, Codable {
+    public var id: String?
+    var text: String = ""          // 메세지 텍스트
+    var timestamp: Date            // 메세지를 보낸 시간
+    var sender: String             // 발신자
+    let receiver: String           // 수신자
+}
+
+/*
+ public struct ChatRoom: Identifiable, Codable {        // 채팅방
+     @DocumentID public var id: String                  // 채팅방의 id
+     public var sender: String                          // 발신자
+     public var receiver: String                        // 수신자
+     public var usersUnreadCount: [String: Int]         // 읽지 않은 메세지 숫자 [유저Id : 읽지 않은 숫자]
+ }
+
+ public struct Message: Identifiable, Codable {         // 메세지
+     @DocumentID public var id: String                  // 메세지 id
+     public var roomId: String                          // 메세지를 보낼 방의 id
+     public var senderId: String                        // 발신자 유저 id
+     public var text: String                            // 메세지 텍스트
+     public var createdAt: Date                         // 메세지를 보낸 시간
+ }
+
+ */

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseStorage
 import BookBillionaireCore
 
 struct ServiceTestView: View {
@@ -13,6 +15,7 @@ struct ServiceTestView: View {
     let bookService: BookService = BookService.shared
     let mapService: MapService = MapService.shared
     let rentalService: RentalService = RentalService.shared
+    let imagesRef = Storage.storage().reference().child("images")
 
     @State var users: [User] = []
     @State var books: [Book] = []

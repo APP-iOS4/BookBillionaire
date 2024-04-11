@@ -12,15 +12,22 @@ public struct User: Identifiable, Codable {
     public var nickName: String
     public var address: String
     public var image: String?
-    public var pointUserID: String {id}
+    public var point: Int?
     public var myBooks: [String]? //북정보를 가지고 있음
     public var rentalBooks: [String]? //렌탈정보를 가지고 있음
 
-    public init(id: String, nickName: String, address: String, image: String? = nil, myBooks: [String]? = nil, rentalBooks: [String]? = nil) {
+    public init() {
+        self.id = UUID().uuidString
+        self.nickName = ""
+        self.address = ""
+    }
+    
+    public init(id: String, nickName: String, address: String, image: String? = nil, point: Int? = 0, myBooks: [String]? = nil, rentalBooks: [String]? = nil) {
         self.id = id
         self.nickName = nickName
         self.address = address
         self.image = image
+        self.point = point
         self.myBooks = myBooks
         self.rentalBooks = rentalBooks
     }
@@ -33,11 +40,6 @@ public struct User: Identifiable, Codable {
         self.image = try container.decodeIfPresent(String.self, forKey: .image)
         self.myBooks = try container.decodeIfPresent([String].self, forKey: .myBooks) ?? []
         self.rentalBooks = try container.decodeIfPresent([String].self, forKey: .rentalBooks) ?? []
-    }
-    
-    //샘플
-    public static var sample: User {
-        User(id: "", nickName: "호스표", address: "경기도 양주시")
     }
 }
 

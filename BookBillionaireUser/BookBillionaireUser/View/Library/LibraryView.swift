@@ -8,36 +8,40 @@
 import SwiftUI
 
 struct LibraryView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var selectedIndex: Int = 0
     
     var body: some View {
-        ScrollView {
-            LazyVStack(pinnedViews: [.sectionHeaders]) {
+        switch authViewModel.state {
+        case .logIn:
+            VStack {
                 Section(header: CategoryView(selectedIndex: $selectedIndex)) {
                     if selectedIndex == 0 {
                         MyBookListView()
                     } else {
                         RentalBookListView()
                     }
+                    Spacer()
                 }
-                Spacer()
             }
-        }
-        .navigationTitle("내 서재")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(.background, for: .navigationBar)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    BookCreateView()
-                } label: {
-                    if selectedIndex == 0 {
-                        Label("plus", systemImage: "plus")
-                            .labelStyle(.iconOnly)
-                            .foregroundStyle(Color.accentColor)
+            .toolbarBackground(.background, for: .navigationBar)
+            .navigationTitle("내 서재")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        BookCreateView()
+                    } label: {
+                        if selectedIndex == 0 {
+                            Label("plus", systemImage: "plus")
+                                .labelStyle(.iconOnly)
+                                .foregroundStyle(Color.accentColor)
+                        }
                     }
                 }
             }
+        case .logOut:
+            UnlogginedView()
         }
     }
 }
@@ -45,5 +49,6 @@ struct LibraryView: View {
 #Preview {
     NavigationStack {
         LibraryView()
+            .environmentObject(AuthViewModel())
     }
 }
