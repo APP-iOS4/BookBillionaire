@@ -14,14 +14,17 @@ struct ChatListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List(roomListVM.rooms, id: \.room.self) { room in
-                    NavigationLink(value: room){
-                        RoomCell(room: room)}
+                ScrollView {
+                    ForEach(roomListVM.rooms, id: \.room.self) { room in
+                        NavigationLink(value: room){
+                            RoomCell(room: room)}
+                        Divider()
+                    }
+                    .navigationDestination(for: RoomViewModel.self){ room in
+                        ChatView(room: room)
+                    }
+                    .listStyle(PlainListStyle())
                 }
-                .navigationDestination(for: RoomViewModel.self){ room in
-                    ChatView(room: room)
-                }
-                .listStyle(PlainListStyle())
             }
             .navigationTitle("채팅")
             .navigationBarTitleDisplayMode(.inline)

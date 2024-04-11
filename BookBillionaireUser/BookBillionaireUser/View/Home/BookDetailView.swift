@@ -56,7 +56,7 @@ struct BookDetailView: View {
                     Spacer()
                     Text("책 소유자 : ")
                     Text(user.nickName)
-                    Image(user.image ?? "")
+                    Image(user.image ?? "default")
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 30, height: 30)
@@ -99,10 +99,10 @@ struct BookDetailView: View {
                     .padding(.bottom, 5)
                 
                 VStack{
-                    BookDetailUserListView(user: user)
-                    BookDetailUserListView(user: user)
-                    BookDetailUserListView(user: user)
-                    BookDetailUserListView(user: user)
+//                    BookDetailUserListView(user: user)
+//                    BookDetailUserListView(user: user)
+//                    BookDetailUserListView(user: user)
+//                    BookDetailUserListView(user: user)
                 }
                 .padding()
             }

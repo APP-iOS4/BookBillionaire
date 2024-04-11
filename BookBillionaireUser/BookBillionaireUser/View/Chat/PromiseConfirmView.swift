@@ -18,7 +18,7 @@ struct PromiseConfirmView: View {
     @State var rentalService: RentalService = RentalService.shared
     var user: User
     @State var book: Book
-    
+
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -86,6 +86,7 @@ struct PromiseConfirmView: View {
                     //                        }
                     //                    }
                     
+
                     //                    HStack {
                     //                        Text("장소")
                     //
@@ -104,6 +105,26 @@ struct PromiseConfirmView: View {
                     //                            }
                     //                        }
                     //                    }
+
+//                    HStack {
+//                        Text("장소")
+//                        
+//                        Spacer()
+//                        
+//                        Button {
+//                            // 맵 뷰 토글하기
+//                            mapViewShowing.toggle()
+//                        } label: {
+//                            NavigationLink(destination: MeetingMapView()) {
+//                                HStack {
+//                                    Spacer()
+//                                    Text("장소 선택")
+//                                        .foregroundStyle(.gray)
+//                                }
+//                            }
+//                        }
+//                    }
+
                 }
                 .navigationBarTitle("\(user.nickName)님과의 약속")
                 .navigationBarTitleDisplayMode(.inline)
