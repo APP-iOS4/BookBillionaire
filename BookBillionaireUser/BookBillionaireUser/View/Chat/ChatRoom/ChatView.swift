@@ -105,15 +105,15 @@ struct ChatView: View {
             messageListVM.registerUpdatesForRoom(room: room)
         }
         // MARK: - 약속잡기 버튼
-        .navigationBarItems(trailing:
-        Button {
-            promiseViewShowing.toggle()
-            hideKeyboard()
-        } label: {
-            NavigationLink(destination: PromiseConfirmView()) {
-                Text("약속잡기")
-            }
-        })
+//        .navigationBarItems(trailing:
+//        Button {
+//            promiseViewShowing.toggle()
+//            hideKeyboard()
+//        } label: {
+////            NavigationLink(destination: PromiseConfirmView(user: User, book: <#Book#>)) {
+////                Text("약속잡기")
+//            }
+//        })
     }
     
     private func sendMessage() {

@@ -25,21 +25,27 @@ struct SearchBar: View {
                     .overlay {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color("AccentColor"),lineWidth: 1)
+                        // 텍스트 삭제 버튼
+                        if !searchBook.isEmpty {
+                                Button {
+                                    searchBook = ""
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundStyle(.gray)
+                                }
+                                .padding(.leading, 280)
+                        }
                     }
-                
-                if !searchBook.isEmpty {
-                    Button {
-                        searchBook = ""
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(.gray)
-                    }
-                }
+                    .onChange(of: searchBook) { _ in
+                         isSearching = false
+                     }
+
                 
                 Button {
                     if !searchBook.isEmpty {
                         saveSearchHistory()
                         searchBooksByTitle(title: searchBook)
+                        isSearching = true
                     }
                     
                 } label: {

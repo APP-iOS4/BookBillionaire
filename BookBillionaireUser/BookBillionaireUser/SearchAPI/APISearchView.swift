@@ -30,6 +30,7 @@ struct APISearchView: View {
     @State private var searchBook = ""
     @State private var isLoading = false
     @State private var apiKey = ""
+    @Binding var isShowing: Bool
     
     private func fetchMyKey() {
         // 번들된 key.plist 파일을 읽는다
@@ -90,7 +91,7 @@ struct APISearchView: View {
                     ProgressView()
                 } else if books.count != 0 {
                     List(books, id: \.id) { book in
-                        APISearchListRowView(book: book)
+                        APISearchListRowView(book: book, isShowing: $isShowing)
                     }
                     .listStyle(.plain)
                 } else {

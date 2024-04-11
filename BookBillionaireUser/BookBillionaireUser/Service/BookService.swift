@@ -22,6 +22,10 @@ class BookService: ObservableObject {
     func registerBook(_ book: Book) -> Bool {
         do {
             try bookRef.document(book.id).setData(from: book)
+            let userRef = Firestore.firestore().collection("User").document(book.ownerID)
+            userRef.updateData([
+                "myBooks": FieldValue.arrayUnion([book.id])
+            ])
             return true
         } catch let error {
             print("\(#function) 책 저장 함수 오류: \(error)")

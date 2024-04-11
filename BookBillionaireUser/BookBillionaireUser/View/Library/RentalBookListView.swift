@@ -21,6 +21,7 @@ struct RentalBookListView: View {
                     .fontWeight(.medium)
                 Spacer()
             }
+            .padding()
             // 빌린도서 목록 미구현으로 보유도서 목록으로 더미데이터 사용
             if myBooks.isEmpty {
                 VStack(spacing: 10) {
@@ -49,11 +50,11 @@ struct RentalBookListView: View {
                             
                         }
                     }
+                    .padding()
                     SpaceBox()
                 }
             }
         }
-        .padding()
 //        .onAppear{
 //            loadMybook()
 //        }
