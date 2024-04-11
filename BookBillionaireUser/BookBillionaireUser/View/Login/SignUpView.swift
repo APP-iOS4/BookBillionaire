@@ -118,7 +118,7 @@ struct SignUpView: View {
                             emailErrorText = "올바른 이메일 형식이 아닙니다."
                         }
                         if passwordText.count >= 6 && passwordConfirmText == passwordText && isValidEmail(emailText) {
-                            authViewModel.emailAuthSignUp(email: emailText, userName: nameText, password: passwordText)
+                            authViewModel.signUp(email: emailText, userName: nameText, password: passwordText)
                             isShowingAlert = true
                         }
                     } label: {

@@ -6,6 +6,7 @@ struct LoginView: View {
     @State var emailText: String = ""
     @State var passwordText: String = ""
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
     @Environment (\.dismiss) private var dismiss
     
     var body: some View {
@@ -37,7 +38,7 @@ struct LoginView: View {
                             .foregroundStyle(Color.accentColor)
                     }
                     Button{
-                        authViewModel.emailAuthLogIn(email: emailText, password: passwordText)
+                        authViewModel.signIn(email: emailText, password: passwordText)
                         dismiss()
                     } label: {
                         Text("로그인")
@@ -53,9 +54,10 @@ struct LoginView: View {
                 Text("다른 방법으로 로그인")
                     .padding()
                 
-                Button {
-                    // 구글 로그인 버튼 눌렀을 때의 동작
-                } label: {
+                Button(action: {
+                    authViewModelGoogle.signIn(email: "", password: "")
+                    dismiss()
+                }) {
                     Image("SignInWithGoogle")
                         .resizable()
                         .frame(width: 335, height: 50)

@@ -21,10 +21,9 @@
 		04A59A982BC19813009FBF6E /* AccentButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A962BC19813009FBF6E /* AccentButtonStyle.swift */; };
 		04A59A992BC19813009FBF6E /* WhiteButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A972BC19813009FBF6E /* WhiteButtonStyle.swift */; };
 		04A59AAA2BC3B7D8009FBF6E /* ServiceTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A822BBE8876009FBF6E /* ServiceTestView.swift */; };
-		04A59AB42BC4FDE0009FBF6E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		04A59AB42BC4FDE0009FBF6E /* UnlogginedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59AB32BC4FDE0009FBF6E /* UnlogginedView.swift */; };
 		04A59AB62BC52031009FBF6E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59AB52BC52031009FBF6E /* FirebaseStorage */; };
 		04A59AB82BC52031009FBF6E /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59AB72BC52031009FBF6E /* FirebaseStorageCombine-Community */; };
-		04A59ABB2BC684E0009FBF6E /* UnlogginedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59AB92BC68419009FBF6E /* UnlogginedView.swift */; };
 		04A59AC02BC68D79009FBF6E /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59ABE2BC68D79009FBF6E /* DatePickerView.swift */; };
 		04A59AC12BC68D79009FBF6E /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59ABF2BC68D79009FBF6E /* TimePickerView.swift */; };
 		04A59AC32BC69538009FBF6E /* MeetingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59AC22BC69537009FBF6E /* MeetingMapView.swift */; };
@@ -51,7 +50,9 @@
 		35537C582BBD8CA800FE8354 /* BookSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35537C572BBD8CA800FE8354 /* BookSearchView.swift */; };
 		35537C5A2BBD8CB400FE8354 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35537C592BBD8CB400FE8354 /* HomeView.swift */; };
 		35537C5C2BBD8CBC00FE8354 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35537C5B2BBD8CBC00FE8354 /* BookDetailView.swift */; };
-		8C7633502BBD40E9002EF297 /* AuthGoogleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C76334F2BBD40E9002EF297 /* AuthGoogleViewModel.swift */; };
+		8C1E20EF2BC7A75A00D92E95 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C1E20EE2BC7A75A00D92E95 /* GoogleService-Info.plist */; };
+		8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */; };
+		8C1E20F32BC7AF0D00D92E95 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */; };
 		8C85928C2BBD23BD0082C8B8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */; };
 		8C85928D2BBD23BD0082C8B8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */; };
 		8C85928E2BBD23BD0082C8B8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85928B2BBD23BD0082C8B8 /* LoginView.swift */; };
@@ -92,7 +93,7 @@
 		04A59A942BC143E7009FBF6E /* SpaceBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceBox.swift; sourceTree = "<group>"; };
 		04A59A962BC19813009FBF6E /* AccentButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccentButtonStyle.swift; sourceTree = "<group>"; };
 		04A59A972BC19813009FBF6E /* WhiteButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiteButtonStyle.swift; sourceTree = "<group>"; };
-		04A59AB92BC68419009FBF6E /* UnlogginedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlogginedView.swift; sourceTree = "<group>"; };
+		04A59AB32BC4FDE0009FBF6E /* UnlogginedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlogginedView.swift; sourceTree = "<group>"; };
 		04A59ABE2BC68D79009FBF6E /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		04A59ABF2BC68D79009FBF6E /* TimePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		04A59AC22BC69537009FBF6E /* MeetingMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingMapView.swift; sourceTree = "<group>"; };
@@ -120,8 +121,10 @@
 		35537C572BBD8CA800FE8354 /* BookSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookSearchView.swift; sourceTree = "<group>"; };
 		35537C592BBD8CB400FE8354 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		35537C5B2BBD8CBC00FE8354 /* BookDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
+		8C1E20EE2BC7A75A00D92E95 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModelGoogle.swift; sourceTree = "<group>"; };
+		8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		8C76334E2BBD3DCF002EF297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8C76334F2BBD40E9002EF297 /* AuthGoogleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGoogleViewModel.swift; sourceTree = "<group>"; };
 		8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		8C85928B2BBD23BD0082C8B8 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -283,7 +286,6 @@
 			isa = PBXGroup;
 			children = (
 				350AFD172BC7675900FFEC82 /* GoogleService-Info.plist */,
-
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
@@ -301,6 +303,7 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
+				8C1E20EE2BC7A75A00D92E95 /* GoogleService-Info.plist */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
@@ -353,9 +356,10 @@
 			children = (
 				8C85928B2BBD23BD0082C8B8 /* LoginView.swift */,
 				8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */,
+				8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */,
 				8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */,
-				8C76334F2BBD40E9002EF297 /* AuthGoogleViewModel.swift */,
-				04A59AB92BC68419009FBF6E /* UnlogginedView.swift */,
+				04A59AB32BC4FDE0009FBF6E /* UnlogginedView.swift */,
+				8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -487,7 +491,6 @@
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
 				350AFD182BC7675900FFEC82 /* GoogleService-Info.plist in Resources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,7 +522,6 @@
 				8C85928C2BBD23BD0082C8B8 /* AuthViewModel.swift in Sources */,
 				04A59A932BBFCF6A009FBF6E /* APISearchBar.swift in Sources */,
 				04A59A8B2BBFB7F7009FBF6E /* RentalService.swift in Sources */,
-				8C7633502BBD40E9002EF297 /* AuthGoogleViewModel.swift in Sources */,
 				350AFD142BC7608700FFEC82 /* BookDetailUserListView.swift in Sources */,
 				08C46D852BC2D7FA00DB6D1D /* ChatBubble.swift in Sources */,
 				EF0F74BB2BBCFA7100E37D0D /* SearchBar.swift in Sources */,
@@ -550,7 +552,9 @@
 				04A59AB42BC4FDE0009FBF6E /* (null) in Sources */,
 				35537C5A2BBD8CB400FE8354 /* HomeView.swift in Sources */,
 				08C46D812BC2D61300DB6D1D /* RoomListViewModel.swift in Sources */,
+				8C1E20F32BC7AF0D00D92E95 /* AuthModel.swift in Sources */,
 				EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */,
+				8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */,
 				8C85928D2BBD23BD0082C8B8 /* SignUpView.swift in Sources */,
 				8C85928E2BBD23BD0082C8B8 /* LoginView.swift in Sources */,
 				EF0F74882BBCF7C500E37D0D /* BookBillionaireUserApp.swift in Sources */,

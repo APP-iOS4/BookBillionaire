@@ -17,7 +17,7 @@ struct ProfileView: View {
     var body: some View {
     NavigationStack{
             VStack(alignment: .leading){
-                if authViewModel.state == .logOut {
+                if authViewModel.state == .loggedOut {
                     UnlogginedView()
                 } else {
                     HStack(spacing: 20) {
@@ -48,8 +48,6 @@ struct ProfileView: View {
                             }
                         }.listStyle(.plain)
                     }
-                    
-                    
                 }
             }.padding()
         }
@@ -57,12 +55,11 @@ struct ProfileView: View {
     func logout() {
         do {
             try Auth.auth().signOut()
-            authViewModel.state = .logOut // 로그아웃 상태로 변경
+            authViewModel.state = .loggedOut // 로그아웃 상태로 변경
             userEmail = nil // 이메일 초기화
             userUID = nil // UID 초기화
         } catch {
             print("로그아웃 중 오류 발생:", error.localizedDescription)
-
         }
     }
 }
