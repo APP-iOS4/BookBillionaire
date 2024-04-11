@@ -35,14 +35,8 @@ struct BookSearchListView: View {
                             BookListRowView(book: book)
                         }
 
-//                        NavigationLink(value: book) {
-//                            BookListRowView(book: book)
-//                        }
                     }
                     .foregroundStyle(.primary)
-//                    .navigationDestination(for: Book.self) { book in
-//                        BookDetailView(book: book, user: user(for: book))
-//                    }
                 }
             }
         }

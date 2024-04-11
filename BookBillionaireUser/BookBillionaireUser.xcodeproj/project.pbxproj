@@ -283,6 +283,9 @@
 		35B1F1C12BC80965006DF56D /* BookDetailViews */ = {
 			isa = PBXGroup;
 			children = (
+				350AFD152BC761B600FFEC82 /* BookDetailImageView.swift */,
+				350AFD132BC7608700FFEC82 /* BookDetailUserListView.swift */,
+				35537C5B2BBD8CBC00FE8354 /* BookDetailView.swift */,
 			);
 			path = BookDetailViews;
 			sourceTree = "<group>";
@@ -290,6 +293,10 @@
 		35B1F1C22BC80975006DF56D /* BookSearchViews */ = {
 			isa = PBXGroup;
 			children = (
+				350AFD1D2BC7C14800FFEC82 /* RecentSearchView.swift */,
+				EF0F74BA2BBCFA7100E37D0D /* BookSearchBarView.swift */,
+				350AFD1F2BC7C16400FFEC82 /* BookSearchListView.swift */,
+				35537C572BBD8CA800FE8354 /* BookSearchView.swift */,
 			);
 			path = BookSearchViews;
 			sourceTree = "<group>";
@@ -377,17 +384,10 @@
 		EF0F74B52BBCFA0500E37D0D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				35537C592BBD8CB400FE8354 /* HomeView.swift */,
+				352D6FFE2BBE804C00D12B0F /* BookListRowView.swift */,
 				35B1F1C22BC80975006DF56D /* BookSearchViews */,
 				35B1F1C12BC80965006DF56D /* BookDetailViews */,
-				35537C592BBD8CB400FE8354 /* HomeView.swift */,
-				350AFD1D2BC7C14800FFEC82 /* RecentSearchView.swift */,
-				EF0F74BA2BBCFA7100E37D0D /* BookSearchBarView.swift */,
-				350AFD1F2BC7C16400FFEC82 /* BookSearchListView.swift */,
-				35537C572BBD8CA800FE8354 /* BookSearchView.swift */,
-				35537C5B2BBD8CBC00FE8354 /* BookDetailView.swift */,
-				352D6FFE2BBE804C00D12B0F /* BookListRowView.swift */,
-				350AFD132BC7608700FFEC82 /* BookDetailUserListView.swift */,
-				350AFD152BC761B600FFEC82 /* BookDetailImageView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
