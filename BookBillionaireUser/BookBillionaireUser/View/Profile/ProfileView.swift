@@ -17,7 +17,7 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            if authViewModel.state == .logOut {
+            if authViewModel.state == .loggedOut {
                 UnlogginedView()
             } else {
                 
