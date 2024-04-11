@@ -6,13 +6,15 @@ struct LoginView: View {
     @State var emailText: String = ""
     @State var passwordText: String = ""
     @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var isSignUpScreen: Bool = false
     @Environment (\.dismiss) private var dismiss
     
     var body: some View {
         NavigationStack{
             VStack {
-                Text("Book Billionare")
-                    .font(.title)
+               Image("AppLogo")
+                    .resizable()
+                    .scaledToFit()
                     .padding(.top, 100)
                 Section {
                     VStack(spacing: 10) {
@@ -30,25 +32,18 @@ struct LoginView: View {
                 }
                 .padding(.top, 50)
                 HStack(spacing: 20) {
-                    NavigationLink {
-                        SignUpView()
-                    } label: {
-                        Text("회원가입")
-                            .foregroundStyle(Color.accentColor)
+                    Button("회원가입") {
+                        isSignUpScreen = true
                     }
-                    Button{
+                    .buttonStyle(WhiteButtonStyle(height: 40.0))
+                    Button("로그인"){
                         authViewModel.emailAuthLogIn(email: emailText, password: passwordText)
                         dismiss()
-                    } label: {
-                        Text("로그인")
-                            .padding()
-                            .background(Color.white)
-                            .foregroundColor(.accentColor)
-                            .background(emailText.isEmpty || passwordText.isEmpty ? .gray : .red)
-                            .cornerRadius(10)
-                    }
-                    .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
+                    }.buttonStyle(WhiteButtonStyle(height: 40.0))
+                        .foregroundStyle(emailText.isEmpty || passwordText.isEmpty ? .gray : .accentColor)
+                        .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
                 }
+                .padding(.top)
                 
                 Text("다른 방법으로 로그인")
                     .padding()
@@ -67,6 +62,9 @@ struct LoginView: View {
                 SpaceBox()
             }
             .padding(.horizontal, 30)
+            .fullScreenCover(isPresented: $isSignUpScreen, content: {
+                SignUpView()
+            })
         }
 
     }
