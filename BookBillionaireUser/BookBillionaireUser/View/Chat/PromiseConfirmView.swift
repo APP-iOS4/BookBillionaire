@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BookBillionaireCore
 
 struct PromiseConfirmView: View {
     @State private var dateViewShowing = false
@@ -13,14 +14,17 @@ struct PromiseConfirmView: View {
     @State private var mapViewShowing = false
     @State var selectedTime = Date()
     @State var selectedDate = Date()
-    @State private var receiver = "킹유진"
+    @Environment (\.dismiss) private var dismiss
+    @State var rentalService: RentalService = RentalService.shared
+    var user: User
+    var book: Book
 
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                Text("\(receiver)님과의 약속")
+                Text("\(book.title)에 대한 약속잡기")
                     .font(.title2)
                     .padding()
                     .padding(.bottom, 20)
@@ -100,7 +104,7 @@ struct PromiseConfirmView: View {
                         }
                     }
                 }
-                .navigationBarTitle("약속잡기")
+                .navigationBarTitle("\(user.nickName)님과의 약속")
                 .navigationBarTitleDisplayMode(.inline)
               //  .toolbarTitleDisplayMode(.inline) //17버전에서 사용가능
                 .listStyle(.inset)
@@ -109,9 +113,9 @@ struct PromiseConfirmView: View {
          Spacer()
             
             Button("약속 잡기") {
-                // 약속 확정 뷰
-                // 약속이 잡혔다는 화면 보여주고 돌아가기
+                updateRental()
                 presentationMode.wrappedValue.dismiss()
+                
             }
             .buttonStyle(AccentButtonStyle())
             .padding(.horizontal, 30)
@@ -130,8 +134,29 @@ struct PromiseConfirmView: View {
         formatter.timeStyle = .short
         return formatter
     }()
+    
+    private func combine(date: Date, withTime time: Date) -> Date? {
+        let calendar = Calendar.current
+
+        let dateComponents = calendar.dateComponents([.month, .day], from: date)
+        let timeComponents = calendar.dateComponents([.hour, .minute], from: time)
+
+        var combinedComponents = DateComponents()
+        combinedComponents.month = dateComponents.month
+        combinedComponents.day = dateComponents.day
+        combinedComponents.hour = timeComponents.hour
+        combinedComponents.minute = timeComponents.minute
+
+        return calendar.date(from: combinedComponents)
+    }
+    
+    private func updateRental() {
+        Task{
+            await rentalService.updateRental(book.rental, rentalTime: combine(date: selectedDate, withTime: selectedTime) ?? Date())
+        }
+    }
 }
 
-#Preview {
-    PromiseConfirmView()
-}
+//#Preview {
+//    PromiseConfirmView()
+//}
