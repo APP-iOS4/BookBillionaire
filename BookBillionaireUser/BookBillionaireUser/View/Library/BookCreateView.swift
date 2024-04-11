@@ -29,18 +29,23 @@ struct BookCreateView: View {
                         book.ownerID = user.uid
                         rental.bookOwner = user.uid
                     }
+                    if book.rentalState == .rentalAvailable {
+                        rental.id = UUID().uuidString
+                        book.rental = rental.id
+                        _ = rentalService.registerRental(rental)
+                    }
                     book.id = UUID().uuidString
-                    rental.id = UUID().uuidString
-                    book.rental = rental.id
                     _ = bookService.registerBook(book)
-                    _ = rentalService.registerRental(rental)
                     dismiss()
                 }
                 .buttonStyle(AccentButtonStyle())
-                .disabled(book.title.isEmpty || book.contents.isEmpty || book.authors.isEmpty)
+                .disabled(book.rentalState == .rentalAvailable ? (book.title.isEmpty || book.contents.isEmpty || book.authors.first!.isEmpty) : (book.title.isEmpty || book.authors.first!.isEmpty))
                 .padding()
             }
             SpaceBox()
+        }
+        .onChange(of: book.rentalState) { _ in
+            book.contents = ""
         }
         .sheet(isPresented: $isShowingSheet) {
             APISearchView(isShowing: $isShowingSheet)
