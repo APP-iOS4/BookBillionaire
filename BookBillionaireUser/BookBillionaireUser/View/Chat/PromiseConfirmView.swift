@@ -17,7 +17,7 @@ struct PromiseConfirmView: View {
     @Environment (\.dismiss) private var dismiss
     @State var rentalService: RentalService = RentalService.shared
     var user: User
-    var book: Book
+    @State var book: Book
 
     @Environment(\.presentationMode) var presentationMode
     
@@ -103,7 +103,7 @@ struct PromiseConfirmView: View {
 //                            }
 //                        }
 //                    }
-//                }
+                }
                 .navigationBarTitle("\(user.nickName)님과의 약속")
                 .navigationBarTitleDisplayMode(.inline)
               //  .toolbarTitleDisplayMode(.inline) //17버전에서 사용가능
