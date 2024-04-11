@@ -12,7 +12,6 @@ struct ChatListView: View {
     @StateObject private var roomListVM = RoomListViewModel()
     
     var body: some View {
-        NavigationStack {
             VStack {
                 ScrollView {
                     ForEach(roomListVM.rooms, id: \.room.self) { room in
@@ -45,7 +44,6 @@ struct ChatListView: View {
                 roomListVM.getAllRooms()
             })
         }
-    }
 }
 
 struct RoomCell: View {

@@ -7,16 +7,18 @@
 
 import SwiftUI
 import WebKit
+import BookBillionaireCore
 
 struct BookSearchView: View {
     @State private var searchBook = ""
     @State private var recentSearches: [String] = []
+    @State private var filteredBooks: [Book] = [] // 필터링된 책 목록 추가
     @State private var isWebViewPresented = false
     @State private var selectedBookstoreSettings: BookStoreSettings?
     
     var body: some View {
         VStack(alignment: .center) {
-            SearchBar(searchBook: $searchBook)
+            BookSearchBarView(searchBook: $searchBook, filteredBooks: $filteredBooks)
             Spacer()
             VStack(alignment: .leading, spacing: 10) {
                 Text("찾는 책이 없다면? 찾아보러가기")
@@ -99,5 +101,7 @@ struct WebView: UIViewRepresentable {
 
 
 #Preview {
-    BookSearchView()
+    NavigationStack {
+        BookSearchView()
+    }
 }

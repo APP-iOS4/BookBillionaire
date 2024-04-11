@@ -15,8 +15,7 @@ struct BookDetailView: View {
     var body: some View {
         ScrollView{
             BookDetailImageView(book: book)
-            
-            // 정보
+            // 정보란
             VStack(alignment: .leading) {
                 Rectangle()
                     .frame(height: 100)
@@ -104,11 +103,12 @@ struct BookDetailView: View {
 //                    BookDetailUserListView(user: user)
 //                    BookDetailUserListView(user: user)
                 }
-                .padding()
             }
             .padding(.horizontal)
+            .navigationTitle(book.title)
         }
         .ignoresSafeArea()
+        SpaceBox()
     }
     
 }
