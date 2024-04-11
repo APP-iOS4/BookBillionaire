@@ -85,25 +85,25 @@ struct PromiseConfirmView: View {
 //                        }
 //                    }
                     
-                    HStack {
-                        Text("장소")
-                        
-                        Spacer()
-                        
-                        Button {
-                            // 맵 뷰 토글하기
-                            mapViewShowing.toggle()
-                        } label: {
-                            NavigationLink(destination: MeetingMapView()) {
-                                HStack {
-                                    Spacer()
-                                    Text("장소 선택")
-                                        .foregroundStyle(.gray)
-                                }
-                            }
-                        }
-                    }
-                }
+//                    HStack {
+//                        Text("장소")
+//                        
+//                        Spacer()
+//                        
+//                        Button {
+//                            // 맵 뷰 토글하기
+//                            mapViewShowing.toggle()
+//                        } label: {
+//                            NavigationLink(destination: MeetingMapView()) {
+//                                HStack {
+//                                    Spacer()
+//                                    Text("장소 선택")
+//                                        .foregroundStyle(.gray)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 .navigationBarTitle("\(user.nickName)님과의 약속")
                 .navigationBarTitleDisplayMode(.inline)
               //  .toolbarTitleDisplayMode(.inline) //17버전에서 사용가능
@@ -153,6 +153,7 @@ struct PromiseConfirmView: View {
     private func updateRental() {
         Task{
             await rentalService.updateRental(book.rental, rentalTime: combine(date: selectedDate, withTime: selectedTime) ?? Date())
+            book.rentalState = .renting
         }
     }
 }
