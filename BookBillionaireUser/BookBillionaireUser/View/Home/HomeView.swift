@@ -25,6 +25,7 @@ struct HomeView: View {
             HStack(alignment: .center) {
                 Text("BOOK BILLINAIRE")
                     .font(.largeTitle)
+                    .foregroundStyle(.accent)
                 
                 Spacer()
                 
@@ -46,7 +47,11 @@ struct HomeView: View {
                     } label: {
                         Text("\(menu.buttonTitle)")
                             .fontWeight(menuTitle == menu ? .bold : .regular)
+                            .foregroundStyle(menuTitle == menu ? .white : .accentColor)
                     }
+                    .padding(10)
+                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondaryColor").opacity(0.2))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
             }
             .padding(.bottom, 12)
@@ -65,7 +70,6 @@ struct HomeView: View {
                                 NavigationLink(value: book) {
                                     HStack(alignment: .center) {
                                         BookListRowView(book: book)
-                                            .padding(.bottom, 12)
                                     }
                                 }
                                 .foregroundStyle(.primary)
@@ -89,6 +93,7 @@ struct HomeView: View {
                                         .presentationDetents([.fraction(0.2)])
                                 }
                             }
+                            Divider()
                         }
                         .navigationDestination(for: Book.self) { book in
                             BookDetailView(book: book, user: user(for: book))
@@ -126,7 +131,6 @@ struct HomeView: View {
             return user
         }
         // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-        // 추후 협의후 수정예정
         return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
     }
 }
