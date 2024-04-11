@@ -13,7 +13,7 @@ struct BookListRowView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(alignment:.top, spacing: 15) {
+            HStack(alignment:.top) {
                 AsyncImage(url: URL(string: book.thumbnail)){ image in
                     image.resizable()
                         .frame(width: 100, height: 140)
@@ -24,18 +24,24 @@ struct BookListRowView: View {
                 VStack(alignment: .leading) {
                     Text(book.title)
                         .font(.subheadline)
-                    
+                        .padding(.bottom, 5)
                     if book.authors.isEmpty {
-                        Text("\(book.title) \n \(book.translators?.joined(separator: ", ") ?? "")")
+                        Text("\(book.title)")
+                            .font(.caption)
+                        Text("\(book.translators?.joined(separator: ", ") ?? "")")
+                            .multilineTextAlignment(.leading)
                             .font(.caption)
                             .padding(.bottom, 10)
                     } else {
-                        Text("\(book.title) \n \(book.authors.joined(separator: ", "))")
+                        Text("\(book.title)")
+                            .font(.caption)
+                        Text("\(book.authors.joined(separator: ", "))")
+                            .multilineTextAlignment(.leading)
                             .font(.caption)
                             .padding(.bottom, 10)
                     }
                 }
-                .padding(.bottom, 30)
+                .padding(.leading, 10)
             }
         }
     }
