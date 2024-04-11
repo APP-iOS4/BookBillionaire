@@ -22,6 +22,7 @@ struct PromiseConfirmView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
+        
         NavigationStack {
             VStack(alignment: .leading) {
                 Text("\(book.title)에 대한 약속잡기")
@@ -67,24 +68,44 @@ struct PromiseConfirmView: View {
                         })
                     }
                     //결제방식 일단 아웃
-//                    HStack {
-//                        Text("결제 방식")
-//                        
-//                        Spacer()
-//                        
-//                        Button {
-//                            // 결제 방식 고르기 창 조금 보여주기
-//                            // .sheet로 보여주면 될 듯
-//                        } label: {
-//                            HStack {
-//                                Text("결제 방식 선택")
-//                                    .foregroundStyle(.gray)
-//                                Image(systemName: "chevron.down")
-//                                    .foregroundStyle(.gray)
-//                            }
-//                        }
-//                    }
+                    //                    HStack {
+                    //                        Text("결제 방식")
+                    //
+                    //                        Spacer()
+                    //
+                    //                        Button {
+                    //                            // 결제 방식 고르기 창 조금 보여주기
+                    //                            // .sheet로 보여주면 될 듯
+                    //                        } label: {
+                    //                            HStack {
+                    //                                Text("결제 방식 선택")
+                    //                                    .foregroundStyle(.gray)
+                    //                                Image(systemName: "chevron.down")
+                    //                                    .foregroundStyle(.gray)
+                    //                            }
+                    //                        }
+                    //                    }
                     
+
+                    //                    HStack {
+                    //                        Text("장소")
+                    //
+                    //                        Spacer()
+                    //
+                    //                        Button {
+                    //                            // 맵 뷰 토글하기
+                    //                            mapViewShowing.toggle()
+                    //                        } label: {
+                    //                            NavigationLink(destination: MeetingMapView()) {
+                    //                                HStack {
+                    //                                    Spacer()
+                    //                                    Text("장소 선택")
+                    //                                        .foregroundStyle(.gray)
+                    //                                }
+                    //                            }
+                    //                        }
+                    //                    }
+
 //                    HStack {
 //                        Text("장소")
 //                        
@@ -103,14 +124,15 @@ struct PromiseConfirmView: View {
 //                            }
 //                        }
 //                    }
+
                 }
                 .navigationBarTitle("\(user.nickName)님과의 약속")
                 .navigationBarTitleDisplayMode(.inline)
-              //  .toolbarTitleDisplayMode(.inline) //17버전에서 사용가능
+                //  .toolbarTitleDisplayMode(.inline) //17버전에서 사용가능
                 .listStyle(.inset)
             }
             
-         Spacer()
+            Spacer()
             
             Button("약속 잡기") {
                 updateRental()
@@ -122,7 +144,7 @@ struct PromiseConfirmView: View {
         }
         
     }
-
+    
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM월 dd일"
@@ -137,16 +159,16 @@ struct PromiseConfirmView: View {
     
     private func combine(date: Date, withTime time: Date) -> Date? {
         let calendar = Calendar.current
-
+        
         let dateComponents = calendar.dateComponents([.month, .day], from: date)
         let timeComponents = calendar.dateComponents([.hour, .minute], from: time)
-
+        
         var combinedComponents = DateComponents()
         combinedComponents.month = dateComponents.month
         combinedComponents.day = dateComponents.day
         combinedComponents.hour = timeComponents.hour
         combinedComponents.minute = timeComponents.minute
-
+        
         return calendar.date(from: combinedComponents)
     }
     
@@ -157,6 +179,8 @@ struct PromiseConfirmView: View {
         }
     }
 }
+
+
 
 //#Preview {
 //    PromiseConfirmView()
