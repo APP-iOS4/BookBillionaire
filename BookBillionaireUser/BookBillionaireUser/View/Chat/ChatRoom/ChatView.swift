@@ -19,6 +19,7 @@ struct ChatView: View {
     // username 갖다 꽂기 [임시로 최준영 적어놓음]
     @State private var cancellables: AnyCancellable?
     @State private var plusItemShowing = false
+    @State private var messageVS = Message(vs: MessageViewState(message: "", roomId: "", username: "", timestamp: Date()))
 
     var body: some View {
         VStack {
@@ -29,9 +30,9 @@ struct ChatView: View {
                             HStack {
                                 if message.username == username {
                                     Spacer()
-                                    ChatBubble(messageText: message.messageText, username: message.username, style: .from, message: Message(vs: MessageViewState(message: "", roomId: "", username: "", timestamp: Date())))
+                                    ChatBubble(messageText: message.messageText, username: message.username, style: .from, message: messageVS)
                                 } else {
-                                    ChatBubble(messageText: message.messageText, username: message.username, style: .to, message: Message(vs: MessageViewState(message: "", roomId: "", username: "", timestamp: Date())))
+                                    ChatBubble(messageText: message.messageText, username: message.username, style: .to, message: messageVS)
                                     Spacer()
                                 }
                             }

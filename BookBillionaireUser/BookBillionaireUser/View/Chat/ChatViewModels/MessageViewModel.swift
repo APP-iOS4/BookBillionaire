@@ -5,6 +5,7 @@
 //  Created by 최준영 on 4/7/24.
 //
 
+//import BookBillionaireCore
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -30,10 +31,6 @@ struct MessageViewModel {
     
     var messageId: String {
         message.id ?? ""
-    }
-    
-    var timestamp: Date {
-        message.timestamp
     }
 }
 
@@ -63,7 +60,6 @@ class MessageListViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.messages = messages
                         }
-                        
                     }
                 }
             }

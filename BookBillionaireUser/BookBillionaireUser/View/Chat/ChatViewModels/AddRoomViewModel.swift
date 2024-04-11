@@ -28,7 +28,7 @@ class AddRoomViewModel: ObservableObject {
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    completion()
+                    //completion()
                 }
             }
         } catch let error {

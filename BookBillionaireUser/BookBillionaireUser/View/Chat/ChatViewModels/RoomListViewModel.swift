@@ -5,6 +5,7 @@
 //  Created by 최준영 on 4/7/24.
 //
 
+//import BookBillionaireCore
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -25,7 +26,6 @@ struct RoomViewModel: Hashable {
         room.id ?? ""
     }
 }
-
 
 class RoomListViewModel: ObservableObject {
     
