@@ -24,6 +24,7 @@ struct RentalStateSheetView: View {
             .pickerStyle(.wheel)
             Button("완료") {
                 isShowingSheet.toggle()
+                rentalState = tempRentalState
             }
             .buttonStyle(AccentButtonStyle())
             .padding()
