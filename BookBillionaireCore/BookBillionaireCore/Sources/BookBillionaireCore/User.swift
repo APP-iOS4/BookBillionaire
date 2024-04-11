@@ -16,6 +16,12 @@ public struct User: Identifiable, Codable {
     public var myBooks: [String]? //북정보를 가지고 있음
     public var rentalBooks: [String]? //렌탈정보를 가지고 있음
 
+    public init() {
+        self.id = UUID().uuidString
+        self.nickName = ""
+        self.address = ""
+    }
+    
     public init(id: String, nickName: String, address: String, image: String? = nil, point: Int? = 0, myBooks: [String]? = nil, rentalBooks: [String]? = nil) {
         self.id = id
         self.nickName = nickName

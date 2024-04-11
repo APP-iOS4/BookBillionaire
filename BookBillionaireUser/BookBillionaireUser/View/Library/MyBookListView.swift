@@ -21,6 +21,7 @@ struct MyBookListView: View {
                     .fontWeight(.medium)
                 Spacer()
             }
+            .padding()
             if myBooks.isEmpty {
                 VStack(spacing: 10) {
                     Spacer()
@@ -48,6 +49,7 @@ struct MyBookListView: View {
                             BookItem(book: book)
                         }
                     }
+                    .padding()
                     // DetailView 미구현, 추후 변경
                     .navigationDestination(for: Book.self) { book in
                         Text("안녕 \(book.title) 디테일 뷰")
@@ -56,7 +58,6 @@ struct MyBookListView: View {
                 }
             }
         }
-        .padding()
         .onAppear{
             loadMybook()
         }
@@ -64,7 +65,9 @@ struct MyBookListView: View {
     
     private func loadMybook() {
         Task {
-            myBooks = await bookService.loadBookByID("Eyhr4YQGsATlRDUcc9rYl9PZYk52")
+            if let user = AuthViewModel().currentUser {
+                myBooks = await bookService.loadBookByID(user.uid)
+            }
         }
     }
     

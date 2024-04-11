@@ -26,4 +26,17 @@ class RentalService: ObservableObject {
             return false
         }
     }
+
+    func updateRental(_ rentalID: String, rentalTime: Date) async {
+        let rentaldocRef = rentalRef.document(rentalID)
+        do {
+            try await rentaldocRef.updateData([
+                "rentalTime" : rentalTime,
+            ])
+            print("렌탈타임 변경 성공🧚‍♀️")
+        } catch let error {
+            print("\(#function) 렌탈타임 변경 실패했음☄️ \(error)")
+        }
+        
+    }
 }
