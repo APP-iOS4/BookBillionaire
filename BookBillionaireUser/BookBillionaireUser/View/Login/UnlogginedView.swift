@@ -11,6 +11,7 @@ struct UnlogginedView: View {
     @State private var isPresentedLogin: Bool = false
     
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
     
     var body: some View {
         if authViewModel.state == .loggedOut {
@@ -21,6 +22,8 @@ struct UnlogginedView: View {
                 }
                 .buttonStyle(WhiteButtonStyle(height: 40))
                 .padding(.horizontal, 100)
+                Text(authViewModel.state == .loggedIn ? "Email Logged In" : "Email Logged Out")
+                Text(authViewModelGoogle.state == .loggedIn ? "Google Logged In" : "Google Logged Out")
             }
             .fullScreenCover(isPresented: $isPresentedLogin, content: {
                 LoginView(isPresentedLogin: $isPresentedLogin)

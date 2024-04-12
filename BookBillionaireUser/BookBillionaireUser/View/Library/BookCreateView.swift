@@ -25,7 +25,7 @@ struct BookCreateView: View {
                     DescriptionView(book: $book)
                 }
                 Button("완료") {
-                    if let user = AuthViewModel().currentUser {
+                    if let user = AuthViewModel.shared.currentUser {
                         book.ownerID = user.uid
                         rental.bookOwner = user.uid
                     }

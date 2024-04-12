@@ -9,8 +9,9 @@ import Firebase
 import GoogleSignIn
 
 class AuthViewModel: ObservableObject, AuthViewModelProtocol {
+    static let shared = AuthViewModel()
     
-    @Published var state: AuthState = .loggedOut
+    @Published public var state: AuthState = .loggedOut
     let signInMethod: SignInMethod = .email
     var currentUser: User? {
             if let user = Auth.auth().currentUser {
