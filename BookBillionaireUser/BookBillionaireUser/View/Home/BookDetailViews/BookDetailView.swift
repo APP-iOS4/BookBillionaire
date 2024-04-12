@@ -15,11 +15,43 @@ struct BookDetailView: View {
     var body: some View {
         ScrollView{
             BookDetailImageView(book: book)
+            HStack {
+                // 설정 버튼
+                Menu {
+                    Button {
+                        
+                    } label: {
+                        Label("게시물 보관하기", systemImage: "square.and.arrow.down")
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Label("게시물 공유하기", systemImage: "square.and.arrow.up")
+                    }
+                    
+                    Button(role: .destructive) {
+                        
+                    } label: {
+                        Label("신고하기", systemImage: "exclamationmark.triangle")
+                    }
+                    
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20)
+                        .foregroundStyle(.accent)
+                }
+            }
+            .offset(x: 170, y: -90)
+
             // 정보란
             VStack(alignment: .leading) {
-                Rectangle()
-                    .frame(height: 100)
-                    .foregroundStyle(.clear)
+                    Rectangle()
+                        .frame(height: 100)
+                        .foregroundStyle(.clear)
+                    Spacer()
                 
                 HStack{
                     Text(book.title)
