@@ -10,7 +10,8 @@ import BookBillionaireCore
 
 struct MyBookListView: View {
     let bookService: BookService = BookService.shared
-    @State var myBooks: [Book] = []
+    @State private var myBooks: [Book] = []
+    @State private var users: [User] = []
     @State private var isShowingAlert: Bool = false
     
     var body: some View {
@@ -52,8 +53,8 @@ struct MyBookListView: View {
                                 Spacer()
                                 // 메뉴 버튼
                                 Menu {
-                                    Button {
-                                        
+                                    NavigationLink {
+                                        BookCreateView(book: book)
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
@@ -93,9 +94,10 @@ struct MyBookListView: View {
                         }
                     }
                     .padding()
-                    // DetailView 미구현, 추후 변경
+                    // BookDetailView로 연결예정... User가 음슴
                     .navigationDestination(for: Book.self) { book in
                         Text("안녕 \(book.title) 디테일 뷰")
+                        BookDetailView(book: book, user: user(for: book))
                     }
                     SpaceBox()
                 }
@@ -121,6 +123,16 @@ struct MyBookListView: View {
                 myBooks.remove(at: index)
             }
         }
+    }
+    // BookDetailView에 전달할 User를 가져오는 메서드
+    // User 반환
+    func user(for book: Book) -> User {
+        // book.ownerID == user.id 일치 확인 후 값 return
+        if let user = users.first(where: { $0.id == book.ownerID }) {
+            return user
+        }
+        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
+        return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
     }
 }
 
