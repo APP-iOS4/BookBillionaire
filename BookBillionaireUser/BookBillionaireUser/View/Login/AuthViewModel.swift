@@ -5,29 +5,20 @@
 //  Created by Seungjae Yu on 3/25/24.
 //  참조: https://elisha0103.tistory.com/10
 
-import Foundation
 import Firebase
-import FirebaseAuth
-import FirebaseFirestore
-import AuthenticationServices
 
-class AuthViewModel: ObservableObject { 
+class AuthViewModel: ObservableObject, AuthViewModelProtocol {
     
-    @Published var state: SignInState = .logOut
-
-    enum SignInState{
-        case logIn
-        case logOut
-    }
-    
+    @Published var state: AuthState = .loggedOut
+    let signInMethod: SignInMethod = .email
     var currentUser: User? {
-        if let user = Auth.auth().currentUser {
-            return user
+            if let user = Auth.auth().currentUser {
+                return user
+            }
+            return nil
         }
-        return nil
-    }
     
-    func emailAuthSignUp(email: String, userName: String, password: String) {
+    func signUp(email: String, userName: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("error: \(error.localizedDescription)")
@@ -67,20 +58,21 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func emailAuthLogIn(email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if let error = error {
-                print("error: \(error.localizedDescription)")
+    func signIn(email: String?, password: String?) {
+        if let email = email, let password = password {
+            Auth.auth().signIn(withEmail: email, password: password) { result, error in
+                if let error = error {
+                    print("error: \(error.localizedDescription)")
+                    return
+                }
                 
-                return
-            }
-            
-            if result != nil {
-                self.state = .logIn
-                print("사용자 이메일: \(String(describing: result?.user.email))")
-                print("사용자 이름: \(String(describing: result?.user.displayName))") //nil 리턴
-            } else {
+                if result != nil {
+                    self.state = .loggedIn
+                    print("사용자 이메일: \(String(describing: result?.user.email))")
+                    print("사용자 이름: \(String(describing: result?.user.displayName))") //nil 리턴
+                } else {
 
+                }
             }
         }
     }
@@ -114,4 +106,13 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.state = .loggedOut // 로그아웃 상태로 변경
+            
+        } catch {
+            print("로그아웃 중 오류 발생:", error.localizedDescription)
+        }
+    }
 }
