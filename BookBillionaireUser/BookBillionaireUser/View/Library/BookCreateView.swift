@@ -7,6 +7,8 @@
 
 import SwiftUI
 import BookBillionaireCore
+import FirebaseStorage
+import FirebaseFirestore
 
 struct BookCreateView: View {
     let bookService: BookService = BookService.shared
@@ -15,17 +17,19 @@ struct BookCreateView: View {
     @State var rental: Rental = Rental(id: "", bookOwner: "", rentalStartDay: Date(), rentalEndDay: Date())
     @Environment(\.dismiss) var dismiss
     @State var isShowingSheet: Bool = false
+    @State private var selectedImage: UIImage?
     
     var body: some View {
         ScrollView {
             VStack {
-                BookInfoAddView(book: $book)
+                BookInfoAddView(book: $book, selectedImage: $selectedImage)
                 if book.rentalState == .rentalAvailable {
                     RentalPeriodView(rental: $rental)
                     DescriptionView(book: $book)
                 }
                 Button("완료") {
                     if let user = AuthViewModel.shared.currentUser {
+                    uploadPhoto()
                         book.ownerID = user.uid
                         rental.bookOwner = user.uid
                     }
@@ -49,6 +53,26 @@ struct BookCreateView: View {
         }
         .navigationTitle("책 등록")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func uploadPhoto() {
+        guard selectedImage != nil else {
+            return
+        }
+        let storageRef = Storage.storage().reference()
+        let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+        guard imageData != nil else {
+            return
+        }
+        let path = "images/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
+        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+            
+            if error == nil && metadata != nil {
+                let db = Firestore.firestore()
+                db.collection("images").document().setData(["url":path])
+            }
+        }
     }
 }
 
