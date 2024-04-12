@@ -10,6 +10,7 @@ import SwiftUI
 struct LibraryView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var selectedIndex: Int = 0
+    @State private var isShowing: Bool = false
     
     var body: some View {
         switch authViewModel.state {
@@ -29,8 +30,18 @@ struct LibraryView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        BookCreateView()
+                    Menu {
+                        NavigationLink {
+                            APISearchView(isShowing: $isShowing)
+                        } label: {
+                            Label("검색으로 등록하기", systemImage: "magnifyingglass")
+                        }
+                        
+                        NavigationLink {
+                            BookCreateView()
+                        } label: {
+                            Label("입력으로 등록하기", systemImage: "square.and.pencil")
+                        }
                     } label: {
                         if selectedIndex == 0 {
                             Label("plus", systemImage: "plus")
@@ -38,6 +49,7 @@ struct LibraryView: View {
                                 .foregroundStyle(Color.accentColor)
                         }
                     }
+                    .toolbar(.hidden, for: .tabBar)
                 }
             }
         case .loggedOut:
