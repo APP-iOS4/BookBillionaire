@@ -2,13 +2,11 @@
 //  HomeView.swift
 //  BookBillionaireUser
 //
-//  Created by Woo Sung jong on 4/3/24.
+//  Created by 홍승표 on 11/4/24.
 //
 
 import SwiftUI
 import BookBillionaireCore
-
-
 
 struct HomeView: View {
     @State private var books: [Book] = []
@@ -18,9 +16,8 @@ struct HomeView: View {
     let bookService = BookService.shared
     let userService = UserService.shared
     
-    
     var body: some View {
-        NavigationStack {
+        VStack {
             // 헤더 & 서치
             HStack(alignment: .center) {
                 Text("BOOK BILLINAIRE")
@@ -48,10 +45,12 @@ struct HomeView: View {
                         Text("\(menu.buttonTitle)")
                             .fontWeight(menuTitle == menu ? .bold : .regular)
                             .foregroundStyle(menuTitle == menu ? .white : .accentColor)
+                            .minimumScaleFactor(0.5)
                     }
                     .padding(10)
-                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondaryColor").opacity(0.2))
+                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.2))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .fixedSize()
                 }
             }
             .padding(.bottom, 12)
@@ -73,7 +72,6 @@ struct HomeView: View {
                                     }
                                 }
                                 .foregroundStyle(.primary)
-                                
                                 Spacer()
                                 // 설정 버튼
                                 Button {
@@ -88,10 +86,8 @@ struct HomeView: View {
                                         .rotationEffect(.degrees(90))
                                 }
                                 .padding(.top, 10)
-                                .sheet(isPresented: $isShowingBottomSheet) {
-                                    BottomSheet(isShowingSheet: $isShowingBottomSheet)
-                                        .presentationDetents([.fraction(0.2)])
-                                }
+                                // 설정 모달 창 추후 수정
+
                             }
                             Divider()
                         }

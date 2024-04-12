@@ -26,7 +26,10 @@ struct SignUpView: View {
     var body: some View {
             ScrollView {
                 VStack(spacing: 10) {
-                    Image("logoBookBillionaire")
+                    Image("AppLogo")
+                        .resizable()
+                        .scaledToFit()
+                    Text("회원가입")
                     VStack(alignment: .leading) {
                         Text("이름")
                             .foregroundStyle(.white)
@@ -35,7 +38,6 @@ struct SignUpView: View {
                             .background(.thinMaterial)
                             .cornerRadius(10)
                             .textInputAutocapitalization(.never)
-                            .padding(.bottom, 10)
                         Text("이메일")
                             .foregroundStyle(.white)
                         TextField("이메일을 입력해주세요", text: $emailText)
@@ -49,7 +51,6 @@ struct SignUpView: View {
                             })
                         Text(emailErrorText)
                             .foregroundColor(isEmailError ? .red : .clear)
-                            .padding(.leading, 10)
                         Text("비밀번호")
                             .foregroundStyle(.white)
                         ZStack(alignment: .trailing) {
@@ -160,3 +161,5 @@ struct SignUpView: View {
         return emailPredicate.evaluate(with: email)
     }
 }
+
+#Preview { SignUpView() }

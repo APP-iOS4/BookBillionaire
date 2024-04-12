@@ -94,14 +94,14 @@ class BookService: ObservableObject {
             print("\(#function) Error removing document : \(error)")
         }
     }
-    
+    // 렌탈 상황에 따른 상태 변경 함수
     func updateRentalState(_ bookID: String, rentalState: RentalStateType) async {
         let userRentalRef = bookRef.document(bookID)
         do {
             try await userRentalRef.updateData([
                 "rentalState" : rentalState.rawValue
             ])
-            print("렌탈상황 변경 성공🧚‍♀️")
+            print("렌탈 상황 변경 성공🧚‍♀️")
         } catch let error {
             print("\(#function) 렌탈정보 변경 실패했음☄️ \(error)")
         }
@@ -144,17 +144,30 @@ class BookService: ObservableObject {
     func searchBooksByTitle(title: String) async -> [Book] {
         var searchResult: [Book] = []
         do {
-            let querySnapshot = try await bookRef.whereField("title", isEqualTo: title).getDocuments()
+            let querySnapshot = try await bookRef.getDocuments()
             searchResult = querySnapshot.documents.compactMap { document -> Book? in
                 do {
                     let book = try document.data(as: Book.self)
-                    return book
+                    // 책 제목에 검색어의 각 문자를 포함하는지 확인
+                    let titleCharacters = Array(title)
+                    
+                    let contained = titleCharacters.allSatisfy { character in
+                        return (book.title).localizedCaseInsensitiveContains(String(character))
+                        
+                    }
+                    
+                    if contained {
+                        return book
+                    } else {
+                        return nil
+                    }
                 } catch {
                     print("디코딩 오류: \(error)")
                     return nil
                 }
             }
             print("검색 결과: \(searchResult)")
+            print("부분 일치 검색 결과: \(searchResult)")
         } catch {
             print("문서를 가져오는 중에 오류가 발생했습니다: \(error)")
         }
