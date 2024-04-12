@@ -3,6 +3,7 @@ import GoogleSignIn
 import AuthenticationServices
 
 struct LoginView: View {
+    @Binding var isPresentedLogin: Bool
     @State var emailText: String = ""
     @State var passwordText: String = ""
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -10,6 +11,17 @@ struct LoginView: View {
     @Environment (\.dismiss) private var dismiss
     
     var body: some View {
+        HStack() {
+            Spacer()
+            Button(action: {
+                isPresentedLogin.toggle()
+             }) {
+                 Image(systemName: "xmark")
+                     .foregroundColor(.black)
+                     .font(.title2)
+             }
+             .padding()
+        }
         NavigationStack{
             VStack {
                 Text("Book Billionare")
@@ -75,5 +87,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(isPresentedLogin: .constant(true))
 }
