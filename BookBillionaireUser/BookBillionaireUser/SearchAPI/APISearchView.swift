@@ -26,7 +26,6 @@ struct apiSearchResponse: Decodable {
 
 struct APISearchView: View {
     @State private var books: [SearchBook] = []
-    
     @State private var searchBook = ""
     @State private var isLoading = false
     @State private var apiKey = ""
@@ -35,8 +34,8 @@ struct APISearchView: View {
     private func fetchMyKey() {
         // 번들된 key.plist 파일을 읽는다
         if let plistPath = Bundle.main.path(forResource: "key", ofType: "plist"),
-          
-           let plistData = FileManager.default.contents(atPath: plistPath),
+           
+            let plistData = FileManager.default.contents(atPath: plistPath),
            let plistDictionary = try? PropertyListSerialization.propertyList(from: plistData, options: [], format: nil) as? [String: Any],
            let myKey = plistDictionary["myKey"] as? String {
             apiKey = myKey
@@ -49,7 +48,7 @@ struct APISearchView: View {
     func encodeQuery(_ query: String) -> String {
         return query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!.replacingOccurrences(of: "+", with: "%20")
     }
-
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
@@ -91,7 +90,11 @@ struct APISearchView: View {
                     ProgressView()
                 } else if books.count != 0 {
                     List(books, id: \.id) { book in
-                        APISearchListRowView(book: book, isShowing: $isShowing)
+                        NavigationLink {
+                            BookCreateView()
+                        } label: {
+                            APISearchListRowView(book: book)
+                        }
                     }
                     .listStyle(.plain)
                 } else {
@@ -103,7 +106,7 @@ struct APISearchView: View {
                 fetchMyKey()
             }
             .navigationTitle("책 검색")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
-    
 }
