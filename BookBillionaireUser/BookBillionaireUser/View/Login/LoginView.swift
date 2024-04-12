@@ -53,7 +53,10 @@ struct LoginView: View {
                     Button{
                         authViewModel.signIn(email: emailText, password: passwordText)
                         dismiss()
-                    }.buttonStyle(WhiteButtonStyle(height: 40.0))
+                    } label: {
+                        
+                    }
+                    .buttonStyle(WhiteButtonStyle(height: 40.0))
                         .foregroundStyle(emailText.isEmpty || passwordText.isEmpty ? .gray : .accentColor)
                         .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
                 }

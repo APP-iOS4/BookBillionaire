@@ -12,7 +12,7 @@ struct HomeView: View {
     @State private var books: [Book] = []
     @State private var users: [User] = []
     @State private var menuTitle: BookCategory = .hometown
-    @State private var isShowingBottomSheet: Bool = false
+    @State private var isShowingMenuSet: Bool = false
     let bookService = BookService.shared
     let userService = UserService.shared
     
@@ -33,7 +33,9 @@ struct HomeView: View {
                         .frame(width: 20)
                 }
             }
-            .padding(.bottom, 12)
+            //홈 배너
+            HomePagingView()
+                .frame(height: 200)
             
             // 메뉴 버튼
             HStack(alignment: .center) {
@@ -73,9 +75,14 @@ struct HomeView: View {
                                 }
                                 .foregroundStyle(.primary)
                                 Spacer()
+                                
                                 // 설정 버튼
-                                Button {
-                                    isShowingBottomSheet.toggle()
+                                Menu {
+                                    Button {
+                                        
+                                    } label: {
+                                        Label("게시물 숨기기", systemImage: "eye.slash")
+                                    }
                                     
                                 } label: {
                                     Image(systemName: "ellipsis")
@@ -86,7 +93,6 @@ struct HomeView: View {
                                         .rotationEffect(.degrees(90))
                                 }
                                 .padding(.top, 10)
-                                // 설정 모달 창 추후 수정
 
                             }
                             Divider()
