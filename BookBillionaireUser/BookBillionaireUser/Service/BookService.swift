@@ -94,14 +94,14 @@ class BookService: ObservableObject {
             print("\(#function) Error removing document : \(error)")
         }
     }
-    
+    // 렌탈 상황에 따른 상태 변경 함수
     func updateRentalState(_ bookID: String, rentalState: RentalStateType) async {
         let userRentalRef = bookRef.document(bookID)
         do {
             try await userRentalRef.updateData([
                 "rentalState" : rentalState.rawValue
             ])
-            print("렌탈상황 변경 성공🧚‍♀️")
+            print("렌탈 상황 변경 성공🧚‍♀️")
         } catch let error {
             print("\(#function) 렌탈정보 변경 실패했음☄️ \(error)")
         }

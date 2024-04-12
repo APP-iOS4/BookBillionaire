@@ -9,6 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct BookDetailImageView: View {
+    @Environment(\.colorScheme) var colorScheme
     let book: Book
     
     var body: some View {
@@ -25,7 +26,7 @@ struct BookDetailImageView: View {
             VStack(alignment: .center){
                     UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
                         .frame(height: 100)
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(colorScheme == .dark ? .black : .white) 
                         .padding(.top, 200)
                 }
             

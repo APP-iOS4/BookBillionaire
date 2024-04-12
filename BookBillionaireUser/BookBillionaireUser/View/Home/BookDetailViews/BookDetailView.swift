@@ -24,13 +24,9 @@ struct BookDetailView: View {
                 HStack{
                     Text(book.title)
                         .font(.title)
-                        .bold()
-             
-                    Button {
-                        Void()
-                    } label: {
-                        Text("대여 가능")
-                    }
+                        .fontWeight(.bold)
+                    
+                    StatusButton(status: book.rentalState)
                 }
          
                 HStack{
@@ -98,10 +94,10 @@ struct BookDetailView: View {
                     .padding(.bottom, 5)
                 
                 VStack{
-//                    BookDetailUserListView(user: user)
-//                    BookDetailUserListView(user: user)
-//                    BookDetailUserListView(user: user)
-//                    BookDetailUserListView(user: user)
+                    BookDetailUserListView(book: book, user: user)
+                    BookDetailUserListView(book: book, user: user)
+                    BookDetailUserListView(book: book, user: user)
+                    BookDetailUserListView(book: book, user: user)
                 }
             }
             .padding(.horizontal)

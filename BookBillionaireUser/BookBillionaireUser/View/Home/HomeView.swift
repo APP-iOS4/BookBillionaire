@@ -48,7 +48,7 @@ struct HomeView: View {
                             .minimumScaleFactor(0.5)
                     }
                     .padding(10)
-                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondaryColor").opacity(0.2))
+                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.2))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .fixedSize()
                 }
