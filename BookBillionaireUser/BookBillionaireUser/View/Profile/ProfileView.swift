@@ -43,22 +43,12 @@ struct ProfileView: View {
                         List{
                             Text("개인정보 처리방침")
                             Button("로그아웃") {
-                                logout()
+                                authViewModel.signOut()
                             }
                         }.listStyle(.plain)
                     }
                 }
             }.padding()
-    }
-    func logout() {
-        do {
-            try Auth.auth().signOut()
-            authViewModel.state = .loggedOut // 로그아웃 상태로 변경
-            userEmail = nil // 이메일 초기화
-            userUID = nil // UID 초기화
-        } catch {
-            print("로그아웃 중 오류 발생:", error.localizedDescription)
-        }
     }
 }
 

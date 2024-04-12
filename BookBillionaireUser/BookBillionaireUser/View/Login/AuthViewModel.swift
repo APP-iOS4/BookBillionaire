@@ -6,6 +6,7 @@
 //  참조: https://elisha0103.tistory.com/10
 
 import Firebase
+import GoogleSignIn
 
 class AuthViewModel: ObservableObject, AuthViewModelProtocol {
     
@@ -107,6 +108,8 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
     }
     
     func signOut() {
+        GIDSignIn.sharedInstance.signOut()
+        
         do {
             try Auth.auth().signOut()
             self.state = .loggedOut // 로그아웃 상태로 변경
