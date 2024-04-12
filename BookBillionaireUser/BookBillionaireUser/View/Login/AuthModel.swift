@@ -23,4 +23,5 @@ protocol AuthViewModelProtocol {
     
     func signIn(email: String?, password: String?)
     func readUserData(uid: String)
+    func signOut()
 }

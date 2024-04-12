@@ -3,13 +3,14 @@ import GoogleSignIn
 import AuthenticationServices
 
 struct LoginView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
+    @Environment (\.dismiss) private var dismiss
+
     @Binding var isPresentedLogin: Bool
     @State var emailText: String = ""
     @State var passwordText: String = ""
-    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isSignUpScreen: Bool = false
-    @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
-    @Environment (\.dismiss) private var dismiss
     
     var body: some View {
         HStack() {
@@ -50,7 +51,7 @@ struct LoginView: View {
                     }
                     .buttonStyle(WhiteButtonStyle(height: 40.0))
 
-                    Button{
+                    Button("로그인") {
                         authViewModel.signIn(email: emailText, password: passwordText)
                         dismiss()
                     }.buttonStyle(WhiteButtonStyle(height: 40.0))
@@ -63,7 +64,7 @@ struct LoginView: View {
                     .padding()
                 
                 Button(action: {
-                    authViewModelGoogle.signIn(email: "", password: "")
+                    authViewModelGoogle.signIn(email: nil, password: nil)
                     dismiss()
                 }) {
                     Image("SignInWithGoogle")
