@@ -15,7 +15,6 @@ struct ProfileView: View {
     @State private var userUID: String? // New state variable to hold user's UID
     
     var body: some View {
-    NavigationStack{
             VStack(alignment: .leading){
                 if authViewModel.state == .loggedOut {
                     UnlogginedView()
@@ -50,7 +49,6 @@ struct ProfileView: View {
                     }
                 }
             }.padding()
-        }
     }
 }
 

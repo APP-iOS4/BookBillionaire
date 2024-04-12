@@ -11,6 +11,7 @@ import BookBillionaireCore
 struct MyBookListView: View {
     let bookService: BookService = BookService.shared
     @State var myBooks: [Book] = []
+    @State private var isShowingAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -45,8 +46,50 @@ struct MyBookListView: View {
             } else {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(myBooks, id: \.self) { book in
-                            BookItem(book: book)
+                        ForEach(myBooks) { book in
+                            HStack(alignment: .top) {
+                                BookItem(book: book)
+                                Spacer()
+                                // 메뉴 버튼
+                                Menu {
+                                    Button {
+                                        
+                                    } label: {
+                                        Label("편집", systemImage: "pencil")
+                                    }
+                                    Button(role: .destructive) {
+                                        isShowingAlert.toggle()
+                                    } label: {
+                                        Label("삭제", systemImage: "trash.circle.fill")
+                                    }
+                                } label: {
+                                    Image(systemName: "ellipsis")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 17)
+                                        .foregroundStyle(.gray.opacity(0.4))
+                                        .rotationEffect(.degrees(90))
+                                }
+                                .alert("", isPresented: $isShowingAlert) {
+                                    Button(role: .cancel) {
+                                        
+                                    } label: {
+                                        Text("취소")
+                                    }
+                                    // 1. 삭제시 rentalService에 remove 메서드 구현해서 추가 해야함.
+                                    Button(role: .destructive) {
+                                        deleteMyBook(book)
+                                    } label: {
+                                        Text("삭제")
+                                    }
+                                } message: {
+                                    Text("""
+                                        삭제시 복구가 불가능 합니다.
+                                        삭제하시겠습니까?
+                                        """)
+                                }
+                                .padding()
+                            }
                         }
                     }
                     .padding()
@@ -71,8 +114,13 @@ struct MyBookListView: View {
         }
     }
     
-    private func removeList(at offsets: IndexSet) {
-        myBooks.remove(atOffsets: offsets)
+    private func deleteMyBook(_ book: Book) {
+        Task {
+            await bookService.deleteBook(book)
+            if let index = myBooks.firstIndex(where: { $0.id == book.id }) {
+                myBooks.remove(at: index)
+            }
+        }
     }
 }
 
