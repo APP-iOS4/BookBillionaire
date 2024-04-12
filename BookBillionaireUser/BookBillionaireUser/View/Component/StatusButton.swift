@@ -21,7 +21,7 @@ struct StatusButton: View {
         case .rentalNotPossible:
             return Color.red
         case .rentalAvailable:
-            return Color("SecondaryColor")
+            return Color("SecondColor")
         }
     }
     
