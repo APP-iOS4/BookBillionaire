@@ -8,23 +8,26 @@
 import SwiftUI
 
 struct UnlogginedView: View {
-    @State private var isPresentedLogin: Bool = false
+    @State private var isShowingLoginSheet: Bool = false
     var body: some View {
-        VStack{
-            Text("로그인이 필요한 서비스 입니다.")
-            Button("로그인하기"){
-                isPresentedLogin = true
+        Button{
+            isShowingLoginSheet = true
+        } label: {
+            ZStack{
+                RoundedRectangle(cornerRadius: 10.0)
+                    .frame(height: 100)
+                    .foregroundStyle(.thinMaterial)
+                HStack{
+                    Image("defaultUser1")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                    Text("로그인하고 같이 책읽으러 가기")
+                        .tint(.accentColor)
+                }
             }
-                .buttonStyle(WhiteButtonStyle(height: 40))
-                .padding(.horizontal, 100)
-        }.fullScreenCover(isPresented: $isPresentedLogin, content: {
-            LoginView()
-        })
-        Button("로그아웃 하기"){
-            isPresentedLogin = true
-        }.buttonStyle(WhiteButtonStyle(height: 40))
-            .padding(40)
-        .fullScreenCover(isPresented: $isPresentedLogin, content: {
+        }
+        .fullScreenCover(isPresented: $isShowingLoginSheet, content: {
             LoginView()
         })
     }

@@ -9,9 +9,11 @@ import SwiftUI
 import Foundation
 import BookBillionaireCore
 
+
 class UserStore {
+
     var users: [User] = []
-    
+
     init() {
         users = [
             User(id: "985ZXtyszUYU9RCKYOaPZYALMyn1", nickName: "유승재재", address: "주소 정보 없음", image: nil, myBooks: Optional([]), rentalBooks: Optional([])),
@@ -21,4 +23,5 @@ class UserStore {
             User(id: "tBxmiAPEbZXYJIeQjTRmrc2z5zd2", nickName: "유승재", address: "주소 정보 없음", image: nil, myBooks: Optional([]), rentalBooks: Optional([]))
         ]
     }
+    
 }

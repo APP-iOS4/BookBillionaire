@@ -10,6 +10,7 @@ import Firebase
 class AuthViewModel: ObservableObject, AuthViewModelProtocol {
     
     @Published var state: AuthState = .loggedOut
+    
     let signInMethod: SignInMethod = .email
     var currentUser: User? {
             if let user = Auth.auth().currentUser {
