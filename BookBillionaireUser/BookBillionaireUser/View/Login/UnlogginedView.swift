@@ -28,7 +28,7 @@ struct UnlogginedView: View {
             }
         }
         .fullScreenCover(isPresented: $isShowingLoginSheet, content: {
-            LoginView()
+//            LoginView()
         })
     }
 
