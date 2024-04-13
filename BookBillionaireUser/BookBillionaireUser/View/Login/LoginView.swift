@@ -54,8 +54,6 @@ struct LoginView: View {
                     Button("로그인"){
                         authViewModel.signIn(email: emailText, password: passwordText)
                         dismiss()
-                    } label: {
-                        
                     }
                     .buttonStyle(WhiteButtonStyle(height: 40.0))
                         .foregroundStyle(emailText.isEmpty || passwordText.isEmpty ? .gray : .accentColor)
