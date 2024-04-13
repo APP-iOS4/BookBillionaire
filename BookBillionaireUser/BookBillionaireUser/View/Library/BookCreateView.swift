@@ -65,12 +65,10 @@ struct BookCreateView: View {
             return
         }
         let path = "images/\(UUID().uuidString).jpg"
+        book.thumbnail = path
         let fileRef = storageRef.child(path)
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-            
             if error == nil && metadata != nil {
-                let db = Firestore.firestore()
-                db.collection("images").document().setData(["url":path])
             }
         }
     }
