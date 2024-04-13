@@ -9,6 +9,8 @@ import Foundation
 
 struct Room: Codable, Hashable {
     var id: String?
-    let name: String          // 방의 이름 (상대방 닉네임)
-    let description: String   // [임시] last Chat
+    let receiverName: String    // 방의 이름 (상대방 닉네임)
+    let lastTimeStamp: Date     // 마지막 메세지의 시간
+    let lastMessage: String     // 마지막 메세지
+    let users: [String]         // [대화 참여 인원의 ID]
 }

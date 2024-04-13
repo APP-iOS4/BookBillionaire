@@ -5,21 +5,21 @@
 //  Created by 최준영 on 4/8/24.
 //
 
+import BookBillionaireCore
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-// [테스트용] 방 생성 모델 입니다 - 추후 삭제 예정
+// [테스트용] 방 생성 뷰모델 입니다 - 추후 삭제 예정
 
 class AddRoomViewModel: ObservableObject {
     
     var name: String = ""
-    var description: String = ""
     let db = Firestore.firestore()
     
     func createRoom(completion: @escaping () -> Void) {
-        
-        let room = Room(name: name, description: description)
+        // 채팅방 생성 함수
+        let room = Room(receiverName: name, lastTimeStamp: Date(), lastMessage: "대화를 시작해보세요!", users: [/* 참여 유저 목록 */])
         
         do {
         
@@ -28,7 +28,7 @@ class AddRoomViewModel: ObservableObject {
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    //completion()
+                    completion()
                 }
             }
         } catch let error {

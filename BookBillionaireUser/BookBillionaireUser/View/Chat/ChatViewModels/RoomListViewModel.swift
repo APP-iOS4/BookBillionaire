@@ -14,27 +14,31 @@ struct RoomViewModel: Hashable {
     
     let room: Room
     
-    var name: String {
-        room.name
+    var receiverName: String {
+        room.receiverName
     }
-    
-    var description: String {
-        room.description
-    }
-    
+
     var roomId: String {
         room.id ?? ""
+    }
+    
+    var lastTimeStamp: Date {
+        room.lastTimeStamp
+    }
+    
+    var lastMessage: String {
+        room.lastMessage
     }
 }
 
 class RoomListViewModel: ObservableObject {
     
     @Published var rooms: [RoomViewModel] = []
-    let db = Firestore.firestore()
+    let db = Firestore.firestore().collection("chat")
     
     func getAllRooms() {
-        // 채팅방 목록을 불러오는 함수
-        db.collection("chat")
+        // [임시] 채팅방 목록을 불러오는 함수 - 추후 로그인 Id에 맞춰서 array-contains 사용하여 필터링 하여 가져와야함
+        db
             .getDocuments { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)

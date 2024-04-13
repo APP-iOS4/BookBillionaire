@@ -17,15 +17,13 @@ struct ChatBubble: View {
     let messageText: String
     let username: String
     let style: MessageStyle
-    let message: Message
+    let message: MessageViewModel
     
     var body: some View {
         VStack(alignment: style == .from ? .trailing : .leading) {
             if style == .from {
                 HStack(alignment: .bottom) {
-                    Text("\(message.timestamp.formatted(.dateTime.hour().minute()))")
-                    //Text("09:00")
-                    // [임시] 타임스탬프로 변경 될 예정
+                    Text("\(message.formatTimestamp(message.messageTimestamp))")
                         .font(.caption2)
                         .foregroundColor(.gray)
                     
@@ -64,8 +62,7 @@ struct ChatBubble: View {
                                 .cornerRadius(15)
                         }
                         
-                        Text("\(message.timestamp.formatted(.dateTime.hour().minute()))")
-                        // [임시] 타임스탬프로 변경 될 예정
+                        Text("\(message.formatTimestamp(message.messageTimestamp))")
                             .font(.caption2)
                             .foregroundColor(.gray)
                     }
@@ -76,7 +73,7 @@ struct ChatBubble: View {
     }
 }
 
-#Preview {
-    ChatBubble(messageText: "안녕하세요! 📖 책 대여 희망합니다!!", username: "최준영", style: .to, message: Message(vs: MessageViewState(message: "", roomId: "", username: "", timestamp: Date())))
-}
+//#Preview {
+//    ChatBubble(messageText: "안녕하세요! 📖 책 대여 희망합니다!!", username: "최준영", style: .to, message: MessageViewState.init(message: "", roomId: "", username: "", timestamp: Date()))
+//}
 

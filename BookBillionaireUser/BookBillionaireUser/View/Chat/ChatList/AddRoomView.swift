@@ -16,7 +16,7 @@ struct AddRoomView: View {
         VStack {
             Form {
                 TextField("[임시] 이름", text: $addRoomVM.name)
-                TextField("[임시] 설명", text: $addRoomVM.description)
+//                TextField("[임시] 설명", text: $addRoomVM.description)
             }
             
             Button("생성하기") {

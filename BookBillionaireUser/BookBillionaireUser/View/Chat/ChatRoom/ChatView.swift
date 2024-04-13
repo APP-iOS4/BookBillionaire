@@ -13,13 +13,12 @@ struct ChatView: View {
     
     @StateObject private var messageListVM = MessageListViewModel()
     @State private var promiseViewShowing = false
-    
     @State private var message: String = ""
-    @AppStorage("username") private var username = "최준영2"
-    // username 갖다 꽂기 [임시로 최준영 적어놓음]
     @State private var cancellables: AnyCancellable?
     @State private var plusItemShowing = false
-    @State private var messageVS = Message(vs: MessageViewState(message: "", roomId: "", username: "", timestamp: Date()))
+    
+    @AppStorage("username") private var username = "최준영"
+    // username 갖다 꽂기 [임시로 최준영 적어놓음]
 
     var body: some View {
         VStack {
@@ -30,9 +29,9 @@ struct ChatView: View {
                             HStack {
                                 if message.username == username {
                                     Spacer()
-                                    ChatBubble(messageText: message.messageText, username: message.username, style: .from, message: messageVS)
+                                    ChatBubble(messageText: message.messageText, username: message.username, style: .from, message: message)
                                 } else {
-                                    ChatBubble(messageText: message.messageText, username: message.username, style: .to, message: messageVS)
+                                    ChatBubble(messageText: message.messageText, username: message.username, style: .to, message: message)
                                     Spacer()
                                 }
                             }
@@ -76,6 +75,7 @@ struct ChatView: View {
                 
                 Button {
                     sendMessage()
+                    message = ""
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
@@ -99,7 +99,7 @@ struct ChatView: View {
                     .padding(.top, 30)
             }
         }
-        .navigationTitle(room.name)
+        .navigationTitle(room.receiverName)
         
         .onAppear {
             messageListVM.registerUpdatesForRoom(room: room)
@@ -134,5 +134,5 @@ extension View {
 
 
 #Preview {
-    ChatView(room: RoomViewModel(room: Room(name: "최준영", description: "책 대여 신청합니다"/*, users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"]*/)))
+    ChatView(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "", users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"])))
 }

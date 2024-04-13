@@ -49,7 +49,8 @@ struct ChatListView: View {
 struct RoomCell: View {
     
     let room: RoomViewModel
-    
+//    let messageViewState: MessageViewState
+    // 파이어베이스에 올라간 목록들을 여기서 어떻게 보여주는지 모르겠다.
     var body: some View {
         HStack {
             ZStack {
@@ -65,26 +66,28 @@ struct RoomCell: View {
             .padding(.horizontal, 5)
             
             VStack(alignment: .leading, spacing: 10) {
-                Text(room.name)
+                Text(room.receiverName)
                     .font(.system(size: 16, weight: .bold))
-                Text(room.description)
+                
+                Text(room.lastMessage)
                     .font(.system(size: 14))
                     .foregroundColor(Color(.lightGray))
+                    .lineLimit(1)
             }
             
             Spacer()
             
             HStack(alignment: .top) {
-            // [임시] 마지막 채팅 시간 넣어주기
-                Text("오전 9:15분")
+                Text(room.lastTimeStamp.formatted(date: .numeric, time: .shortened))
                     .font(.system(size: 10))
                     .foregroundColor(Color(.lightGray))
                     .padding(.bottom, 30)
             }
+            // 후순위 :
             // [임시] 안 읽은 메세지 숫자
-            Image(systemName: "1.circle.fill")
-                .foregroundColor(.orange)
-                .font(.system(size: 23))
+//            Image(systemName: "1.circle.fill")
+//                .foregroundColor(.orange)
+//                .font(.system(size: 23))
         }
         .padding(.horizontal, 15)
         
@@ -93,6 +96,6 @@ struct RoomCell: View {
 }
 
 #Preview {
-    RoomCell(room: RoomViewModel(room: Room(name: "최준영", description: "책 대여 블라블라 어쩌구 저쩌구")))
+    RoomCell(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "gg", users: ["",""])))
 //    ChatListView()
 }
