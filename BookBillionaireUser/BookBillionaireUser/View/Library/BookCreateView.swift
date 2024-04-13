@@ -25,7 +25,7 @@ struct BookCreateView: View {
                     DescriptionView(book: $book)
                 }
                 Button("완료") {
-                    if let user = AuthViewModel().currentUser {
+                    if let user = AuthViewModel.shared.currentUser {
                         book.ownerID = user.uid
                         rental.bookOwner = user.uid
                     }
@@ -47,20 +47,8 @@ struct BookCreateView: View {
         .onChange(of: book.rentalState) { _ in
             book.contents = ""
         }
-        .sheet(isPresented: $isShowingSheet) {
-            APISearchView(isShowing: $isShowingSheet)
-        }
         .navigationTitle("책 등록")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    isShowingSheet.toggle()
-                } label: {
-                    Label("검색하기", systemImage: "magnifyingglass")
-                }
-            }
-        }
     }
 }
 

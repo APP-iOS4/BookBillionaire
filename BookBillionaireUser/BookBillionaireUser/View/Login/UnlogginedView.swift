@@ -31,6 +31,7 @@ struct UnlogginedView: View {
             LoginView()
         })
     }
+
 }
 
 #Preview {

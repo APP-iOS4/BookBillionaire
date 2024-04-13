@@ -3,14 +3,27 @@ import GoogleSignIn
 import AuthenticationServices
 
 struct LoginView: View {
-    @State var emailText: String = ""
-    @State var passwordText: String = ""
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var isSignUpScreen: Bool = false
     @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
     @Environment (\.dismiss) private var dismiss
+
+    @Binding var isPresentedLogin: Bool
+    @State var emailText: String = ""
+    @State var passwordText: String = ""
+    @State private var isSignUpScreen: Bool = false
     
     var body: some View {
+        HStack() {
+            Spacer()
+            Button(action: {
+                isPresentedLogin.toggle()
+             }) {
+                 Image(systemName: "xmark")
+                     .foregroundColor(.black)
+                     .font(.title2)
+             }
+             .padding()
+        }
         NavigationStack{
             VStack {
                Image("AppLogo")
@@ -41,7 +54,10 @@ struct LoginView: View {
                     Button("로그인"){
                         authViewModel.signIn(email: emailText, password: passwordText)
                         dismiss()
-                    }.buttonStyle(WhiteButtonStyle(height: 40.0))
+                    } label: {
+                        
+                    }
+                    .buttonStyle(WhiteButtonStyle(height: 40.0))
                         .foregroundStyle(emailText.isEmpty || passwordText.isEmpty ? .gray : .accentColor)
                         .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
                 }
@@ -51,7 +67,7 @@ struct LoginView: View {
                     .padding()
                 
                 Button(action: {
-                    authViewModelGoogle.signIn(email: "", password: "")
+                    authViewModelGoogle.signIn(email: nil, password: nil)
                     dismiss()
                 }) {
                     Image("SignInWithGoogle")
@@ -73,5 +89,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(isPresentedLogin: .constant(true))
 }

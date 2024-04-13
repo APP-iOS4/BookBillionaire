@@ -9,6 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct BookDetailUserListView: View {
+    let book: Book
     let user: User
     
     var body: some View {
@@ -19,16 +20,11 @@ struct BookDetailUserListView: View {
                 .frame(width: 50, height: 50)
             Text(user.nickName).font(.headline)
             Spacer()
-            // 렌탈 부분 설정 후 상태 버튼으로 변경
-            Button {
-                Void()
-            } label: {
-                Text("대여 가능")
-            }
+            StatusButton(status: book.rentalState)
         }
     }
 }
 
 #Preview {
-    BookDetailUserListView(user: User(id: "아이디", nickName: "닉네임", address: "주소"))
+    BookDetailUserListView(book: Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable), user: User(id: "아이디", nickName: "닉네임", address: "주소"))
 }

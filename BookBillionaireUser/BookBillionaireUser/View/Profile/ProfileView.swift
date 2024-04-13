@@ -59,8 +59,7 @@ struct ProfileView: View {
         .onAppear{
             userUID = authViewModel.currentUser?.uid
         }
-    }
-    
+    }    
     func logout() {
         do {
             try Auth.auth().signOut()
@@ -71,8 +70,6 @@ struct ProfileView: View {
             print("로그아웃 중 오류 발생:", error.localizedDescription)
         }
     }
-    
-    func 
 }
 
 

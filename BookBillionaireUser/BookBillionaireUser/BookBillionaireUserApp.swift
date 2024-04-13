@@ -25,8 +25,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct BookBillionaireUserApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject private var authViewModel: AuthViewModel = AuthViewModel()
-    @ObservedObject var authViewModelGoogle: AuthViewModelGoogle = AuthViewModelGoogle(authViewModel: AuthViewModel())
+    @StateObject private var authViewModel: AuthViewModel = AuthViewModel.shared
+    @StateObject private var authViewModelGoogle: AuthViewModelGoogle = AuthViewModelGoogle()
     
     var body: some Scene {
         WindowGroup {
