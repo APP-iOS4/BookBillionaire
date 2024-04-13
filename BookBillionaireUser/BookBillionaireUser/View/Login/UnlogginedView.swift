@@ -8,35 +8,28 @@
 import SwiftUI
 
 struct UnlogginedView: View {
-    @State private var isPresentedLogin: Bool = false
-    
-    @EnvironmentObject var authViewModel: AuthViewModel
-    @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
-    
+    @State private var isShowingLoginSheet: Bool = false
     var body: some View {
-        if authViewModel.state == .loggedOut {
-            VStack{
-                Text("로그인이 필요한 서비스 입니다.")
-                Button("로그인하기"){
-                    isPresentedLogin = true
+        Button{
+            isShowingLoginSheet = true
+        } label: {
+            ZStack{
+                RoundedRectangle(cornerRadius: 10.0)
+                    .frame(height: 100)
+                    .foregroundStyle(.thinMaterial)
+                HStack{
+                    Image("defaultUser1")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                    Text("로그인하고 같이 책읽으러 가기")
+                        .tint(.accentColor)
                 }
-                .buttonStyle(WhiteButtonStyle(height: 40))
-                .padding(.horizontal, 100)
-                Text(authViewModel.state == .loggedIn ? "Email Logged In" : "Email Logged Out")
-                Text(authViewModelGoogle.state == .loggedIn ? "Google Logged In" : "Google Logged Out")
-            }
-            .fullScreenCover(isPresented: $isPresentedLogin, content: {
-                LoginView(isPresentedLogin: $isPresentedLogin)
-            })
-        } else {
-            VStack {
-                Button("로그아웃하기"){
-                    authViewModel.signOut()
-                }
-                .buttonStyle(WhiteButtonStyle(height: 40))
-                .padding(.horizontal, 100)
             }
         }
+        .fullScreenCover(isPresented: $isShowingLoginSheet, content: {
+            LoginView()
+        })
     }
 
 }
