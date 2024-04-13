@@ -13,6 +13,7 @@ struct MyBookListView: View {
     @State private var myBooks: [Book] = []
     @State private var users: [User] = []
     @State private var isShowingAlert: Bool = false
+    @State private var showToast = false
     
     var body: some View {
         VStack {
@@ -80,6 +81,7 @@ struct MyBookListView: View {
                                     // 1. 삭제시 rentalService에 remove 메서드 구현해서 추가 해야함.
                                     Button(role: .destructive) {
                                         deleteMyBook(book)
+                                        showToastMessage()
                                     } label: {
                                         Text("삭제")
                                     }
@@ -103,6 +105,7 @@ struct MyBookListView: View {
                 }
             }
         }
+        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
         .onAppear{
             loadMybook()
         }
@@ -126,13 +129,24 @@ struct MyBookListView: View {
     }
     // BookDetailView에 전달할 User를 가져오는 메서드
     // User 반환
-    func user(for book: Book) -> User {
+    private func user(for book: Book) -> User {
         // book.ownerID == user.id 일치 확인 후 값 return
         if let user = users.first(where: { $0.id == book.ownerID }) {
             return user
         }
         // 일치값 없으면 일단 그냥 샘플 불러오게 처리
         return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
+    }
+    
+    func showToastMessage() {
+        withAnimation {
+            self.showToast = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            withAnimation {
+                self.showToast = false
+            }
+        }
     }
 }
 
