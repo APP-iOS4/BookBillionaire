@@ -74,8 +74,10 @@ struct ChatView: View {
                     .disableAutocorrection(true)
                 
                 Button {
-                    sendMessage()
-                    message = ""
+                    if message != "" {
+                        sendMessage()
+                        message = ""
+                    } 
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
