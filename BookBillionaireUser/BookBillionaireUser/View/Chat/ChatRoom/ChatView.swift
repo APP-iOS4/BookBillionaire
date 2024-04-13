@@ -119,7 +119,7 @@ struct ChatView: View {
     }
     
     private func sendMessage() {
-        let messageVS = MessageViewState(message: message, roomId: room.roomId, username: username, timestamp: Date())
+        let messageVS = Message(message: message, username: username, roomId: room.roomId, timestamp: Date())
         
         messageListVM.sendMessage(msg: messageVS) {
             message = ""

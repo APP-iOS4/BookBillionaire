@@ -15,7 +15,7 @@ import FirebaseFirestoreSwift
 class AddRoomViewModel: ObservableObject {
     
     var name: String = ""
-    let db = Firestore.firestore()
+    let db = Firestore.firestore().collection("chat")
     
     func createRoom(completion: @escaping () -> Void) {
         // 채팅방 생성 함수
@@ -23,7 +23,7 @@ class AddRoomViewModel: ObservableObject {
         
         do {
         
-        _ = try db.collection("chat")
+        _ = try db
             .addDocument(from: room, encoder: Firestore.Encoder()) { (error) in
                 if let error = error {
                     print(error.localizedDescription)
