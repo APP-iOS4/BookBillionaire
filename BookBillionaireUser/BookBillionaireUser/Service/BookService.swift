@@ -11,7 +11,7 @@ import BookBillionaireCore
 
 class BookService: ObservableObject {
     static let shared = BookService() // 싱글턴 인스턴스
-    var books: [Book]
+    @Published var books: [Book]
     private let bookRef = Firestore.firestore().collection("books")
     
     private init() {
@@ -45,11 +45,10 @@ class BookService: ObservableObject {
     }
     
     /// 유저들이 등록한 모든 책을 다 가져오는 함수
-    func loadBooks() async -> [Book] {
-        var resultBooks: [Book] = []
+    func loadBooks() async {
         do {
             let querySnapshot = try await bookRef.getDocuments()
-            resultBooks = querySnapshot.documents.compactMap { document -> Book? in
+            books = querySnapshot.documents.compactMap { document -> Book? in
                 do {
                     let book = try document.data(as: Book.self)
                     return book
@@ -61,8 +60,6 @@ class BookService: ObservableObject {
         } catch {
             print("Error fetching documents: \(error)")
         }
-        print(resultBooks)
-        return resultBooks
     }
     
     /// 책 owner ID로 책을 불러오는 함수

@@ -11,7 +11,8 @@ import BookBillionaireCore
 
 class UserService: ObservableObject {
     static let shared = UserService()
-    var users: [User]
+    public var users: [User]
+    
     private let allUserRef = Firestore.firestore().collection("User")
     
     /// 외부에서 인스턴스화 방지를 위한 private 초기화
@@ -20,11 +21,10 @@ class UserService: ObservableObject {
     }
     
     /// 모든 유저들의 정보를 가져오는 함수
-    func loadUsers() async -> [User] {
-        var resultUsers: [User] = []
+    func loadUsers() async {
         do {
             let querySnapshot = try await allUserRef.getDocuments()
-            resultUsers = querySnapshot.documents.compactMap { document -> User? in
+            users = querySnapshot.documents.compactMap { document -> User? in
                 do {
                     let user = try document.data(as: User.self)
                     return user
@@ -36,7 +36,6 @@ class UserService: ObservableObject {
         } catch {
             print("Error fetching documents: \(error)")
         }
-        return resultUsers
     }
     
     /// 유저의 책정보 등록(관리용)
@@ -53,10 +52,10 @@ class UserService: ObservableObject {
     }
     
     /// 유저 ID로 유저 정보를 불러오는 함수
-    func loadUserByID(_ bookOwnerID: String) async -> User {
+    func loadUserByID(_ UserID: String) async -> User {
         var user: User
         do {
-            user = try await allUserRef.document(bookOwnerID).getDocument().data(as: User.self)
+            user = try await allUserRef.document(UserID).getDocument().data(as: User.self)
             print("\(user)")
             return user
         } catch {

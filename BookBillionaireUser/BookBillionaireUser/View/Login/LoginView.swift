@@ -51,7 +51,7 @@ struct LoginView: View {
                     }
                     .buttonStyle(WhiteButtonStyle(height: 40.0))
 
-                    Button("로그인") {
+                    Button("로그인"){
                         authViewModel.signIn(email: emailText, password: passwordText)
                         dismiss()
                     } label: {
@@ -85,7 +85,6 @@ struct LoginView: View {
                 SignUpView()
             })
         }
-
     }
 }
 
