@@ -19,8 +19,6 @@ struct HomePagingView: View {
                 Image(banners[index])
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                    .padding(.horizontal, 10)
                     .tag(index) // 각 이미지에 인덱스를 태그로 지정
                     .overlay(
                         Text("\(index + 1) / \(banners.count)")
@@ -28,8 +26,8 @@ struct HomePagingView: View {
                             .padding(5)
                             .foregroundColor(.white)
                             .background(Color.black.opacity(0.5))
-                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 20)),
+                            .clipShape(Capsule())
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 10)),
                         alignment: .bottomTrailing
                     )
             }
