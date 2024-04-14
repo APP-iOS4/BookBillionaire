@@ -120,7 +120,7 @@ struct HomeView: View {
     // 책 소유자 유저 데이터 호출
     func fetchUsers() {
         Task {
-            users = await userService.loadUsers()
+            await userService.loadUsers()
         }
     }
     
