@@ -4,11 +4,24 @@
       "color" : {
         "color-space" : "srgb",
         "components" : {
-          "alpha" : "1.000",
-          "blue" : "1.000",
-          "green" : "0.757",
-          "red" : "0.459"
+          "alpha" : "0.650",
+          "blue" : "0x00",
+          "green" : "0x95",
+          "red" : "0xFF"
         }
+      },
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "color" : {
+        "platform" : "osx",
+        "reference" : "systemGrayColor"
       },
       "idiom" : "universal"
     }
