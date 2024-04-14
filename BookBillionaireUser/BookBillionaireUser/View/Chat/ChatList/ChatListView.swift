@@ -26,6 +26,7 @@ struct ChatListView: View {
                     .listStyle(PlainListStyle())
                 }
             }
+            .padding(.top, 15)
             .refreshable {
                 roomListVM.getAllRooms()
             }
@@ -35,7 +36,7 @@ struct ChatListView: View {
             .navigationBarItems(trailing: Button {
                 isEditing = true
             } label: {
-                Text("Edit")
+                Image(systemName: "plus.app")
             })
             
             .sheet(isPresented: $isEditing, onDismiss: {
@@ -100,6 +101,6 @@ struct RoomCell: View {
 }
 
 #Preview {
-    RoomCell(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "gg", users: ["",""])))
-//    ChatListView()
+//    RoomCell(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "gg", users: ["",""])))
+    ChatListView()
 }

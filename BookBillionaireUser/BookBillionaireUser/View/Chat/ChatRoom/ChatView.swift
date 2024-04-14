@@ -22,6 +22,84 @@ struct ChatView: View {
 
     var body: some View {
         VStack {
+            Divider()
+            
+            VStack {
+                HStack(alignment: .center) {
+                    Image(systemName: "a.book.closed.ko")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .padding(.leading, 25)
+                        .padding(.trailing, 10)
+                    VStack(alignment: .leading) {
+                        Text("패밀리 레스토랑 가자(상)")
+                            .font(.headline)
+                        Text("신드롬을 일으킨 『가라오케 가자!』. 출간 직후 종합 베스트셀러 1위는 물론, 탄탄한 팬덤이 생길 만큼 화제가 되었던 작품이다. 끔찍한 벌칙이 걸린 가라오케 대회를 위해 의기투합했던 야쿠자 쿄지와 독설 노래 선생 사토미의 뒷이야기를 궁금해하고, 오매불망 기다려왔던 독자들에게 새로운 이야기가 도착했다. ")
+                            .font(.subheadline)
+                            .foregroundStyle(.gray)
+                            .lineLimit(2)
+                    }
+                    .padding(.trailing, 25)
+                    
+                    Spacer()
+                    
+                }
+                .frame(height: 70)
+                
+                //==============버튼
+                HStack {
+                    Spacer()
+                    
+                    Button("위치 확인") {
+                        // 장소 확인하는 버튼
+                    }
+                    .padding(8)
+                    .padding(.horizontal, 10)
+                    .font(.callout)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.accentColor, lineWidth: 1))
+                    
+                    Spacer()
+                        .frame(width: 30)
+                    
+                    Button("약속 잡기") {
+                        // 약속 잡기 뷰로 이동
+                //        .navigationBarItems(trailing:
+                //        Button {
+                //            promiseViewShowing.toggle()
+                //            hideKeyboard()
+                //        } label: {
+                ////            NavigationLink(destination: PromiseConfirmView(user: User, book: <#Book#>)) {
+                ////                Text("약속잡기")
+                //            }
+                //        })
+                    }
+                    .padding(8)
+                    .padding(.horizontal, 10)
+                    .font(.callout)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.accentColor, lineWidth: 1))
+                    
+                    /* // 파란색 배경 버튼
+                     .padding(9)
+                     .font(.callout)
+                     .background(
+                         RoundedRectangle(cornerRadius: 15)
+                             .foregroundColor(.accentColor))
+                     .foregroundStyle(.white)
+                     
+                     */
+                    Spacer()
+                }
+            }
+            .padding(.vertical, 10)
+
+
+            // 상단에 책 정보, 책 제목, 책 설명, 대여하기 버튼까지
+            Divider()
+            //--------------------------------------
             ScrollView {
                 ScrollViewReader { scrollView in
                     VStack {
@@ -106,16 +184,12 @@ struct ChatView: View {
         .onAppear {
             messageListVM.registerUpdatesForRoom(room: room)
         }
-        // MARK: - 약속잡기 버튼
-//        .navigationBarItems(trailing:
-//        Button {
-//            promiseViewShowing.toggle()
-//            hideKeyboard()
-//        } label: {
-////            NavigationLink(destination: PromiseConfirmView(user: User, book: <#Book#>)) {
-////                Text("약속잡기")
-//            }
-//        })
+        .navigationBarItems(trailing:
+        Button {
+            
+        } label: {
+            Text("나가기")
+        })
     }
     
     private func sendMessage() {
