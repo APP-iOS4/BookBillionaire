@@ -77,10 +77,10 @@ public enum BookCategory: String, CaseIterable, Identifiable, Codable {
     public var id: String {
         self.rawValue
     }
-    case hometown = "우리 동네에서 빌려요~ 🏡"
-    case suggestion = "빌리네어가 추천해요! 🤩"
-    case soaring = "요즘 사람들이 많이 찾고 있어요 👀"
-    case best = "베스트🥇"
+    case hometown = "우리 동네에서 빌려요"
+    case suggestion = "빌리네어가 추천해요"
+    case soaring = "요즘 사람들이 많이 찾고 있어요"
+    case best = "베스트"
     
     public var buttonTitle: String {
         switch self {
@@ -89,9 +89,9 @@ public enum BookCategory: String, CaseIterable, Identifiable, Codable {
         case .suggestion:
             return "추천"
         case .soaring:
-            return "인기 급상승 🚀"
+            return "인기 급상승"
         case .best:
-            return "베스트 🥇"
+            return "베스트"
         }
     }
 }
