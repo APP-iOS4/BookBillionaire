@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct MessageViewModel {
+struct MessageViewModel { // 수정 예정
     
     let message: Message
     
@@ -85,7 +85,9 @@ class MessageListViewModel: ObservableObject {
         }
         
         do {
-            chatDB.document(msg.roomId).updateData([
+            chatDB
+                .document(msg.roomId)
+                .updateData([
                 "lastMessage" : msg.message,
                 "lastTimeStamp": msg.timestamp
 //                "senderId": msg
@@ -97,68 +99,51 @@ class MessageListViewModel: ObservableObject {
             //        }
         }
     }
-}
-
-extension Date {
-    func timeAgoFormat(numericDates: Bool = false) -> String {
-        let calendar = Calendar.current
-        let date = self
-        let now = Date()
-        let earliest = (now as NSDate).earlierDate(date)
-        let latest = (earliest == now) ? date : now
-        let components:DateComponents = (calendar as NSCalendar).components([NSCalendar.Unit.minute , NSCalendar.Unit.hour , NSCalendar.Unit.day , NSCalendar.Unit.weekOfYear , NSCalendar.Unit.month , NSCalendar.Unit.year , NSCalendar.Unit.second], from: earliest, to: latest, options: NSCalendar.Options())
-        
-        if components.year! >= 2 {
-            return "\(components.year!)년 전"
-        } else if components.year! >= 1 {
-            if numericDates {
-                return "1년 전"
+    
+    // 채팅방 삭제 메서드
+    func deleteRoom(roomID: String, completion: @escaping () -> Void) {
+        chatDB
+            .document(roomID)
+            .delete { error in
+            if let error = error {
+                print("채팅방 삭제 실패: \(error)")
             } else {
-                return "지난 해"
+                print("채팅방 삭제 성공🎉")
+                completion()
             }
-        } else if components.month! >= 2 {
-            return "\(components.month!)달 전"
-        } else if components.month! >= 1 {
-            if numericDates {
-                return "1달 전"
-            } else {
-                return "지난 달"
+        }
+    }
+    
+    // 채팅방 안의 메세지 전체 삭제 메서드
+    func deleteAllMessagesInRoom(roomID: String, completion: @escaping (Bool, Error?) -> Void) {
+        let chatDB = Firestore
+            .firestore()
+            .collection("chat")
+        chatDB
+            .document(roomID)
+            .collection("messages")
+            .getDocuments { (snapshot, error) in
+            guard let snapshot = snapshot else {
+                completion(false, error)
+                return
             }
-        } else if components.weekOfYear! >= 2 {
-            return "\(components.weekOfYear!)주 전"
-        } else if components.weekOfYear! >= 1 {
-            if numericDates {
-                return "1주 전"
-            } else {
-                return "지난 주"
+            
+            let batch = Firestore
+                    .firestore()
+                    .batch()
+            snapshot.documents.forEach { document in
+                batch.deleteDocument(document.reference)
             }
-        } else if components.day! >= 2 {
-            return "\(components.day!)일 전"
-        } else if components.day! >= 1 {
-            if numericDates {
-                return "1일 전"
-            } else {
-                return "어제"
+            
+            batch.commit { err in
+                if let err = err {
+                    print("채팅방 안의 메세지 삭제 실패: \(err)")
+                    completion(false, err)
+                } else {
+                    print("채팅방 안의 모든 메세지 삭제 성공🎉")
+                    completion(true, nil)
+                }
             }
-        } else if components.hour! >= 2 {
-            return "\(components.hour!)시간 전"
-        } else if components.hour! >= 1 {
-            if numericDates {
-                return "1시간 전"
-            } else {
-                return "시간 전"
-            }
-        } else if components.minute! >= 2 {
-            return "\(components.minute!)분 전"
-        } else if components.minute! >= 1 {
-            if numericDates {
-                return "1분 전"
-            } else {
-                return "분 전"
-            }
-        } else {
-            return "지금"
         }
     }
 }
-

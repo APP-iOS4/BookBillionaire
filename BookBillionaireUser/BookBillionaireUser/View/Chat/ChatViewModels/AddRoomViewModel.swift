@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-// [테스트용] 방 생성 뷰모델 입니다 - 추후 삭제 예정
+// [임시] 방 생성 뷰모델 입니다 - 추후 삭제 예정
 
 class AddRoomViewModel: ObservableObject {
     
@@ -34,7 +34,6 @@ class AddRoomViewModel: ObservableObject {
         } catch let error {
             print(error.localizedDescription)
         }
-        
     }
-    
 }
+
