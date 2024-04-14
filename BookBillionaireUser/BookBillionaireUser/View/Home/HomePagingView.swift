@@ -19,6 +19,7 @@ struct HomePagingView: View {
                 Image(banners[index])
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
                     .tag(index) // 각 이미지에 인덱스를 태그로 지정
                     .overlay(
                         Text("\(index + 1) / \(banners.count)")
