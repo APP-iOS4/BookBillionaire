@@ -9,12 +9,11 @@ import SwiftUI
 import BookBillionaireCore
 
 struct HomeView: View {
-    @State private var books: [Book] = []
-    @State private var users: [User] = []
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingMenuSet: Bool = false
-    let bookService = BookService.shared
-    let userService = UserService.shared
+    @StateObject private var bookService = BookService.shared
+    @StateObject private var userService = UserService.shared
+    let searchService = SearchService()
     
     var body: some View {
         VStack {
@@ -42,7 +41,8 @@ struct HomeView: View {
                 ForEach(BookCategory.allCases, id: \.self) { menu in
                     Button{
                         menuTitle = menu
-                        fetchBooks()
+                        bookService.fetchBooks(menuTitle: menu)
+                        
                     } label: {
                         Text("\(menu.buttonTitle)")
                             .fontWeight(menuTitle == menu ? .bold : .regular)
@@ -66,7 +66,7 @@ struct HomeView: View {
                         .padding(.bottom, 12)
                     // 책 리스트
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(books, id: \.self) { book in
+                        ForEach(bookService.books, id: \.self) { book in
                             HStack(alignment: .top, spacing: 0) {
                                 NavigationLink(value: book) {
                                     HStack(alignment: .center) {
@@ -98,7 +98,7 @@ struct HomeView: View {
                             Divider()
                         }
                         .navigationDestination(for: Book.self) { book in
-                            BookDetailView(book: book, user: user(for: book))
+                            BookDetailView(book: book, user: searchService.user(for: book))
                         }
                     }
                 }
@@ -107,34 +107,11 @@ struct HomeView: View {
         .padding()
         // 책 불러오기
         .onAppear {
-            fetchBooks()
-            fetchUsers()
+            bookService.fetchBooks(menuTitle: menuTitle)
+            userService.fetchUsers()
         }
     }
-    // 책 데이터 호출
-    func fetchBooks() {
-        Task {
-            books = await bookService.filteredLoadBooks(bookCategory: menuTitle)
-        }
-    }
-    // 책 소유자 유저 데이터 호출
-    func fetchUsers() {
-        Task {
-            await userService.loadUsers()
-        }
-    }
-    
-    
-    // BookDetailView에 전달할 User를 가져오는 메서드
-    // User 반환
-    func user(for book: Book) -> User {
-        // book.ownerID == user.id 일치 확인 후 값 return
-        if let user = users.first(where: { $0.id == book.ownerID }) {
-            return user
-        }
-        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-        return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
-    }
+
 }
 
 #Preview {
