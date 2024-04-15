@@ -37,22 +37,22 @@ struct HomePagingView: View {
                                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 20)),
                             alignment: .bottomTrailing
                         )
-                        .overlay(
-                            // 재생 / 일시정지 버튼
-                            Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20)
-                                .foregroundStyle(.black.opacity(0.5))
-                                .padding(EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 0)),
-                            alignment: .bottomLeading
-                        )
-                        .onTapGesture {
-                            isPlaying.toggle()
-                        }
                 }
             }
             .tabViewStyle(PageTabViewStyle())
+            .overlay(
+                // 재생 / 일시정지 버튼
+                Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20)
+                    .foregroundStyle(.black.opacity(0.5))
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 15, trailing: 0)),
+                alignment: .bottomLeading
+            )
+            .onTapGesture {
+                isPlaying.toggle()
+            }
             
         }
         .onReceive(timer) { _ in
