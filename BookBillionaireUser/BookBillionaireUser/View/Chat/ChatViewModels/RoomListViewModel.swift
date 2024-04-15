@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct RoomViewModel: Hashable {
+struct RoomViewModel: Hashable { // 수정 예정
     
     let room: Room
     
@@ -36,15 +36,14 @@ class RoomListViewModel: ObservableObject {
     @Published var rooms: [RoomViewModel] = []
     let db = Firestore.firestore().collection("chat")
     
+    // [임시] 채팅방 목록을 불러오는 함수 - 추후 로그인 Id에 맞춰서 array-contains 사용하여 필터링 하여 가져와야함
     func getAllRooms() {
-        // [임시] 채팅방 목록을 불러오는 함수 - 추후 로그인 Id에 맞춰서 array-contains 사용하여 필터링 하여 가져와야함
-        db
+        db.order(by: "lastTimeStamp", descending: true)
             .getDocuments { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
                     if let snapshot = snapshot {
-                        
                         let rooms: [RoomViewModel] = snapshot.documents.compactMap { doc in
                             guard var room = try? doc.data(as: Room.self) else {
                                 return nil

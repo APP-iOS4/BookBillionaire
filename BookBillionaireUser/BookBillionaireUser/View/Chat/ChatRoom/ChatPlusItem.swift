@@ -42,7 +42,7 @@ struct ChatPlusItem: View {
                         }
                         .frame(width: 50, height: 40)
                         
-                        Text("장소공유")
+                        Text("약속장소")
                             .foregroundStyle(.gray)
                     }
                 }
