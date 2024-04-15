@@ -13,6 +13,7 @@ struct ChatListView: View {
     
     var body: some View {
             VStack {
+                // 대화방 삭제 기능 구현
                 ScrollView {
                     ForEach(roomListVM.rooms, id: \.room.self) { room in
                         NavigationLink(value: room){
@@ -25,13 +26,17 @@ struct ChatListView: View {
                     .listStyle(PlainListStyle())
                 }
             }
+            .padding(.top, 15)
+            .refreshable {
+                roomListVM.getAllRooms()
+            }
             .navigationTitle("채팅")
             .navigationBarTitleDisplayMode(.inline)
             
             .navigationBarItems(trailing: Button {
                 isEditing = true
             } label: {
-                Text("Edit")
+                Image(systemName: "plus.app")
             })
             
             .sheet(isPresented: $isEditing, onDismiss: {
@@ -96,6 +101,6 @@ struct RoomCell: View {
 }
 
 #Preview {
-    RoomCell(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "gg", users: ["",""])))
-//    ChatListView()
+//    RoomCell(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "gg", users: ["",""])))
+    ChatListView()
 }

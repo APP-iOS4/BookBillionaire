@@ -10,19 +10,12 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct MessageViewState: Encodable { // 추후 삭제 예정
-    let message: String
-    let roomId: String
-    let username: String
-    var timestamp: Date
-}
-
-struct MessageViewModel {
+struct MessageViewModel { // 수정 예정
     
     let message: Message
     
     var messageText: String {
-        message.text
+        message.message
     }
     
     var username: String {
@@ -77,10 +70,10 @@ class MessageListViewModel: ObservableObject {
     
     
     
-    func sendMessage(msg: MessageViewState, completion: @escaping () -> Void) {
+    func sendMessage(msg: Message, completion: @escaping () -> Void) {
         //메세지 보내기
         
-        let message = Message(vs: msg)
+        let message = msg
 
         do {
             try chatDB
@@ -92,7 +85,9 @@ class MessageListViewModel: ObservableObject {
         }
         
         do {
-            chatDB.document(msg.roomId).updateData([
+            chatDB
+                .document(msg.roomId)
+                .updateData([
                 "lastMessage" : msg.message,
                 "lastTimeStamp": msg.timestamp
 //                "senderId": msg
@@ -102,6 +97,53 @@ class MessageListViewModel: ObservableObject {
             //        } catch let error {
             //            print("\(#function) 마지막 변경 실패했음☄️ \(error)")
             //        }
+        }
+    }
+    
+    // 채팅방 삭제 메서드
+    func deleteRoom(roomID: String, completion: @escaping () -> Void) {
+        chatDB
+            .document(roomID)
+            .delete { error in
+            if let error = error {
+                print("채팅방 삭제 실패: \(error)")
+            } else {
+                print("채팅방 삭제 성공🎉")
+                completion()
+            }
+        }
+    }
+    
+    // 채팅방 안의 메세지 전체 삭제 메서드
+    func deleteAllMessagesInRoom(roomID: String, completion: @escaping (Bool, Error?) -> Void) {
+        let chatDB = Firestore
+            .firestore()
+            .collection("chat")
+        chatDB
+            .document(roomID)
+            .collection("messages")
+            .getDocuments { (snapshot, error) in
+            guard let snapshot = snapshot else {
+                completion(false, error)
+                return
+            }
+            
+            let batch = Firestore
+                    .firestore()
+                    .batch()
+            snapshot.documents.forEach { document in
+                batch.deleteDocument(document.reference)
+            }
+            
+            batch.commit { err in
+                if let err = err {
+                    print("채팅방 안의 메세지 삭제 실패: \(err)")
+                    completion(false, err)
+                } else {
+                    print("채팅방 안의 모든 메세지 삭제 성공🎉")
+                    completion(true, nil)
+                }
+            }
         }
     }
 }

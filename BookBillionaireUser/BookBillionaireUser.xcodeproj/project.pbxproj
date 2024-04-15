@@ -27,12 +27,12 @@
 		04A59AC02BC68D79009FBF6E /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59ABE2BC68D79009FBF6E /* DatePickerView.swift */; };
 		04A59AC12BC68D79009FBF6E /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59ABF2BC68D79009FBF6E /* TimePickerView.swift */; };
 		04A59AC32BC69538009FBF6E /* MeetingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59AC22BC69537009FBF6E /* MeetingMapView.swift */; };
+		08508C762BCC3605006A6519 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08508C752BCC3605006A6519 /* GoogleService-Info.plist */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
 		088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260412BBD2B4C007BEA25 /* LocationSharedView.swift */; };
 		088260442BBD2B5E007BEA25 /* PhotoSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260432BBD2B5E007BEA25 /* PhotoSharedView.swift */; };
 		088260462BBD2B85007BEA25 /* PromiseConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */; };
-		0891C0272BC9793000CAB1C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0891C0262BC9793000CAB1C6 /* GoogleService-Info.plist */; };
 		08C46D7D2BC2D40700DB6D1D /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D7C2BC2D40700DB6D1D /* Room.swift */; };
 		08C46D7F2BC2D4A700DB6D1D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D7E2BC2D4A700DB6D1D /* Message.swift */; };
 		08C46D812BC2D61300DB6D1D /* RoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D802BC2D61300DB6D1D /* RoomListViewModel.swift */; };
@@ -98,12 +98,12 @@
 		04A59ABE2BC68D79009FBF6E /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		04A59ABF2BC68D79009FBF6E /* TimePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		04A59AC22BC69537009FBF6E /* MeetingMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingMapView.swift; sourceTree = "<group>"; };
+		08508C752BCC3605006A6519 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260412BBD2B4C007BEA25 /* LocationSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharedView.swift; sourceTree = "<group>"; };
 		088260432BBD2B5E007BEA25 /* PhotoSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSharedView.swift; sourceTree = "<group>"; };
 		088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseConfirmView.swift; sourceTree = "<group>"; };
-		0891C0262BC9793000CAB1C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08C46D7C2BC2D40700DB6D1D /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		08C46D7E2BC2D4A700DB6D1D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		08C46D802BC2D61300DB6D1D /* RoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewModel.swift; sourceTree = "<group>"; };
@@ -198,6 +198,14 @@
 				04A59A8E2BBFCF6A009FBF6E /* APISearchView.swift */,
 			);
 			path = SearchAPI;
+			sourceTree = "<group>";
+		};
+		08508C712BCC351B006A6519 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				08508C752BCC3605006A6519 /* GoogleService-Info.plist */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		088260362BBD277D007BEA25 /* ChatRoom */ = {
@@ -310,6 +318,7 @@
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
+				08508C712BCC351B006A6519 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -324,7 +333,6 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
-				0891C0262BC9793000CAB1C6 /* GoogleService-Info.plist */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
@@ -509,7 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
-				0891C0272BC9793000CAB1C6 /* GoogleService-Info.plist in Resources */,
+				08508C762BCC3605006A6519 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
