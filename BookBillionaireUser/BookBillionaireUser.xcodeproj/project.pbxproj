@@ -27,6 +27,7 @@
 		04A59AC02BC68D79009FBF6E /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59ABE2BC68D79009FBF6E /* DatePickerView.swift */; };
 		04A59AC12BC68D79009FBF6E /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59ABF2BC68D79009FBF6E /* TimePickerView.swift */; };
 		04A59AC32BC69538009FBF6E /* MeetingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59AC22BC69537009FBF6E /* MeetingMapView.swift */; };
+		04DCAFA62BCD6A2C00B9B146 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04DCAFA52BCD6A2C00B9B146 /* GoogleService-Info.plist */; };
 		08508C762BCC3605006A6519 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08508C752BCC3605006A6519 /* GoogleService-Info.plist */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
@@ -41,7 +42,6 @@
 		08C46D892BC2EC2A00DB6D1D /* ChatPlusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D882BC2EC2A00DB6D1D /* ChatPlusItem.swift */; };
 		08C46D8B2BC378FF00DB6D1D /* AddRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D8A2BC378FF00DB6D1D /* AddRoomView.swift */; };
 		08C46D8D2BC3793900DB6D1D /* AddRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D8C2BC3793900DB6D1D /* AddRoomViewModel.swift */; };
-		35082EFA2BCCADDA0008AA90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35082EF92BCCADDA0008AA90 /* GoogleService-Info.plist */; };
 		35082EFC2BCCDF140008AA90 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35082EFB2BCCDF140008AA90 /* SearchService.swift */; };
 		350AFD142BC7608700FFEC82 /* BookDetailUserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350AFD132BC7608700FFEC82 /* BookDetailUserListView.swift */; };
 		350AFD162BC761B600FFEC82 /* BookDetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350AFD152BC761B600FFEC82 /* BookDetailImageView.swift */; };
@@ -101,6 +101,7 @@
 		04A59ABE2BC68D79009FBF6E /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		04A59ABF2BC68D79009FBF6E /* TimePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		04A59AC22BC69537009FBF6E /* MeetingMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingMapView.swift; sourceTree = "<group>"; };
+		04DCAFA52BCD6A2C00B9B146 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08508C752BCC3605006A6519 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
@@ -115,7 +116,6 @@
 		08C46D882BC2EC2A00DB6D1D /* ChatPlusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPlusItem.swift; sourceTree = "<group>"; };
 		08C46D8A2BC378FF00DB6D1D /* AddRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomView.swift; sourceTree = "<group>"; };
 		08C46D8C2BC3793900DB6D1D /* AddRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewModel.swift; sourceTree = "<group>"; };
-		35082EF92BCCADDA0008AA90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		35082EFB2BCCDF140008AA90 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		350AFD132BC7608700FFEC82 /* BookDetailUserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailUserListView.swift; sourceTree = "<group>"; };
 		350AFD152BC761B600FFEC82 /* BookDetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailImageView.swift; sourceTree = "<group>"; };
@@ -331,7 +331,7 @@
 		EF0F747B2BBCF7C500E37D0D = {
 			isa = PBXGroup;
 			children = (
-				35082EF92BCCADDA0008AA90 /* GoogleService-Info.plist */,
+				04DCAFA52BCD6A2C00B9B146 /* GoogleService-Info.plist */,
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
@@ -535,7 +535,7 @@
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
 				08508C762BCC3605006A6519 /* GoogleService-Info.plist in Resources */,
-
+				04DCAFA62BCD6A2C00B9B146 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
