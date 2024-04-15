@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecentSearchView: View {
     @Binding var searchBook: String
-    @State private var recentSearches: [String] = UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
+    @StateObject private var searchService = SearchService()
     
     var body: some View {
         VStack(spacing: 20) {
@@ -21,20 +21,20 @@ struct RecentSearchView: View {
                 Spacer()
             }
             
-            if recentSearches.isEmpty {
+            if searchService.recentSearches.isEmpty {
                 Text("검색 결과 없음")
                     .foregroundColor(.gray)
                 
             } else {
                 LazyVStack {
-                    ForEach(recentSearches.reversed(), id: \.self) { search in
+                    ForEach(searchService.recentSearches.reversed(), id: \.self) { search in
                         HStack {
                             Text("\(search)")
                                 .foregroundColor(.primary)
                             Spacer()
                             
                             Button(action: {
-                                removeSearchHistory(search: search)
+                                searchService.removeSearchHistory(search: search)
                             }, label: {
                                 Image(systemName: "multiply.circle.fill")
                                     .foregroundStyle(.gray)
@@ -46,16 +46,6 @@ struct RecentSearchView: View {
             }
         }
     }
-    
-    // 검색어 되돌리기
-    func removeSearchHistory(search: String) {
-        if let index = recentSearches.firstIndex(of: search) {
-            // 최근 검색어 UserDefaults에서 업데이트
-                        UserDefaults.standard.set(recentSearches, forKey: "RecentSearches")
-            recentSearches.remove(at: index)
-        }
-    }
-    
 }
 
 #Preview {

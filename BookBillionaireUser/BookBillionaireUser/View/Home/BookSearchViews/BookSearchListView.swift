@@ -11,8 +11,7 @@ import BookBillionaireCore
 struct BookSearchListView: View {
     @Binding var searchBook: String
     @Binding var filteredBooks: [Book]
-    let users: [User] = []
-    let bookService = BookService.shared
+    @StateObject private var searchService = SearchService()
     
     var body: some View {
         VStack(spacing: 20) {
@@ -23,40 +22,28 @@ struct BookSearchListView: View {
                 Spacer()
             }
             
-            if filteredBooks.isEmpty {
+            if searchService.filteredBooks.isEmpty {
                 Text("검색한 결과가 없습니다")
                 
             } else {
                 LazyVStack(alignment: .leading, spacing: 10) {
-                    ForEach(filteredBooks) { book in
+                    ForEach(searchService.filteredBooks) { book in
                         NavigationLink {
-                            BookDetailView(book: book, user: user(for: book))
+                            BookDetailView(book: book, user: searchService.user(for: book))
                         } label: {
                             BookListRowView(book: book)
                         }
-
+                        
                     }
                     .foregroundStyle(.primary)
                 }
             }
         }
     }
-
-    
-    // BookDetailView에 전달할 User를 가져오는 메서드
-    // User 반환
-    func user(for book: Book) -> User {
-        // book.ownerID == user.id 일치 확인 후 값 return
-        if let user = users.first(where: { $0.id == book.ownerID }) {
-            return user
-        }
-        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-        return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
-    }
     
 }
 
 #Preview {
-    BookSearchListView(searchBook: .constant("원도"), filteredBooks: .constant([]))
+    BookSearchListView(searchBook: .constant("원도"), filteredBooks: .constant([Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]))
 }
 

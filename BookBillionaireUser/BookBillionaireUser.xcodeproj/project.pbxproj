@@ -32,7 +32,6 @@
 		088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260412BBD2B4C007BEA25 /* LocationSharedView.swift */; };
 		088260442BBD2B5E007BEA25 /* PhotoSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260432BBD2B5E007BEA25 /* PhotoSharedView.swift */; };
 		088260462BBD2B85007BEA25 /* PromiseConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */; };
-		0891C0272BC9793000CAB1C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0891C0262BC9793000CAB1C6 /* GoogleService-Info.plist */; };
 		08C46D7D2BC2D40700DB6D1D /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D7C2BC2D40700DB6D1D /* Room.swift */; };
 		08C46D7F2BC2D4A700DB6D1D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D7E2BC2D4A700DB6D1D /* Message.swift */; };
 		08C46D812BC2D61300DB6D1D /* RoomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D802BC2D61300DB6D1D /* RoomListViewModel.swift */; };
@@ -41,6 +40,8 @@
 		08C46D892BC2EC2A00DB6D1D /* ChatPlusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D882BC2EC2A00DB6D1D /* ChatPlusItem.swift */; };
 		08C46D8B2BC378FF00DB6D1D /* AddRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D8A2BC378FF00DB6D1D /* AddRoomView.swift */; };
 		08C46D8D2BC3793900DB6D1D /* AddRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D8C2BC3793900DB6D1D /* AddRoomViewModel.swift */; };
+		35082EFA2BCCADDA0008AA90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35082EF92BCCADDA0008AA90 /* GoogleService-Info.plist */; };
+		35082EFC2BCCDF140008AA90 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35082EFB2BCCDF140008AA90 /* SearchService.swift */; };
 		350AFD142BC7608700FFEC82 /* BookDetailUserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350AFD132BC7608700FFEC82 /* BookDetailUserListView.swift */; };
 		350AFD162BC761B600FFEC82 /* BookDetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350AFD152BC761B600FFEC82 /* BookDetailImageView.swift */; };
 		350AFD1E2BC7C14800FFEC82 /* RecentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350AFD1D2BC7C14800FFEC82 /* RecentSearchView.swift */; };
@@ -103,7 +104,6 @@
 		088260412BBD2B4C007BEA25 /* LocationSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharedView.swift; sourceTree = "<group>"; };
 		088260432BBD2B5E007BEA25 /* PhotoSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSharedView.swift; sourceTree = "<group>"; };
 		088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseConfirmView.swift; sourceTree = "<group>"; };
-		0891C0262BC9793000CAB1C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08C46D7C2BC2D40700DB6D1D /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		08C46D7E2BC2D4A700DB6D1D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		08C46D802BC2D61300DB6D1D /* RoomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewModel.swift; sourceTree = "<group>"; };
@@ -112,6 +112,8 @@
 		08C46D882BC2EC2A00DB6D1D /* ChatPlusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPlusItem.swift; sourceTree = "<group>"; };
 		08C46D8A2BC378FF00DB6D1D /* AddRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomView.swift; sourceTree = "<group>"; };
 		08C46D8C2BC3793900DB6D1D /* AddRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewModel.swift; sourceTree = "<group>"; };
+		35082EF92BCCADDA0008AA90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		35082EFB2BCCDF140008AA90 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		350AFD132BC7608700FFEC82 /* BookDetailUserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailUserListView.swift; sourceTree = "<group>"; };
 		350AFD152BC761B600FFEC82 /* BookDetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailImageView.swift; sourceTree = "<group>"; };
 		350AFD1D2BC7C14800FFEC82 /* RecentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				04A59A802BBE85C2009FBF6E /* UserService.swift */,
 				04A59A822BBE8876009FBF6E /* ServiceTestView.swift */,
 				04A59A8A2BBFB7F7009FBF6E /* RentalService.swift */,
+				35082EFB2BCCDF140008AA90 /* SearchService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -283,6 +286,15 @@
 			path = ChatViewModels;
 			sourceTree = "<group>";
 		};
+		35082EFD2BCCF2720008AA90 /* HomeSubViews */ = {
+			isa = PBXGroup;
+			children = (
+				3585FD542BC8CEFB00F2C4DD /* HomePagingView.swift */,
+				352D6FFE2BBE804C00D12B0F /* BookListRowView.swift */,
+			);
+			path = HomeSubViews;
+			sourceTree = "<group>";
+		};
 		35B1F1C12BC80965006DF56D /* BookDetailViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,8 +308,8 @@
 		35B1F1C22BC80975006DF56D /* BookSearchViews */ = {
 			isa = PBXGroup;
 			children = (
-				350AFD1D2BC7C14800FFEC82 /* RecentSearchView.swift */,
 				EF0F74BA2BBCFA7100E37D0D /* BookSearchBarView.swift */,
+				350AFD1D2BC7C14800FFEC82 /* RecentSearchView.swift */,
 				350AFD1F2BC7C16400FFEC82 /* BookSearchListView.swift */,
 				35537C572BBD8CA800FE8354 /* BookSearchView.swift */,
 			);
@@ -307,6 +319,7 @@
 		EF0F747B2BBCF7C500E37D0D = {
 			isa = PBXGroup;
 			children = (
+				35082EF92BCCADDA0008AA90 /* GoogleService-Info.plist */,
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
@@ -324,7 +337,6 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
-				0891C0262BC9793000CAB1C6 /* GoogleService-Info.plist */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
@@ -387,8 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				35537C592BBD8CB400FE8354 /* HomeView.swift */,
-				3585FD542BC8CEFB00F2C4DD /* HomePagingView.swift */,
-				352D6FFE2BBE804C00D12B0F /* BookListRowView.swift */,
+				35082EFD2BCCF2720008AA90 /* HomeSubViews */,
 				35B1F1C22BC80975006DF56D /* BookSearchViews */,
 				35B1F1C12BC80965006DF56D /* BookDetailViews */,
 			);
@@ -509,7 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
-				0891C0272BC9793000CAB1C6 /* GoogleService-Info.plist in Resources */,
+				35082EFA2BCCADDA0008AA90 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +582,7 @@
 				EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */,
 				EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */,
 				EF0F74D22BBD38FA00E37D0D /* MyBookListView.swift in Sources */,
+				35082EFC2BCCDF140008AA90 /* SearchService.swift in Sources */,
 				04A59AB42BC4FDE0009FBF6E /* UnlogginedView.swift in Sources */,
 				35537C5A2BBD8CB400FE8354 /* HomeView.swift in Sources */,
 				08C46D812BC2D61300DB6D1D /* RoomListViewModel.swift in Sources */,
