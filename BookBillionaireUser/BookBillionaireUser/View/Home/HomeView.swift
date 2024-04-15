@@ -9,7 +9,6 @@ import SwiftUI
 import BookBillionaireCore
 
 struct HomeView: View {
-    @State private var books: [Book] = []
     @State private var users: [User] = []
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingMenuSet: Bool = false
@@ -20,8 +19,10 @@ struct HomeView: View {
         VStack {
             // 헤더 & 서치
             HStack(alignment: .center) {
-                Text("BOOK BILLINAIRE")
-                    .font(.largeTitle)
+                Image("applogoShortcut")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Text("BOOK BILLIONAIRE")
                     .foregroundStyle(.accent)
                 
                 Spacer()
@@ -34,29 +35,32 @@ struct HomeView: View {
                 }
             }
             //홈 배너
-            HomePagingView()
+            HomePagingView() 
                 .frame(height: 200)
+                .padding(.top)
             
             // 메뉴 버튼
-            HStack(alignment: .center) {
-                ForEach(BookCategory.allCases, id: \.self) { menu in
-                    Button{
-                        menuTitle = menu
-                        fetchBooks()
-                    } label: {
-                        Text("\(menu.buttonTitle)")
-                            .fontWeight(menuTitle == menu ? .bold : .regular)
-                            .foregroundStyle(menuTitle == menu ? .white : .accentColor)
-                            .minimumScaleFactor(0.5)
+            ScrollView(.horizontal, showsIndicators: false){
+                HStack(spacing: 10) {
+                    ForEach(BookCategory.allCases, id: \.self) { menu in
+                        Button{
+                            menuTitle = menu
+                            fetchBooks()
+                        } label: {
+                            Text("\(menu.buttonTitle)")
+                                .padding(10)
+                                .frame(minWidth: 100)
+                                .fontWeight(menuTitle == menu ? .bold : .regular)
+                                .foregroundStyle(menuTitle == menu ? .white : .bbfont)
+                                .minimumScaleFactor(0.5)
+                        }
+                        .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.2))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .fixedSize()
                     }
-                    .padding(10)
-                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.2))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .fixedSize()
                 }
+                .padding(.vertical, 20)
             }
-            .padding(.bottom, 12)
-            
             // 리스트
             ScrollView(showsIndicators: false) {
                 // 메뉴 타이틀
@@ -120,7 +124,7 @@ struct HomeView: View {
     // 책 소유자 유저 데이터 호출
     func fetchUsers() {
         Task {
-            users = await userService.loadUsers()
+        await userService.loadUsers()
         }
     }
     

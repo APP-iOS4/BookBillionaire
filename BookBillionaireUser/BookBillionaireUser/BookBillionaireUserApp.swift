@@ -27,12 +27,14 @@ struct BookBillionaireUserApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authViewModel: AuthViewModel = AuthViewModel.shared
     @StateObject private var authViewModelGoogle: AuthViewModelGoogle = AuthViewModelGoogle()
+    @StateObject private var bookService: BookService = BookService.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(authViewModel)
                 .environmentObject(authViewModelGoogle)
+                .environmentObject(bookService)
         }
     }
 }

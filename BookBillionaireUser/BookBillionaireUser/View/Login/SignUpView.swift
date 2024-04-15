@@ -24,15 +24,24 @@ struct SignUpView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-            ScrollView {
-                VStack(spacing: 10) {
+        ScrollView {
+            VStack(spacing: 10) {
+                HStack {
+                    Spacer()
+                    Button{
+                        dismiss()
+                    }label: {
+                        Image(systemName: "xmark")
+                    }
+                }.padding(.bottom, 50)
+
                     Image("AppLogo")
                         .resizable()
                         .scaledToFit()
                     Text("회원가입")
                     VStack(alignment: .leading) {
                         Text("이름")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color.accentColor)
                         TextField("이름을 입력해주세요", text: $nameText)
                             .padding()
                             .background(.thinMaterial)

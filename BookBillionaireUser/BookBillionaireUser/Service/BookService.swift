@@ -10,14 +10,14 @@ import FirebaseFirestore
 import BookBillionaireCore
 
 class BookService: ObservableObject {
-    static let shared = BookService() // 싱글턴 인스턴스
+    static let shared = BookService()// 싱글턴 인스턴스
+    
     @Published var books: [Book]
     private let bookRef = Firestore.firestore().collection("books")
     
     private init() {
-        books = []
-    } // 외부에서 인스턴스화 방지를 위한 private 초기화
-    
+        self.books = []
+    }
     /// 책을 등록하는 함수
     func registerBook(_ book: Book) -> Bool {
         do {

@@ -1,8 +1,16 @@
+//
+//  RLoginView.swift
+//  BookBillionaireUser
+//
+//  Created by YUJIN JEON on 4/13/24.
+//
+
 import SwiftUI
 import GoogleSignIn
 import AuthenticationServices
 
-struct LoginView: View {
+struct RLoginView: View {
+    @Environment(\.openURL) var openURL
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
     @Environment (\.dismiss) private var dismiss
@@ -13,23 +21,17 @@ struct LoginView: View {
     @State private var isSignUpScreen: Bool = false
     
     var body: some View {
-        HStack() {
-            Spacer()
-            Button(action: {
-                isPresentedLogin.toggle()
-             }) {
-                 Image(systemName: "xmark")
-                     .foregroundColor(.black)
-                     .font(.title2)
-             }
-             .padding()
-        }
         NavigationStack{
             VStack {
-               Image("AppLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.top, 100)
+                // 앱로고
+                Section{
+                    Image("AppLogo")
+                        .resizable()
+                        .scaledToFit()
+                }
+                .padding(.top, 100)
+                
+                // 로그인 입력창
                 Section {
                     VStack(spacing: 10) {
                         TextField("email", text: $emailText)
@@ -45,6 +47,7 @@ struct LoginView: View {
                     }
                 }
                 .padding(.top, 50)
+            
                 HStack(spacing: 20) {
                     Button("회원가입") {
                         isSignUpScreen = true
@@ -73,9 +76,6 @@ struct LoginView: View {
                         .frame(width: 335, height: 50)
                 }
                 .padding(.bottom, 10)
-                Spacer()
-                Spacer()
-                Text("Team BB")
                 SpaceBox()
             }
             .padding(.horizontal, 30)
@@ -87,5 +87,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(isPresentedLogin: .constant(true))
+    RLoginView(isPresentedLogin: .constant(true))
 }

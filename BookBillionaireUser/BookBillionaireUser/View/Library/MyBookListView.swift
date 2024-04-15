@@ -105,7 +105,7 @@ struct MyBookListView: View {
                 }
             }
         }
-        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
+//        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
         .onAppear{
             loadMybook()
         }
