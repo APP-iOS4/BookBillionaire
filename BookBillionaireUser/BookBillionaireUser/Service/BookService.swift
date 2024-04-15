@@ -13,7 +13,7 @@ class BookService: ObservableObject {
     static let shared = BookService() // 싱글턴 인스턴스
     @Published var books: [Book]
     private let bookRef = Firestore.firestore().collection("books")
-    
+
     private init() {
         books = []
     } // 외부에서 인스턴스화 방지를 위한 private 초기화
@@ -137,6 +137,20 @@ class BookService: ObservableObject {
         return filterdBooks
     }
     
+    
+    // 책 데이터 호출
+    // 서비스 데이터(Back)를 모델에 가져와 뷰(Front)에 적용
+    func fetchBooks(menuTitle: BookCategory) {
+        Task {
+            let fetchedBooks = await BookService.shared.filteredLoadBooks(bookCategory: menuTitle)
+            
+            DispatchQueue.main.async {
+                self.books = fetchedBooks
+            }
+        }
+    }
+
+    
     // 책 검색 필터 (서치바)
     func searchBooksByTitle(title: String) async -> [Book] {
         var searchResult: [Book] = []
@@ -170,6 +184,8 @@ class BookService: ObservableObject {
         }
         return searchResult
     }
+
+
 }
 
 

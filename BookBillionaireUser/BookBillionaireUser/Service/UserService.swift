@@ -63,6 +63,14 @@ class UserService: ObservableObject {
             return User(id: "", nickName: "", address: "")
         }
     }
+    
+
+    // 책 소유자 유저 데이터 호출
+    func fetchUsers() {
+        Task {
+            await UserService.shared.loadUsers()
+        }
+    }
 }
 
 
