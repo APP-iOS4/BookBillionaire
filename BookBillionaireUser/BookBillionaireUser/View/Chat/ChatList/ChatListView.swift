@@ -10,8 +10,11 @@ import SwiftUI
 struct ChatListView: View {
     @State private var isEditing: Bool = false
     @StateObject private var roomListVM = RoomListViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
+        switch authViewModel.state {
+        case .loggedIn:
             VStack {
                 // 대화방 삭제 기능 구현
                 ScrollView {
@@ -47,8 +50,12 @@ struct ChatListView: View {
             
             .onAppear(perform: {
                 roomListVM.getAllRooms()
+                
             })
+        case .loggedOut:
+            UnlogginedView()
         }
+    }
 }
 
 struct RoomCell: View {

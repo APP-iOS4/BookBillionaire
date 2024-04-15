@@ -7,20 +7,22 @@
 
 import SwiftUI
 import Combine
+import BookBillionaireCore
 
 struct ChatView: View {
     let room: RoomViewModel
     
+    @State var message: Message = Message(message: "", senderId: "", roomId: "", timestamp: Date(), ImageURL: "")
+    
     @StateObject private var messageListVM = MessageListViewModel()
     @State private var promiseViewShowing = false
-    @State private var message: String = ""
+    @State private var messageText: String = ""
     @State private var cancellables: AnyCancellable?
     @State private var plusItemShowing = false
     @State private var isPresentedExitAlert = false
     @Environment(\.presentationMode) var presentationMode
     
-    @AppStorage("username") private var username = "최준영"
-    // username 갖다 꽂기 [임시로 최준영 적어놓음]
+    var username: String? = AuthViewModel.shared.currentUser?.displayName
     
     var body: some View {
         VStack {
@@ -38,7 +40,7 @@ struct ChatView: View {
             messageTextField
             
             if plusItemShowing {
-                ChatPlusItem()
+                ChatPlusItem(message: $message, messageVM: messageListVM)
                     .padding(.bottom, 50)
                     .padding(.top, 30)
             }
@@ -53,10 +55,10 @@ struct ChatView: View {
     }
     
     private func sendMessage() {
-        let messageVS = Message(message: message, username: username, roomId: room.roomId, timestamp: Date())
+        let messageVS = Message(message: messageText, senderId: username ?? "", roomId: room.roomId, timestamp: Date())
         
         messageListVM.sendMessage(msg: messageVS) {
-            message = ""
+            messageText = ""
         }
     }
     
@@ -84,7 +86,6 @@ struct ChatView: View {
             }
             .frame(height: 70)
             
-            //==============버튼
             HStack {
                 Spacer()
                 
@@ -103,15 +104,13 @@ struct ChatView: View {
                 
                 Button("약속 잡기") {
                     // 약속 잡기 뷰로 이동
-                    //        .navigationBarItems(trailing:
-                    //        Button {
-                    //            promiseViewShowing.toggle()
+                    // promiseViewShowing.toggle()
                     //            hideKeyboard()
                     //        } label: {
                     ////            NavigationLink(destination: PromiseConfirmView(user: User, book: <#Book#>)) {
                     ////                Text("약속잡기")
                     //            }
-                    //        })
+                   
                 }
                 .padding(8)
                 .padding(.horizontal, 10)
@@ -143,9 +142,9 @@ struct ChatView: View {
                         HStack {
                             if message.username == username {
                                 Spacer()
-                                ChatBubble(messageText: message.messageText, username: message.username, style: .from, message: message)
+                                ChatBubble(messageText: message.messageText, username: message.username, style: .from, messageVM: message)
                             } else {
-                                ChatBubble(messageText: message.messageText, username: message.username, style: .to, message: message)
+                                ChatBubble(messageText: message.messageText, username: message.username, style: .to, messageVM: message)
                                 Spacer()
                             }
                         }
@@ -181,16 +180,16 @@ struct ChatView: View {
             .padding(.horizontal,10)
             
             
-            TextField("메세지를 입력하세요.", text: $message)
+            TextField("메세지를 입력하세요.", text: $messageText)
                 .padding(10)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
                 .disableAutocorrection(true)
             
             Button {
-                if message != "" {
+                if messageText != "" {
                     sendMessage()
-                    message = ""
+                    messageText = ""
                 }
             } label: {
                 ZStack {
@@ -240,5 +239,5 @@ extension View {
 
 
 #Preview {
-    ChatView(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "", users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"])))
+    ChatView(room: RoomViewModel(room: Room(receiverId: "최준영", lastTimeStamp: Date(), lastMessage: "", users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"])))
 }

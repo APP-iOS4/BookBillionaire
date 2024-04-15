@@ -17,21 +17,26 @@ struct ChatBubble: View {
     let messageText: String
     let username: String
     let style: MessageStyle
-    let message: MessageViewModel
+    let messageVM: MessageViewModel
+    let message: Message = Message(id: "", message: "", senderId: "", roomId: "", timestamp: Date(), ImageURL: "")
     
     var body: some View {
         VStack(alignment: style == .from ? .trailing : .leading) {
             if style == .from {
                 HStack(alignment: .bottom) {
-                    Text("\(message.formatTimestamp(message.messageTimestamp))")
+                    Text("\(messageVM.formatTimestamp(messageVM.messageTimestamp))")
                         .font(.caption2)
                         .foregroundColor(.gray)
-                   
-                    Text(messageText)
-                        .lineLimit(nil)
-                        .padding(12)
-                        .background(Color.yellow)
-                        .cornerRadius(15)
+                    if messageText == messageText {
+                        Text(messageText)
+                            .lineLimit(nil)
+                            .padding(12)
+                            .background(Color.yellow)
+                            .cornerRadius(15)
+                    } else {
+                        PhotoSharedItem(message: message)
+                            .cornerRadius(15)
+                    }
                 }
                 .frame(maxWidth: 350, alignment: .trailing)
             } else {
@@ -53,16 +58,20 @@ struct ChatBubble: View {
                         VStack(alignment: .leading) {
                             Text(username)
                                 .font(.caption)
-                            
-                            Text(messageText)
-                                .lineLimit(nil)
-                                .padding(12)
-                                .background(Color.gray)
-                                .foregroundStyle(.white)
-                                .cornerRadius(15)
+                            if messageText == messageText {
+                                Text(messageText)
+                                    .lineLimit(nil)
+                                    .padding(12)
+                                    .background(Color.gray)
+                                    .foregroundStyle(.white)
+                                    .cornerRadius(15)
+                            } else {
+                                PhotoSharedItem(message: message)
+                                    .cornerRadius(15)
+                            }
                         }
                         
-                        Text("\(message.formatTimestamp(message.messageTimestamp))")
+                        Text("\(messageVM.formatTimestamp(messageVM.messageTimestamp))")
                             .font(.caption2)
                             .foregroundColor(.gray)
                     }

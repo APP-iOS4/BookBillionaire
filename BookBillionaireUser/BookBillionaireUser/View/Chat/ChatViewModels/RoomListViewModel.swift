@@ -15,7 +15,7 @@ struct RoomViewModel: Hashable { // 수정 예정
     let room: Room
     
     var receiverName: String {
-        room.receiverName
+        room.receiverId
     }
 
     var roomId: String {
@@ -37,6 +37,7 @@ class RoomListViewModel: ObservableObject {
     let db = Firestore.firestore().collection("chat")
     
     // [임시] 채팅방 목록을 불러오는 함수 - 추후 로그인 Id에 맞춰서 array-contains 사용하여 필터링 하여 가져와야함
+    
     func getAllRooms() {
         db.order(by: "lastTimeStamp", descending: true)
             .getDocuments { (snapshot, error) in

@@ -6,18 +6,22 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct ChatPlusItem: View {
+    @State private var selectedImage: UIImage?
+    @State private var selectedItem: PhotosPickerItem?
+    @Binding var message: Message
+    var messageVM: MessageListViewModel
+
     var body: some View {
         HStack {
             GridRow {
-                Button {
-                    // 포토 피커로 이동
-                } label: {
+                PhotosPicker(selection: $selectedItem, matching: .images) {
                     VStack{
                         ZStack {
                             RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
-                                .foregroundColor(.accentColor)
+                                .foregroundColor(.accent)
                             Image(systemName: "photo.fill")
                                 .foregroundColor(.white)
                         }
@@ -25,6 +29,19 @@ struct ChatPlusItem: View {
                         
                         Text("사진보내기")
                             .foregroundStyle(.gray)
+                    }
+                }
+            }
+            .onChange(of: selectedItem) { _ in
+                Task {
+                    if let selectedItem,
+                       let data = try? await selectedItem.loadTransferable(type: Data.self) {
+                        if let image = UIImage(data: data) {
+                            selectedImage = image
+                            message.ImageURL = "\(image)"
+                            messageVM.uploadPhoto(selectedImage: selectedImage, photoImage: message.ImageURL ?? "")
+                            print(message.ImageURL!)
+                        }
                     }
                 }
             }
@@ -71,6 +88,6 @@ struct ChatPlusItem: View {
 }
 
 
-#Preview {
-    ChatPlusItem()
-}
+//#Preview {
+//    ChatPlusItem()
+//}
