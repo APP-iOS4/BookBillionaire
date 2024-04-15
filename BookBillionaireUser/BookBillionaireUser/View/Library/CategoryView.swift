@@ -9,14 +9,13 @@ import SwiftUI
 
 struct CategoryView: View {
     @Binding var selectedIndex: Int
-    @State private var selectedCategory: String = "보유도서"
-    var categories = ["보유도서", "빌린도서"]
+    @State private var selectedCategory: Category = .myBook
     
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 20) {
-                ForEach(Array(categories.enumerated()), id: \.element) { index, category in
-                    Text("\(category)")
+                ForEach(Array(Category.allCases.enumerated()), id: \.element) { index, category in
+                    Text(category.rawValue)
                         .padding(.vertical, 20)
                         .fontWeight(.medium)
                         .foregroundStyle(selectedCategory == category ? Color.accentColor : .black)
@@ -53,4 +52,9 @@ struct CategoryView: View {
 
 #Preview {
     CategoryView(selectedIndex: .constant(0))
+}
+
+enum Category: String, CaseIterable {
+    case myBook = "보유도서"
+    case rentalBook = "빌린도서"
 }
