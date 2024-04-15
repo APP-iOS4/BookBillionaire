@@ -77,7 +77,7 @@ public enum BookCategory: String, CaseIterable, Identifiable, Codable {
     public var id: String {
         self.rawValue
     }
-    case hometown = "우리 동네에서 빌려요~ 🏡"
+    case hometown = "우리 동네에서 빌려요"
     case suggestion = "빌리네어가 추천해요! 🤩"
     case soaring = "요즘 사람들이 많이 찾고 있어요 👀"
     case best = "베스트🥇"
