@@ -48,7 +48,7 @@ struct ProfileView: View {
                         }
                     }
                 }
-                
+              
                 Section("최근 살펴본 책 내역") {
                     HStack {
                         Rectangle()
@@ -77,7 +77,6 @@ struct ProfileView: View {
             loadMyProfile()
         }
     }
-    
     private func loadMyProfile() {
         Task {
             if let currentUser = AuthViewModel.shared.currentUser {

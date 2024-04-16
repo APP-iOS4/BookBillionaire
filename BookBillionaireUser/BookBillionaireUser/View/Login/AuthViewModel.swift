@@ -22,39 +22,58 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
         }
     
     func signUp(email: String, userName: String, password: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let error = error {
-                print("error: \(error.localizedDescription)")
+        // 중복 체크
+        checkEmailDuplication(email) { [weak self] isEmailUnique in
+            guard let self = self else { return }
+            
+            if !isEmailUnique {
+                print("이미 등록된 이메일입니다.")
                 return
             }
             
-            if let result = result {
-                let changeRequest = result.user.createProfileChangeRequest()
-                changeRequest.displayName = userName
-                changeRequest.commitChanges { error in
+            self.checkNicknameDuplication(userName) { isNicknameUnique in
+                if !isNicknameUnique {
+                    print("이미 사용 중인 닉네임입니다.")
+                    return
+                }
+                
+                // 이메일, 닉네임 중복이 없으면 회원가입 진행
+                Auth.auth().createUser(withEmail: email, password: password) { result, error in
                     if let error = error {
-                        print("Error updating profile: \(error.localizedDescription)")
+                        print("error: \(error.localizedDescription)")
                         return
                     }
                     
-                    // Firestore에 사용자 정보 및 생성일자 저장
-                    let db = Firestore.firestore()
-                    let userData: [String: Any] = [
-                        "nickname": userName,
-                        "createdAt": Timestamp(date: Date()), // 현재 시간을 Timestamp로 변환하여 저장
-                        "id": result.user.uid,
-                        "introduction": "",
-                        "profileImage": "person.crop.circle"
-                    ]
-                    db.collection("User").document(result.user.uid).setData(userData) { error in
-                        if let error = error {
-                            print("Error saving user data: \(error.localizedDescription)")
-                            return
+                    if let result = result {
+                        let changeRequest = result.user.createProfileChangeRequest()
+                        changeRequest.displayName = userName
+                        changeRequest.commitChanges { error in
+                            if let error = error {
+                                print("Error updating profile: \(error.localizedDescription)")
+                                return
+                            }
+                            
+                            // Firestore에 사용자 정보 및 생성일자 저장
+                            let db = Firestore.firestore()
+                            let userData: [String: Any] = [
+                                "emailEqualtoAuth": email,
+                                "nickname": userName,
+                                "createdAt": Timestamp(date: Date()), // 현재 시간을 Timestamp로 변환하여 저장
+                                "id": result.user.uid,
+                                "introduction": "",
+                                "profileImage": "person.crop.circle"
+                            ]
+                            db.collection("User").document(result.user.uid).setData(userData) { error in
+                                if let error = error {
+                                    print("Error saving user data: \(error.localizedDescription)")
+                                    return
+                                }
+                                print("사용자 데이터가 성공적으로 저장되었습니다.")
+                                
+                                // 사용자 데이터를 다시 읽어와서 출력
+                                self.readUserData(uid: result.user.uid)
+                            }
                         }
-                        print("사용자 데이터가 성공적으로 저장되었습니다.")
-                        
-                        // 사용자 데이터를 다시 읽어와서 출력
-                        self.readUserData(uid: result.user.uid)
                     }
                 }
             }
@@ -120,4 +139,47 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
             print("로그아웃 중 오류 발생:", error.localizedDescription)
         }
     }
+    
+    // 이메일(식별자) 중복 체크
+    func checkEmailDuplication(_ email: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("User").whereField("emailEqualtoAuth", isEqualTo: email).getDocuments { snapshot, error in
+            if let error = error {
+                print("Error checking email duplication: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let snapshot = snapshot, !snapshot.isEmpty {
+                // 이미 사용 중인 이메일이 존재
+                completion(false)
+            } else {
+                // 사용 가능한 이메일
+                completion(true)
+            }
+        }
+    }
+    
+    // 닉네임 중복 체크
+    func checkNicknameDuplication(_ nickname: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("User").whereField("nickname", isEqualTo: nickname).getDocuments { snapshot, error in
+            if let error = error {
+                print("Error checking nickname duplication: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let snapshot = snapshot {
+                if !snapshot.isEmpty {
+                    // 중복된 닉네임이 존재
+                    completion(false)
+                } else {
+                    // 중복된 닉네임이 존재하지 않음
+                    completion(true)
+                }
+            }
+        }
+    }
 }
+
