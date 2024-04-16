@@ -22,24 +22,24 @@ struct HomePagingView: View {
                 ForEach(banners.indices, id: \.self) { index in
                     Image(banners[index])
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .clipShape(RoundedRectangle(cornerRadius: 25.0))
                         .padding(.horizontal, 10)
                         .tag(index) // 각 이미지에 인덱스를 태그로 지정
-                        .overlay(
-                            // 배너 페이지 수
-                            Text("\(index + 1) / \(banners.count)")
-                                .font(.caption)
-                                .padding(5)
-                                .foregroundStyle(.white)
-                                .background(Color.black.opacity(0.5))
-                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 20)),
-                            alignment: .bottomTrailing
-                        )
                 }
             }
             .tabViewStyle(PageTabViewStyle())
+            .overlay(
+                // 배너 페이지 수
+                Text("\(currentIndex + 1) / \(banners.count)")
+                    .font(.caption)
+                    .padding(5)
+                    .foregroundStyle(.white)
+                    .background(Color.black.opacity(0.5))
+                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 20)),
+                alignment: .bottomTrailing
+            )
             .overlay(
                 // 재생 / 일시정지 버튼
                 Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
@@ -56,14 +56,14 @@ struct HomePagingView: View {
             
         }
         .onReceive(timer) { _ in
-            //            withAnimation {
-            if isPlaying {
-                currentIndex += 1
-                if currentIndex >= banners.count {
-                    currentIndex = 0
+            withAnimation() {
+                if isPlaying {
+                    currentIndex += 1
+                    if currentIndex >= banners.count {
+                        currentIndex = 0
+                    }
                 }
             }
-            //            }
         }
     }
 }

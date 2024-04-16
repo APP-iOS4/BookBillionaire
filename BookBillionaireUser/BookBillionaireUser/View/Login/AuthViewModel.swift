@@ -7,6 +7,7 @@
 
 import Firebase
 import GoogleSignIn
+import FirebaseAuth
 
 class AuthViewModel: ObservableObject, AuthViewModelProtocol {
     static let shared = AuthViewModel()
