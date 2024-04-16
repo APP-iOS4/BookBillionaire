@@ -96,6 +96,8 @@ struct HomeView: View {
 
                             }
                             Divider()
+                                .background(Color.gray)
+                                .padding(.vertical, 10)
                         }
                         .navigationDestination(for: Book.self) { book in
                             BookDetailView(book: book, user: searchService.user(for: book))
