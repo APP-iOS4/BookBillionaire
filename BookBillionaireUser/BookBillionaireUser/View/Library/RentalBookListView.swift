@@ -55,17 +55,9 @@ struct RentalBookListView: View {
                 }
             }
         }
-//        .onAppear{
-//            loadMybook()
-//        }
-    }
-    
-    private func loadMybook() {
-        Task {
-            myBooks = await bookService.loadBookByID("Eyhr4YQGsATlRDUcc9rYl9PZYk52")
-        }
-    }
+       }
 }
+
 
 #Preview {
     NavigationStack {

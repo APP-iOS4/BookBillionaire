@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @EnvironmentObject var bookService: BookService
     @State private var selectedTab = 0
-    
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {

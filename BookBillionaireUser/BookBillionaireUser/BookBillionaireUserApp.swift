@@ -35,6 +35,9 @@ struct BookBillionaireUserApp: App {
                 .environmentObject(authViewModel)
                 .environmentObject(authViewModelGoogle)
                 .environmentObject(bookService)
+                .task {
+                    bookService.fetchBooks()
+                }
         }
     }
 }

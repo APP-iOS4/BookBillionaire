@@ -22,7 +22,7 @@ public struct User: Identifiable, Codable {
         self.address = ""
     }
     
-    public init(id: String, nickName: String, address: String, image: String? = nil, point: Int? = 0, myBooks: [String]? = nil, rentalBooks: [String]? = nil) {
+    public init(id: String, nickName: String, address: String, image: String? = nil, point: Int? = 0, myBooks: [String]? = [], rentalBooks: [String]? = []) {
         self.id = id
         self.nickName = nickName
         self.address = address

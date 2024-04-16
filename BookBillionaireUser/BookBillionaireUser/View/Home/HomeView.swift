@@ -12,7 +12,8 @@ struct HomeView: View {
     @State private var users: [User] = []
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingMenuSet: Bool = false
-    let bookService = BookService.shared
+    @EnvironmentObject var bookService: BookService
+    @State private var books: [Book] = []
     let userService = UserService.shared
     
     var body: some View {
@@ -108,18 +109,19 @@ struct HomeView: View {
                 }
             }
         }
-        .padding()
-        // 책 불러오기
         .onAppear {
-            fetchBooks()
+            bookService.fetchBooks()
+            books = bookService.filterByCategory(.hometown)
             fetchUsers()
         }
+        .padding()
+        
+        // 책 불러오기
+        
     }
     // 책 데이터 호출
     func fetchBooks() {
-        Task {
-            books = await bookService.filteredLoadBooks(bookCategory: menuTitle)
-        }
+            books = bookService.filterByCategory(menuTitle)
     }
     // 책 소유자 유저 데이터 호출
     func fetchUsers() {
@@ -139,8 +141,10 @@ struct HomeView: View {
         // 일치값 없으면 일단 그냥 샘플 불러오게 처리
         return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
     }
+    
 }
 
-#Preview {
-    HomeView()
-}
+//#Preview {
+//    HomeView(books: .constant([Book]))
+//        .environmentObject(BookService())
+//}

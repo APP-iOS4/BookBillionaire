@@ -114,7 +114,7 @@ struct MyBookListView: View {
     private func loadMybook() {
         Task {
             if let user = AuthViewModel.shared.currentUser {
-                myBooks = await bookService.loadBookByID(user.uid)
+                myBooks = bookService.filterByOwenerID(user.uid)
             }
         }
     }

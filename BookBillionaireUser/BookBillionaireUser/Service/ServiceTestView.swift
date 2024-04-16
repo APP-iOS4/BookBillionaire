@@ -21,10 +21,13 @@ struct ServiceTestView: View {
     @State var books: [Book] = []
     var body: some View {
         Button("함수 실행") {
-            Task{
-                books = await bookService.filteredLoadBooks(bookCategory: .best)
-
-            }
+                books =  bookService.filterByCategory(.best)
+            print(books)
+        }
+        .onAppear{
+            bookService.fetchBooks()
+            books = bookService.books
+            
         }
     }
 }
