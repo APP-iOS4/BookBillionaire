@@ -71,12 +71,13 @@ class UserService: ObservableObject {
         }
     }
     
-    func updateUserByID(_ userID: String, nickname: String, imageUrl: String) async {
+    func updateUserByID(_ userID: String, nickname: String, imageUrl: String, address: String) async {
         let userRef = allUserRef.document(userID)
         do {
             try await userRef.updateData([
                 "nickname": nickname,
-                "profileImage": imageUrl
+                "profileImage": imageUrl,
+                "address": address
             ])
             print("유저 정보 변경 성공")
         } catch let error {
