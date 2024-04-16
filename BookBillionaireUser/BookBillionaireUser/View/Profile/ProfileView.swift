@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import FirebaseAuth
+//import FirebaseAuth
+import BookBillionaireCore
 import PhotosUI
 
 struct ProfileView: View {
@@ -14,7 +15,8 @@ struct ProfileView: View {
     @State private var isLoggedIn: Bool = false
     @State private var userEmail: String? // New state variable to hold user's email
     @State private var userUID: String? // New state variable to hold user's UID
-    @State private var user: User?
+    @State var user: User = User()
+    let userService: UserService = UserService.shared
     @State var isShowingDialog: Bool = false
     @State private var isShowingPhotosPicker: Bool = false
     @State private var selectedImage: UIImage?
@@ -24,60 +26,61 @@ struct ProfileView: View {
         VStack(alignment: .leading){
             Text("마이 프로필")
                 .font(.title.bold())
-//            if authViewModel.state == .loggedOut {
-//                UnlogginedView()
-//            } else {}
-            Section {
-                HStack(spacing: 20) {
-                    if let image = selectedImage {
-                        Button {
-                            isShowingDialog.toggle()
-                        } label: {
-                            Image(uiImage: image)
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                                .clipShape(Circle())
-                                .overlay(CameraOverlay(), alignment: .bottomTrailing)
+            if authViewModel.state == .loggedOut {
+                UnlogginedView()
+            } else {
+                Section {
+                    HStack(spacing: 20) {
+                        if let image = selectedImage {
+                            Button {
+                                isShowingDialog.toggle()
+                            } label: {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                                    .overlay(CameraOverlay(), alignment: .bottomTrailing)
+                            }
+                        } else {
+                            Button {
+                                isShowingDialog.toggle()
+                            } label: {
+                                Image("defaultUser1")
+                                    .resizable()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                                    .overlay(CameraOverlay(), alignment: .bottomTrailing)
+                            }
                         }
-                    } else {
-                        Button {
-                            isShowingDialog.toggle()
-                        } label: {
-                            Image("defaultUser1")
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                                .clipShape(Circle())
-                                .overlay(CameraOverlay(), alignment: .bottomTrailing)
+                        
+                        VStack(alignment: .leading) {
+                            Text(user.nickName)
+                                .bold()
+                            Text("")
                         }
                     }
-                    
-                    VStack(alignment: .leading) {
-                        Text("닉네임")
-                            .bold()
-                        Text("")
-                    }
+                    .padding()
                 }
-                .padding()
-            }
-            Text("최근 살펴본 책 내역")
-            HStack {
-                Rectangle()
-                Rectangle()
-                Rectangle()
-            }
-            .frame(height: 100)
-            .padding(.vertical)
-            Section("환경설정") {
-                List{
-                    Text("개인정보 처리방침")
-                    Button("로그아웃") {
-                        logout()
-                    }
+                Text("최근 살펴본 책 내역")
+                HStack {
+                    Rectangle()
+                    Rectangle()
+                    Rectangle()
                 }
-                .listStyle(.plain)
-            }                    
-            .navigationTitle("마이 프로필")
+                .frame(height: 100)
+                .padding(.vertical)
+                Section("환경설정") {
+                    List{
+                        Text("개인정보 처리방침")
+                        Button("로그아웃") {
+                            //                        logout()
+                        }
+                    }
+                    .listStyle(.plain)
+                }
+            }
         }
+        .navigationTitle("마이 프로필")
         .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItem)
         .confirmationDialog("프로필", isPresented: $isShowingDialog, actions: {
             Button{
@@ -106,23 +109,32 @@ struct ProfileView: View {
         }
         .padding()
         .onAppear{
-            userUID = authViewModel.currentUser?.uid
+//            userUID = authViewModel.currentUser?.uid
+            loadMyProfile()
         }
     }
     
-    func logout() {
-        do {
-            try Auth.auth().signOut()
-            authViewModel.state = .loggedOut // 로그아웃 상태로 변경
-            userEmail = nil // 이메일 초기화
-            userUID = nil // UID 초기화
-        } catch {
-            print("로그아웃 중 오류 발생:", error.localizedDescription)
+    private func loadMyProfile() {
+            Task {
+                if let currentUser = AuthViewModel.shared.currentUser {
+                    user = await userService.loadUserByID(currentUser.uid)
+                }
+            }
         }
-    }
+    
+//    func logout() {
+//        do {
+//            try Auth.auth().signOut()
+//            authViewModel.state = .loggedOut // 로그아웃 상태로 변경
+//            userEmail = nil // 이메일 초기화
+//            userUID = nil // UID 초기화
+//        } catch {
+//            print("로그아웃 중 오류 발생:", error.localizedDescription)
+//        }
+//    }
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(user: User())
         .environmentObject(AuthViewModel())
 }
