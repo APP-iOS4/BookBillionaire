@@ -102,9 +102,10 @@ struct HomeView: View {
                             }
                             Divider()
                         }
-                        .navigationDestination(for: Book.self) { book in
-                            BookDetailView(book: book, user: user(for: book))
-                        }
+                        
+                    }
+                    .navigationDestination(for: Book.self) { book in
+                        BookDetailView(book: book, user: user(for: book))
                     }
                 }
             }

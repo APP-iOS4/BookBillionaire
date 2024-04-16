@@ -27,7 +27,7 @@ struct BookBillionaireUserApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authViewModel: AuthViewModel = AuthViewModel.shared
     @StateObject private var authViewModelGoogle: AuthViewModelGoogle = AuthViewModelGoogle()
-    @StateObject private var bookService: BookService = BookService.shared
+    @StateObject private var bookService: BookService = BookService()
     
     var body: some Scene {
         WindowGroup {
@@ -36,7 +36,7 @@ struct BookBillionaireUserApp: App {
                 .environmentObject(authViewModelGoogle)
                 .environmentObject(bookService)
                 .task {
-                    bookService.fetchBooks()
+                        await bookService.loadBooks()
                 }
         }
     }

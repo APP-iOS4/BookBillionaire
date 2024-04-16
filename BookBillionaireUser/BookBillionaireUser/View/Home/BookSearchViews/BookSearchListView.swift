@@ -12,8 +12,8 @@ struct BookSearchListView: View {
     @Binding var searchBook: String
     @Binding var filteredBooks: [Book]
     let users: [User] = []
-    let bookService = BookService.shared
-    
+    @EnvironmentObject var bookService: BookService
+
     var body: some View {
         VStack(spacing: 20) {
             HStack {

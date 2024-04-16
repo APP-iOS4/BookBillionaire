@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct MyBookListView: View {
-    let bookService: BookService = BookService.shared
+    @EnvironmentObject var bookService: BookService
     @State private var myBooks: [Book] = []
     @State private var users: [User] = []
     @State private var isShowingAlert: Bool = false

@@ -13,8 +13,8 @@ struct BookSearchBarView: View {
     @Binding var filteredBooks: [Book]
     @State private var isSearching = false
     @State private var recentSearches: [String] = UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
-    let bookService = BookService.shared
-    
+    @EnvironmentObject var bookService: BookService
+
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .center) {

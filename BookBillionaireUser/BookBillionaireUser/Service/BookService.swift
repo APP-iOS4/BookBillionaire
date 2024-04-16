@@ -10,14 +10,9 @@ import FirebaseFirestore
 import BookBillionaireCore
 
 class BookService: ObservableObject {
-    static let shared = BookService()// 싱글턴 인스턴스
-    
-    @Published var books: [Book]
+    @Published var books: [Book] = []
     private let bookRef = Firestore.firestore().collection("books")
-    
-    init() {
-        self.books = []
-    }
+
     /// 책을 등록하는 함수
     func registerBook(_ book: Book) -> Bool {
         do {
@@ -32,18 +27,21 @@ class BookService: ObservableObject {
             return false
         }
     }
-
+    
     /// 유저들이 등록한 모든 책을 다 가져오는 함수
+    
     func loadBooks() async {
         do {
             let querySnapshot = try await bookRef.getDocuments()
-            books = querySnapshot.documents.compactMap { document -> Book? in
-                do {
-                    let book = try document.data(as: Book.self)
-                    return book
-                } catch {
-                    print("Error decoding book: \(error)")
-                    return nil
+            DispatchQueue.main.sync {
+                books = querySnapshot.documents.compactMap { document -> Book? in
+                    do {
+                        let book = try document.data(as: Book.self)
+                        return book
+                    } catch {
+                        print("Error decoding book: \(error)")
+                        return nil
+                    }
                 }
             }
         } catch {
@@ -53,7 +51,7 @@ class BookService: ObservableObject {
     
     /// 책들 모두 패치
     func fetchBooks() {
-        Task {
+        Task{
             await loadBooks()
         }
     }

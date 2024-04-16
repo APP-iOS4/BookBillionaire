@@ -22,13 +22,12 @@ public struct User: Identifiable, Codable {
         self.address = ""
     }
     
-    public init(id: String, nickName: String, address: String, image: String? = nil, point: Int? = 0, myBooks: [String]? = [], rentalBooks: [String]? = []) {
+    public init(id: String, nickName: String, address: String, image: String? = nil, point: Int? = 0, rentalBooks: [String]? = []) {
         self.id = id
         self.nickName = nickName
         self.address = address
         self.image = image
         self.point = point
-        self.myBooks = myBooks
         self.rentalBooks = rentalBooks
     }
     
@@ -38,8 +37,8 @@ public struct User: Identifiable, Codable {
         self.nickName = try container.decode(String.self, forKey: .nickName)
         self.address = try container.decodeIfPresent(String.self, forKey: .address) ?? "주소 정보 없음"
         self.image = try container.decodeIfPresent(String.self, forKey: .image)
-        self.myBooks = try container.decodeIfPresent([String].self, forKey: .myBooks) ?? []
-        self.rentalBooks = try container.decodeIfPresent([String].self, forKey: .rentalBooks) ?? []
+        self.myBooks = try container.decodeIfPresent([String].self, forKey: .myBooks) ?? [""]
+        self.rentalBooks = try container.decodeIfPresent([String].self, forKey: .rentalBooks) ?? [""]
     }
 }
 

@@ -48,5 +48,5 @@ struct BookListRowView: View {
 }
 
 #Preview {
-    BookListRowView(book: BookService.shared.books[0])
+    BookListRowView(book: BookService().books[0])
 }

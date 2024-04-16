@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct RentalBookListView: View {
-    let bookService: BookService = BookService.shared
+    @EnvironmentObject var bookService: BookService
     @State var myBooks: [Book] = []
     
     var body: some View {
