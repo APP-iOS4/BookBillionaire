@@ -13,7 +13,6 @@ struct StatusButton: View {
     
     var status: RentalStateType
     
-    
     var statusButtonColor: Color {
         switch status {
         case .renting:

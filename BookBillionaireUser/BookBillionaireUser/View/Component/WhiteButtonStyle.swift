@@ -10,12 +10,11 @@ import SwiftUI
 struct WhiteButtonStyle: ButtonStyle {
     var height: CGFloat = 60
     var font: Font? = .system(size: 20)
-
   func makeBody(configuration: Configuration) -> some View {
       ZStack{
           Capsule(style: .continuous)
               .stroke(Color.accentColor)
-              .foregroundColor(.white)
+              .foregroundStyle(.white)
               .frame(height: self.height)
           configuration.label
               .padding()
