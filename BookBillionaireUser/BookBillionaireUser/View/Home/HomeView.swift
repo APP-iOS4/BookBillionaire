@@ -41,23 +41,17 @@ struct HomeView: View {
                 .padding(.top)
             
             // 메뉴 버튼
-            ScrollView(.horizontal, showsIndicators: false){
-                HStack(spacing: 10) {
-                    ForEach(BookCategory.allCases, id: \.self) { menu in
-                        Button{
-                            menuTitle = menu
-                            fetchBooks()
-                        } label: {
-                            Text("\(menu.buttonTitle)")
-                                .padding(10)
-                                .frame(minWidth: 100)
-                                .fontWeight(menuTitle == menu ? .bold : .regular)
-                                .foregroundStyle(menuTitle == menu ? .white : .bbfont)
-                                .minimumScaleFactor(0.5)
-                        }
-                        .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.2))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .fixedSize()
+            HStack(alignment: .center) {
+                ForEach(BookCategory.allCases, id: \.self) { menu in
+                    Button{
+                        menuTitle = menu
+                        bookService.fetchBooks(menuTitle: menu)
+                        
+                    } label: {
+                        Text("\(menu.buttonTitle)")
+                            .fontWeight(menuTitle == menu ? .bold : .regular)
+                            .foregroundStyle(menuTitle == menu ? .white : .accentColor)
+                            .minimumScaleFactor(0.5)
                     }
                 }
                 .padding(.vertical, 20)
@@ -71,7 +65,7 @@ struct HomeView: View {
                         .padding(.bottom, 12)
                     // 책 리스트
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(books, id: \.self) { book in
+                        ForEach(bookService.books, id: \.self) { book in
                             HStack(alignment: .top, spacing: 0) {
                                 NavigationLink(value: book) {
                                     HStack(alignment: .center) {
@@ -101,19 +95,19 @@ struct HomeView: View {
 
                             }
                             Divider()
+                                .background(Color.gray)
+                                .padding(.vertical, 10)
                         }
-                        
-                    }
-                    .navigationDestination(for: Book.self) { book in
-                        BookDetailView(book: book, user: user(for: book))
+                        .navigationDestination(for: Book.self) { book in
+                            BookDetailView(book: book, user: searchService.user(for: book))
+                        }
                     }
                 }
             }
         }
         .onAppear {
-            bookService.fetchBooks()
-            books = bookService.filterByCategory(.hometown)
-            fetchUsers()
+            bookService.fetchBooks(menuTitle: menuTitle)
+            userService.fetchUsers()
         }
         .padding()
         
@@ -142,7 +136,6 @@ struct HomeView: View {
         // 일치값 없으면 일단 그냥 샘플 불러오게 처리
         return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
     }
-    
 }
 
 //#Preview {

@@ -10,12 +10,12 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-// [테스트용] 방 생성 뷰모델 입니다 - 추후 삭제 예정
+// [임시] 방 생성 뷰모델 입니다 - 추후 삭제 예정
 
 class AddRoomViewModel: ObservableObject {
     
     var name: String = ""
-    let db = Firestore.firestore()
+    let db = Firestore.firestore().collection("chat")
     
     func createRoom(completion: @escaping () -> Void) {
         // 채팅방 생성 함수
@@ -23,7 +23,7 @@ class AddRoomViewModel: ObservableObject {
         
         do {
         
-        _ = try db.collection("chat")
+        _ = try db
             .addDocument(from: room, encoder: Firestore.Encoder()) { (error) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -34,7 +34,6 @@ class AddRoomViewModel: ObservableObject {
         } catch let error {
             print(error.localizedDescription)
         }
-        
     }
-    
 }
+

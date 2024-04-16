@@ -15,7 +15,7 @@ struct BookInfoAddView: View {
     @State var isShowingDialog: Bool = false
     @State var isShowingPhotosPicker: Bool = false
     @State var isShowingCamera: Bool = false
-    @State private var selectedImage: UIImage?
+    @Binding var selectedImage: UIImage?
     @State private var selectedItem: PhotosPickerItem?
     
     var body: some View {
@@ -94,6 +94,6 @@ struct BookInfoAddView: View {
 }
 
 #Preview {
-    BookInfoAddView(book: .constant(Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)))
+    BookInfoAddView(book: .constant(Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)), selectedImage: .constant(UIImage()))
 }
 

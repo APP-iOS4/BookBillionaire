@@ -26,7 +26,7 @@ struct ChatBubble: View {
                     Text("\(message.formatTimestamp(message.messageTimestamp))")
                         .font(.caption2)
                         .foregroundColor(.gray)
-                    
+                   
                     Text(messageText)
                         .lineLimit(nil)
                         .padding(12)

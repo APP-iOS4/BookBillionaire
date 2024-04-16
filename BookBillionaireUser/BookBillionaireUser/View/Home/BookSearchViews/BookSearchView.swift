@@ -11,7 +11,6 @@ import BookBillionaireCore
 
 struct BookSearchView: View {
     @State private var searchBook = ""
-    @State private var recentSearches: [String] = []
     @State private var filteredBooks: [Book] = [] // 필터링된 책 목록 추가
     @State private var isWebViewPresented = false
     @State private var selectedBookstoreSettings: BookStoreSettings?

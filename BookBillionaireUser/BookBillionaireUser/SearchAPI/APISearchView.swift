@@ -91,7 +91,7 @@ struct APISearchView: View {
                 } else if books.count != 0 {
                     List(books, id: \.id) { book in
                         NavigationLink {
-                            BookCreateView()
+                            BookCreateView(searchBook: book)
                         } label: {
                             APISearchListRowView(book: book)
                         }

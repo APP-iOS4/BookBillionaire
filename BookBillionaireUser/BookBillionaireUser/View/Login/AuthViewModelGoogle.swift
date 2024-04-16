@@ -4,7 +4,6 @@
 //
 //  Created by Seungjae Yu on 4/8/24.
 //  https://elisha0103.tistory.com/9
-
 import Firebase
 import GoogleSignIn
 
@@ -12,9 +11,6 @@ class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
     
     @Published var state: AuthState = .loggedOut
     let signInMethod: SignInMethod = .google
-
-    let authViewModel = AuthViewModel.shared
-
     
     // google 로그인 절차
     func signIn(email: String?, password: String?) {
@@ -54,27 +50,43 @@ class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
             } else {
                 print("Successfully signed in with Google")
                 self.state = .loggedIn
-                authViewModel.state = .loggedIn
+                AuthViewModel.shared.state = .loggedIn
 
                 print("사용자 이메일: \(String(describing: result?.user.email))")
-                print("사용자 이름: \(String(describing: result?.user.displayName))") //nil 리턴
+                print("사용자 이름: \(String(describing: result?.user.displayName))")
+                
+                if let isNewUser = result?.additionalUserInfo?.isNewUser, isNewUser {
+                    signUp(user: result?.user)
+                }
             }
         }
     }
     
-    func readUserData(uid: String) {
-    
-    }
-    
-    
-    // 로그아웃 절차
-    func signOut() {
-        GIDSignIn.sharedInstance.signOut()
-        
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print(error.localizedDescription)
+    // firebase 회원가입
+    private func signUp(user: User?) {
+        // Perform sign-up process here
+        // You can implement your sign-up logic in this function
+        if let user = user {
+            // Firestore에 사용자 정보 및 생성일자 저장
+            let db = Firestore.firestore()
+            let userData: [String: Any] = [
+                "emailEqualtoAuth": user.email ?? "",
+                "nickname": user.displayName ?? "",
+                "createdAt": Timestamp(date: Date()), // 현재 시간을 Timestamp로 변환하여 저장
+                "id": user.uid,
+                "introduction": "",
+                "profileImage": "person.crop.circle"
+            ]
+            db.collection("User").document(user.uid).setData(userData) { error in
+                if let error = error {
+                    print("Error saving user data: \(error.localizedDescription)")
+                    return
+                }
+                print("사용자 데이터가 성공적으로 저장되었습니다.")
+                
+                // 사용자 데이터를 다시 읽어와서 출력
+                AuthViewModel.shared.readUserData(uid: user.uid)
+            }
         }
     }
 }

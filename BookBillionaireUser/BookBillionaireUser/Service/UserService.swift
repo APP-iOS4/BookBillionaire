@@ -63,6 +63,27 @@ class UserService: ObservableObject {
             return User(id: "", nickName: "", address: "")
         }
     }
+    
+    // 책 소유자 유저 데이터 호출
+    func fetchUsers() {
+        Task {
+            await UserService.shared.loadUsers()
+        }
+    }
+    
+    func updateUserByID(_ userID: String, nickname: String, imageUrl: String, address: String) async {
+        let userRef = allUserRef.document(userID)
+        do {
+            try await userRef.updateData([
+                "nickname": nickname,
+                "profileImage": imageUrl,
+                "address": address
+            ])
+            print("유저 정보 변경 성공")
+        } catch let error {
+            print("Error updating user: \(error)")
+        }
+    }
 }
 
 

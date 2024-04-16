@@ -20,6 +20,7 @@ public struct User: Identifiable, Codable {
         self.id = UUID().uuidString
         self.nickName = ""
         self.address = ""
+        self.image = ""
     }
     
     public init(id: String, nickName: String, address: String, image: String? = nil, point: Int? = 0, rentalBooks: [String]? = []) {
@@ -45,7 +46,7 @@ public struct User: Identifiable, Codable {
 public enum UserCodingKeys: String, CodingKey {
     case id, address
     case nickName = "nickname"
-    case image
+    case image = "profileImage"
     case price
     case pointUserID
     case myBooks
