@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct RLoginInfoView: View {
-    @State var banners: [String] = ["banner1", "banner2", "banner3"]
+    @State var banners: [String] = ["sampleImage1", "sampleImage2", "sampleImage3"]
     @State private var currentIndex = 0
     
     var body: some View {
