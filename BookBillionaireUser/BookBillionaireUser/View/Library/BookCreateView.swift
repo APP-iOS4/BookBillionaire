@@ -19,6 +19,14 @@ struct BookCreateView: View {
     @State var isShowingSheet: Bool = false
     @State private var selectedImage: UIImage?
     
+    init(searchBook: SearchBook? = nil) {
+            if let searchBook = searchBook {
+                _book = State(initialValue: Book(owenerID: "", title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
+            } else {
+                _book = State(initialValue: Book(owenerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable))
+            }
+        }
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -69,6 +77,9 @@ struct BookCreateView: View {
         let fileRef = storageRef.child(path)
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
+            } else if let error = error {
+                // Handle unsuccessful upload
+                print("Error uploading image: \(error)")
             }
         }
     }
