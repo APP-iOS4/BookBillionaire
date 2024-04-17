@@ -19,8 +19,9 @@ struct BookDetailView: View {
     @State var roomModel: ChatRoom = ChatRoom(id: "", receiverName: "", lastTimeStamp: Date(), lastMessage: "", users: [])
     
     @State private var showLoginAlert = false
-    
     @State private var createdRoomId: String?
+    @State var isShowingAlert: Bool = false
+    @State var isShowingSheet: Bool = false
     
     var body: some View {
         ZStack {
@@ -29,7 +30,6 @@ struct BookDetailView: View {
                 CustomAlert(alertType: .hidePost, isShowingDefualtAlert: $isShowingAlert)
                     .zIndex(1)
             }
-            .offset(x: 170, y: -90)
             
             // 정보란
             VStack(alignment: .leading) {
