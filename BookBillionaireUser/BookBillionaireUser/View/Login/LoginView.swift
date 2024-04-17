@@ -5,6 +5,7 @@ import AuthenticationServices
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
+    @EnvironmentObject var userService: UserService
     @Environment(\.dismiss) private var dismiss
 
     @Binding var isPresentedLogin: Bool

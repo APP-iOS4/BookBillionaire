@@ -57,6 +57,7 @@ struct LibraryView: View {
             }
         case .loggedOut:
             UnlogginedView()
+                .padding()
         }
     }
 }

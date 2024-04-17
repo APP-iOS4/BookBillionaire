@@ -37,6 +37,7 @@ struct ChatListView: View {
             }
         case .loggedOut:
             UnlogginedView()
+                .padding()
         }
     }
 }
