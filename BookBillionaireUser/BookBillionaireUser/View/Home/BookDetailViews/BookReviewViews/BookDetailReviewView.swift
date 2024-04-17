@@ -42,10 +42,11 @@ struct BookDetailReviewView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 12)
                 }
+                .foregroundStyle(Color.primary)
                 .padding(5)
                 .overlay {
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.accentColor, lineWidth: 1)
+                        .stroke(Color.primary.opacity(0.5), lineWidth: 2)
                         .background(Color.clear)
                 }
             }

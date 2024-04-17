@@ -66,8 +66,6 @@ struct CreateBookReviewView: View {
             .padding(.bottom, 8)
             .padding(.top, 0)
             .padding(.horizontal)
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
     }
 }

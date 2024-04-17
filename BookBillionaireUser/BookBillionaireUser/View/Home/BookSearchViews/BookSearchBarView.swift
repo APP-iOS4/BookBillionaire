@@ -67,6 +67,7 @@ struct BookSearchBarView: View {
                 RecentSearchView(searchBook: $searchService.searchBook)
             }
         }
+        .navigationTitle("책 검색하기")
     }
     
 }
