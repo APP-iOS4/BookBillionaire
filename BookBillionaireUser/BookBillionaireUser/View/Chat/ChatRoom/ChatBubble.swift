@@ -18,7 +18,7 @@ struct ChatBubble: View {
     let username: String
     let style: MessageStyle
     let messageVM: MessageViewModel
-    let message: Message = Message(id: "", message: "", senderId: "", roomId: "", timestamp: Date(), ImageURL: "")
+    let message: Message = Message(id: "", message: "", senderName: "", roomId: "", timestamp: Date(), ImageURL: "")
     
     var body: some View {
         VStack(alignment: style == .from ? .trailing : .leading) {
@@ -44,15 +44,14 @@ struct ChatBubble: View {
                 HStack(alignment: .top) {
                     ZStack {
                         //[임시] 상대방 프로필 사진 불러오기
-                        Circle()
-                            .foregroundColor(.accentColor)
-                            .frame(width: 40, height: 40)
-                            .opacity(0.8)
-                        
-                        Image(systemName: "figure.arms.open")
-                            .padding(8)
-                            .foregroundColor(.white)
+                        Image("defaultUser")
+                            .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
                     }
+                    .padding(.top, 5)
                     
                     HStack(alignment: .bottom) {
                         VStack(alignment: .leading) {
@@ -62,7 +61,7 @@ struct ChatBubble: View {
                                 Text(messageText)
                                     .lineLimit(nil)
                                     .padding(12)
-                                    .background(Color.gray)
+                                    .background(Color.blue.opacity(0.6))
                                     .foregroundStyle(.white)
                                     .cornerRadius(15)
                             } else {

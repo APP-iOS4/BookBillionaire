@@ -21,7 +21,6 @@ struct PhotoSharedItem: View {
                     AsyncImage(url: url) { image in
                         image.resizable()
                             .frame(width: 80, height: 80)
-//                            .background(Color.gray)
                     } placeholder: {
                         ProgressView()
                     }
@@ -35,7 +34,7 @@ struct PhotoSharedItem: View {
                 Spacer()
             }
         .onAppear {
-            // 사진 받아오는 코드
+            // 사진 받아오기
             if message.ImageURL!.hasPrefix("http://") || message.ImageURL!.hasPrefix("https://") {
                 imageUrl = URL(string: message.ImageURL ?? "")
             } else {

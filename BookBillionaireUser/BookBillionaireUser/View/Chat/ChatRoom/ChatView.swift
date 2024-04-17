@@ -11,8 +11,8 @@ import BookBillionaireCore
 
 struct ChatView: View {
     let room: RoomViewModel
-    
-    @State var message: Message = Message(message: "", senderId: "", roomId: "", timestamp: Date(), ImageURL: "")
+
+    @State var message: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date(), ImageURL: "")
     
     @StateObject private var messageListVM = MessageListViewModel()
     @State private var promiseViewShowing = false
@@ -34,6 +34,7 @@ struct ChatView: View {
             Divider()
             
             chatBubble
+                .padding(.top, 5)
             
             Spacer()
             
@@ -55,7 +56,7 @@ struct ChatView: View {
     }
     
     private func sendMessage() {
-        let messageVS = Message(message: messageText, senderId: username ?? "", roomId: room.roomId, timestamp: Date())
+        let messageVS = Message(message: messageText, senderName: username ?? "", roomId: room.roomId, timestamp: Date())
         
         messageListVM.sendMessage(msg: messageVS) {
             messageText = ""
@@ -66,70 +67,83 @@ struct ChatView: View {
     private var promiseBanner: some View {
         VStack {
             HStack(alignment: .center) {
-                Image(systemName: "a.book.closed.ko")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .padding(.leading, 25)
-                    .padding(.trailing, 10)
+                AsyncImage(url: URL(string:
+                                        "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F1103577%3Ftimestamp%3D20221025123259"
+                                   )) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 85, height: 100)
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+                .padding(.leading, 25)
+                .padding(.trailing, 10)
+                
                 VStack(alignment: .leading) {
-                    Text("패밀리 레스토랑 가자(상)")
+                    
+                    Text("Clean Code(클린 코드)")
                         .font(.headline)
-                    Text("신드롬을 일으킨 『가라오케 가자!』. 출간 직후 종합 베스트셀러 1위는 물론, 탄탄한 팬덤이 생길 만큼 화제가 되었던 작품이다. 끔찍한 벌칙이 걸린 가라오케 대회를 위해 의기투합했던 야쿠자 쿄지와 독설 노래 선생 사토미의 뒷이야기를 궁금해하고, 오매불망 기다려왔던 독자들에게 새로운 이야기가 도착했다. ")
+                        .bold()
+                    
+                    Text("『Clean Code(클린 코드)』은 오브젝트 멘토(Object Mentor)의 동료들과 힘을 모아 ‘개발하며’ 클린 코드를 만드는 최상의 애자일 기법을 소개하고 있다. 소프트웨어 장인 정신의 가치를 심어 주며 프로그래밍 실력을 높여줄 것이다. 여러분이 노력만 한다면. 어떤 노력이 필요하냐고? 코드를 읽어야 한다. 아주 많은 코드를. 그리고 코드를 읽으면서 그 코드의 무엇이 옳은지, 그른지 생각도 해야 한다. 좀 더 중요하게는 전문가로서 자신이 지니는 가치")
                         .font(.subheadline)
                         .foregroundStyle(.gray)
                         .lineLimit(2)
+                    
+                    HStack {
+                        Button("위치 확인") {
+                            // 장소 확인하는 버튼
+                        }
+                        .padding(7)
+                        .padding(.horizontal, 17)
+                        .font(.callout)
+                        .foregroundStyle(.black)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.accent, lineWidth: 1.5))
+                        
+                        Spacer()
+                        
+                        Button("약속 잡기") {
+                            // 약속 잡기 뷰로 이동
+                            // promiseViewShowing.toggle()
+                            //            hideKeyboard()
+                            //        } label: {
+                            ////            NavigationLink(destination: PromiseConfirmView(user: User, book: <#Book#>)) {
+                            ////                Text("약속잡기")
+                            //            }
+                           
+                        }
+                        .padding(7)
+                        .padding(.horizontal, 17)
+                        .font(.callout)
+                        .foregroundStyle(.black)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.accent, lineWidth: 1.5))
+                        
+                        /* // 파란색 배경 버튼
+                         .padding(9)
+                         .font(.callout)
+                         .background(
+                         RoundedRectangle(cornerRadius: 15)
+                         .foregroundColor(.accentColor))
+                         .foregroundStyle(.white)
+                         
+                         */
+                        Spacer()
+                    }
                 }
-                .padding(.trailing, 25)
+                .padding(.trailing, 16)
                 
                 Spacer()
                 
             }
-            .frame(height: 70)
-            
-            HStack {
-                Spacer()
-                
-                Button("위치 확인") {
-                    // 장소 확인하는 버튼
-                }
-                .padding(8)
-                .padding(.horizontal, 10)
-                .font(.callout)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.accentColor, lineWidth: 1))
-                
-                Spacer()
-                    .frame(width: 30)
-                
-                Button("약속 잡기") {
-                    // 약속 잡기 뷰로 이동
-                    // promiseViewShowing.toggle()
-                    //            hideKeyboard()
-                    //        } label: {
-                    ////            NavigationLink(destination: PromiseConfirmView(user: User, book: <#Book#>)) {
-                    ////                Text("약속잡기")
-                    //            }
-                   
-                }
-                .padding(8)
-                .padding(.horizontal, 10)
-                .font(.callout)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.accentColor, lineWidth: 1))
-                
-                /* // 파란색 배경 버튼
-                 .padding(9)
-                 .font(.callout)
-                 .background(
-                 RoundedRectangle(cornerRadius: 15)
-                 .foregroundColor(.accentColor))
-                 .foregroundStyle(.white)
-                 
-                 */
-                Spacer()
-            }
+            .frame(height: 120)
         }
     }
     
@@ -239,5 +253,5 @@ extension View {
 
 
 #Preview {
-    ChatView(room: RoomViewModel(room: Room(receiverId: "최준영", lastTimeStamp: Date(), lastMessage: "", users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"])))
+    ChatView(room: RoomViewModel(room: ChatRoom(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "", users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"])))
 }
