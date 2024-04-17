@@ -24,9 +24,9 @@ public struct Book: Identifiable, Codable, Hashable {
     public var rentalState: RentalStateType
 
     /// 일반 초기화
-    public init(owenerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", rental: String = "", rentalState: RentalStateType) {
+    public init(ownerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", rental: String = "", rentalState: RentalStateType) {
         
-        self.ownerID = owenerID
+        self.ownerID = ownerID
         self.isbn = isbn
         self.title = title
         self.contents = contents
