@@ -70,9 +70,11 @@ struct HomeView: View {
                     LazyVStack(alignment: .leading, spacing: 10) {
                         ForEach(filteredBooks, id: \.self) { book in
                             HStack(alignment: .top, spacing: 0) {
+                                NavigationLink(value: book) {
                                     HStack(alignment: .center) {
                                         BookItem(book: book)
                                     }
+                                }
                                 .foregroundStyle(.primary)
                                 Spacer()
                                 // 설정 버튼
