@@ -46,5 +46,5 @@ struct BookDetailImageView: View {
 }
 
 #Preview {
-    BookDetailImageView(book: Book(owenerID: "", title: "책제목", contents: "책내용", authors: ["작가"], rentalState: .rentalAvailable))
+    BookDetailImageView(book: Book(ownerID: "", title: "책제목", contents: "책내용", authors: ["작가"], rentalState: .rentalAvailable))
 }

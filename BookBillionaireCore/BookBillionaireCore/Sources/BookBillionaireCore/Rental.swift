@@ -15,6 +15,8 @@ public struct Rental: Identifiable, Codable{
     public var rentalEndDay: Date
     public var rentalTime: Date?
     public var map: String
+    public var latitude: Double
+    public var longitude: Double
     
     public init() {
         self.id = UUID().uuidString
@@ -24,9 +26,11 @@ public struct Rental: Identifiable, Codable{
         self.rentalEndDay = Date()
         self.rentalTime = Date()
         self.map = ""
+        self.latitude = 0.0
+        self.longitude = 0.0
     }
     
-    public init(id: String, bookOwner: String, bookBorrower: String? = nil, rentalStartDay: Date, rentalEndDay: Date, rentalTime: Date? = nil, map: String) {
+    public init(id: String, bookOwner: String, bookBorrower: String? = nil, rentalStartDay: Date, rentalEndDay: Date, rentalTime: Date? = nil, map: String, latitude: Double, longitude: Double) {
         self.id = UUID().uuidString
         self.bookOwner = bookOwner
         self.bookBorrower = bookBorrower
@@ -34,5 +38,7 @@ public struct Rental: Identifiable, Codable{
         self.rentalEndDay = rentalEndDay
         self.rentalTime = rentalTime
         self.map = map
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }

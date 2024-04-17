@@ -72,6 +72,6 @@ struct BookSearchBarView: View {
 }
 
 #Preview {
-    BookSearchBarView(searchBook: .constant("원도"), filteredBooks: .constant([Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]))
+    BookSearchBarView(searchBook: .constant("원도"), filteredBooks: .constant([Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]))
 }
 
