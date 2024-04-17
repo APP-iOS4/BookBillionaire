@@ -50,7 +50,9 @@ struct MyBookListView: View {
                     LazyVStack(alignment: .leading, spacing: 10) {
                         ForEach(myBooks) { book in
                             HStack(alignment: .top) {
-                                BookItem(book: book)
+                                NavigationLink(value: book) {
+                                    BookItem(book: book)
+                                }
                                 Spacer()
                                 // 메뉴 버튼
                                 Menu {
@@ -97,7 +99,8 @@ struct MyBookListView: View {
                     }
                     .padding()
                     .navigationDestination(for: Book.self) { book in
-                        BookDetailView(book: book, user: user(for: book))
+                        RentalCreateView(book: book)
+                        .toolbar(.hidden, for: .tabBar)
                     }
                     SpaceBox()
                 }
@@ -151,5 +154,6 @@ struct MyBookListView: View {
 #Preview {
     NavigationStack {
         MyBookListView()
+            .environmentObject(BookService())
     }
 }

@@ -12,48 +12,43 @@ import FirebaseStorage
 struct BookItem: View {
     let book: Book
     @State private var imageUrl: URL?
-    @State private var isFavorite: Bool = false
     
     var body: some View {
-        NavigationLink(value: book) {
-            VStack(alignment: .center) {
-                HStack(alignment: .top) {
-                    // 책 이미지 부분
-                    if let url = imageUrl {
-                        AsyncImage(url: url) { image in
-                            image.resizable()
-                                .frame(width: 100, height: 140)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                    } else {
-                        Image("default")
-                            .resizable()
+            HStack(alignment: .top) {
+                // 책 이미지 부분
+                if let url = imageUrl {
+                    AsyncImage(url: url) { image in
+                        image.resizable()
                             .frame(width: 100, height: 140)
-                            .background(Color.gray)
+                    } placeholder: {
+                        ProgressView()
                     }
-                    
-                    VStack(alignment: .leading) {
-                        Text(book.title)
-                            .font(.subheadline)
-                            .padding(.bottom, 5)
-                        if book.authors.isEmpty {
-                            Text("\(book.title)")
-                            Text("\(book.translators?.joined(separator: ", ") ?? "")")
-                        } else {
-                            Text("\(book.title)")
-                            Text("\(book.authors.joined(separator: ", "))")
-                        }
-                    }
-                    .padding(.bottom, 10)
-                    .font(.caption)
-                    .multilineTextAlignment(.leading)
-                    .foregroundStyle(Color.primary)
+                } else {
+                    Image("default")
+                        .resizable()
+                        .frame(width: 100, height: 140)
                 }
-                .padding(.leading, 10)
-                Spacer()
+                
+                // 책 정보 부분
+                VStack(alignment: .leading) {
+                    Text(book.title)
+                        .font(.subheadline)
+                        .padding(.bottom, 5)
+                    if book.authors.isEmpty {
+                        Text("\(book.title)")
+                        Text("\(book.translators?.joined(separator: ", ") ?? "")")
+                    } else {
+                        Text("\(book.title)")
+                        Text("\(book.authors.joined(separator: ", "))")
+                    }
+                }
+                .padding(.bottom, 10)
+                .font(.caption)
+                .multilineTextAlignment(.leading)
+                .foregroundStyle(Color.primary)
             }
-        }
+            .padding(.leading, 10)
+
         .onAppear {
             // 앞글자에 따라 imageURL에 할당하는 조건
             if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
@@ -75,5 +70,5 @@ struct BookItem: View {
 
 
 #Preview {
-    BookItem(book: Book(owenerID: "", title: "제목", contents: "내용", authors: ["작가"], rentalState: .rentalAvailable))
+    BookItem(book: Book(ownerID: "", title: "제목", contents: "내용", authors: ["작가"], rentalState: .rentalAvailable))
 }

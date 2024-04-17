@@ -5,6 +5,7 @@
 //  Created by 홍승표 on 4/3/24.
 //
 
+
 import SwiftUI
 import BookBillionaireCore
 
@@ -13,17 +14,28 @@ struct BookDetailView: View {
     @State var user: User = User()
     @EnvironmentObject var userService: UserService
     @StateObject var commentViewModel = CommnetViewModel()
+    
     //채팅
     @EnvironmentObject var authViewModel: AuthViewModel
     @State var roomListVM: RoomListViewModel = RoomListViewModel()
     @State var roomModel: ChatRoom = ChatRoom(id: "", receiverName: "", lastTimeStamp: Date(), lastMessage: "", users: [])
-    
     @State private var isShowingSheet: Bool = false
     @State private var isFavorite: Bool = false
     @State private var showLoginAlert = false
     @State private var isChatViewPresented = false
     
     @State private var roomId: String? // 생성한 방의 id를 담는 변수
+    
+    // 렌탈
+    let rentalService = RentalService()
+    @State var rentalTime: (Date, Date) = (Date(), Date())
+    @State var rental: Rental = Rental()
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        return formatter
+    }
+    
     
     var body: some View {
         ScrollView {
@@ -118,43 +130,30 @@ struct BookDetailView: View {
                     }
                     
                     Spacer()
-                    
-                    HStack {
-                        Text("책 소유자 : \(user.nickName)")
-                        Image(user.image ?? "default")
-                            .resizable()
-                            .clipShape(Circle())
-                            .frame(width: 30, height: 30)
-                        
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("책 소유자 : \(user.nickName)")
+                            Image(user.image ?? "default")
+                                .resizable()
+                                .clipShape(Circle())
+                                .frame(width: 30, height: 30)
+                        }
+                        // 대여기간 표시
+                        Text("대여기간: \(dateFormatter.string(from: rentalTime.0)) ~ \(dateFormatter.string(from: rentalTime.1))")
+                    }
+                    .font(.headline)
+                    .onAppear {
+                        Task {
+                            rentalTime = await rentalService.getRentalDay(rental.id)
+                        }
                     }
                 }
+                
                 Divider()
                     .padding(.vertical, 10)
                 
                 // 책 정보 섹션
-                VStack(alignment: .leading) {
-                    Text("작품소개")
-                        .font(.subheadline)
-                        .fontWeight(.bold)
-                    Text(book.contents)
-                        .font(.system(size: 13))
-                    
-                    HStack{
-                        if book.authors.isEmpty {
-                            Text("저자를 찾을 수 없어요.")
-                        } else {
-                            ForEach(book.authors, id: \.self) { author in
-                                Text(author)
-                            }
-                        }
-                        Divider()
-                        ForEach(book.translators ?? ["번역자"], id: \.self) { translator in Text("번역:\(translator)")
-                        }
-                        Spacer()
-                        Text(book.bookCategory?.rawValue ?? "카테고리")
-                    }
-                    .font(.caption)
-                }
+                BookDetailInfoView(book: book)
                 
                 Divider()
                     .padding(.vertical, 10)
@@ -174,5 +173,5 @@ struct BookDetailView: View {
 }
 
 #Preview {
-    BookDetailView(book: Book(owenerID: "", title: "책이름", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(id: "책유저", nickName: "닉네임", address: "주소"))
+    BookDetailView(book: Book(ownerID: "", title: "책이름", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(id: "책유저", nickName: "닉네임", address: "주소"))
 }

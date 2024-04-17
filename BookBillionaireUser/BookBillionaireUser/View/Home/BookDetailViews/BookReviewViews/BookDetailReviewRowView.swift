@@ -22,20 +22,23 @@ struct BookDetailReviewRowView: View {
                 Text(user.nickName)
                     .font(.headline)
                 Spacer()
-                Text("\(comment.relativeTime)")
-            }
-            
-            HStack(alignment: .top) {
-                ForEach(1...5, id: \.self) { index in // star의 값에 따라 별의 개수를 표시
-                    if index <= comment.star {
-                        Image(systemName: "star.fill")
-                            .foregroundStyle(.yellow)
-                    } else {
-                        Image(systemName: "star")
-                            .foregroundStyle(.gray)
+                VStack(alignment: .trailing) {
+                    HStack(alignment: .top) {
+                        ForEach(1...5, id: \.self) { index in // star의 값에 따라 별의 개수를 표시
+                            if index <= comment.star {
+                                Image(systemName: "star.fill")
+                                    .foregroundStyle(.yellow)
+                            } else {
+                                Image(systemName: "star")
+                                    .foregroundStyle(.gray)
+                            }
+                        }
                     }
+                    Text("\(comment.relativeTime)")
+                        .font(.caption)
                 }
             }
+
                 .padding(.vertical, 8)
             Text(comment.comment)
         }

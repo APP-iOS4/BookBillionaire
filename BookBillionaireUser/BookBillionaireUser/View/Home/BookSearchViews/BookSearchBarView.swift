@@ -67,11 +67,12 @@ struct BookSearchBarView: View {
                 RecentSearchView(searchBook: $searchService.searchBook)
             }
         }
+        .navigationTitle("책 검색하기")
     }
     
 }
 
 #Preview {
-    BookSearchBarView(searchBook: .constant("원도"), filteredBooks: .constant([Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]))
+    BookSearchBarView(searchBook: .constant("원도"), filteredBooks: .constant([Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]))
 }
 
