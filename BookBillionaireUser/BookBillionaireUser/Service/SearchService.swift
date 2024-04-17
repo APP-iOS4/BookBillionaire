@@ -27,19 +27,6 @@ class SearchService: ObservableObject {
         }
     }
     
-    // 서치바 필터링 책검색 함수
-    // 서비스 데이터(Back)를 모델에 가져와 뷰(Front)에 적용
-    func searchBooksByTitle(title: String) {
-        Task {
-            let filteredResults = await self.searchBooksByTitle(title: searchBook)
-            
-            DispatchQueue.main.async {
-                self.filteredBooks = filteredResults
-            }
-        }
-    }
-    
-    
     // 검색어 되돌리기
     func removeSearchHistory(search: String) {
         if let index = recentSearches.firstIndex(of: search) {
@@ -49,19 +36,7 @@ class SearchService: ObservableObject {
         }
     }
     
-    
-//    // BookDetailView에 전달할 User를 가져오는 메서드
-//    // User 반환
-//    //
-//    func user(for book: Book) -> User {
-//        // book.ownerID == user.id 일치 확인 후 값 return
-//        if let user = userService.users.first(where: { $0.id == book.ownerID }) {
-//            return user
-//        }
-//        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-//        return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
-//    }
-    
+
     // 책 검색 필터 (서치바)
     func searchBooksByTitle(title: String) async -> [Book] {
         var searchResult: [Book] = []
@@ -75,7 +50,6 @@ class SearchService: ObservableObject {
                     
                     let contained = titleCharacters.allSatisfy { character in
                         return (book.title).localizedCaseInsensitiveContains(String(character))
-                        
                     }
                     
                     if contained {
@@ -95,6 +69,4 @@ class SearchService: ObservableObject {
         }
         return searchResult
     }
-
-
 }

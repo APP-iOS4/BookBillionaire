@@ -14,17 +14,23 @@ struct ServiceTestView: View {
     let mapService: MapService = MapService.shared
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var bookService: BookService
-    let rentalService: RentalService = RentalService.shared
+
     let imagesRef = Storage.storage().reference().child("images")
+    let rentalService = RentalService()
 
     @State var users: [User] = []
     @State var books: [Book] = []
+    @State var rentalTime: (Date, Date) = (Date(), Date())
+    @State var rental: Rental = Rental()
+    
     var body: some View {
         Button("함수 실행") {
             Task{
-                await userService.loadUsers()
+                rental = await rentalService.getRental("0435FF97-97DD-40E3-9FB1-90D0947551B4")
+                rentalTime = await rentalService.getRentalDay("0435FF97-97DD-40E3-9FB1-90D0947551B4")
             }
-            print("\(userService.loadUserByID("CG8Ilul95OOoFcEEk8LUUNhWSqz1"))")
+            print("\(rental)")
+            print("\(rentalTime)")
         }
     }
 }

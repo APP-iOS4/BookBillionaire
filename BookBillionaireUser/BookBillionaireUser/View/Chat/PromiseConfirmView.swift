@@ -15,7 +15,7 @@ struct PromiseConfirmView: View {
     @State var selectedTime = Date()
     @State var selectedDate = Date()
     @Environment (\.dismiss) private var dismiss
-    @State var rentalService: RentalService = RentalService.shared
+    @State var rentalService: RentalService = RentalService()
     var user: User
     @State var book: Book
 

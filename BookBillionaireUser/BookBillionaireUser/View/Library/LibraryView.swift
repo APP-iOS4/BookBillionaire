@@ -16,6 +16,7 @@ struct LibraryView: View {
         switch authViewModel.state {
         case .loggedIn:
             VStack {
+                // 카테고리 선택
                 Section(header: CategoryView(selectedIndex: $selectedIndex)) {
                     if selectedIndex == 0 {
                         MyBookListView()
@@ -25,20 +26,22 @@ struct LibraryView: View {
                     Spacer()
                 }
             }
-            .toolbarBackground(.background, for: .navigationBar)
             .navigationTitle("내 서재")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
+                    // 메뉴 버튼
                     Menu {
                         NavigationLink {
                             APISearchView(isShowing: $isShowing)
+                            .toolbar(.hidden, for: .tabBar)
                         } label: {
                             Label("검색으로 등록하기", systemImage: "magnifyingglass")
                         }
                         
                         NavigationLink {
                             BookCreateView()
+                            .toolbar(.hidden, for: .tabBar)
                         } label: {
                             Label("입력으로 등록하기", systemImage: "square.and.pencil")
                         }
@@ -49,7 +52,7 @@ struct LibraryView: View {
                                 .foregroundStyle(Color.accentColor)
                         }
                     }
-                    .toolbar(.hidden, for: .tabBar)
+                    
                 }
             }
         case .loggedOut:
@@ -62,5 +65,6 @@ struct LibraryView: View {
     NavigationStack {
         LibraryView()
             .environmentObject(AuthViewModel())
+            .environmentObject(BookService())
     }
 }

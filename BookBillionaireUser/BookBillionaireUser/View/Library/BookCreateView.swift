@@ -12,9 +12,9 @@ import FirebaseFirestore
 
 struct BookCreateView: View {
     @EnvironmentObject var bookService: BookService
-    let rentalService: RentalService = RentalService.shared
+    let rentalService: RentalService = RentalService()
     @State var book: Book = Book(owenerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
-    @State var rental: Rental = Rental(id: "", bookOwner: "", rentalStartDay: Date(), rentalEndDay: Date())
+    @State var rental: Rental = Rental()
     @Environment(\.dismiss) var dismiss
     @State var isShowingSheet: Bool = false
     @State private var selectedImage: UIImage?

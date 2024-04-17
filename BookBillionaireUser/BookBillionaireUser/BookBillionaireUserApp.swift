@@ -18,7 +18,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-      return GIDSignIn.sharedInstance.handle(url)
+        return GIDSignIn.sharedInstance.handle(url)
     }
 }
 
@@ -30,7 +30,6 @@ struct BookBillionaireUserApp: App {
     @StateObject private var bookService: BookService = BookService()
     @StateObject private var userService: UserService = UserService()
 
-    
     var body: some Scene {
         WindowGroup {
             ContentView()

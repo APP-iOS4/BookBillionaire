@@ -10,8 +10,10 @@ import BookBillionaireCore
 
 struct BookDetailView: View {
     let book: Book
-    let user: User
-    
+    @State var user: User = User()
+    @EnvironmentObject var userService: UserService
+    @StateObject var commentViewModel = CommnetViewModel()
+    //채팅
     @EnvironmentObject var authViewModel: AuthViewModel
     @State var roomListVM: RoomListViewModel = RoomListViewModel()
     @State var roomModel: ChatRoom = ChatRoom(id: "", receiverName: "", lastTimeStamp: Date(), lastMessage: "", users: [])
@@ -28,7 +30,7 @@ struct BookDetailView: View {
             BookDetailImageView(book: book)
             // 찜하기, 설정 버튼
             HStack {
-                // FavoriteButton(isSaveBook: $isFavorite)
+                FavoriteButton(isSaveBook: $isFavorite)
                 Spacer()
                 Menu {
                     ShareLink(item: URL(string: "https://github.com/tv1039")!) {
@@ -150,9 +152,51 @@ struct BookDetailView: View {
                     ForEach(book.translators ?? ["번역자"], id: \.self) { translator in Text("번역:\(translator)")
                     }
                     Spacer()
-                    Text(book.bookCategory?.rawValue ?? "카테고리")
+                    
+                    HStack {
+                        Text("책 소유자 : \(user.nickName)")
+                        Image(user.image ?? "default")
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 30, height: 30)
+                    }
                 }
-                .font(.caption)
+                Divider()
+                    .padding(.vertical, 10)
+                
+                // 책 정보 섹션
+                VStack(alignment: .leading){
+                    Text("작품소개")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                    Text(book.contents)
+                        .font(.system(size: 13))
+                    
+                    HStack{
+                        if book.authors.isEmpty {
+                            Text("저자를 찾을 수 없어요.")
+                        } else {
+                            ForEach(book.authors, id: \.self) { author in
+                                Text(author)
+                            }
+                        }
+                        Divider()
+                        ForEach(book.translators ?? ["번역자"], id: \.self) { translator in Text("번역:\(translator)")
+                        }
+                        Spacer()
+                        Text(book.bookCategory?.rawValue ?? "카테고리")
+                    }
+                    .font(.caption)
+                }
+                
+                Divider()
+                    .padding(.vertical, 10)
+                // 책 소유자 리스트
+                BookAnotherOwnerView(book: book, user: user)
+                Divider()
+                    .padding(.vertical, 10)
+                // 사용자들 후기
+                BookDetailReviewView(comments: commentViewModel.comments, user: user)
             }
             
             Divider()
@@ -164,6 +208,7 @@ struct BookDetailView: View {
         .padding(.horizontal)
         .navigationTitle(book.title)
         SpaceBox()
+        CreateBookReviewView(user: user, commentViewModel: commentViewModel)
     }
 }
 

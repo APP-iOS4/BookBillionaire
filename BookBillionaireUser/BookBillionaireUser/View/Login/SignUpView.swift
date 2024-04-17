@@ -22,6 +22,8 @@ struct SignUpView: View {
     @State private var emailErrorText: String = ""
     @State private var emailErrorText2: String = ""
     @State private var emailErrorText2Color: Color = .clear
+    @State private var validationNickname: Bool = false
+    @State private var validationEmail: Bool = false
     @State private var isSecure: Bool = true
     
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -48,16 +50,19 @@ struct SignUpView: View {
                                 if containsSpecialCharacters(nameText) {
                                     nicknameErrorTextColor = .red
                                     nicknameErrorText = "띄어쓰기 및 특수문자 입력이 제한됩니다."
+                                    validationNickname = false
                                 } else {
                                     authViewModel.checkNicknameDuplication(nameText) { isUnique in
                                         if !isUnique {
                                             print("닉네임이 중복됩니다.")
                                             nicknameErrorTextColor = .red
                                             nicknameErrorText = "닉네임이 중복됩니다. 다른 닉네임을 사용해주세요."
+                                            validationNickname = false
                                         } else {
                                             print("닉네임이 중복되지 않습니다.")
                                             nicknameErrorTextColor = .blue
                                             nicknameErrorText = "사용 가능한 닉네임 입니다."
+                                            validationNickname = true
                                         }
                                     }
                                 }
@@ -84,11 +89,13 @@ struct SignUpView: View {
                                 isEmailError = !isValidEmail(newValue)
                                 emailErrorText = "올바른 이메일 형식이 아닙니다."
                                 emailErrorText2 = ""
+                                validationEmail = false
                             })
                         Button(action: {
                             if !isValidEmail(emailText) {
                                 emailErrorText = "올바른 이메일 형식이 아닙니다."
                                 emailErrorText2 = ""
+                                validationEmail = false
                             } else {
                                 if !emailText.isEmpty {
                                     authViewModel.checkEmailDuplication(emailText) { isUnique in
@@ -96,10 +103,12 @@ struct SignUpView: View {
                                             print("이메일이 중복됩니다.")
                                             emailErrorText2Color = .red
                                             emailErrorText2 = "이메일이 중복됩니다. 다른 이메일을 사용해주세요."
+                                            validationEmail = false
                                         } else {
                                             print("이메일이 중복되지 않습니다.")
                                             emailErrorText2Color = .blue
                                             emailErrorText2 = "사용 가능한 이메일 입니다."
+                                            validationEmail = true
                                         }
                                         emailErrorText = ""
                                     }
@@ -121,62 +130,62 @@ struct SignUpView: View {
                     }
                     Text("비밀번호")
                         .foregroundStyle(.primary)
-                        ZStack(alignment: .trailing) {
-                            if isSecure {
-                                SecureField("비밀번호", text: $passwordText)
-                                    .padding()
-                                    .background(.thinMaterial)
-                                    .cornerRadius(10)
-                            } else {
-                                TextField("비밀번호", text: $passwordText)
-                                    .padding()
-                                    .background(.thinMaterial)
-                                    .cornerRadius(10)
-                                    .textInputAutocapitalization(.none)
-                                    .autocapitalization(.none)
-                            }
-                            Button {
-                                isSecure.toggle()
-                            } label: {
-                                Image(systemName: isSecure ? "eye.slash" : "eye")
-                                    .foregroundColor(.primary)
-                            }
-                            .padding(.trailing, 10)
+                    ZStack(alignment: .trailing) {
+                        if isSecure {
+                            SecureField("비밀번호", text: $passwordText)
+                                .padding()
+                                .background(.thinMaterial)
+                                .cornerRadius(10)
+                        } else {
+                            TextField("비밀번호", text: $passwordText)
+                                .padding()
+                                .background(.thinMaterial)
+                                .cornerRadius(10)
+                                .textInputAutocapitalization(.none)
+                                .autocapitalization(.none)
                         }
-                        Text("비밀번호는 6자리 이상 입력해주세요.")
-                            .foregroundColor(isPasswordCountError ? .red : .clear)
-                            .padding(.leading, 10)
-                        Text("비밀번호 확인")
-                            .foregroundStyle(.primary)
-                        ZStack(alignment: .trailing) {
-                            if isSecure {
-                                SecureField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
-                                    .padding()
-                                    .background(.thinMaterial)
-                                    .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
-                                    .cornerRadius(10)
-                            } else {
-                                TextField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
-                                    .padding()
-                                    .background(.thinMaterial)
-                                    .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
-                                    .cornerRadius(10)
-                                    .textInputAutocapitalization(.none)
-                                    .autocapitalization(.none)
-                            }
-                            Button {
-                                isSecure.toggle()
-                            } label: {
-                                Image(systemName: isSecure ? "eye.slash" : "eye")
-                                    .foregroundColor(.primary)
-                            }
-                            .padding(.trailing, 10)
+                        Button {
+                            isSecure.toggle()
+                        } label: {
+                            Image(systemName: isSecure ? "eye.slash" : "eye")
+                                .foregroundColor(.primary)
                         }
-                        Text("비밀번호가 서로 다릅니다.")
-                            .foregroundColor(isPasswordUnCorrectError ? .red : .clear)
-                            .padding(.leading, 10)
+                        .padding(.trailing, 10)
                     }
-                    
+                    Text("비밀번호는 6자리 이상 입력해주세요.")
+                        .foregroundColor(isPasswordCountError ? .red : .clear)
+                        .padding(.leading, 10)
+                    Text("비밀번호 확인")
+                        .foregroundStyle(.primary)
+                    ZStack(alignment: .trailing) {
+                        if isSecure {
+                            SecureField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
+                                .padding()
+                                .background(.thinMaterial)
+                                .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
+                                .cornerRadius(10)
+                        } else {
+                            TextField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
+                                .padding()
+                                .background(.thinMaterial)
+                                .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
+                                .cornerRadius(10)
+                                .textInputAutocapitalization(.none)
+                                .autocapitalization(.none)
+                        }
+                        Button {
+                            isSecure.toggle()
+                        } label: {
+                            Image(systemName: isSecure ? "eye.slash" : "eye")
+                                .foregroundColor(.primary)
+                        }
+                        .padding(.trailing, 10)
+                    }
+                    Text("비밀번호가 서로 다릅니다.")
+                        .foregroundColor(isPasswordUnCorrectError ? .red : .clear)
+                        .padding(.leading, 10)
+                }
+                ZStack {
                     Button {
                         isShowingProgressView = true
                         
@@ -200,9 +209,28 @@ struct SignUpView: View {
                             isShowingProgressView = false
                         }
                         if passwordText.count >= 6 && passwordConfirmText == passwordText && isValidEmail(emailText) {
-                            authViewModel.signUp(email: emailText, userName: nameText, password: passwordText)
-                            isShowingAlert = true
-                            isShowingProgressView = false
+                            authViewModel.checkNicknameDuplication(nameText) { isUniqueNickname in
+                                if !isUniqueNickname {
+                                    print("닉네임이 중복됩니다.")
+                                    nicknameErrorTextColor = .red
+                                    nicknameErrorText = "닉네임이 중복됩니다. 다른 닉네임을 사용해주세요."
+                                    isShowingProgressView = false
+                                } else {
+                                    print("닉네임이 중복되지 않습니다.")
+                                    authViewModel.checkEmailDuplication(emailText) { isUniqueEmail in
+                                        if !isUniqueEmail {
+                                            print("이메일이 중복됩니다.")
+                                            emailErrorText2Color = .red
+                                            emailErrorText2 = "이메일이 중복됩니다. 다른 이메일을 사용해주세요."
+                                            isShowingProgressView = false
+                                        } else {
+                                            print("이메일이 중복되지 않습니다.")
+                                            authViewModel.signUp(email: emailText, userName: nameText, password: passwordText)
+                                            isShowingAlert = true
+                                        }
+                                    }
+                                }
+                            }
                         }
                     } label: {
                         Text("회원 가입")
@@ -226,12 +254,17 @@ struct SignUpView: View {
                         ProgressView()
                     }
                 }
-                .padding()
-                .padding(.bottom, 15)
             }
+            .padding()
+            .padding(.bottom, 15)
         }
+    }
     private func checkSignUpCondition () -> Bool {
         if nameText.isEmpty || emailText.isEmpty || passwordText.isEmpty || passwordConfirmText.isEmpty {
+            return false
+        }
+        // 추가: 닉네임 형식/중복확인 여부 및 이메일 형식/중복확인 여부도 조건에 추가
+        if validationEmail == false || validationNickname == false {
             return false
         }
         return true
