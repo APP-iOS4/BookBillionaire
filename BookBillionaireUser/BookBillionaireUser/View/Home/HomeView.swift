@@ -36,7 +36,7 @@ struct HomeView: View {
                 }
             }
             //홈 배너
-            HomePagingView() 
+            HomePagingView()
                 .frame(height: 200)
                 .padding(.top)
             
@@ -45,7 +45,7 @@ struct HomeView: View {
                 ForEach(BookCategory.allCases, id: \.self) { menu in
                     Button{
                         menuTitle = menu
-                        bookService.fetchBooks(menuTitle: menu)
+                        bookService.fetchBooks()
                         
                     } label: {
                         Text("\(menu.buttonTitle)")
@@ -92,39 +92,36 @@ struct HomeView: View {
                                         .rotationEffect(.degrees(90))
                                 }
                                 .padding(.top, 10)
-
+                                
                             }
                             Divider()
                                 .background(Color.gray)
                                 .padding(.vertical, 10)
                         }
                         .navigationDestination(for: Book.self) { book in
-                            BookDetailView(book: book, user: searchService.user(for: book))
+                            BookDetailView(book: book, user: user(for: book))
                         }
                     }
                 }
             }
         }
         .onAppear {
-            bookService.fetchBooks(menuTitle: menuTitle)
+            fetchBooks()
             userService.fetchUsers()
         }
         .padding()
-        
-        // 책 불러오기
-        
     }
     // 책 데이터 호출
     func fetchBooks() {
-            books = bookService.filterByCategory(menuTitle)
+        books = bookService.filterByCategory(menuTitle)
     }
+    
     // 책 소유자 유저 데이터 호출
     func fetchUsers() {
         Task {
-        await userService.loadUsers()
+            await userService.loadUsers()
         }
     }
-    
     
     // BookDetailView에 전달할 User를 가져오는 메서드
     // User 반환

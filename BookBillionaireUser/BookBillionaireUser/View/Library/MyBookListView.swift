@@ -55,7 +55,7 @@ struct MyBookListView: View {
                                 // 메뉴 버튼
                                 Menu {
                                     NavigationLink {
-                                        BookCreateView(book: book)
+//                                        BookCreateView(book: book)
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
@@ -96,16 +96,14 @@ struct MyBookListView: View {
                         }
                     }
                     .padding()
-                    // BookDetailView로 연결예정... User가 음슴
                     .navigationDestination(for: Book.self) { book in
-                        Text("안녕 \(book.title) 디테일 뷰")
                         BookDetailView(book: book, user: user(for: book))
                     }
                     SpaceBox()
                 }
             }
         }
-//        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
+        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
         .onAppear{
             loadMybook()
         }

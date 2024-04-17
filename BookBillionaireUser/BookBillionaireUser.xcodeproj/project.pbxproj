@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		040216652BCE065900A7C922 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 040216642BCE065900A7C922 /* GoogleService-Info.plist */; };
 		04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A3F2BBD29C1009FBF6E /* BookService.swift */; };
 		04A59A452BBD2F66009FBF6E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59A442BBD2F66009FBF6E /* BookBillionaireCore */; };
 		04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A802BBE85C2009FBF6E /* UserService.swift */; };
@@ -30,7 +29,6 @@
 		04A59AC32BC69538009FBF6E /* MeetingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59AC22BC69537009FBF6E /* MeetingMapView.swift */; };
 		04DCAF9C2BCA985900B9B146 /* RLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCAF9B2BCA985900B9B146 /* RLoginView.swift */; };
 		04DCAFA02BCAACE800B9B146 /* RLoginInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCAF9F2BCAACE800B9B146 /* RLoginInfoView.swift */; };
-		04DCAFA62BCD6A2C00B9B146 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04DCAFA52BCD6A2C00B9B146 /* GoogleService-Info.plist */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
 		088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260412BBD2B4C007BEA25 /* LocationSharedView.swift */; };
@@ -82,6 +80,7 @@
 		EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */; };
 		EF30EED32BCE153C00D929D9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF30EED22BCE153C00D929D9 /* EditProfileView.swift */; };
 		EF30EED52BCE18E500D929D9 /* ProfilePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF30EED42BCE18E500D929D9 /* ProfilePhoto.swift */; };
+		EF6C38932BCF499200098E18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF6C38922BCF499200098E18 /* GoogleService-Info.plist */; };
 		EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7A2B942BBF99A00068D100 /* CameraView.swift */; };
 		EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */; };
 		EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */; };
@@ -92,7 +91,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		040216642BCE065900A7C922 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		04A59A822BBE8876009FBF6E /* ServiceTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTestView.swift; sourceTree = "<group>"; };
@@ -159,6 +157,7 @@
 		EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreateView.swift; sourceTree = "<group>"; };
 		EF30EED22BCE153C00D929D9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		EF30EED42BCE18E500D929D9 /* ProfilePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoto.swift; sourceTree = "<group>"; };
+		EF6C38922BCF499200098E18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF7A2B942BBF99A00068D100 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalStateSheetView.swift; sourceTree = "<group>"; };
 		EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoAddView.swift; sourceTree = "<group>"; };
@@ -370,13 +369,11 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
-				040216642BCE065900A7C922 /* GoogleService-Info.plist */,
-				8C76334E2BBD3DCF002EF297 /* Info.plist */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
 				8C76334E2BBD3DCF002EF297 /* Info.plist */,
-				040216602BCDD67800A7C922 /* GoogleService-Info.plist */,
+				EF6C38922BCF499200098E18 /* GoogleService-Info.plist */,
 				EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */,
 				EF0F74B02BBCF99000E37D0D /* View */,
 				EF0F748B2BBCF7C700E37D0D /* Assets.xcassets */,
@@ -562,8 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
-				040216652BCE065900A7C922 /* GoogleService-Info.plist in Resources */,
-				04DCAFA62BCD6A2C00B9B146 /* GoogleService-Info.plist in Resources */,
+				EF6C38932BCF499200098E18 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
