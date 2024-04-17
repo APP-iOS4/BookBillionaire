@@ -93,6 +93,5 @@ struct RoomCell: View {
 }
 
 #Preview {
-//    RoomCell(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "gg", users: ["",""])))
     ChatListView()
 }
