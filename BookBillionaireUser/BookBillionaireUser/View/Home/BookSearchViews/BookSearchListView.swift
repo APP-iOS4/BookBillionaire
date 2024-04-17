@@ -11,9 +11,10 @@ import BookBillionaireCore
 struct BookSearchListView: View {
     @Binding var searchBook: String
     @Binding var filteredBooks: [Book]
+    let users: [User] = []
+    @EnvironmentObject var bookService: BookService
     @StateObject private var searchService = SearchService()
-    
-    var body: some View {
+        var body: some View {
         VStack(spacing: 20) {
             HStack {
                 Text("검색된 책 목록")

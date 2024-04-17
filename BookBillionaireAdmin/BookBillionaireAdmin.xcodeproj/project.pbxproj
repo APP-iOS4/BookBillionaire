@@ -7,12 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040216692BCE12C200A7C922 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 040216682BCE12C200A7C922 /* GoogleService-Info.plist */; };
+		0402166C2BCE16D900A7C922 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0402166B2BCE16D900A7C922 /* FirebaseAuth */; };
+		0402166E2BCE16D900A7C922 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 0402166D2BCE16D900A7C922 /* FirebaseAuthCombine-Community */; };
+		040216702BCE16D900A7C922 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0402166F2BCE16D900A7C922 /* FirebaseFirestore */; };
+		040216722BCE16D900A7C922 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 040216712BCE16D900A7C922 /* FirebaseFirestoreCombine-Community */; };
+		040216742BCE16D900A7C922 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 040216732BCE16D900A7C922 /* FirebaseFirestoreSwift */; };
+		040216772BCE19A300A7C922 /* DashBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040216762BCE19A300A7C922 /* DashBoardView.swift */; };
+		040216792BCE19D500A7C922 /* QnAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040216782BCE19D500A7C922 /* QnAView.swift */; };
+		0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167A2BCE1A6900A7C922 /* SettingView.swift */; };
+		0402167E2BCE5CBB00A7C922 /* QnA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167D2BCE5CBB00A7C922 /* QnA.swift */; };
+		040216802BCEB03A00A7C922 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167F2BCEB03A00A7C922 /* Category.swift */; };
 		EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */; };
 		EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A32BBCF80C00E37D0D /* ContentView.swift */; };
 		EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040216682BCE12C200A7C922 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		040216762BCE19A300A7C922 /* DashBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardView.swift; sourceTree = "<group>"; };
+		040216782BCE19D500A7C922 /* QnAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnAView.swift; sourceTree = "<group>"; };
+		0402167A2BCE1A6900A7C922 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		0402167D2BCE5CBB00A7C922 /* QnA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnA.swift; sourceTree = "<group>"; };
+		0402167F2BCEB03A00A7C922 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBillionaireAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookBillionaireAdminApp.swift; sourceTree = "<group>"; };
 		EF0F74A32BBCF80C00E37D0D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -25,12 +42,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040216742BCE16D900A7C922 /* FirebaseFirestoreSwift in Frameworks */,
+				0402166C2BCE16D900A7C922 /* FirebaseAuth in Frameworks */,
+				040216722BCE16D900A7C922 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				0402166E2BCE16D900A7C922 /* FirebaseAuthCombine-Community in Frameworks */,
+				040216702BCE16D900A7C922 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040216752BCE199500A7C922 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0402167C2BCE5C9F00A7C922 /* Model */,
+				040216762BCE19A300A7C922 /* DashBoardView.swift */,
+				040216782BCE19D500A7C922 /* QnAView.swift */,
+				0402167A2BCE1A6900A7C922 /* SettingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0402167C2BCE5C9F00A7C922 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0402167D2BCE5CBB00A7C922 /* QnA.swift */,
+				0402167F2BCEB03A00A7C922 /* Category.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		EF0F74952BBCF80C00E37D0D = {
 			isa = PBXGroup;
 			children = (
@@ -50,7 +92,10 @@
 		EF0F74A02BBCF80C00E37D0D /* BookBillionaireAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				040216812BCEDE3300A7C922 /* GoogleService-Info.plist */,
+				040216752BCE199500A7C922 /* Views */,
 				EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */,
+				040216682BCE12C200A7C922 /* GoogleService-Info.plist */,
 				EF0F74A32BBCF80C00E37D0D /* ContentView.swift */,
 				EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */,
 				EF0F74A72BBCF80E00E37D0D /* BookBillionaireAdmin.entitlements */,
@@ -74,6 +119,13 @@
 			dependencies = (
 			);
 			name = BookBillionaireAdmin;
+			packageProductDependencies = (
+				0402166B2BCE16D900A7C922 /* FirebaseAuth */,
+				0402166D2BCE16D900A7C922 /* FirebaseAuthCombine-Community */,
+				0402166F2BCE16D900A7C922 /* FirebaseFirestore */,
+				040216712BCE16D900A7C922 /* FirebaseFirestoreCombine-Community */,
+				040216732BCE16D900A7C922 /* FirebaseFirestoreSwift */,
+			);
 			productName = BookBillionaireAdmin;
 			productReference = EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */;
 			productType = "com.apple.product-type.application";
@@ -102,6 +154,9 @@
 				Base,
 			);
 			mainGroup = EF0F74952BBCF80C00E37D0D;
+			packageReferences = (
+				0402166A2BCE16D900A7C922 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = EF0F749F2BBCF80C00E37D0D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -117,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */,
+				040216692BCE12C200A7C922 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +184,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */,
+				0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */,
+				040216772BCE19A300A7C922 /* DashBoardView.swift in Sources */,
 				EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */,
+				040216802BCEB03A00A7C922 /* Category.swift in Sources */,
+				0402167E2BCE5CBB00A7C922 /* QnA.swift in Sources */,
+				040216792BCE19D500A7C922 /* QnAView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,8 +331,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -284,7 +345,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -309,8 +370,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -323,7 +384,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -349,6 +410,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0402166A2BCE16D900A7C922 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.24.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0402166B2BCE16D900A7C922 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0402166A2BCE16D900A7C922 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		0402166D2BCE16D900A7C922 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0402166A2BCE16D900A7C922 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		0402166F2BCE16D900A7C922 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0402166A2BCE16D900A7C922 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		040216712BCE16D900A7C922 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0402166A2BCE16D900A7C922 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		040216732BCE16D900A7C922 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0402166A2BCE16D900A7C922 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EF0F74962BBCF80C00E37D0D /* Project object */;
 }

@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct Message: Codable {
+struct Message: Codable, Hashable {
     var id: String?
-    var message: String       // 메세지 텍스트
-    var username: String      // 해당 메세지를 보낸 유저 닉네임
-    var roomId: String        // 방의 Id
-    var timestamp: Date       // 메세지를 보낸 시간
+    var message: String        // 메세지 텍스트
+    var senderName: String     // 메세지를 보낸 유저 이름
+    var roomId: String         // 대화방의 Id
+    var timestamp: Date        // 메세지를 보낸 시간
+    var ImageURL: String?      // 사진 첨부
 }
 
 

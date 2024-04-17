@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct MyBookListView: View {
-    let bookService: BookService = BookService.shared
+    @EnvironmentObject var bookService: BookService
     @State private var myBooks: [Book] = []
     @State private var users: [User] = []
     @State private var isShowingAlert: Bool = false
@@ -55,7 +55,7 @@ struct MyBookListView: View {
                                 // 메뉴 버튼
                                 Menu {
                                     NavigationLink {
-                                        BookCreateView(book: book)
+//                                        BookCreateView(book: book)
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
@@ -96,9 +96,7 @@ struct MyBookListView: View {
                         }
                     }
                     .padding()
-                    // BookDetailView로 연결예정... User가 음슴
                     .navigationDestination(for: Book.self) { book in
-                        Text("안녕 \(book.title) 디테일 뷰")
                         BookDetailView(book: book, user: user(for: book))
                     }
                     SpaceBox()
@@ -114,7 +112,7 @@ struct MyBookListView: View {
     private func loadMybook() {
         Task {
             if let user = AuthViewModel.shared.currentUser {
-                myBooks = await bookService.loadBookByID(user.uid)
+                myBooks = bookService.filterByOwenerID(user.uid)
             }
         }
     }
