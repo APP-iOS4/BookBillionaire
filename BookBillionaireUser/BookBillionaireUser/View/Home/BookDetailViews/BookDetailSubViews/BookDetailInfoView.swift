@@ -39,5 +39,5 @@ struct BookDetailInfoView: View {
 }
 
 #Preview {
-    BookDetailInfoView(book: Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable))
+    BookDetailInfoView(book: Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable))
 }
