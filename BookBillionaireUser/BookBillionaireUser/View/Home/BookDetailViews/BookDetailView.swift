@@ -17,8 +17,10 @@ import BookBillionaireCore
 
 struct BookDetailView: View {
     let book: Book
-    let user: User
-    
+    @State var user: User = User()
+    @EnvironmentObject var userService: UserService
+    @StateObject var commentViewModel = CommnetViewModel()
+    //채팅
     @EnvironmentObject var authViewModel: AuthViewModel
     @State var roomListVM: RoomListViewModel = RoomListViewModel()
     @State var roomModel: ChatRoom = ChatRoom(id: "", receiverName: "", lastTimeStamp: Date(), lastMessage: "", users: [])
@@ -32,7 +34,7 @@ struct BookDetailView: View {
             BookDetailImageView(book: book)
             // 찜하기, 설정 버튼
             HStack {
-                //                FavoriteButton(isSaveBook: $isFavorite)
+                FavoriteButton(isSaveBook: $isFavorite)
                 Spacer()
                 Menu {
                     ShareLink(item: URL(string: "https://github.com/tv1039")!) {
@@ -148,14 +150,18 @@ struct BookDetailView: View {
                 
                 Divider()
                     .padding(.vertical, 10)
-                
+                // 책 소유자 리스트
+                BookAnotherOwnerView(book: book, user: user)
                 Divider()
                     .padding(.vertical, 10)
+                // 사용자들 후기
+                BookDetailReviewView(comments: commentViewModel.comments, user: user)
             }
             .padding(.horizontal)
             .navigationTitle(book.title)
             SpaceBox()
         }
+        CreateBookReviewView(user: user, commentViewModel: commentViewModel)
     }
 }
 

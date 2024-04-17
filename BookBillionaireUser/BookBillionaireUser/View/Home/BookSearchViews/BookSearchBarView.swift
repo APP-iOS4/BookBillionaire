@@ -9,14 +9,13 @@ import SwiftUI
 import BookBillionaireCore
 
 struct BookSearchBarView: View {
+    @State var isSearching = false
     @Binding var searchBook: String
     @Binding var filteredBooks: [Book]
-    @State private var isSearching = false
-    @State private var recentSearches: [String] = UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
-    @EnvironmentObject var bookService: BookService
     // 검색 viewModel
     @StateObject private var searchService = SearchService()
-        var body: some View {
+    
+    var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .center) {
                 TextField("책 이름을 입력해주세요", text: $searchService.searchBook)
@@ -40,35 +39,36 @@ struct BookSearchBarView: View {
                         .padding(.trailing, 5)
                     }
                     .onChange(of: searchService.searchBook) { _ in
-                        searchService.isSearching = false
-                     }
-
+                        isSearching = false
+                    }
                 
                 Button {
                     if !searchService.searchBook.isEmpty {
                         searchService.saveSearchHistory()
-                        searchService.searchBooksByTitle(title: searchService.searchBook)
-                        
-                        searchService.isSearching = true
+                        // 비동기 함수 호출
+                        // Book 타입 배열 filteredBooks에 반환
+                        Task {
+                            searchService.filteredBooks = await searchService.searchBooksByTitle(title: searchService.searchBook)
+                            isSearching = true
+                        }
                     }
                     
                 } label: {
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(.primary)
                 }
             }
             .padding(.bottom, 20)
             
             
             // 뷰 전환 - 검색 목록 & 최근 검색어
-            if searchService.isSearching || searchService.searchBook.isEmpty {
+            if isSearching || searchService.searchBook.isEmpty {
                 BookSearchListView(searchBook: $searchService.searchBook, filteredBooks: $searchService.filteredBooks)
             } else {
                 RecentSearchView(searchBook: $searchService.searchBook)
             }
         }
     }
-
+    
 }
 
 #Preview {

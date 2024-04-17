@@ -29,7 +29,6 @@ class BookService: ObservableObject {
     }
     
     /// 유저들이 등록한 모든 책을 다 가져오는 함수
-    
     func loadBooks() async {
         do {
             let querySnapshot = try await bookRef.getDocuments()
@@ -108,21 +107,4 @@ class BookService: ObservableObject {
         }
         self.fetchBooks()
     }
-    
-    
-    
-    // 승표형해당 함수는 위에있는 필터 함수로 써주세용
-    //    // 책 데이터 호출
-    //    // 서비스 데이터(Back)를 모델에 가져와 뷰(Front)에 적용
-    //    func fetchBooks(menuTitle: BookCategory) {
-    //        Task {
-    //            let fetchedBooks = await books.filteredLoadBooks(bookCategory: menuTitle)
-    //
-    //            DispatchQueue.main.async {
-    //                self.books = fetchedBooks
-    //            }
-    //        }
-    //    }
-    //}
 }
-
