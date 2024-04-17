@@ -41,7 +41,7 @@ struct ProfileView: View {
                     } label: {
                         ZStack {
                             Rectangle()
-                                .foregroundStyle(Color.white)
+                                .foregroundStyle(Color.clear)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 50)
                             Label("프로필 수정", systemImage: "pencil")
@@ -68,10 +68,10 @@ struct ProfileView: View {
                     }
                     .listStyle(.plain)
                 }
+                .navigationTitle("마이 프로필")
             }
         }
         .padding()
-        .navigationTitle("마이 프로필")
         .onAppear{
             //            userUID = authViewModel.currentUser?.uid
             loadMyProfile()
