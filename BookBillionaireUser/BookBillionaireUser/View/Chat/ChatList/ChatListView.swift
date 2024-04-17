@@ -64,6 +64,7 @@ struct RoomCell: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text(room.receiverName)
                     .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.black)
                 
                 Text(room.lastMessage)
                     .font(.system(size: 14))

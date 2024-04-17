@@ -12,7 +12,7 @@ struct BookDetailView: View {
     let book: Book
     let userService = UserService.shared
     @EnvironmentObject var authViewModel: AuthViewModel
-
+    
     @State var user: User = User()
     @State var roomListVM: RoomListViewModel = RoomListViewModel()
     
@@ -23,8 +23,6 @@ struct BookDetailView: View {
     @State private var createdRoomId: String?
     
     var body: some View {
-        NavigationView {
-            
         ScrollView{
             BookDetailImageView(book: book)
             HStack {
@@ -57,13 +55,13 @@ struct BookDetailView: View {
                 }
             }
             .offset(x: 170, y: -90)
-
+            
             // 정보란
             VStack(alignment: .leading) {
-                    Rectangle()
-                        .frame(height: 100)
-                        .foregroundStyle(.clear)
-                    Spacer()
+                Rectangle()
+                    .frame(height: 100)
+                    .foregroundStyle(.clear)
+                Spacer()
                 
                 HStack{
                     Text(book.title)
@@ -74,30 +72,29 @@ struct BookDetailView: View {
                 }
                 
                 HStack {
-                    NavigationLink(destination: ChatView(room: RoomViewModel(room: ChatRoom(id: "", receiverName: "", lastTimeStamp: Date(), lastMessage: "", users: [])))) {
-                        Button {
-                            switch authViewModel.state {
-                            case .loggedIn:
-                                
-                                // 메세지 보내기를 클릭했을때
-                                // 생성된 room id 에 해당하는 방으로 뷰가 이동되어야 함
-                                
-                                roomListVM.createRoom(completion: { })
-                                
-                                
-                                roomListVM.getCreatedRoomID(completion: {_ in })
-                                
-                                // 지금 생성된 방의 id를 찾아서 그 방으로 화면 이동을 해야하는데 어떻게 하지
-                                // 생성된 방의 id를 변수에 담는다
-                                // 그 아이디를 확인해서 해당하는 방으로 이동하는 메서드를 만든다
-                                
-                            case .loggedOut:
-                                showLoginAlert = true
-                            }
-                        } label: {
-                            Text("메세지 보내기")
+                    Button {
+                        switch authViewModel.state {
+                        case .loggedIn:
+                            
+                            // 메세지 보내기를 클릭했을때
+                            // 생성된 room id 에 해당하는 방으로 뷰가 이동되어야 함
+                            
+                            roomListVM.createRoom(completion: { })
+                            //일단 임시로 ChatListView로 이동하자
+                            
+                            //roomListVM.getCreatedRoomID(completion: {_ in })
+                            
+                            // 지금 생성된 방의 id를 찾아서 그 방으로 화면 이동을 해야하는데 어떻게 하지
+                            // 생성된 방의 id를 변수에 담는다
+                            // 그 아이디를 확인해서 해당하는 방으로 이동하는 메서드를 만든다
+                            
+                        case .loggedOut:
+                            showLoginAlert = true
                         }
+                    } label: {
+                        Text("메세지 보내기")
                     }
+                    
                     .buttonStyle(WhiteButtonStyle(height: 40.0, font: .headline))
                     .alert(isPresented: $showLoginAlert) {
                         Alert(title: Text("알림"), message: Text("로그인이 필요합니다."), dismissButton: .default(Text("확인")))
@@ -120,7 +117,7 @@ struct BookDetailView: View {
                         print("2 \(roomListVM.receiverId)")
                     }
                 }
-
+                
                 HStack {
                     Spacer()
                     Text("책 소유자 : ")
@@ -185,11 +182,10 @@ struct BookDetailView: View {
                     print("생성")
                 }
             }
-        }
     }
 }
-                       
-                       
+
+
 
 //#Preview {
 //    BookDetailView(book: Book(owenerID: "", title: "책이름", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(id: "책유저", nickName: "닉네임", address: "주소"))
