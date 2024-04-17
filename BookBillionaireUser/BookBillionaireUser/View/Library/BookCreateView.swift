@@ -11,74 +11,73 @@ import FirebaseStorage
 import FirebaseFirestore
 
 struct BookCreateView: View {
+    @State var book: Book = Book(ownerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
     @EnvironmentObject var bookService: BookService
-    let rentalService: RentalService = RentalService()
-    @State var book: Book = Book(owenerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
-    @State var rental: Rental = Rental()
-    @Environment(\.dismiss) var dismiss
-    @State var isShowingSheet: Bool = false
+    @Environment(\.dismiss) private var dismiss
+    @State private var isShowingSheet: Bool = false
     @State private var selectedImage: UIImage?
     
+    // 선택적 파라미터 초기값 설정
     init(searchBook: SearchBook? = nil) {
-            if let searchBook = searchBook {
-                _book = State(initialValue: Book(owenerID: "", title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
-            } else {
-                _book = State(initialValue: Book(owenerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable))
-            }
+        if let searchBook = searchBook {
+            _book = State(initialValue: Book(ownerID: "", isbn: searchBook.isbn, title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
+        } else {
+            _book = State(initialValue: Book(ownerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable))
         }
+    }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                BookInfoAddView(book: $book, selectedImage: $selectedImage)
-                if book.rentalState == .rentalAvailable {
-                    RentalPeriodView(rental: $rental)
-                    DescriptionView(book: $book)
-                }
-                Button("완료") {
-                    if let user = AuthViewModel.shared.currentUser {
-                    uploadPhoto()
-                        book.ownerID = user.uid
-                        rental.bookOwner = user.uid
-                    }
-                    if book.rentalState == .rentalAvailable {
-                        rental.id = UUID().uuidString
-                        book.rental = rental.id
-                        _ = rentalService.registerRental(rental)
-                    }
-                    book.id = UUID().uuidString
-                    _ = bookService.registerBook(book)
-                    dismiss()
-                }
-                .buttonStyle(AccentButtonStyle())
-                .disabled(book.rentalState == .rentalAvailable ? (book.title.isEmpty || book.contents.isEmpty || book.authors.first!.isEmpty) : (book.title.isEmpty || book.authors.first!.isEmpty))
-                .padding()
+        VStack {
+            BookInfoAddView(book: $book, selectedImage: $selectedImage)
+            DescriptionView(book: $book)
+            Button {
+                uploadPhoto()
+                assignCurrentUserIDToBook(book: &book)
+                book.id = UUID().uuidString
+                _ = bookService.registerBook(book)
+                dismiss()
+            } label: {
+                Text("완료")
             }
-            SpaceBox()
-        }
-        .onChange(of: book.rentalState) { _ in
-            book.contents = ""
+            .buttonStyle(AccentButtonStyle())
+            .disabled(isBookEmpty(book: book))
+            .padding()
+            Spacer()
         }
         .navigationTitle("책 등록")
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    // 현재 유저정보 할당 함수
+    private func assignCurrentUserIDToBook(book: inout Book) {
+        if let currentUser = AuthViewModel.shared.currentUser {
+            book.ownerID = currentUser.uid
+        }
+    }
+    
+    // 버튼 활성화 조건 함수
+    private func isBookEmpty(book: Book) -> Bool {
+        return book.title.isEmpty || book.contents.isEmpty || book.authors.isEmpty
+    }
+    
+    // Firebase Storage 업로드 함수
     private func uploadPhoto() {
         guard selectedImage != nil else {
             return
         }
+        // Firebase Storage jpeg로 변환
         let storageRef = Storage.storage().reference()
         let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
         guard imageData != nil else {
             return
         }
+        // Firebase Storage 경로 설정
         let path = "images/\(UUID().uuidString).jpg"
         book.thumbnail = path
         let fileRef = storageRef.child(path)
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
             } else if let error = error {
-                // Handle unsuccessful upload
                 print("Error uploading image: \(error)")
             }
         }

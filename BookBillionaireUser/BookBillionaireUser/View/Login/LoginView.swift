@@ -11,6 +11,9 @@ struct LoginView: View {
     @State var emailText: String = ""
     @State var passwordText: String = ""
     @State private var isSignUpScreen: Bool = false
+    var PrivatePolicyUrl = Bundle.main.url(forResource: "PrivatePolicy", withExtension: "html")!
+    @State private var isPrivateSheet: Bool = false
+
 
     var body: some View {
         NavigationView {
@@ -25,7 +28,6 @@ struct LoginView: View {
                             .font(.title2)
                     }
                 }
-
                 Image("AppLogo")
                     .resizable()
                     .scaledToFit()
@@ -48,11 +50,12 @@ struct LoginView: View {
                 .padding(.top, 50)
 
                 HStack(spacing: 20) {
-                    NavigationLink(destination: SignUpView(), isActive: $isSignUpScreen) {
+                    NavigationLink {
+                        SignUpView()
+                    } label: {
                         Text("회원가입")
-                    }
-                    .buttonStyle(WhiteButtonStyle(height: 40.0))
-
+                    }.buttonStyle(WhiteButtonStyle(height: 40.0))
+                    
                     Button("로그인") {
                         authViewModel.signIn(email: emailText, password: passwordText)
                         dismiss()
@@ -75,14 +78,28 @@ struct LoginView: View {
                         .frame(width: 335, height: 50)
                 }
                 .padding(.bottom, 10)
-
+                
                 Spacer()
                 Spacer()
-                Text("Team BB")
+                HStack{
+                    Text("가입 시,")
+                        Text("개인정보 처리방침")
+                            .underline()
+                            .onTapGesture {
+                                isPrivateSheet = true
+                            }
+                        Text("에 동의하게 됩니다.")
+                }
+                .font(.caption)
                 SpaceBox()
             }
             .padding(.horizontal, 30)
-            .navigationBarHidden(true) // Hide navigation bar
+            .navigationBarHidden(true)
+            .sheet(isPresented: $isPrivateSheet, content: {
+                WebView(url: PrivatePolicyUrl)
+                    .padding(30)
+            })
+            // Hide navigation bar
         }
     }
 }
