@@ -12,7 +12,6 @@ import BookBillionaireCore
 class SearchService: ObservableObject {
     @Published var searchBook: String = ""
     @Published var filteredBooks: [Book] = []
-    @Published var isSearching = false
     @Published var recentSearches: [String] = UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
     private let bookService = BookService.shared
     private let userService = UserService.shared
@@ -37,7 +36,6 @@ class SearchService: ObservableObject {
             }
         }
     }
-    
     
     // 검색어 되돌리기
     func removeSearchHistory(search: String) {

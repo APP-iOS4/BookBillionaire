@@ -8,7 +8,7 @@
 import SwiftUI
 import BookBillionaireCore
 
-struct BookDetailUserListView: View {
+struct BookDetailOwnerRowView: View {
     let book: Book
     let user: User
     
@@ -26,5 +26,5 @@ struct BookDetailUserListView: View {
 }
 
 #Preview {
-    BookDetailUserListView(book: Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable), user: User(id: "아이디", nickName: "닉네임", address: "주소"))
+    BookDetailOwnerRowView(book: Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable), user: User(id: "아이디", nickName: "닉네임", address: "주소"))
 }

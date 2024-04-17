@@ -11,105 +11,82 @@ import BookBillionaireCore
 struct BookDetailView: View {
     let book: Book
     let user: User
-    @State var isShowingAlert: Bool = false
+    @StateObject var commentViewModel = CommnetViewModel()
     @State var isShowingSheet: Bool = false
+    @State var isFavorite: Bool = false
     
     var body: some View {
-        ZStack {
-            //Alert
-            if isShowingAlert {
-                CustomAlert(alertType: .hidePost, isShowingDefualtAlert: $isShowingAlert)
-                    .zIndex(1)
-            }
-            
-            ScrollView{
-                BookDetailImageView(book: book)
-                HStack {
-                    // 설정 버튼
-                    Menu {
-                        Button {
-                            isShowingAlert.toggle()
-                        } label: {
-                            Label("게시물 보관하기", systemImage: "square.and.arrow.down")
-                        }
-                        
-                        ShareLink(item: URL(string: "https://github.com/tv1039")!) {
-                            Label("게시물 공유하기", systemImage: "square.and.arrow.up")
-                        }
-                        
-                        Button(role: .destructive) {
-                            isShowingSheet = true
-                        } label: {
-                            Label("신고하기", systemImage: "exclamationmark.triangle")
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20)
-                            .foregroundStyle(.gray.opacity(0.5))
+        ScrollView{
+            BookDetailImageView(book: book)
+            // 찜하기, 설정 버튼
+            HStack {
+                FavoriteButton(isSaveBook: $isFavorite)
+                Spacer()
+                Menu {
+                    ShareLink(item: URL(string: "https://github.com/tv1039")!) {
+                        Label("게시물 공유하기", systemImage: "square.and.arrow.up")
                     }
+                    
+                    Button(role: .destructive) {
+                        isShowingSheet = true
+                    } label: {
+                        Label("신고하기", systemImage: "exclamationmark.triangle")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30)
+                        .foregroundStyle(.gray.opacity(0.3))
                 }
-                .offset(x: 170, y: -90)
-                // 신고 시트
-                .sheet(isPresented: $isShowingSheet) {
-                    BottomSheet(isShowingSheet: $isShowingSheet)
-                        .presentationDetents([.fraction(0.8), .large])
+            }
+            .offset(y: -95)
+            .padding(.horizontal, 15)
+            // 신고 시트
+            .sheet(isPresented: $isShowingSheet) {
+                BottomSheet(isShowingSheet: $isShowingSheet)
+                    .presentationDetents([.fraction(0.8), .large])
+            }
+            // 대여신청 섹션
+            VStack(alignment: .leading) {
+                Rectangle()
+                    .frame(height: 100)
+                    .foregroundStyle(.clear)
+                Spacer()
+                HStack{
+                    Text(book.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    // 대여 상태
+                    StatusButton(status: book.rentalState)
                 }
                 
-                // 정보란
-                VStack(alignment: .leading) {
-                    Rectangle()
-                        .frame(height: 100)
-                        .foregroundStyle(.clear)
+                VStack(alignment: .leading){
+                    Button {
+                        // 준영아 연결해줘!!!
+                    } label: {
+                        Text("채팅하기")
+                    }
+                    .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
                     Spacer()
-                    
-                    HStack{
-                        Text(book.title)
-                            .font(.title)
-                            .fontWeight(.bold)
-                        // 대여 상태
-                        StatusButton(status: book.rentalState)
-                    }
-                    
-                    HStack{
-                        Button {
-                            
-                        } label: {
-                            Text("메세지 보내기")
-                        }
-                        .buttonStyle(WhiteButtonStyle(height: 40.0, font: .headline))
-                        
-                        Spacer()
-                        
-                        Button {
-                            
-                        } label: {
-                            Text("대여 신청")
-                        }
-                        .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
-                    }
-                    
                     HStack {
-                        Spacer()
-                        Text("책 소유자 : ")
-                        Text(user.nickName)
+                        Text("책 소유자 : \(user.nickName)")
                         Image(user.image ?? "default")
                             .resizable()
                             .clipShape(Circle())
                             .frame(width: 30, height: 30)
                     }
-                    
-                    Divider()
-                        .padding(.vertical, 10)
-                    
-                    Section{
-                        Text("작품소개")
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                        Text(book.contents)
-                            .font(.system(size: 13))
-                    }
+                }
+                Divider()
+                    .padding(.vertical, 10)
+                
+                // 책 정보 섹션
+                VStack(alignment: .leading){
+                    Text("작품소개")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                    Text(book.contents)
+                        .font(.system(size: 13))
                     
                     HStack{
                         if book.authors.isEmpty {
@@ -126,28 +103,24 @@ struct BookDetailView: View {
                         Text(book.bookCategory?.rawValue ?? "카테고리")
                     }
                     .font(.caption)
-                    
-                    Divider()
-                        .padding(.vertical)
-                    
-                    // 책 목록
-                    Text("📖 읽고싶은 책인데 대여중이라면?")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .padding(.bottom, 5)
-                    
-                    VStack{
-                        BookDetailUserListView(book: book, user: user)
-                        BookDetailUserListView(book: book, user: user)
-                        BookDetailUserListView(book: book, user: user)
-                        BookDetailUserListView(book: book, user: user)
-                    }
                 }
-                .padding(.horizontal)
-                .navigationTitle(book.title)
+                
+                Divider()
+                    .padding(.vertical, 10)
+                
+                // 책 소유자 리스트
+                BookAnotherOwnerView(book: book, user: user)
+                Divider()
+                    .padding(.vertical, 10)
+                // 사용자들 후기
+                BookDetailReviewView(comments: commentViewModel.comments, user: user)
             }
+            .padding(.horizontal)
+            .navigationTitle(book.title)
             SpaceBox()
         }
+        // 코멘트 달기
+        CreateBookReviewView(user: user, commentViewModel: commentViewModel)
     }
 }
 

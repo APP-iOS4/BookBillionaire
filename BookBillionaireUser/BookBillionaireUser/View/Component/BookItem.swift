@@ -10,8 +10,9 @@ import BookBillionaireCore
 import FirebaseStorage
 
 struct BookItem: View {
-    var book: Book
+    let book: Book
     @State private var imageUrl: URL?
+    @State private var isFavorite: Bool = false
 
     var body: some View {
         NavigationLink(value: book) {
@@ -19,7 +20,7 @@ struct BookItem: View {
                 if let url = imageUrl {
                     AsyncImage(url: url) { image in
                         image.resizable()
-                            .frame(width: 100, height: 120)
+                            .frame(width: 100, height: 140)
                             .background(Color.gray)
                     } placeholder: {
                         ProgressView()
@@ -27,16 +28,34 @@ struct BookItem: View {
                 } else {
                     Image("default")
                         .resizable()
-                        .frame(width: 100, height: 120)
+                        .frame(width: 100, height: 140)
                         .background(Color.gray)
                 }
+                
                 VStack(alignment: .leading) {
                     Text(book.title)
-                    Text(book.authors.joined(separator: ", "))
-                    Spacer()
+                        .font(.subheadline)
+                        .padding(.bottom, 5)
+                    if book.authors.isEmpty {
+                        Text("\(book.title)")
+                            .font(.caption)
+                        Text("\(book.translators?.joined(separator: ", ") ?? "")")
+                            .multilineTextAlignment(.leading)
+                            .font(.caption)
+                            .padding(.bottom, 10)
+                    } else {
+                        Text("\(book.title)")
+                            .font(.caption)
+                        Text("\(book.authors.joined(separator: ", "))")
+                            .multilineTextAlignment(.leading)
+                            .font(.caption)
+                            .padding(.bottom, 10)
+                    }
                 }
+                .padding(.leading, 10)
                 .foregroundStyle(Color.black)
                 Spacer()
+                
             }
         }
         .onAppear {
@@ -58,4 +77,8 @@ struct BookItem: View {
             }
         }
     }
+}
+
+#Preview {
+    BookItem(book: Book(owenerID: "", title: "제목", contents: "내용", authors: ["작가"], rentalState: .rentalAvailable))
 }

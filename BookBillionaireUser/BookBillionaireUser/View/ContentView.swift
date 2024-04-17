@@ -49,7 +49,7 @@ struct ContentView: View {
             }
             
             NavigationStack {
-                ChatListView()
+
             }
             .tag(Tab.chat)
             .tabItem {

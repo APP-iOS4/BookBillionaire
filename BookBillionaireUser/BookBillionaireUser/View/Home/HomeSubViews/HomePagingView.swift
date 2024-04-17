@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct HomePagingView: View {
     @State var banners: [String] = ["banner1", "banner2", "banner3"]
     @State private var currentIndex = 0

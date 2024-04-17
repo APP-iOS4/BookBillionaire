@@ -70,7 +70,7 @@ struct HomeView: View {
                             HStack(alignment: .top, spacing: 0) {
                                 NavigationLink(value: book) {
                                     HStack(alignment: .center) {
-                                        BookListRowView(book: book)
+                                        BookItem(book: book)
                                     }
                                 }
                                 .foregroundStyle(.primary)

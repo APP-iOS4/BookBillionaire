@@ -9,6 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct BookSearchBarView: View {
+    @State var isSearching = false
     @Binding var searchBook: String
     @Binding var filteredBooks: [Book]
     // 검색 viewModel
@@ -38,7 +39,7 @@ struct BookSearchBarView: View {
                         .padding(.trailing, 5)
                     }
                     .onChange(of: searchService.searchBook) { _ in
-                        searchService.isSearching = false
+                        isSearching = false
                      }
 
                 
@@ -47,7 +48,7 @@ struct BookSearchBarView: View {
                         searchService.saveSearchHistory()
                         searchService.searchBooksByTitle(title: searchService.searchBook)
                         
-                        searchService.isSearching = true
+                        isSearching = true
                     }
                     
                 } label: {
@@ -59,7 +60,7 @@ struct BookSearchBarView: View {
             
             
             // 뷰 전환 - 검색 목록 & 최근 검색어
-            if searchService.isSearching || searchService.searchBook.isEmpty {
+            if isSearching || searchService.searchBook.isEmpty {
                 BookSearchListView(searchBook: $searchService.searchBook, filteredBooks: $searchService.filteredBooks)
             } else {
                 RecentSearchView(searchBook: $searchService.searchBook)
