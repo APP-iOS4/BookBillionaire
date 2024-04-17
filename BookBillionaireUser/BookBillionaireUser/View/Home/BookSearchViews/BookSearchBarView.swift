@@ -40,15 +40,17 @@ struct BookSearchBarView: View {
                     }
                     .onChange(of: searchService.searchBook) { _ in
                         isSearching = false
-                     }
-
+                    }
                 
                 Button {
                     if !searchService.searchBook.isEmpty {
                         searchService.saveSearchHistory()
-                        searchService.searchBooksByTitle(title: searchService.searchBook)
-                        
-                        isSearching = true
+                        // 비동기 함수 호출
+                        // Book 타입 배열 filteredBooks에 반환
+                        Task {
+                            searchService.filteredBooks = await searchService.searchBooksByTitle(title: searchService.searchBook)
+                            isSearching = true
+                        }
                     }
                     
                 } label: {
@@ -66,7 +68,7 @@ struct BookSearchBarView: View {
             }
         }
     }
-
+    
 }
 
 #Preview {
