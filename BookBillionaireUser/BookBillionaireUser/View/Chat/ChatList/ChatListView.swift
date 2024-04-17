@@ -10,10 +10,12 @@ import SwiftUI
 struct ChatListView: View {
     @State private var isEditing: Bool = false
     @StateObject private var roomListVM = RoomListViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
+        switch authViewModel.state {
+        case .loggedIn:
             VStack {
-                // 대화방 삭제 기능 구현
                 ScrollView {
                     ForEach(roomListVM.rooms, id: \.room.self) { room in
                         NavigationLink(value: room){
@@ -33,46 +35,36 @@ struct ChatListView: View {
             .navigationTitle("채팅")
             .navigationBarTitleDisplayMode(.inline)
             
-            .navigationBarItems(trailing: Button {
-                isEditing = true
-            } label: {
-                Image(systemName: "plus.app")
-            })
-            
-            .sheet(isPresented: $isEditing, onDismiss: {
-                
-            }, content: {
-                AddRoomView()
-            })
-            
             .onAppear(perform: {
                 roomListVM.getAllRooms()
             })
+        case .loggedOut:
+            UnlogginedView()
         }
+    }
 }
 
 struct RoomCell: View {
     
     let room: RoomViewModel
-//    let messageViewState: MessageViewState
-    // 파이어베이스에 올라간 목록들을 여기서 어떻게 보여주는지 모르겠다.
+
     var body: some View {
         HStack {
             ZStack {
                 // [임시] 상대방 이미지 받아와서 넣어주기
-                Circle()
-                    .foregroundColor(.accentColor)
-                    .frame(width: 50, height: 50)
-                    .opacity(0.7)
-                Image(systemName: "figure.arms.open")
-                    .padding(8)
-                    .foregroundColor(.white)
+                Image("defaultUser")
+                    .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
             }
             .padding(.horizontal, 5)
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(room.receiverName)
                     .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.black)
                 
                 Text(room.lastMessage)
                     .font(.system(size: 14))
@@ -88,8 +80,8 @@ struct RoomCell: View {
                     .foregroundColor(Color(.lightGray))
                     .padding(.bottom, 30)
             }
-            // 후순위 :
-            // [임시] 안 읽은 메세지 숫자
+//             후순위 :
+//             [임시] 안 읽은 메세지 숫자
 //            Image(systemName: "1.circle.fill")
 //                .foregroundColor(.orange)
 //                .font(.system(size: 23))
