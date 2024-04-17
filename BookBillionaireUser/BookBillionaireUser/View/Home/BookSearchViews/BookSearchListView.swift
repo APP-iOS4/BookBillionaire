@@ -11,10 +11,9 @@ import BookBillionaireCore
 struct BookSearchListView: View {
     @Binding var searchBook: String
     @Binding var filteredBooks: [Book]
-    let users: [User] = []
-    @EnvironmentObject var bookService: BookService
     @StateObject private var searchService = SearchService()
-        var body: some View {
+    
+    var body: some View {
         VStack(spacing: 20) {
             HStack {
                 Text("검색된 책 목록")
@@ -23,12 +22,12 @@ struct BookSearchListView: View {
                 Spacer()
             }
             
-            if searchService.filteredBooks.isEmpty {
+            if filteredBooks.isEmpty {
                 Text("검색한 결과가 없습니다")
                 
             } else {
                 LazyVStack(alignment: .leading, spacing: 10) {
-                    ForEach(searchService.filteredBooks) { book in
+                    ForEach(filteredBooks) { book in
                         NavigationLink {
                             BookDetailView(book: book, user: searchService.user(for: book))
                         } label: {
@@ -45,6 +44,6 @@ struct BookSearchListView: View {
 }
 
 #Preview {
-    BookSearchListView(searchBook: .constant("원도"), filteredBooks: .constant([Book(owenerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]))
+    BookSearchListView(searchBook: .constant("재채기 멋있게 하는 방법"), filteredBooks: .constant([Book(owenerID: "", title: "재채기 멋있게 하는 방법", contents: "", authors: [""], rentalState: .rentalAvailable)]))
 }
 

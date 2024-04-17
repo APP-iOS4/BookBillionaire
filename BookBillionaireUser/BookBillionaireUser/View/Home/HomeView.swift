@@ -9,13 +9,15 @@ import SwiftUI
 import BookBillionaireCore
 
 struct HomeView: View {
-    @State private var users: [User] = []
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingMenuSet: Bool = false
     @EnvironmentObject var bookService: BookService
-    @State private var books: [Book] = []
     let userService = UserService.shared
-    
+    let searchService = SearchService()
+    // 메뉴에 따라 필터로 책 불러오기
+    var filteredBooks: [Book] {
+           return bookService.filterByCategory(menuTitle)
+    }
     var body: some View {
         VStack {
             // 헤더 & 서치
@@ -45,14 +47,16 @@ struct HomeView: View {
                 ForEach(BookCategory.allCases, id: \.self) { menu in
                     Button{
                         menuTitle = menu
-                        bookService.fetchBooks()
-                        
                     } label: {
                         Text("\(menu.buttonTitle)")
                             .fontWeight(menuTitle == menu ? .bold : .regular)
                             .foregroundStyle(menuTitle == menu ? .white : .accentColor)
                             .minimumScaleFactor(0.5)
                     }
+                    .padding(10)
+                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.2))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .fixedSize()
                 }
                 .padding(.vertical, 20)
             }
@@ -65,16 +69,15 @@ struct HomeView: View {
                         .padding(.bottom, 12)
                     // 책 리스트
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(bookService.books, id: \.self) { book in
+                        ForEach(filteredBooks, id: \.self) { book in
                             HStack(alignment: .top, spacing: 0) {
                                 NavigationLink(value: book) {
                                     HStack(alignment: .center) {
-                                        BookListRowView(book: book)
+                                        BookItem(book: book)
                                     }
                                 }
                                 .foregroundStyle(.primary)
                                 Spacer()
-                                
                                 // 설정 버튼
                                 Menu {
                                     Button {
@@ -99,43 +102,20 @@ struct HomeView: View {
                                 .padding(.vertical, 10)
                         }
                         .navigationDestination(for: Book.self) { book in
-                            BookDetailView(book: book, user: user(for: book))
+                            BookDetailView(book: book, user: searchService.user(for: book))
                         }
                     }
                 }
             }
         }
         .onAppear {
-            fetchBooks()
             userService.fetchUsers()
         }
         .padding()
     }
-    // 책 데이터 호출
-    func fetchBooks() {
-        books = bookService.filterByCategory(menuTitle)
-    }
-    
-    // 책 소유자 유저 데이터 호출
-    func fetchUsers() {
-        Task {
-            await userService.loadUsers()
-        }
-    }
-    
-    // BookDetailView에 전달할 User를 가져오는 메서드
-    // User 반환
-    func user(for book: Book) -> User {
-        // book.ownerID == user.id 일치 확인 후 값 return
-        if let user = users.first(where: { $0.id == book.ownerID }) {
-            return user
-        }
-        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-        return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
-    }
 }
 
-//#Preview {
-//    HomeView(books: .constant([Book]))
-//        .environmentObject(BookService())
-//}
+#Preview {
+    HomeView()
+        .environmentObject(BookService())
+}
