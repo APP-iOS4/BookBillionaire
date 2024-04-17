@@ -22,6 +22,9 @@ struct BookDetailView: View {
     @State private var isShowingSheet: Bool = false
     @State private var isFavorite: Bool = false
     @State private var showLoginAlert = false
+    @State private var isChatViewPresented = false
+    
+    @State private var roomId: String? // 생성한 방의 id를 담는 변수
     
     // 렌탈
     let rentalService = RentalService()
@@ -35,7 +38,7 @@ struct BookDetailView: View {
     
     
     var body: some View {
-        ScrollView{
+        ScrollView {
             BookDetailImageView(book: book)
             // 찜하기, 설정 버튼
             HStack {
@@ -72,6 +75,7 @@ struct BookDetailView: View {
                     .frame(height: 100)
                     .foregroundStyle(.clear)
                 Spacer()
+                
                 HStack{
                     Text(book.title)
                         .font(.title)
@@ -80,33 +84,43 @@ struct BookDetailView: View {
                     StatusButton(status: book.rentalState)
                 }
                 
-                VStack(alignment: .leading){
-                    Button {
-                        switch authViewModel.state {
-                        case .loggedIn:
-                            
-                            // 메세지 보내기를 클릭했을때
-                            // 생성된 room id 에 해당하는 방으로 뷰가 이동되어야 함
-                            
-                            roomListVM.createRoom(completion: { })
-                            //일단 임시로 ChatListView로 이동하자
-                            
-                            //roomListVM.getCreatedRoomID(completion: {_ in })
-                            
-                            // 지금 생성된 방의 id를 찾아서 그 방으로 화면 이동을 해야하는데 어떻게 하지
-                            // 생성된 방의 id를 변수에 담는다
-                            // 그 아이디를 확인해서 해당하는 방으로 이동하는 메서드를 만든다
-                            
-                        case .loggedOut:
-                            showLoginAlert = true
+                VStack(alignment: .leading) {
+                    HStack {
+                        Button {
+                            switch authViewModel.state {
+                            case .loggedIn:
+                                roomListVM.createRoom { newRoomId in
+                                    if let newRoomId = newRoomId {
+                                        // 채팅방이 성공적으로 생성되었을 때의 처리
+                                        print("성공적으로 방을 생성했습니다. 방 ID: \(newRoomId)")
+                                        self.roomId = newRoomId
+                                        // 현재 채팅룸의 아이디 값
+                                        
+                                        isChatViewPresented.toggle()
+                                    } else {
+                                        print("방을 생성하는 데 실패했습니다.")
+                                    }
+                                }
+                            case .loggedOut:
+                                showLoginAlert = true
+                            }
+                        } label: {
+                            Text("채팅하기")
                         }
-                    } label: {
-                        Text("채팅하기")
+                        .background(
+                            NavigationLink(destination: ChatListView(), isActive: $isChatViewPresented) {
+                                EmptyView()
+                            }
+                                .hidden()
+                        )
                     }
+                    
                     .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
+                    
                     .alert(isPresented: $showLoginAlert) {
                         Alert(title: Text("알림"), message: Text("로그인이 필요합니다."), dismissButton: .default(Text("확인")))
                     }
+                    
                     .onAppear {
                         roomListVM.receiverName = user.nickName
                         print("1 \(roomListVM.receiverName)")
@@ -157,7 +171,6 @@ struct BookDetailView: View {
         CreateBookReviewView(user: user, commentViewModel: commentViewModel)
     }
 }
-
 
 #Preview {
     BookDetailView(book: Book(ownerID: "", title: "책이름", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(id: "책유저", nickName: "닉네임", address: "주소"))

@@ -66,25 +66,28 @@ class RoomListViewModel: ObservableObject {
     }
     
     /// 채팅방 생성 메서드
-    func createRoom(completion: @escaping () -> Void) {
+    func createRoom(completion: @escaping (String?) -> Void) {
         
         let user: String = String(AuthViewModel.shared.currentUser?.uid ?? "")
-        let room = ChatRoom(receiverName: receiverName, lastTimeStamp: Date(), lastMessage: "대화를 시작해보세요!", users: [user, receiverId])
+        var room = ChatRoom(receiverName: receiverName, lastTimeStamp: Date(), lastMessage: "대화를 시작해보세요!", users: [user, receiverId])
+        
+        let newRoomRef = db.document()
+        room.id = newRoomRef.documentID
         
         do {
-        _ = try db
-                .document(room.id).setData(from: room, encoder: Firestore.Encoder()) { (error) in
+            try newRoomRef.setData(from: room, encoder: Firestore.Encoder()) { (error) in
                 if let error = error {
                     print(error.localizedDescription)
-                    
+                    completion(nil) // 에러가 발생하면 nil 반환
                 } else {
-                    completion()
-                    print("방 생성 \(user)")
+                    print("방 생성 \(user) with ID: \(room.id)")
                     self.roomId = room.id
+                    completion(room.id) // 성공적으로 생성되면 문서 ID 반환
                 }
             }
         } catch let error {
             print(error.localizedDescription)
+            completion(nil) // 예외 발생 시 nil 반환
         }
     }
     
@@ -102,13 +105,6 @@ class RoomListViewModel: ObservableObject {
             print("Error getting documents: (error)👻")
         }
         return room
-    }
-    
-    func getCreatedRoomID(completion: @escaping (String?) -> Void) {
-        createRoom {
-            // 방이 성공적으로 생성되면 호출되는 클로저
-            completion(self.roomId)
-        }
     }
 }
 

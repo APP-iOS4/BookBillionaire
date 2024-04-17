@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 import FirebaseStorage
 
-/// firestore에서 가져와서 채팅창에 보여주는 사진 아이템
+/// firestore에서 가져와서 채팅창에 보여주는 사진 아이템 레이아웃 설정
 struct PhotoSharedItem: View {
     
     var message: Message

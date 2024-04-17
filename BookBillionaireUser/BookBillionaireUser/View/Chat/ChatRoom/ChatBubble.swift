@@ -33,6 +33,7 @@ struct ChatBubble: View {
                             .padding(12)
                             .background(Color.yellow)
                             .cornerRadius(15)
+                            .foregroundColor(.black)
                     } else {
                         PhotoSharedItem(message: message)
                             .cornerRadius(15)
@@ -46,10 +47,10 @@ struct ChatBubble: View {
                         //[임시] 상대방 프로필 사진 불러오기
                         Image("defaultUser")
                             .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.gray, lineWidth: 2))
                     }
                     .padding(.top, 5)
                     
@@ -80,6 +81,7 @@ struct ChatBubble: View {
         }
     }
 }
+
 
 //#Preview {
 //    ChatBubble(messageText: "안녕하세요! 📖 책 대여 희망합니다!!", username: "최준영", style: .to, message: MessageViewState.init(message: "", roomId: "", username: "", timestamp: Date()))

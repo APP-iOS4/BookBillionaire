@@ -183,5 +183,5 @@ struct PromiseConfirmView: View {
 
 
 //#Preview {
-//    PromiseConfirmView()
+//    PromiseConfirmView(user: User(id: "", nickName: "", address: ""), book: Book(owenerID: "", title: "", contents: "", authors: [], rentalState: RentalStateType.rentalNotPossible))
 //}
