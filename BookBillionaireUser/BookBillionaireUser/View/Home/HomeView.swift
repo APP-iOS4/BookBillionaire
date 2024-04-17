@@ -100,7 +100,7 @@ struct HomeView: View {
                                 .padding(.vertical, 10)
                         }
                         .navigationDestination(for: Book.self) { book in
-                            BookDetailView(book: book, user: userService.loadUserByID(book))
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID))
                         }
                     }
                 }
@@ -116,4 +116,5 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .environmentObject(BookService())
+        .environmentObject(UserService())
 }

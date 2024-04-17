@@ -29,7 +29,6 @@ class BookService: ObservableObject {
     }
     
     /// 유저들이 등록한 모든 책을 다 가져오는 함수
-    
     func loadBooks() async {
         do {
             let querySnapshot = try await bookRef.getDocuments()

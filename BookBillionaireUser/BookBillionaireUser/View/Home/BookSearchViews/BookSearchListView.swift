@@ -29,7 +29,7 @@ struct BookSearchListView: View {
                 LazyVStack(alignment: .leading, spacing: 10) {
                     ForEach(filteredBooks) { book in
                         NavigationLink {
-                            BookDetailView(book: book, user: userService.loadUserByID(<#T##UserID: String##String#>))
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID))
                         } label: {
                             BookListRowView(book: book)
                         }
