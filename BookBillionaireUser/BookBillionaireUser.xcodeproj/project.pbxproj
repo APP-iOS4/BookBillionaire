@@ -335,8 +335,8 @@
 		35B1F1C12BC80965006DF56D /* BookDetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				35EAF21C2BCF8F270051B38B /* CommentModels */,
 				356DFFA62BCD5A3500007CDA /* BookDetailView.swift */,
+				35EAF21C2BCF8F270051B38B /* CommentModels */,
 				35EAF21B2BCF8F170051B38B /* BookDetailSubViews */,
 				35EAF2192BCF8EEE0051B38B /* BookOwnerViews */,
 				35EAF21A2BCF8F040051B38B /* BookReviewViews */,
