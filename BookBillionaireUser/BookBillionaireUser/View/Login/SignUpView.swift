@@ -12,7 +12,6 @@ struct SignUpView: View {
     @State private var emailText: String = ""
     @State private var passwordText: String = ""
     @State private var passwordConfirmText: String = ""
-    @State private var isShowingProgressView = false
     @State private var isShowingAlert: Bool = false
     @State private var isPasswordCountError: Bool = false
     @State private var isPasswordUnCorrectError: Bool = false
@@ -187,26 +186,20 @@ struct SignUpView: View {
                 }
                 ZStack {
                     Button {
-                        isShowingProgressView = true
-                        
                         if containsSpecialCharacters(nameText) {
                             nicknameErrorTextColor = .red
                             nicknameErrorText = "띄어쓰기 및 특수문자 입력이 제한됩니다."
-                            isShowingProgressView = false
                         }
                         
                         if passwordText.count < 6 {
                             isPasswordCountError = true
-                            isShowingProgressView = false
                         }
                         if passwordConfirmText != passwordText {
                             isPasswordUnCorrectError = true
-                            isShowingProgressView = false
                         }
                         if !isValidEmail(emailText) {
                             isEmailError = true
                             emailErrorText = "올바른 이메일 형식이 아닙니다."
-                            isShowingProgressView = false
                         }
                         if passwordText.count >= 6 && passwordConfirmText == passwordText && isValidEmail(emailText) {
                             authViewModel.checkNicknameDuplication(nameText) { isUniqueNickname in
@@ -214,7 +207,6 @@ struct SignUpView: View {
                                     print("닉네임이 중복됩니다.")
                                     nicknameErrorTextColor = .red
                                     nicknameErrorText = "닉네임이 중복됩니다. 다른 닉네임을 사용해주세요."
-                                    isShowingProgressView = false
                                 } else {
                                     print("닉네임이 중복되지 않습니다.")
                                     authViewModel.checkEmailDuplication(emailText) { isUniqueEmail in
@@ -222,7 +214,6 @@ struct SignUpView: View {
                                             print("이메일이 중복됩니다.")
                                             emailErrorText2Color = .red
                                             emailErrorText2 = "이메일이 중복됩니다. 다른 이메일을 사용해주세요."
-                                            isShowingProgressView = false
                                         } else {
                                             print("이메일이 중복되지 않습니다.")
                                             authViewModel.signUp(email: emailText, userName: nameText, password: passwordText)
@@ -249,15 +240,12 @@ struct SignUpView: View {
                             }
                     }
                     .disabled(!checkSignUpCondition())
-                    
-                    if isShowingProgressView {
-                        ProgressView()
-                    }
                 }
             }
             .padding()
             .padding(.bottom, 15)
         }
+        
     }
     private func checkSignUpCondition () -> Bool {
         if nameText.isEmpty || emailText.isEmpty || passwordText.isEmpty || passwordConfirmText.isEmpty {
