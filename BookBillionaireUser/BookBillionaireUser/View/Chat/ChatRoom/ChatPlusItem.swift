@@ -13,6 +13,7 @@ struct ChatPlusItem: View {
     @State private var selectedItem: PhotosPickerItem?
     @Binding var message: Message
     var messageVM: MessageListViewModel
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         HStack {
@@ -28,7 +29,7 @@ struct ChatPlusItem: View {
                         .frame(width: 50, height: 40)
                         
                         Text("사진보내기")
-                            .foregroundStyle(.gray)
+                            .foregroundColor(colorScheme == .dark ? .white : .gray)
                     }
                 }
             }
@@ -60,7 +61,7 @@ struct ChatPlusItem: View {
                         .frame(width: 50, height: 40)
                         
                         Text("약속장소")
-                            .foregroundStyle(.gray)
+                            .foregroundColor(colorScheme == .dark ? .white : .gray)
                     }
                 }
             }
@@ -79,7 +80,7 @@ struct ChatPlusItem: View {
                         .frame(width: 50, height: 40)
                         
                         Text("신고하기")
-                            .foregroundStyle(.gray)
+                            .foregroundColor(colorScheme == .dark ? .white : .gray)
                     }
                 }
             }
