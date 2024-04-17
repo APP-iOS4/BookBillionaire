@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0402169A2BCF6B0A00A7C922 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 040216992BCF6B0A00A7C922 /* GoogleService-Info.plist */; };
 		04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A3F2BBD29C1009FBF6E /* BookService.swift */; };
 		04A59A452BBD2F66009FBF6E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59A442BBD2F66009FBF6E /* BookBillionaireCore */; };
 		04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A802BBE85C2009FBF6E /* UserService.swift */; };
@@ -30,6 +29,7 @@
 		04A59AC32BC69538009FBF6E /* MeetingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59AC22BC69537009FBF6E /* MeetingMapView.swift */; };
 		04DCAF9C2BCA985900B9B146 /* RLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCAF9B2BCA985900B9B146 /* RLoginView.swift */; };
 		04DCAFA02BCAACE800B9B146 /* RLoginInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCAF9F2BCAACE800B9B146 /* RLoginInfoView.swift */; };
+		08508C8B2BCFC6F8006A6519 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08508C8A2BCFC6F8006A6519 /* GoogleService-Info.plist */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
 		088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260412BBD2B4C007BEA25 /* LocationSharedView.swift */; };
@@ -53,7 +53,6 @@
 		356DFFA72BCD5A3500007CDA /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356DFFA62BCD5A3500007CDA /* BookDetailView.swift */; };
 		3585FD552BC8CEFB00F2C4DD /* HomePagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585FD542BC8CEFB00F2C4DD /* HomePagingView.swift */; };
 		35B1F1C02BC80482006DF56D /* StatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B1F1BF2BC80482006DF56D /* StatusButton.swift */; };
-		35EAF2082BCF663F0051B38B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35EAF2072BCF663F0051B38B /* GoogleService-Info.plist */; };
 		35EAF20A2BCF670D0051B38B /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF2092BCF670D0051B38B /* FavoriteButton.swift */; };
 		35EAF2102BCF67F80051B38B /* BookDetailReviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF20B2BCF67F80051B38B /* BookDetailReviewRowView.swift */; };
 		35EAF2112BCF67F80051B38B /* BookDetailOwnerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF20C2BCF67F80051B38B /* BookDetailOwnerRowView.swift */; };
@@ -97,7 +96,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		040216992BCF6B0A00A7C922 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		04A59A822BBE8876009FBF6E /* ServiceTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTestView.swift; sourceTree = "<group>"; };
@@ -115,6 +113,7 @@
 		04A59AC22BC69537009FBF6E /* MeetingMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingMapView.swift; sourceTree = "<group>"; };
 		04DCAF9B2BCA985900B9B146 /* RLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RLoginView.swift; path = BookBillionaireUser/RLoginView.swift; sourceTree = SOURCE_ROOT; };
 		04DCAF9F2BCAACE800B9B146 /* RLoginInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLoginInfoView.swift; sourceTree = "<group>"; };
+		08508C8A2BCFC6F8006A6519 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260412BBD2B4C007BEA25 /* LocationSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharedView.swift; sourceTree = "<group>"; };
@@ -138,7 +137,6 @@
 		356DFFA62BCD5A3500007CDA /* BookDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		3585FD542BC8CEFB00F2C4DD /* HomePagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagingView.swift; sourceTree = "<group>"; };
 		35B1F1BF2BC80482006DF56D /* StatusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusButton.swift; sourceTree = "<group>"; };
-		35EAF2072BCF663F0051B38B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		35EAF2092BCF670D0051B38B /* FavoriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		35EAF20B2BCF67F80051B38B /* BookDetailReviewRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailReviewRowView.swift; sourceTree = "<group>"; };
 		35EAF20C2BCF67F80051B38B /* BookDetailOwnerRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailOwnerRowView.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 			path = Renewal;
 			sourceTree = "<group>";
 		};
-
 		088260362BBD277D007BEA25 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,8 +388,6 @@
 		EF0F747B2BBCF7C500E37D0D = {
 			isa = PBXGroup;
 			children = (
-				040216992BCF6B0A00A7C922 /* GoogleService-Info.plist */,
-
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
@@ -414,7 +409,7 @@
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
 				8C76334E2BBD3DCF002EF297 /* Info.plist */,
-				08508C882BCF813D006A6519 /* GoogleService-Info.plist */,
+				08508C8A2BCFC6F8006A6519 /* GoogleService-Info.plist */,
 				EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */,
 				EF0F74B02BBCF99000E37D0D /* View */,
 				EF0F748B2BBCF7C700E37D0D /* Assets.xcassets */,
@@ -601,8 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
-
-				0402169A2BCF6B0A00A7C922 /* GoogleService-Info.plist in Resources */,
+				08508C8B2BCFC6F8006A6519 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

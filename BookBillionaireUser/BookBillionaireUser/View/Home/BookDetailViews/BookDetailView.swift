@@ -63,6 +63,7 @@ struct BookDetailView: View {
                     .frame(height: 100)
                     .foregroundStyle(.clear)
                 Spacer()
+                
                 HStack{
                     Text(book.title)
                         .font(.title)
@@ -72,7 +73,6 @@ struct BookDetailView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    
                     HStack {
                         Button {
                             switch authViewModel.state {
@@ -82,6 +82,8 @@ struct BookDetailView: View {
                                         // 채팅방이 성공적으로 생성되었을 때의 처리
                                         print("성공적으로 방을 생성했습니다. 방 ID: \(newRoomId)")
                                         self.roomId = newRoomId
+                                        // 현재 채팅룸의 아이디 값
+                                        
                                         isChatViewPresented.toggle()
                                     } else {
                                         print("방을 생성하는 데 실패했습니다.")
@@ -99,58 +101,22 @@ struct BookDetailView: View {
                             }
                                 .hidden()
                         )
-//                        .navigationDestination(isPresented: $isChatViewPresented) {
-//                            ChatListView()
-//                        }
-                        
-                        .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
-                        
-                        .alert(isPresented: $showLoginAlert) {
-                            Alert(title: Text("알림"), message: Text("로그인이 필요합니다."), dismissButton: .default(Text("확인")))}
-                        
-                        .onAppear {
-                            roomListVM.receiverName = user.nickName
-                            print("1 \(roomListVM.receiverName)")
-                            
-                            roomListVM.receiverId = user.id
-                            print("2 \(roomListVM.receiverId)")
-                        }
                     }
-                }
-                
-                
-                Spacer()
-                
-                HStack {
-                    Text("책 소유자 : \(user.nickName)")
-                    Image(user.image ?? "default")
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 30, height: 30)
-                }
-            }
-            Divider()
-                .padding(.vertical, 10)
-            
-            // 책 정보 섹션
-            VStack(alignment: .leading){
-                Text("작품소개")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                Text(book.contents)
-                    .font(.system(size: 13))
-                
-                HStack{
-                    if book.authors.isEmpty {
-                        Text("저자를 찾을 수 없어요.")
-                    } else {
-                        ForEach(book.authors, id: \.self) { author in
-                            Text(author)
-                        }
+                    
+                    .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
+                    
+                    .alert(isPresented: $showLoginAlert) {
+                        Alert(title: Text("알림"), message: Text("로그인이 필요합니다."), dismissButton: .default(Text("확인")))
                     }
-                    Divider()
-                    ForEach(book.translators ?? ["번역자"], id: \.self) { translator in Text("번역:\(translator)")
+                    
+                    .onAppear {
+                        roomListVM.receiverName = user.nickName
+                        print("1 \(roomListVM.receiverName)")
+                        
+                        roomListVM.receiverId = user.id
+                        print("2 \(roomListVM.receiverId)")
                     }
+                    
                     Spacer()
                     
                     HStack {
@@ -159,13 +125,14 @@ struct BookDetailView: View {
                             .resizable()
                             .clipShape(Circle())
                             .frame(width: 30, height: 30)
+                        
                     }
                 }
                 Divider()
                     .padding(.vertical, 10)
                 
                 // 책 정보 섹션
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text("작품소개")
                         .font(.subheadline)
                         .fontWeight(.bold)
@@ -198,22 +165,13 @@ struct BookDetailView: View {
                 // 사용자들 후기
                 BookDetailReviewView(comments: commentViewModel.comments, user: user)
             }
-            
-            Divider()
-                .padding(.vertical, 10)
-            
-            Divider()
-                .padding(.vertical, 10)
+            .padding(.horizontal)
+            .navigationTitle(book.title)
+            SpaceBox()
         }
-        .padding(.horizontal)
-        .navigationTitle(book.title)
-        SpaceBox()
         CreateBookReviewView(user: user, commentViewModel: commentViewModel)
     }
 }
-
-
-
 
 #Preview {
     BookDetailView(book: Book(owenerID: "", title: "책이름", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(id: "책유저", nickName: "닉네임", address: "주소"))
