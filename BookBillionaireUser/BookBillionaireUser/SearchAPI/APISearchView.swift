@@ -50,7 +50,6 @@ struct APISearchView: View {
     }
     
     var body: some View {
-        NavigationView {
             VStack(alignment: .center) {
                 APISearchBar(searchBook: $searchBook, onSearch: {
                     self.isLoading = true
@@ -107,6 +106,5 @@ struct APISearchView: View {
             }
             .navigationTitle("책 검색")
             .navigationBarTitleDisplayMode(.inline)
-        }
     }
 }
