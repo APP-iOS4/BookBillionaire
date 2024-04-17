@@ -24,7 +24,7 @@ public struct Book: Identifiable, Codable, Hashable {
     public var rentalState: RentalStateType
 
     /// 일반 초기화
-    public init(owenerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", bookCategory: BookCategory? = nil, rental: String = "", rentalState: RentalStateType) {
+    public init(owenerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", rental: String = "", rentalState: RentalStateType) {
         
         self.ownerID = owenerID
         self.isbn = isbn
@@ -35,40 +35,10 @@ public struct Book: Identifiable, Codable, Hashable {
         self.translators = translators
         self.price = price
         self.thumbnail = thumbnail
-        self.bookCategory = bookCategory
         self.rental = rental
         self.rentalState = rentalState
     }
-    
-    /// 디코딩을 위한 초기화
-    public init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: BookCodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
-        self.ownerID = try container.decode(String.self, forKey: .ownerID)
-        self.isbn = try container.decodeIfPresent(String.self, forKey: .isbn)
-        self.title = try container.decode(String.self, forKey: .title)
-        self.contents = try container.decode(String.self, forKey: .contents)
-        self.publisher = try container.decodeIfPresent(String.self, forKey: .publisher)
-        self.authors = try container.decode([String].self, forKey: .authors)
-        self.translators = try container.decodeIfPresent([String].self, forKey: .translators)
-        self.price = try container.decodeIfPresent(Int.self, forKey: .price)
-        self.thumbnail = try container.decode(String.self, forKey: .thumbnail)
-        self.bookCategory = try container.decodeIfPresent(BookCategory.self, forKey: .bookCategory)
-        self.rental = try container.decode(String.self, forKey: .rental)
-        self.rentalState = try container.decodeIfPresent(RentalStateType.self, forKey: .rentalState) ?? .rentalAvailable
-    }
-}
 
-/// 책 코딩키
-public enum BookCodingKeys: String, CodingKey {
-    case id, ownerID, title, contents, thumbnail, rental
-    case isbn, publisher
-    case price
-    case authors
-    case translators
-    case bookCategory
-    case rentalState
-    case bookCatagory
 }
 
 ///책 카테고리에 대한 enum
@@ -77,10 +47,10 @@ public enum BookCategory: String, CaseIterable, Identifiable, Codable {
     public var id: String {
         self.rawValue
     }
-    case hometown = "우리 동네에서 빌려요~ 🏡"
-    case suggestion = "빌리네어가 추천해요! 🤩"
-    case soaring = "요즘 사람들이 많이 찾고 있어요 👀"
-    case best = "베스트🥇"
+    case hometown = "우리 동네에서 빌려요"
+    case suggestion = "빌리네어가 추천해요"
+    case soaring = "요즘 사람들이 많이 찾고 있어요"
+    case best = "베스트"
     
     public var buttonTitle: String {
         switch self {
@@ -89,9 +59,9 @@ public enum BookCategory: String, CaseIterable, Identifiable, Codable {
         case .suggestion:
             return "추천"
         case .soaring:
-            return "인기 급상승 🚀"
+            return "인기 급상승"
         case .best:
-            return "베스트 🥇"
+            return "베스트"
         }
     }
 }

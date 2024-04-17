@@ -11,10 +11,12 @@ import BookBillionaireCore
 struct BookSearchBarView: View {
     @Binding var searchBook: String
     @Binding var filteredBooks: [Book]
+    @State private var isSearching = false
+    @State private var recentSearches: [String] = UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
+    @EnvironmentObject var bookService: BookService
     // 검색 viewModel
     @StateObject private var searchService = SearchService()
-    
-    var body: some View {
+        var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .center) {
                 TextField("책 이름을 입력해주세요", text: $searchService.searchBook)

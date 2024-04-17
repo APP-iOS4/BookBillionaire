@@ -46,3 +46,7 @@ struct BookListRowView: View {
         }
     }
 }
+
+//#Preview {
+//    BookListRowView(book: BookService().books[0])
+//}

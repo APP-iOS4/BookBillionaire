@@ -11,13 +11,21 @@ import FirebaseStorage
 import FirebaseFirestore
 
 struct BookCreateView: View {
-    let bookService: BookService = BookService.shared
+    @EnvironmentObject var bookService: BookService
     let rentalService: RentalService = RentalService.shared
     @State var book: Book = Book(owenerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
     @State var rental: Rental = Rental(id: "", bookOwner: "", rentalStartDay: Date(), rentalEndDay: Date())
     @Environment(\.dismiss) var dismiss
     @State var isShowingSheet: Bool = false
     @State private var selectedImage: UIImage?
+    
+    init(searchBook: SearchBook? = nil) {
+            if let searchBook = searchBook {
+                _book = State(initialValue: Book(owenerID: "", title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
+            } else {
+                _book = State(initialValue: Book(owenerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable))
+            }
+        }
     
     var body: some View {
         ScrollView {
@@ -69,6 +77,9 @@ struct BookCreateView: View {
         let fileRef = storageRef.child(path)
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
+            } else if let error = error {
+                // Handle unsuccessful upload
+                print("Error uploading image: \(error)")
             }
         }
     }
