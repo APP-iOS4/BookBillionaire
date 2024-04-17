@@ -35,10 +35,10 @@ struct CreateBookReviewView: View {
             
             HStack {
                 Button {
+                    // 포토피커 사용?
                     photoItemShowing.toggle()
                 } label: {
                     photoItemShowing ? Image(systemName: "xmark") : Image(systemName: "plus")
-                    //하아 포토피커 해야됩니까?
                 }
                 .padding(.horizontal,10)
                 

@@ -21,16 +21,16 @@ struct BookAnotherOwnerView: View {
                     .fontWeight(.bold)
                     .padding(.bottom, 5)
                 Spacer()
-                Button {
-                    // 동일 책 소유자 유저 리스트 더 나올거 sheet
-                } label: {
-                    Text("더 보기")
-                        .font(.caption)
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 5)
-                }
+//                Button {
+//                    // 동일 책 소유자 유저 리스트 더 나올거 sheet
+//                } label: {
+//                    Text("더 보기")
+//                        .font(.caption)
+//                    Image(systemName: "chevron.right")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 4)
+//                }
             }
             
             VStack {

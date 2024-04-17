@@ -31,7 +31,7 @@ struct BookSearchListView: View {
                         NavigationLink {
                             BookDetailView(book: book, user: userService.loadUserByID(book.ownerID))
                         } label: {
-                            BookListRowView(book: book)
+                            BookItem(book: book)
                         }
                         
                     }

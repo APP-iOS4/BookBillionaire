@@ -49,7 +49,6 @@ class SearchService: ObservableObject {
                     
                     let contained = titleCharacters.allSatisfy { character in
                         return (book.title).localizedCaseInsensitiveContains(String(character))
-                        
                     }
                     
                     if contained {

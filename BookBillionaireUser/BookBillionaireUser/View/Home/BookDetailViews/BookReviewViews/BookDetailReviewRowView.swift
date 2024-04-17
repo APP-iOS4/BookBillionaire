@@ -10,7 +10,7 @@ import BookBillionaireCore
 
 struct BookDetailReviewRowView: View {
     let user: User
-    let comment: Commnets
+    let comment: Comments
     
     var body: some View {
         VStack(alignment: .leading, spacing: 1) {
@@ -45,5 +45,5 @@ struct BookDetailReviewRowView: View {
 }
 
 #Preview {
-    BookDetailReviewRowView(user: User(id: "", nickName: "", address: ""), comment: Commnets.example)
+    BookDetailReviewRowView(user: User(id: "", nickName: "", address: ""), comment: Comments.example)
 }

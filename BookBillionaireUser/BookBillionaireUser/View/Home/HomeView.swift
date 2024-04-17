@@ -49,11 +49,11 @@ struct HomeView: View {
                     } label: {
                         Text("\(menu.buttonTitle)")
                             .fontWeight(menuTitle == menu ? .bold : .regular)
-                            .foregroundStyle(menuTitle == menu ? .white : .accentColor)
+                            .foregroundStyle(menuTitle == menu ? .white : .black)
                             .minimumScaleFactor(0.5)
                     }
                     .padding(10)
-                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.2))
+                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.6))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .fixedSize()
                 }

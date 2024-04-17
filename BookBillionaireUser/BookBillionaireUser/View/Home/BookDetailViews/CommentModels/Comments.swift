@@ -8,12 +8,12 @@
 import Foundation
 import BookBillionaireCore
 
-struct Commnets: Identifiable {
+struct Comments: Identifiable {
     var user: User
-    var id:UUID = UUID()
-    var comment:String = ""
-    var star:Int = 0
-    var date:Date = Date()
+    var id: UUID = UUID()
+    var comment: String = ""
+    var star: Int = 0
+    var date: Date = Date()
     
     // 코멘트시 옆에 날짜 표기 텍스트
     var relativeTime: String {
@@ -41,10 +41,24 @@ struct Commnets: Identifiable {
     }
     
     // 샘플
-    static var example = Commnets(
+    static var example = Comments(
         user: User(),
         comment: "마지막 페이지 어디갔나요?",
-        star: 4,
+        star: 3,
         date: Date(timeIntervalSinceNow: 60 * 60 * 24 * 20)
+    )
+    
+    static var example2 = Comments(
+        user: User(),
+        comment: "안나오세요?",
+        star: 2,
+        date: Date(timeIntervalSinceNow: 60 * 60 * 24 * 5)
+    )
+    
+    static var example3 = Comments(
+        user: User(),
+        comment: "잘 봤습니다",
+        star: 4,
+        date: Date()
     )
 }

@@ -9,14 +9,13 @@ import SwiftUI
 import BookBillionaireCore
 
 struct BookDetailReviewView: View {
-    let commentEx = Commnets.example
-    let comments: [Commnets]
+    let comments: [Comments]
     let user: User
     @State private var sortByDateAscending = true
     
     // 코멘트 날짜 정렬
     // 단일 객체 x, 배열로!
-    var sortedComments: [Commnets] {
+    var sortedComments: [Comments] {
         if sortByDateAscending {
             return comments.sorted(by: { $0.date < $1.date })
         } else {
@@ -34,7 +33,7 @@ struct BookDetailReviewView: View {
                     .padding(.bottom, 5)
                 Spacer()
                 Button {
-                    
+                    sortByDateAscending.toggle()
                 } label: {
                     Text("최신순")
                         .font(.caption)
@@ -52,7 +51,6 @@ struct BookDetailReviewView: View {
             }
             
             VStack {
-                BookDetailReviewRowView(user: user, comment: commentEx)
                 // 책 관련 리뷰들 순차로 나열 (생성된 리뷰들만 가능) 샘플 ㄴㄴ
                 ForEach(sortedComments, id: \.id) { sortedComment in
                     BookDetailReviewRowView(user: user, comment: sortedComment)
@@ -63,7 +61,8 @@ struct BookDetailReviewView: View {
 }
 
 #Preview {
-    BookDetailReviewView(comments: [Commnets.example], user: User(id: "", nickName: "", address: ""))
+    BookDetailReviewView(comments: [Comments.example, Comments.example2, Comments.example3], user: User(id: "", nickName: "", address: ""))
 }
+
 
 
