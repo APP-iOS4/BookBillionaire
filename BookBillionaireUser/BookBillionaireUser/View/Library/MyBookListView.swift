@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct MyBookListView: View {
-    let bookService: BookService = BookService.shared
+    @EnvironmentObject var bookService: BookService
     @State private var myBooks: [Book] = []
     @State private var users: [User] = []
     @State private var isShowingAlert: Bool = false
@@ -105,7 +105,7 @@ struct MyBookListView: View {
                 }
             }
         }
-        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
+//        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
         .onAppear{
             loadMybook()
         }
@@ -114,7 +114,7 @@ struct MyBookListView: View {
     private func loadMybook() {
         Task {
             if let user = AuthViewModel.shared.currentUser {
-                myBooks = await bookService.loadBookByID(user.uid)
+                myBooks = bookService.filterByOwenerID(user.uid)
             }
         }
     }

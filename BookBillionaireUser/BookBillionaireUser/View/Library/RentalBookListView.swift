@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct RentalBookListView: View {
-    let bookService: BookService = BookService.shared
+    @EnvironmentObject var bookService: BookService
     @State var myBooks: [Book] = []
     
     var body: some View {
@@ -55,17 +55,9 @@ struct RentalBookListView: View {
                 }
             }
         }
-//        .onAppear{
-//            loadMybook()
-//        }
-    }
-    
-    private func loadMybook() {
-        Task {
-            myBooks = await bookService.loadBookByID("Eyhr4YQGsATlRDUcc9rYl9PZYk52")
-        }
-    }
+       }
 }
+
 
 #Preview {
     NavigationStack {

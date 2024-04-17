@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var bookService: BookService
     @State private var selectedTab: Tab = .home
     
     enum Tab: String {

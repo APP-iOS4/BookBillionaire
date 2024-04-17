@@ -17,7 +17,7 @@ struct AccentButtonStyle: ButtonStyle {
               .frame(height: self.height)
           configuration.label
               .padding()
-              .foregroundColor(.white)
+              .foregroundColor(.black)
               .font(font)
       }
   }

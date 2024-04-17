@@ -92,6 +92,7 @@
 		EF0F74A02BBCF80C00E37D0D /* BookBillionaireAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				040216812BCEDE3300A7C922 /* GoogleService-Info.plist */,
 				040216752BCE199500A7C922 /* Views */,
 				EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */,
 				040216682BCE12C200A7C922 /* GoogleService-Info.plist */,
