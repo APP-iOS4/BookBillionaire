@@ -29,7 +29,7 @@ struct BookBillionaireUserApp: App {
     @StateObject private var authViewModelGoogle: AuthViewModelGoogle = AuthViewModelGoogle()
     @StateObject private var bookService: BookService = BookService()
     @StateObject private var userService: UserService = UserService()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()

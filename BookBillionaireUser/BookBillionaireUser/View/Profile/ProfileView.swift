@@ -80,7 +80,7 @@ struct ProfileView: View {
     private func loadMyProfile() {
         Task {
             if let currentUser = AuthViewModel.shared.currentUser {
-                user = await userService.loadUserByID(currentUser.uid)
+                user = userService.loadUserByID(currentUser.uid)
             }
         }
     }

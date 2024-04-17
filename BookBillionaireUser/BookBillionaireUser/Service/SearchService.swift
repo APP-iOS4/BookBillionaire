@@ -36,6 +36,7 @@ class SearchService: ObservableObject {
         }
     }
     
+
     // 책 검색 필터 (서치바)
     func searchBooksByTitle(title: String) async -> [Book] {
         var searchResult: [Book] = []

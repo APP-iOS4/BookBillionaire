@@ -156,5 +156,6 @@ struct EditProfileView: View {
 #Preview {
     NavigationStack {
         EditProfileView(user: .constant(User()), selectedImage: .constant(UIImage()))
+            .environmentObject(UserService())
     }
 }
