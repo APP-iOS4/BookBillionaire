@@ -8,22 +8,37 @@
 import Foundation
 
 public struct Rental: Identifiable, Codable{
-    public var id: String = UUID().uuidString
+    public var id: String
     public var bookOwner: String
     public var bookBorrower: String?
     public var rentalStartDay: Date
     public var rentalEndDay: Date
     public var rentalTime: Date?
-    public var map: String?
+    public var map: String
+    public var latitude: Double
+    public var longitude: Double
     
-    public init(id: String, bookOwner: String, bookBorrower: String? = nil, rentalStartDay: Date, rentalEndDay: Date, rentalTime: Date? = nil, map: String? = nil) {
-        self.id = id
+    public init() {
+        self.id = UUID().uuidString
+        self.bookOwner = ""
+        self.bookBorrower = ""
+        self.rentalStartDay = Date()
+        self.rentalEndDay = Date()
+        self.rentalTime = Date()
+        self.map = ""
+        self.latitude = 0.0
+        self.longitude = 0.0
+    }
+    
+    public init(id: String, bookOwner: String, bookBorrower: String? = nil, rentalStartDay: Date, rentalEndDay: Date, rentalTime: Date? = nil, map: String, latitude: Double, longitude: Double) {
+        self.id = UUID().uuidString
         self.bookOwner = bookOwner
         self.bookBorrower = bookBorrower
         self.rentalStartDay = rentalStartDay
         self.rentalEndDay = rentalEndDay
         self.rentalTime = rentalTime
         self.map = map
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }
-

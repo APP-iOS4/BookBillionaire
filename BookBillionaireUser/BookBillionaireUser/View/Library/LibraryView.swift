@@ -8,36 +8,56 @@
 import SwiftUI
 
 struct LibraryView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var selectedIndex: Int = 0
+    @State private var isShowing: Bool = false
     
     var body: some View {
-        ScrollView {
-            LazyVStack(pinnedViews: [.sectionHeaders]) {
+        switch authViewModel.state {
+        case .loggedIn:
+            VStack {
+                // 카테고리 선택
                 Section(header: CategoryView(selectedIndex: $selectedIndex)) {
                     if selectedIndex == 0 {
                         MyBookListView()
                     } else {
                         RentalBookListView()
                     }
+                    Spacer()
                 }
-                Spacer()
             }
-        }
-        .navigationTitle("내 서재")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(.background, for: .navigationBar)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    Text("책 등록 뷰")
-                } label: {
-                    if selectedIndex == 0 {
-                        Label("plus", systemImage: "plus")
-                            .labelStyle(.iconOnly)
-                            .foregroundStyle(Color.accentColor)
+            .navigationTitle("내 서재")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    // 메뉴 버튼
+                    Menu {
+                        NavigationLink {
+                            APISearchView(isShowing: $isShowing)
+                            .toolbar(.hidden, for: .tabBar)
+                        } label: {
+                            Label("검색으로 등록하기", systemImage: "magnifyingglass")
+                        }
+                        
+                        NavigationLink {
+                            BookCreateView()
+                            .toolbar(.hidden, for: .tabBar)
+                        } label: {
+                            Label("입력으로 등록하기", systemImage: "square.and.pencil")
+                        }
+                    } label: {
+                        if selectedIndex == 0 {
+                            Label("plus", systemImage: "plus")
+                                .labelStyle(.iconOnly)
+                                .foregroundStyle(Color.accentColor)
+                        }
                     }
+                    
                 }
             }
+        case .loggedOut:
+            UnlogginedView()
+                .padding()
         }
     }
 }
@@ -45,5 +65,7 @@ struct LibraryView: View {
 #Preview {
     NavigationStack {
         LibraryView()
+            .environmentObject(AuthViewModel())
+            .environmentObject(BookService())
     }
 }

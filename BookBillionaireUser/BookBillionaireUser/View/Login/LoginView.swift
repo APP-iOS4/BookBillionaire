@@ -1,108 +1,112 @@
-//
-//  Login.swift
-//  BookBillionaire
-//
-//  Created by Seungjae Yu on 3/20/24.
-//
-
 import SwiftUI
+import GoogleSignIn
+import AuthenticationServices
 
 struct LoginView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
+    @EnvironmentObject var userService: UserService
+    @Environment(\.dismiss) private var dismiss
+
+    @Binding var isPresentedLogin: Bool
     @State var emailText: String = ""
     @State var passwordText: String = ""
-    @State var signInProcessing: Bool = false
-    @EnvironmentObject var authViewModel: AuthViewModel
-    
+    @State private var isSignUpScreen: Bool = false
+    var PrivatePolicyUrl = Bundle.main.url(forResource: "PrivatePolicy", withExtension: "html")!
+    @State private var isPrivateSheet: Bool = false
+
+
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.accentColor1
-                    .edgesIgnoringSafeArea(.all)
-                VStack {
-                    Image("logo")
-                        .frame(width: 200, height: 200)
-                        .padding(.top, 50)
-                    ZStack {
-                        Rectangle()
-                            .fill(Color.white)
-                            .cornerRadius(10)
-                            .frame(width: 335, height: 250)
-                        VStack(spacing: 20) {
-                            TextField("email", text: $emailText)
-                                .padding()
-                                .padding(.horizontal, 20)
-                                .cornerRadius(10)
-                                .background(.thinMaterial)
-                                .foregroundColor(Color(hex: 0x014073))
-                                .textInputAutocapitalization(.never)
-                                .autocapitalization(.none)
-                            SecureField("Password", text: $passwordText)
-                                .padding()
-                                .padding(.horizontal, 20)
-                                .cornerRadius(10)
-                                .background(.thinMaterial)
-                                .foregroundColor(Color(hex: 0x014073))
-                            
-                            HStack(spacing: 10) {
-                                Spacer()
-                                NavigationLink {
-                                    SignUpView()
-                                } label: {
-                                    HStack {
-                                        Text("회원가입")
-                                            .foregroundColor(Color(hex: 0x014073))
-                                    }
-                                }
-                                Spacer()
-                                Button(action: {
-                                    signInProcessing = true
-                                    authViewModel.emailAuthLogIn(email: emailText, password: passwordText)
-                                }) {
-                                    ZStack {
-                                        Text("로그인")
-                                            .padding()
-                                            .background(Color.white)
-                                            .foregroundColor(Color(hex: 0x014073))
-                                            .background(emailText.isEmpty || passwordText.isEmpty == true ? .gray : .red)
-                                            .cornerRadius(10)
-                                        
-                                        if signInProcessing {
-                                            ProgressView()
-                                        }
-                                    }
-                                }
-                                .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
-                                Spacer()
-                            }
-                            .padding(.top, 20)
-                        }
-                    }
-                    .padding(.horizontal, 50)
-                    Text("Or")
-                        .foregroundColor(.white)
-                        .padding()
-                    Image("SignInWithGoogle")
-                    Image("SignInWithGoogle")
+        NavigationView {
+            VStack {
+                HStack() {
                     Spacer()
+                    Button(action: {
+                        isPresentedLogin.toggle()
+                    }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.black)
+                            .font(.title2)
+                    }
                 }
+                Image("AppLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.top, 100)
+
+                Section {
+                    VStack(spacing: 10) {
+                        TextField("email", text: $emailText)
+                            .padding()
+                            .background(.thinMaterial)
+                            .cornerRadius(10)
+                            .textInputAutocapitalization(.never)
+                        SecureField("Password", text: $passwordText)
+                            .padding()
+                            .background(.thinMaterial)
+                            .cornerRadius(10)
+                            .textInputAutocapitalization(.never)
+                    }
+                }
+                .padding(.top, 50)
+
+                HStack(spacing: 20) {
+                    NavigationLink {
+                        SignUpView()
+                    } label: {
+                        Text("회원가입")
+                    }.buttonStyle(WhiteButtonStyle(height: 40.0))
+                    
+                    Button("로그인") {
+                        authViewModel.signIn(email: emailText, password: passwordText)
+                        dismiss()
+                    }
+                    .buttonStyle(WhiteButtonStyle(height: 40.0))
+                    .foregroundStyle(emailText.isEmpty || passwordText.isEmpty ? .gray : .accentColor)
+                    .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
+                }
+                .padding(.top)
+
+                Text("다른 방법으로 로그인")
+                    .padding()
+
+                Button(action: {
+                    authViewModelGoogle.signIn(email: nil, password: nil)
+                    dismiss()
+                }) {
+                    Image("SignInWithGoogle")
+                        .resizable()
+                        .frame(width: 335, height: 50)
+                }
+                .padding(.bottom, 10)
+                
+                Spacer()
+                Spacer()
+                HStack{
+                    Text("가입 시,")
+                        Text("개인정보 처리방침")
+                            .underline()
+                            .onTapGesture {
+                                isPrivateSheet = true
+                            }
+                        Text("에 동의하게 됩니다.")
+                }
+                .font(.caption)
+                SpaceBox()
             }
+            .padding(.horizontal, 30)
+            .navigationBarHidden(true)
+            .sheet(isPresented: $isPrivateSheet, content: {
+                WebView(url: PrivatePolicyUrl)
+                    .padding(30)
+            })
+            // Hide navigation bar
         }
     }
 }
 
-extension Color {
-    init(hex: UInt, alpha: Double = 1) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xFF) / 255.0,
-            green: Double((hex >> 8) & 0xFF) / 255.0,
-            blue: Double((hex) & 0xFF) / 255.0,
-            opacity: alpha
-        )
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView(isPresentedLogin: .constant(true))
     }
 }
-
-#Preview {
-    LoginView()
-}
-

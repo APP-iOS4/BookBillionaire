@@ -8,41 +8,61 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var bookService: BookService
+    @State private var selectedTab: Tab = .home
     
-    @State private var selectedTab = 0
+    enum Tab: String {
+        case home = "홈"
+        case library = "내 서재"
+        case chat = "메세지"
+        case profile = "마이프로필"
+        
+        var symbolImage: String {
+            switch self {
+            case .home:
+                return "house"
+            case .library:
+                return "books.vertical"
+            case .chat:
+                return "message"
+            case .profile:
+                return "person.crop.circle.fill"
+            }
+        }
+    }
     
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
                 HomeView()
             }
-            .tag(0)
+            .tag(Tab.home)
             .tabItem {
-                Label("홈", systemImage: "house")
+                Label(Tab.home.rawValue, systemImage: Tab.home.symbolImage)
             }
             
             NavigationStack {
                 LibraryView()
             }
-            .tag(1)
+            .tag(Tab.library)
             .tabItem {
-                Label("내 서재", systemImage: "books.vertical")
+                Label(Tab.library.rawValue, systemImage: Tab.library.symbolImage)
             }
             
             NavigationStack {
                 ChatListView()
             }
-            .tag(2)
+            .tag(Tab.chat)
             .tabItem {
-                Label("메세지", systemImage: "message")
+                Label(Tab.chat.rawValue, systemImage: Tab.chat.symbolImage)
             }
             
             NavigationStack {
                 ProfileView()
             }
-            .tag(3)
+            .tag(Tab.profile)
             .tabItem {
-                Label("마이프로필", systemImage: "person.crop.circle.fill")
+                Label(Tab.profile.rawValue, systemImage: Tab.profile.symbolImage)
             }
         }
     }
@@ -50,4 +70,8 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(BookService())
+        .environmentObject(UserService())
 }
+
+

@@ -2,24 +2,33 @@
 //  HomeView.swift
 //  BookBillionaireUser
 //
-//  Created by Woo Sung jong on 4/3/24.
+//  Created by 홍승표 on 11/4/24.
 //
 
 import SwiftUI
 import BookBillionaireCore
 
-
-
 struct HomeView: View {
-    let bookService = BookService.shared
-    @State private var books: [Book] = []
     @State private var menuTitle: BookCategory = .hometown
-    @State private var isShowingBottomSheet: Bool = false
+    @State private var isShowingMenuSet: Bool = false
+    @EnvironmentObject var bookService: BookService
+    @EnvironmentObject var userService: UserService
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @AppStorage("recentlyPic") var recentlyPic: String = ""
+
+    // 메뉴에 따라 필터로 책 불러오기
+    var filteredBooks: [Book] {
+           return bookService.filterByCategory(menuTitle)
+    }
     var body: some View {
-        NavigationStack {
+        VStack {
+            // 헤더 & 서치
             HStack(alignment: .center) {
-                Text("BOOK BILLINAIRE")
-                    .font(.largeTitle)
+                Image("applogoShortcut")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Text("BOOK BILLIONAIRE")
+                    .foregroundStyle(.accent)
                 
                 Spacer()
                 
@@ -30,20 +39,31 @@ struct HomeView: View {
                         .frame(width: 20)
                 }
             }
-            .padding(.bottom, 12)
+            //홈 배너
+            HomePagingView()
+                .frame(height: 200)
+                .padding(.top)
             
             // 메뉴 버튼
-            HStack(alignment: .center) {
-                ForEach(BookCategory.allCases, id: \.self) { menu in
-                    Button {
-                        menuTitle = menu
-                    } label: {
-                        Text("\(menu.buttonTitle)")
-                            .fontWeight(menuTitle == menu ? .bold : .regular)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center) {
+                    ForEach(BookCategory.allCases, id: \.self) { menu in
+                        Button{
+                            menuTitle = menu
+                        } label: {
+                            Text("\(menu.buttonTitle)")
+                                .fontWeight(menuTitle == menu ? .bold : .regular)
+                                .foregroundStyle(menuTitle == menu ? .white : .black)
+                                .minimumScaleFactor(0.5)
+                                .frame(width: 70, height: 20)
+                        }
+                        .padding(10)
+                        .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.6))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
+                    .padding(.vertical, 20)
                 }
             }
-            .padding(.bottom, 12)
             // 리스트
             ScrollView(showsIndicators: false) {
                 // 메뉴 타이틀
@@ -51,81 +71,60 @@ struct HomeView: View {
                     Text("\(menuTitle.rawValue)")
                         .font(.title2)
                         .padding(.bottom, 12)
-                    
+                    // 책 리스트
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(books, id: \.self) { book in
+                        ForEach(filteredBooks, id: \.self) { book in
                             HStack(alignment: .top, spacing: 0) {
                                 NavigationLink(value: book) {
-                                    
                                     HStack(alignment: .center) {
-                                        if book.thumbnail == "default" || book.thumbnail == "" {
-                                            Image("default")
-                                                .resizable()
-                                                .frame(width: 100, height: 120)
-                                                .background(Color.gray)
-                                        } else {
-                                            AsyncImage(url: URL(string: book.thumbnail)){ image in
-                                                image.resizable()
-                                                    .frame(width: 100, height: 120)
-                                                    .background(Color.gray)
-                                            } placeholder: {
-                                                ProgressView()
-                                            }
-                                        }
-                                        VStack(alignment: .leading) {
-                                            Text(book.title)
-                                            Text(book.authors.joined(separator: ", "))
-                                            Spacer()
-                                        }
-                                        
+                                        BookItem(book: book)
                                     }
                                 }
-                                .navigationDestination(for: Int.self) { value in
-                                    BookDetailView(book: Book.sample, user: User.sample)
-                                }
-                                
                                 .foregroundStyle(.primary)
                                 Spacer()
-                                
-                                Button {
-                                    isShowingBottomSheet.toggle()
+                                // 설정 버튼
+                                Menu {
+                                    Button {
+                                        
+                                    } label: {
+                                        Label("게시물 숨기기", systemImage: "eye.slash")
+                                    }
                                     
                                 } label: {
                                     Image(systemName: "ellipsis")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 17)
-                                        .foregroundStyle(.gray.opacity(0.2))
+                                        .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
                                 }
                                 .padding(.top, 10)
-                                .sheet(isPresented: $isShowingBottomSheet) {
-                                    BottomSheet(isShowingSheet: $isShowingBottomSheet)
-                                        .presentationDetents([.fraction(0.2)])
-                                }
                             }
                             
-                            
+                            Divider()
+                                .background(Color.gray)
+                                .padding(.vertical, 10)
+                        }
+                        .navigationDestination(for: Book.self) { book in
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID))
                         }
                     }
                 }
             }
-            .onAppear {
-                fetchBooks()
-                print(books)
-            }
         }
         .padding()
-        
-    }
-    private func fetchBooks() {
-        Task{
-            books = await bookService.loadBooks()
+        .onAppear {
+            userService.fetchUsers()
+        }
+        .onReceive(AuthViewModel.shared.$state) { _ in
+            userService.currentUser = userService.loadUserByID(authViewModel.currentUser?.uid ?? "")
         }
     }
 }
 
-
 #Preview {
     HomeView()
+        .environmentObject(BookService())
+        .environmentObject(UserService())
+        .environmentObject(AuthViewModel())
 }
