@@ -18,7 +18,7 @@ struct CategoryView: View {
                     Text(category.rawValue)
                         .padding(.vertical, 20)
                         .fontWeight(.medium)
-                        .foregroundStyle(selectedCategory == category ? Color.accentColor : .black)
+                        .foregroundStyle(selectedCategory == category ? Color.accentColor : Color.primary)
                         .overlay {
                             if selectedCategory == category {
                                 VStack {

@@ -35,7 +35,7 @@ struct BookItem: View {
                     Text(book.authors.joined(separator: ", "))
                     Spacer()
                 }
-                .foregroundStyle(Color.black)
+                .foregroundStyle(Color.primary)
                 Spacer()
             }
         }
