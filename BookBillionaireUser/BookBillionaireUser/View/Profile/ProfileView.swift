@@ -68,10 +68,10 @@ struct ProfileView: View {
                     }
                     .listStyle(.plain)
                 }
+                .navigationTitle("마이 프로필")
             }
         }
         .padding()
-        .navigationTitle("마이 프로필")
         .onAppear{
             //            userUID = authViewModel.currentUser?.uid
             loadMyProfile()
