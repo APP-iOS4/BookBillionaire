@@ -12,8 +12,7 @@ struct HomeView: View {
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingMenuSet: Bool = false
     @EnvironmentObject var bookService: BookService
-    let userService = UserService.shared
-    let searchService = SearchService()
+    @EnvironmentObject var userService: UserService
     // 메뉴에 따라 필터로 책 불러오기
     var filteredBooks: [Book] {
            return bookService.filterByCategory(menuTitle)
@@ -95,14 +94,13 @@ struct HomeView: View {
                                         .rotationEffect(.degrees(90))
                                 }
                                 .padding(.top, 10)
-                                
                             }
                             Divider()
                                 .background(Color.gray)
                                 .padding(.vertical, 10)
                         }
                         .navigationDestination(for: Book.self) { book in
-                            BookDetailView(book: book, user: searchService.user(for: book))
+                            BookDetailView(book: book, user: userService.loadUserByID(book))
                         }
                     }
                 }

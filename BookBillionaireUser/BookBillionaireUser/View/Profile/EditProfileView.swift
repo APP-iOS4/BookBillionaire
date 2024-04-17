@@ -12,7 +12,7 @@ import FirebaseStorage
 
 struct EditProfileView: View {
     @Binding var user: User
-    let userService: UserService = UserService.shared
+    @EnvironmentObject var userService: UserService
     @State var isShowingDialog: Bool = false
     @State private var isShowingPhotosPicker: Bool = false
     @Binding var selectedImage: UIImage?

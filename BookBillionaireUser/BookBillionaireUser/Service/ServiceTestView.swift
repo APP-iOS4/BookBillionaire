@@ -11,7 +11,7 @@ import FirebaseStorage
 import BookBillionaireCore
 
 struct ServiceTestView: View {
-    let userService: UserService = UserService.shared
+    @EnvironmentObject var userService: UserService
     let mapService: MapService = MapService.shared
     let rentalService: RentalService = RentalService.shared
     let imagesRef = Storage.storage().reference().child("images")

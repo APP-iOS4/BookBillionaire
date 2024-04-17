@@ -11,11 +11,11 @@ import BookBillionaireCore
 
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var userService: UserService
     @State private var isLoggedIn: Bool = false
     @State private var userEmail: String? // New state variable to hold user's email
     @State private var userUID: String? // New state variable to hold user's UID
     @State var user: User = User()
-    let userService: UserService = UserService.shared
     @State private var selectedImage: UIImage?
     
     var body: some View {

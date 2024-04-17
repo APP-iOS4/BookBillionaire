@@ -18,7 +18,7 @@ import BookBillionaireCore
 struct BookDetailView: View {
     let book: Book
     @State var user: User = User()
-    let userService = UserService.shared
+    @EnvironmentObject var userService: UserService
     @StateObject var commentViewModel = CommnetViewModel()
     //채팅
     @EnvironmentObject var authViewModel: AuthViewModel

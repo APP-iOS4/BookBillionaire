@@ -11,7 +11,7 @@ import BookBillionaireCore
 struct BookSearchListView: View {
     @Binding var searchBook: String
     @Binding var filteredBooks: [Book]
-    @StateObject private var searchService = SearchService()
+    @EnvironmentObject var userService: UserService
     
     var body: some View {
         VStack(spacing: 20) {
@@ -29,7 +29,7 @@ struct BookSearchListView: View {
                 LazyVStack(alignment: .leading, spacing: 10) {
                     ForEach(filteredBooks) { book in
                         NavigationLink {
-                            BookDetailView(book: book, user: searchService.user(for: book))
+                            BookDetailView(book: book, user: userService.loadUserByID(<#T##UserID: String##String#>))
                         } label: {
                             BookListRowView(book: book)
                         }
