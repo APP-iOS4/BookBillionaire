@@ -15,43 +15,46 @@ struct BookItem: View {
 
     var body: some View {
         NavigationLink(value: book) {
-            HStack(alignment: .top) {
-                if let url = imageUrl {
-                    AsyncImage(url: url) { image in
-                        image.resizable()
+            VStack(alignment: .center) {
+                HStack(alignment: .top) {
+                    // 책 이미지 부분
+                    if let url = imageUrl {
+                        AsyncImage(url: url) { image in
+                            image.resizable()
+                                .frame(width: 100, height: 120)
+                                .background(Color.gray)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    } else {
+                        Image("default")
+                            .resizable()
                             .frame(width: 100, height: 120)
                             .background(Color.gray)
-                    } placeholder: {
-                        ProgressView()
                     }
-                } else {
-                    Image("default")
-                        .resizable()
-                        .frame(width: 100, height: 120)
-                        .background(Color.gray)
-                }
-                VStack(alignment: .leading) {
-                    Text(book.title)
-                    Text(book.authors.joined(separator: ", "))
+                    // 책 정보 부분
+                    VStack(alignment: .leading) {
+                        Text(book.title)
+                        Text(book.authors.joined(separator: ", "))
+                        Spacer()
+                    }
+                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(Color.primary)
                     Spacer()
                 }
-                .foregroundStyle(Color.primary)
-                Spacer()
             }
         }
         .onAppear {
+            // 앞글자에 따라 imageURL에 할당하는 조건
             if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
-                // book.thumbnail is a web URL
                 imageUrl = URL(string: book.thumbnail)
             } else {
-                // book.thumbnail is a Firebase Storage path
+                // Firebase Storage 경로
                 let storageRef = Storage.storage().reference(withPath: book.thumbnail)
                 storageRef.downloadURL { (url, error) in
                     if let error = error {
-                        // Handle any errors
                         print("Error getting download URL: \(error)")
                     } else if let url = url {
-                        // Use the download URL
                         imageUrl = url
                     }
                 }
