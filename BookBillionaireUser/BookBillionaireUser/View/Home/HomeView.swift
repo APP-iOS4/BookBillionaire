@@ -13,9 +13,8 @@ struct HomeView: View {
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingMenuSet: Bool = false
     @EnvironmentObject var bookService: BookService
+    @EnvironmentObject var userService: UserService
     @State private var books: [Book] = []
-    let userService = UserService.shared
-    
     var body: some View {
         VStack {
             // 헤더 & 서치
@@ -99,7 +98,7 @@ struct HomeView: View {
                                 .padding(.vertical, 10)
                         }
                         .navigationDestination(for: Book.self) { book in
-                            BookDetailView(book: book, user: user(for: book))
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID))
                         }
                     }
                 }
@@ -107,7 +106,6 @@ struct HomeView: View {
         }
         .onAppear {
             fetchBooks()
-            userService.fetchUsers()
         }
         .padding()
     }

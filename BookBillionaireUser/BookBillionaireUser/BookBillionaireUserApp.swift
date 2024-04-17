@@ -28,6 +28,8 @@ struct BookBillionaireUserApp: App {
     @StateObject private var authViewModel: AuthViewModel = AuthViewModel.shared
     @StateObject private var authViewModelGoogle: AuthViewModelGoogle = AuthViewModelGoogle()
     @StateObject private var bookService: BookService = BookService()
+    @StateObject private var userService: UserService = UserService()
+
     
     var body: some Scene {
         WindowGroup {
@@ -35,8 +37,10 @@ struct BookBillionaireUserApp: App {
                 .environmentObject(authViewModel)
                 .environmentObject(authViewModelGoogle)
                 .environmentObject(bookService)
+                .environmentObject(userService)
                 .task {
-                        await bookService.loadBooks()
+                    await bookService.loadBooks()
+                    await userService.loadUsers()
                 }
         }
     }

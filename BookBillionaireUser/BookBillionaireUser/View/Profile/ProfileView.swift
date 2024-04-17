@@ -15,7 +15,7 @@ struct ProfileView: View {
     @State private var userEmail: String? // New state variable to hold user's email
     @State private var userUID: String? // New state variable to hold user's UID
     @State var user: User = User()
-    let userService: UserService = UserService.shared
+    @EnvironmentObject var userService: UserService
     @State private var selectedImage: UIImage?
     
     var body: some View {
@@ -80,7 +80,7 @@ struct ProfileView: View {
     private func loadMyProfile() {
         Task {
             if let currentUser = AuthViewModel.shared.currentUser {
-                user = await userService.loadUserByID(currentUser.uid)
+                user = userService.loadUserByID(currentUser.uid)
             }
         }
     }

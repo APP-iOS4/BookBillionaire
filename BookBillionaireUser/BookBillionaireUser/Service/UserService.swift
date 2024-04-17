@@ -10,21 +10,14 @@ import FirebaseFirestore
 import BookBillionaireCore
 
 class UserService: ObservableObject {
-    static let shared = UserService()
-    public var users: [User]
-    
+    @Published var users: [User] = []
     private let allUserRef = Firestore.firestore().collection("User")
-    
-    /// 외부에서 인스턴스화 방지를 위한 private 초기화
-    private init() {
-        users = []
-    }
     
     /// 모든 유저들의 정보를 가져오는 함수
     func loadUsers() async {
         do {
             let querySnapshot = try await allUserRef.getDocuments()
-            users = querySnapshot.documents.compactMap { document -> User? in
+            self.users = querySnapshot.documents.compactMap { document -> User? in
                 do {
                     let user = try document.data(as: User.self)
                     return user
@@ -52,22 +45,14 @@ class UserService: ObservableObject {
     }
     
     /// 유저 ID로 유저 정보를 불러오는 함수
-    func loadUserByID(_ UserID: String) async -> User {
-        var user: User
-        do {
-            user = try await allUserRef.document(UserID).getDocument().data(as: User.self)
-            print("\(user)")
-            return user
-        } catch {
-            print("Error decoding book: \(error)")
-            return User(id: "", nickName: "", address: "")
-        }
+    func loadUserByID(_ UserID: String) -> User {
+        return users.filter { $0.id == UserID }.first ?? User()
     }
     
-    // 책 소유자 유저 데이터 호출
+    // 책 소유자 전체 유저 데이터 호출
     func fetchUsers() {
         Task {
-            await UserService.shared.loadUsers()
+            await self.loadUsers()
         }
     }
     
@@ -85,6 +70,4 @@ class UserService: ObservableObject {
         }
     }
 }
-
-
 

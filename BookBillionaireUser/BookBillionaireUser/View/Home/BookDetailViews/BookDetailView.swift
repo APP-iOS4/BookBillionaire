@@ -17,8 +17,7 @@ import BookBillionaireCore
 
 struct BookDetailView: View {
     let book: Book
-    @State var user: User = User()
-    let userService = UserService.shared
+    let user: User
     
     @EnvironmentObject var authViewModel: AuthViewModel
     @State var roomListVM: RoomListViewModel = RoomListViewModel()
@@ -156,12 +155,6 @@ struct BookDetailView: View {
             .padding(.horizontal)
             .navigationTitle(book.title)
             SpaceBox()
-                .onAppear {
-                    Task {
-                        user = await UserService.shared.loadUserByID(book.ownerID)
-                        print("생성")
-                    }
-                }
         }
     }
 }

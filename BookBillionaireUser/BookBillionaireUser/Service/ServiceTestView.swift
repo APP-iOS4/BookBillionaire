@@ -11,8 +11,9 @@ import FirebaseStorage
 import BookBillionaireCore
 
 struct ServiceTestView: View {
-    let userService: UserService = UserService.shared
     let mapService: MapService = MapService.shared
+    @EnvironmentObject var userService: UserService
+    @EnvironmentObject var bookService: BookService
     let rentalService: RentalService = RentalService.shared
     let imagesRef = Storage.storage().reference().child("images")
 
@@ -20,11 +21,16 @@ struct ServiceTestView: View {
     @State var books: [Book] = []
     var body: some View {
         Button("함수 실행") {
-            
+            Task{
+                await userService.loadUsers()
+            }
+            print("\(userService.loadUserByID("CG8Ilul95OOoFcEEk8LUUNhWSqz1"))")
         }
     }
 }
 
 #Preview {
     ServiceTestView()
+        .environmentObject(UserService())
+        .environmentObject(BookService())
 }
