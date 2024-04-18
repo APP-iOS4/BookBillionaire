@@ -64,7 +64,6 @@ struct HomeView: View {
                                     HStack(alignment: .center) {
                                         BookItem(book: book)
                                             .navigationTitle(book.title)
-                                            .navigationBarTitleDisplayMode(.inline)
                                     }
                                 }
                                 .foregroundStyle(.primary)
