@@ -11,7 +11,6 @@ import FirebaseStorage
 import BookBillionaireCore
 
 struct ServiceTestView: View {
-    let mapService: MapService = MapService.shared
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var bookService: BookService
 
@@ -29,8 +28,6 @@ struct ServiceTestView: View {
                 rental = await rentalService.getRental("0435FF97-97DD-40E3-9FB1-90D0947551B4")
                 rentalTime = await rentalService.getRentalDay("0435FF97-97DD-40E3-9FB1-90D0947551B4")
             }
-            print("\(rental)")
-            print("\(rentalTime)")
         }
     }
 }

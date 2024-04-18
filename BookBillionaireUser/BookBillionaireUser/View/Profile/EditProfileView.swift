@@ -111,7 +111,7 @@ struct EditProfileView: View {
                 let path = "profile/\(user.id).jpg"
                 user.image = path
                 let fileRef = storageRef.child(path)
-                let uploadTask = fileRef.putData(data, metadata: nil) { metadata, error in
+                let _ = fileRef.putData(data, metadata: nil) { metadata, error in
                     if error == nil && metadata != nil {
                         // Handle successful upload
                     } else if let error = error {
