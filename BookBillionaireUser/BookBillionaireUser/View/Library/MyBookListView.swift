@@ -25,6 +25,7 @@ struct MyBookListView: View {
                 Spacer()
             }
             .padding()
+            // 보유도서가 없을 때
             if myBooks.isEmpty {
                 VStack(spacing: 10) {
                     Spacer()
@@ -46,18 +47,22 @@ struct MyBookListView: View {
                 .fontWeight(.medium)
                 .foregroundStyle(.gray)
             } else {
+                // 보유도서가 있을 때
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(myBooks) { book in
+                        ForEach(myBooks.indices, id: \.self) { index in
                             HStack(alignment: .top) {
-                                NavigationLink(value: book) {
-                                    BookItem(book: book)
+                                NavigationLink {
+                                    RentalCreateView(book: $myBooks[index])
+                                    .toolbar(.hidden, for: .tabBar)
+                                } label: {
+                                    BookItem(book: myBooks[index])
                                 }
                                 Spacer()
                                 // 메뉴 버튼
                                 Menu {
                                     NavigationLink {
-//                                        BookCreateView(book: book)
+                                        BookCreateView()
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
@@ -70,11 +75,13 @@ struct MyBookListView: View {
                                     Image(systemName: "ellipsis")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 17)
+                                        .frame(width: 17, height: 17)
                                         .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
+//                                        .padding()
                                 }
-                                .alert("", isPresented: $isShowingAlert) {
+                                // 알럿
+                                .alert("경고", isPresented: $isShowingAlert) {
                                     Button(role: .cancel) {
                                         
                                     } label: {
@@ -82,7 +89,7 @@ struct MyBookListView: View {
                                     }
                                     // 1. 삭제시 rentalService에 remove 메서드 구현해서 추가 해야함.
                                     Button(role: .destructive) {
-                                        deleteMyBook(book)
+                                        deleteMyBook(myBooks[index])
                                         showToastMessage()
                                     } label: {
                                         Text("삭제")
@@ -90,23 +97,18 @@ struct MyBookListView: View {
                                 } message: {
                                     Text("""
                                         삭제시 복구가 불가능 합니다.
-                                        삭제하시겠습니까?
                                         """)
                                 }
-                                .padding()
                             }
                         }
                     }
                     .padding()
-                    .navigationDestination(for: Book.self) { book in
-                        RentalCreateView(book: book)
-                        .toolbar(.hidden, for: .tabBar)
-                    }
                     SpaceBox()
                 }
             }
         }
-        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
+        // 토스트 메시지
+        .toast(isShowing: $showToast, text: Text("도서가 삭제되었습니다."))
         .onAppear{
             loadMybook()
         }

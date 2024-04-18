@@ -15,13 +15,15 @@ struct BookItem: View {
     
     var body: some View {
             HStack(alignment: .top) {
-                // 책 이미지 부분
-                if let url = imageUrl {
+                // 책 이미지
+                if let url = imageUrl, !url.absoluteString.isEmpty {
                     AsyncImage(url: url) { image in
                         image.resizable()
                             .frame(width: 100, height: 140)
                     } placeholder: {
-                        ProgressView()
+                        Image("default")
+                            .resizable()
+                            .frame(width: 100, height: 140)
                     }
                 } else {
                     Image("default")
@@ -29,7 +31,7 @@ struct BookItem: View {
                         .frame(width: 100, height: 140)
                 }
                 
-                // 책 정보 부분
+                // 책 정보
                 VStack(alignment: .leading) {
                     Text(book.title)
                         .font(.subheadline)
@@ -56,7 +58,7 @@ struct BookItem: View {
             if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
                 imageUrl = URL(string: book.thumbnail)
             } else {
-                // Firebase Storage 경로
+                // Firebase Storage 경로 URL 다운로드
                 let storageRef = Storage.storage().reference(withPath: book.thumbnail)
                 storageRef.downloadURL { (url, error) in
                     if let error = error {

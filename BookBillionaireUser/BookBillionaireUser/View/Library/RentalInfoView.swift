@@ -9,7 +9,7 @@ import SwiftUI
 import BookBillionaireCore
 import MapKit
 
-struct RentalPeriodView: View {
+struct RentalInfoView: View {
     @Binding var rental: Rental
     @State private var annotations = [MKPointAnnotation]()
     @State private var isShowingSheet: Bool = false
@@ -33,7 +33,7 @@ struct RentalPeriodView: View {
                     Image(systemName: "chevron.down")
                 }
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 10).fill(Color.secondary))
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray).opacity(0.2))
             }
 
             if rental.latitude != 0.0 && rental.longitude != 0.0 {
