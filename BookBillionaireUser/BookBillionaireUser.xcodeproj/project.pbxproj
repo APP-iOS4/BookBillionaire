@@ -13,7 +13,6 @@
 		04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A802BBE85C2009FBF6E /* UserService.swift */; };
 		04A59A862BBF8169009FBF6E /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74B82BBCFA6200E37D0D /* ChatView.swift */; };
 		04A59A872BBF8169009FBF6E /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74BC2BBCFA7F00E37D0D /* LibraryView.swift */; };
-		04A59A892BBF9CC2009FBF6E /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A882BBF9CC2009FBF6E /* MapService.swift */; };
 		04A59A8B2BBFB7F7009FBF6E /* RentalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A8A2BBFB7F7009FBF6E /* RentalService.swift */; };
 		04A59A912BBFCF6A009FBF6E /* APISearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A8E2BBFCF6A009FBF6E /* APISearchView.swift */; };
 		04A59A922BBFCF6A009FBF6E /* APISearchListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A8F2BBFCF6A009FBF6E /* APISearchListRowView.swift */; };
@@ -104,7 +103,6 @@
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		04A59A822BBE8876009FBF6E /* ServiceTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTestView.swift; sourceTree = "<group>"; };
-		04A59A882BBF9CC2009FBF6E /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		04A59A8A2BBFB7F7009FBF6E /* RentalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalService.swift; sourceTree = "<group>"; };
 		04A59A8E2BBFCF6A009FBF6E /* APISearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISearchView.swift; sourceTree = "<group>"; };
 		04A59A8F2BBFCF6A009FBF6E /* APISearchListRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISearchListRowView.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 		04A59A3E2BBD29A5009FBF6E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				04A59A882BBF9CC2009FBF6E /* MapService.swift */,
 				04A59A3F2BBD29C1009FBF6E /* BookService.swift */,
 				04A59A802BBE85C2009FBF6E /* UserService.swift */,
 				04A59A822BBE8876009FBF6E /* ServiceTestView.swift */,
@@ -640,7 +637,6 @@
 				35B1F1C02BC80482006DF56D /* StatusButton.swift in Sources */,
 				04A59AC12BC68D79009FBF6E /* TimePickerView.swift in Sources */,
 				08C46D892BC2EC2A00DB6D1D /* ChatPlusItem.swift in Sources */,
-				04A59A892BBF9CC2009FBF6E /* MapService.swift in Sources */,
 				EF0F74D42BBD472D00E37D0D /* RentalBookListView.swift in Sources */,
 				8C85928C2BBD23BD0082C8B8 /* AuthViewModel.swift in Sources */,
 				356DFFA52BCD442A00007CDA /* BottomSheet.swift in Sources */,

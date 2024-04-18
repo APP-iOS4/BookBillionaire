@@ -43,7 +43,7 @@ struct Toast<Presenting>: View where Presenting: View {
             .frame(width: 300, height: 50)
             .background(RoundedRectangle(cornerRadius: 20).fill(Color.accentColor))
             .foregroundColor(Color.white)
-            .offset(y: self.isShowing ? 0 : 300)
+            .offset(y: self.isShowing ? 0 : 290)
             .opacity(self.isShowing ? 1 : 0)
         }
         .onChange(of: isShowing) { newValue in

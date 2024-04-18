@@ -11,7 +11,7 @@ import FirebaseStorage
 import FirebaseFirestore
 
 struct BookCreateView: View {
-    @State var book: Book = Book(ownerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
+    @State var book: Book = Book()
     @EnvironmentObject var bookService: BookService
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingSheet: Bool = false
@@ -22,7 +22,7 @@ struct BookCreateView: View {
         if let searchBook = searchBook {
             _book = State(initialValue: Book(ownerID: "", isbn: searchBook.isbn, title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
         } else {
-            _book = State(initialValue: Book(ownerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable))
+            _book = State(initialValue: Book())
         }
     }
     
@@ -75,7 +75,7 @@ struct BookCreateView: View {
         let path = "images/\(UUID().uuidString).jpg"
         book.thumbnail = path
         let fileRef = storageRef.child(path)
-        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+        let _ = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
             } else if let error = error {
                 print("Error uploading image: \(error)")

@@ -94,6 +94,6 @@ struct BookInfoAddView: View {
 }
 
 #Preview {
-    BookInfoAddView(book: .constant(Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)), selectedImage: .constant(UIImage()))
+    BookInfoAddView(book: .constant(Book()), selectedImage: .constant(UIImage()))
 }
 
