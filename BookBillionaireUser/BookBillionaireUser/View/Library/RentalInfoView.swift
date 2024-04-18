@@ -75,5 +75,5 @@ struct RentalInfoView: View {
 
 
 #Preview {
-    RentalPeriodView(rental:.constant(Rental(id: "", bookOwner: "",rentalStartDay: Date(), rentalEndDay: Date(), map: "", mapDetail: "", latitude: 0.0, longitude: 0.0)))
+    RentalInfoView(rental:.constant(Rental(id: "", bookOwner: "",rentalStartDay: Date(), rentalEndDay: Date(), map: "", mapDetail: "", latitude: 0.0, longitude: 0.0)))
 }
