@@ -30,7 +30,6 @@
 		04A59AC32BC69538009FBF6E /* MeetingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59AC22BC69537009FBF6E /* MeetingMapView.swift */; };
 		04DCAF9C2BCA985900B9B146 /* RLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCAF9B2BCA985900B9B146 /* RLoginView.swift */; };
 		04DCAFA02BCAACE800B9B146 /* RLoginInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCAF9F2BCAACE800B9B146 /* RLoginInfoView.swift */; };
-		085CE9C12BD01767002B7B20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 085CE9C02BD01767002B7B20 /* GoogleService-Info.plist */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
 		088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260412BBD2B4C007BEA25 /* LocationSharedView.swift */; };
@@ -63,6 +62,9 @@
 		35EAF2172BCF67FE0051B38B /* CommnetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF2152BCF67FE0051B38B /* CommnetViewModel.swift */; };
 		35EAF2182BCF67FE0051B38B /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF2162BCF67FE0051B38B /* Comments.swift */; };
 		35EAF21E2BCFE31D0051B38B /* BookDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF21D2BCFE31D0051B38B /* BookDetailInfoView.swift */; };
+		35ED71C22BD0A2FC006AC2A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35ED71C12BD0A2FC006AC2A0 /* GoogleService-Info.plist */; };
+		35ED71C42BD0B990006AC2A0 /* MenuScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ED71C32BD0B990006AC2A0 /* MenuScrollView.swift */; };
+		35ED71C62BD0BE18006AC2A0 /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ED71C52BD0BE18006AC2A0 /* StarView.swift */; };
 		8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */; };
 		8C1E20F32BC7AF0D00D92E95 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */; };
 		8C85928C2BBD23BD0082C8B8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */; };
@@ -118,7 +120,6 @@
 		04A59AC22BC69537009FBF6E /* MeetingMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingMapView.swift; sourceTree = "<group>"; };
 		04DCAF9B2BCA985900B9B146 /* RLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RLoginView.swift; path = BookBillionaireUser/RLoginView.swift; sourceTree = SOURCE_ROOT; };
 		04DCAF9F2BCAACE800B9B146 /* RLoginInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLoginInfoView.swift; sourceTree = "<group>"; };
-		085CE9C02BD01767002B7B20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260412BBD2B4C007BEA25 /* LocationSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharedView.swift; sourceTree = "<group>"; };
@@ -151,6 +152,9 @@
 		35EAF2152BCF67FE0051B38B /* CommnetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommnetViewModel.swift; sourceTree = "<group>"; };
 		35EAF2162BCF67FE0051B38B /* Comments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		35EAF21D2BCFE31D0051B38B /* BookDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailInfoView.swift; sourceTree = "<group>"; };
+		35ED71C12BD0A2FC006AC2A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		35ED71C32BD0B990006AC2A0 /* MenuScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScrollView.swift; sourceTree = "<group>"; };
+		35ED71C52BD0BE18006AC2A0 /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
 		8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModelGoogle.swift; sourceTree = "<group>"; };
 		8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		8C76334E2BBD3DCF002EF297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				3585FD542BC8CEFB00F2C4DD /* HomePagingView.swift */,
+				35ED71C32BD0B990006AC2A0 /* MenuScrollView.swift */,
 			);
 			path = HomeSubViews;
 			sourceTree = "<group>";
@@ -397,6 +402,7 @@
 		EF0F747B2BBCF7C500E37D0D = {
 			isa = PBXGroup;
 			children = (
+				35ED71C12BD0A2FC006AC2A0 /* GoogleService-Info.plist */,
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
@@ -418,7 +424,6 @@
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
 				8C76334E2BBD3DCF002EF297 /* Info.plist */,
-				085CE9C02BD01767002B7B20 /* GoogleService-Info.plist */,
 				EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */,
 				EF0F74B02BBCF99000E37D0D /* View */,
 				EF0F748B2BBCF7C700E37D0D /* Assets.xcassets */,
@@ -445,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				35EAF2092BCF670D0051B38B /* FavoriteButton.swift */,
+				35ED71C52BD0BE18006AC2A0 /* StarView.swift */,
 				356DFFA42BCD442A00007CDA /* BottomSheet.swift */,
 				353704562BCD183D00E6F531 /* CustomAlert.swift */,
 				35B1F1BF2BC80482006DF56D /* StatusButton.swift */,
@@ -609,7 +615,7 @@
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
 				048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */,
-				085CE9C12BD01767002B7B20 /* GoogleService-Info.plist in Resources */,
+				35ED71C22BD0A2FC006AC2A0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +632,7 @@
 				EF6C38A32BCFD3ED00098E18 /* RentalCreateView.swift in Sources */,
 				350AFD162BC761B600FFEC82 /* BookDetailImageView.swift in Sources */,
 				04A59A872BBF8169009FBF6E /* LibraryView.swift in Sources */,
+				35ED71C42BD0B990006AC2A0 /* MenuScrollView.swift in Sources */,
 				35EAF2102BCF67F80051B38B /* BookDetailReviewRowView.swift in Sources */,
 				35EAF21E2BCFE31D0051B38B /* BookDetailInfoView.swift in Sources */,
 				04DCAF9C2BCA985900B9B146 /* RLoginView.swift in Sources */,
@@ -664,6 +671,7 @@
 				088260462BBD2B85007BEA25 /* PromiseConfirmView.swift in Sources */,
 				EF88A1842BC4E6AC00E0EEAA /* BookItem.swift in Sources */,
 				356DFFA72BCD5A3500007CDA /* BookDetailView.swift in Sources */,
+				35ED71C62BD0BE18006AC2A0 /* StarView.swift in Sources */,
 				0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */,
 				04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */,
 				3585FD552BC8CEFB00F2C4DD /* HomePagingView.swift in Sources */,

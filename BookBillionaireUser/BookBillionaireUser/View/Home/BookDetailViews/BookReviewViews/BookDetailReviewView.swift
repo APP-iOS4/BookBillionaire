@@ -32,23 +32,19 @@ struct BookDetailReviewView: View {
                     .fontWeight(.bold)
                     .padding(.bottom, 5)
                 Spacer()
-                Button {
-                    sortByDateAscending.toggle()
-                } label: {
-                    Text("최신순")
+                HStack(alignment: .center) {
+                    Text(sortByDateAscending ? "최신순" : "오래된순")
                         .font(.caption)
                     Image(systemName: "arrow.up.arrow.down")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 12)
                 }
-                .foregroundStyle(Color.primary)
-                .padding(5)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.primary.opacity(0.5), lineWidth: 2)
-                        .background(Color.clear)
+                .padding(10)
+                .onTapGesture {
+                    sortByDateAscending.toggle()
                 }
+                .foregroundStyle(Color.primary)
             }
             
             VStack {
@@ -62,7 +58,7 @@ struct BookDetailReviewView: View {
 }
 
 #Preview {
-    BookDetailReviewView(comments: [Comments.example, Comments.example2, Comments.example3], user: User(id: "", nickName: "", address: ""))
+    BookDetailReviewView(comments: [Comments.example, Comments.example2], user: User(id: "", nickName: "", address: ""))
 }
 
 
