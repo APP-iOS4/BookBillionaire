@@ -10,7 +10,7 @@ import BookBillionaireCore
 
 struct RentalCreateView: View {
     @State var book: Book
-    @State var rental: Rental = Rental(id: UUID().uuidString, bookOwner: "", rentalStartDay: Date(), rentalEndDay: Date(), map: "", latitude: 0.0, longitude: 0.0)
+    @State var rental: Rental = Rental(id: UUID().uuidString, bookOwner: "", rentalStartDay: Date(), rentalEndDay: Date(), map: "", mapDetail: "", latitude: 0.0, longitude: 0.0)
     let rentalService: RentalService = RentalService()
     @Environment(\.dismiss) var dismiss
     
