@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0402169A2BCF6B0A00A7C922 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 040216992BCF6B0A00A7C922 /* GoogleService-Info.plist */; };
 		048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */ = {isa = PBXBuildFile; fileRef = 048C72302BCFC4A800865316 /* PrivatePolicy.html */; };
 		04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A3F2BBD29C1009FBF6E /* BookService.swift */; };
 		04A59A452BBD2F66009FBF6E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59A442BBD2F66009FBF6E /* BookBillionaireCore */; };
@@ -67,6 +66,7 @@
 		8C85928C2BBD23BD0082C8B8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */; };
 		8C85928D2BBD23BD0082C8B8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */; };
 		8C85928E2BBD23BD0082C8B8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85928B2BBD23BD0082C8B8 /* LoginView.swift */; };
+		8CA4A8A22BCFF77400D559A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CA4A8A12BCFF77400D559A2 /* GoogleService-Info.plist */; };
 		EF0F74882BBCF7C500E37D0D /* BookBillionaireUserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */; };
 		EF0F748A2BBCF7C500E37D0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74892BBCF7C500E37D0D /* ContentView.swift */; };
 		EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF0F748B2BBCF7C700E37D0D /* Assets.xcassets */; };
@@ -99,7 +99,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		040216992BCF6B0A00A7C922 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		048C72302BCFC4A800865316 /* PrivatePolicy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PrivatePolicy.html; sourceTree = "<group>"; };
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -155,6 +154,7 @@
 		8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		8C85928B2BBD23BD0082C8B8 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8CA4A8A12BCFF77400D559A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF0F74842BBCF7C500E37D0D /* BookBillionaireUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBillionaireUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookBillionaireUserApp.swift; sourceTree = "<group>"; };
 		EF0F74892BBCF7C500E37D0D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -394,7 +394,6 @@
 		EF0F747B2BBCF7C500E37D0D = {
 			isa = PBXGroup;
 			children = (
-				040216992BCF6B0A00A7C922 /* GoogleService-Info.plist */,
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
@@ -412,6 +411,7 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
+				8CA4A8A12BCFF77400D559A2 /* GoogleService-Info.plist */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
@@ -606,7 +606,7 @@
 			files = (
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
 				048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */,
-				0402169A2BCF6B0A00A7C922 /* GoogleService-Info.plist in Resources */,
+				8CA4A8A22BCFF77400D559A2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,6 +831,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookBillionaireUser/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "BookBillionaireUser 앱에서 책의 이미지를 촬영하기 위하여 Camera 접근권한을 요청합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재위치에 접근하고자 합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "BookBillionaireUser 앱에서 책의 이미지를 사용하기 위하여 Photo Library 접근권한을 요청합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -868,6 +869,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookBillionaireUser/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "BookBillionaireUser 앱에서 책의 이미지를 촬영하기 위하여 Camera 접근권한을 요청합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재위치에 접근하고자 합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "BookBillionaireUser 앱에서 책의 이미지를 사용하기 위하여 Photo Library 접근권한을 요청합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
