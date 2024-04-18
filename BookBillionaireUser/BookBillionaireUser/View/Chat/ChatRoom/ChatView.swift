@@ -101,7 +101,7 @@ struct ChatView: View {
                         .padding(7)
                         .padding(.horizontal, 17)
                         .font(.callout)
-                        .foregroundStyle(.black)
+                        .foregroundColor(Color(UIColor.label))
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.accent, lineWidth: 1.5))
@@ -121,20 +121,11 @@ struct ChatView: View {
                         .padding(7)
                         .padding(.horizontal, 17)
                         .font(.callout)
-                        .foregroundStyle(.black)
+                        .foregroundColor(Color(UIColor.label))
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.accent, lineWidth: 1.5))
                         
-                        /* // 파란색 배경 버튼
-                         .padding(9)
-                         .font(.callout)
-                         .background(
-                         RoundedRectangle(cornerRadius: 15)
-                         .foregroundColor(.accentColor))
-                         .foregroundStyle(.white)
-                         
-                         */
                         Spacer()
                     }
                 }
@@ -218,8 +209,6 @@ struct ChatView: View {
         .padding(.bottom, 8)
         .padding(.top, 0)
         .padding(.horizontal)
-        .background(Color.white)
-        .cornerRadius(50)
     }
     
     // MARK: - 채팅방 나가기 버튼

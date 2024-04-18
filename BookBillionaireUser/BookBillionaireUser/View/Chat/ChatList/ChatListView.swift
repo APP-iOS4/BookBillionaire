@@ -18,28 +18,26 @@ struct ChatListView: View {
             VStack {
                 ScrollView {
                     ForEach(roomListVM.rooms, id: \.room.self) { room in
-                        NavigationLink(value: room){
-                            RoomCell(room: room)}
+                        NavigationLink(destination: ChatView(room: room)) {
+                            RoomCell(room: room)
+                        }
                         Divider()
                     }
-                    .navigationDestination(for: RoomViewModel.self){ room in
-                        ChatView(room: room)
-                    }
-                    .listStyle(PlainListStyle())
                 }
+                .padding(.top, 15)
+                .refreshable {
+                    roomListVM.getAllRooms()
+                }
+                .navigationTitle("채팅")
+                .navigationBarTitleDisplayMode(.inline)
+                
+                .onAppear(perform: {
+                    roomListVM.getAllRooms()
+                })
             }
-            .padding(.top, 15)
-            .refreshable {
-                roomListVM.getAllRooms()
-            }
-            .navigationTitle("채팅")
-            .navigationBarTitleDisplayMode(.inline)
-            
-            .onAppear(perform: {
-                roomListVM.getAllRooms()
-            })
         case .loggedOut:
             UnlogginedView()
+                .padding()
         }
     }
 }
@@ -64,7 +62,7 @@ struct RoomCell: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text(room.receiverName)
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.black)
+                    .foregroundColor(Color(UIColor.label))
                 
                 Text(room.lastMessage)
                     .font(.system(size: 14))
@@ -93,6 +91,5 @@ struct RoomCell: View {
 }
 
 #Preview {
-//    RoomCell(room: RoomViewModel(room: Room(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "gg", users: ["",""])))
     ChatListView()
 }

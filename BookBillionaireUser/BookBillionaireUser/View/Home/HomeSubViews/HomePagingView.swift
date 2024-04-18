@@ -22,7 +22,7 @@ struct HomePagingView: View {
                     Image(banners[index])
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .clipShape(RoundedRectangle(cornerRadius: 25.0))
+                        .clipShape(RoundedRectangle(cornerRadius: 5.0))
                         .padding(.horizontal, 10)
                         .tag(index) // 각 이미지에 인덱스를 태그로 지정
                 }
