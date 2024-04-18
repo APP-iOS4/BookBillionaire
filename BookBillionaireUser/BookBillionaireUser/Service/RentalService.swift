@@ -23,6 +23,15 @@ class RentalService: ObservableObject {
         }
     }
     
+    func deleteRental(_ rental: Rental) async {
+        do {
+            try await rentalRef.document(rental.id).delete()
+            print("렌탈 삭제 완료")
+        } catch {
+            print("\(#function) Error removing document : \(error)")
+        }
+    }
+    
     func updateRental(_ rentalID: String, rentalTime: Date) async {
         let rentaldocRef = rentalRef.document(rentalID)
         do {

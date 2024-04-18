@@ -95,6 +95,36 @@ class BookService: ObservableObject {
         self.fetchBooks()
     }
     
+    /// 렌탈 ID 등록 및 삭제할 때 모두 이용가능
+    /// 렌탈을 삭제하고 싶을 때는 deleteBookID 입력, 등록하고 싶을때는 registerBookID 입력
+    func updateRental(deleteBookID: String?, registerBookID: String?, rental: Rental) async {
+        if let deleteBookID {
+            let userRentalRef = bookRef.document(deleteBookID)
+            do {
+                try await userRentalRef.updateData([
+                    "rental" : ""
+                ])
+                print("렌탈 삭제성공🧚‍♀️")
+            } catch {
+                print("\(#function) 렌탈삭제 실패했음☄️ \(error)")
+            }
+            self.fetchBooks()
+        }
+        if let registerBookID {
+            let userRentalRef = bookRef.document(registerBookID)
+                do {
+                    try await userRentalRef.updateData([
+                        "rental" : rental.id
+                    ])
+                    print("렌탈 등록성공🧚‍♀️")
+                } catch {
+                    print("\(#function) 렌탈등록 실패했음☄️ \(error)")
+                }
+                self.fetchBooks()
+            }
+    }
+    
+    /// 책의 카테고리를 업데이트 하는 함수
     func updateBookCategory(_ bookID: String, bookCategory: BookCategory) async {
         let userRentalRef = bookRef.document(bookID)
         do {
