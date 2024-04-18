@@ -33,6 +33,6 @@ struct DescriptionView: View {
     }
 }
 
-//#Preview {
-//    DescriptionView(book: .constant(Book.sample))
-//}
+#Preview {
+    DescriptionView(book: .constant(Book()))
+}
