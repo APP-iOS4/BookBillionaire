@@ -63,11 +63,17 @@ struct RoomCell: View {
                 Text(room.receiverName)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(Color(UIColor.label))
-                
-                Text(room.lastMessage)
-                    .font(.system(size: 14))
-                    .foregroundColor(Color(.lightGray))
-                    .lineLimit(1)
+                if room.lastMessage.hasPrefix("https://firebasestorage") {
+                    Text("사진")
+                        .font(.system(size: 14))
+                        .foregroundColor(Color(.lightGray))
+                        .lineLimit(1)
+                } else {
+                    Text(room.lastMessage)
+                        .font(.system(size: 14))
+                        .foregroundColor(Color(.lightGray))
+                        .lineLimit(1)
+                }
             }
             
             Spacer()

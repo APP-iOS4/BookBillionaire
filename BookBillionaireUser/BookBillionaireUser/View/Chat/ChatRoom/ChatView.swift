@@ -11,8 +11,9 @@ import BookBillionaireCore
 
 struct ChatView: View {
     let room: RoomViewModel
+    @State private var chatImageURL: URL?
 
-    @State var message: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date(), ImageURL: "")
+    @State var message: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date())
     
     @StateObject private var messageListVM = MessageListViewModel()
     @State private var promiseViewShowing = false
@@ -41,7 +42,7 @@ struct ChatView: View {
             messageTextField
             
             if plusItemShowing {
-                ChatPlusItem(message: $message, messageVM: messageListVM)
+                ChatPlusItem(message: $message, chatImageURL: $chatImageURL, messageVM: messageListVM)
                     .padding(.bottom, 50)
                     .padding(.top, 30)
             }
@@ -176,13 +177,12 @@ struct ChatView: View {
     // MARK: - 채팅 입력 텍스트필드
     private var messageTextField: some View {
         HStack {
-            Button {
-                plusItemShowing.toggle()
-                hideKeyboard()
-            } label: {
-                plusItemShowing ? Image(systemName: "xmark") : Image(systemName: "plus")
-            }
-            .padding(.horizontal,10)
+            Image(systemName: plusItemShowing ? "xmark" : "plus")
+                .onTapGesture {
+                    plusItemShowing.toggle()
+                    hideKeyboard()
+                }
+                .padding(.horizontal, 10)
             
             
             TextField("메세지를 입력하세요.", text: $messageText)

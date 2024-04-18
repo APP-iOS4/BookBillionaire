@@ -91,7 +91,6 @@ class MessageListViewModel: ObservableObject {
                 "lastMessage" : msg.message,
                 "lastTimeStamp": msg.timestamp,
                 "senderName": msg.senderName
-//                "receiverName": msg.
             ])
             print("메세지 등록 성공🧚‍♀️")
         }
@@ -146,17 +145,50 @@ class MessageListViewModel: ObservableObject {
         }
     }
     
-    /// 채팅방 사진 업로드 메서드
-    func uploadPhoto(selectedImage: UIImage?, photoImage: String) {
-        
-        guard selectedImage != nil else { return }
+    /// Storage에 이미지 업로드 하는 메서드
+    func uploadPhoto(selectedImage: UIImage?, completion: @escaping (URL?) -> Void) {
+        guard let selectedImage = selectedImage else {
+            completion(nil)
+            return
+        }
         
         let storageRef = Storage.storage().reference()
-        let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+        let imageData = selectedImage.jpegData(compressionQuality: 1)
         
-        guard imageData != nil else { return }
+        guard let imageData = imageData else {
+            completion(nil)
+            return
+        }
         
         let path = "chatImages/\(UUID().uuidString).jpg"
-        _ = storageRef.child(path)
+        let fileRef = storageRef.child(path)
+        
+        // 이미지 업로드
+        _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
+            if let error = error {
+                print("Error uploading image: \(error)")
+                completion(nil)
+            } else {
+                // 업로드가 성공하면 fetchDownloadURL()을 호출하여 다운로드 URL 가져오기
+                self.fetchDownloadURL(for: path, completion: completion)
+            }
+        }
+    }
+    
+    ///Storage에 올라간 사진을 URL로 변환하는 메서드
+    func fetchDownloadURL(for path: String, completion: @escaping (URL?) -> Void) {
+        let storageRef = Storage.storage().reference()
+        let fileRef = storageRef.child(path)
+        
+        // 다운로드 URL 가져오기
+        fileRef.downloadURL { url, error in
+            if let error = error {
+                print("Error getting download URL: \(error)")
+                completion(nil) // 에러가 발생하면 nil을 반환
+            } else if let url = url {
+                // 다운로드 URL이 성공적으로 얻어졌을 때 반환
+                completion(url)
+            }
+        }
     }
 }
