@@ -36,9 +36,11 @@ struct BookItem: View {
                         .padding(.bottom, 5)
                     if book.authors.isEmpty {
                         Text("\(book.title)")
+                            .fontWeight(.semibold)
                         Text("\(book.translators?.joined(separator: ", ") ?? "")")
                     } else {
                         Text("\(book.title)")
+                            .fontWeight(.semibold)
                         Text("\(book.authors.joined(separator: ", "))")
                     }
                 }

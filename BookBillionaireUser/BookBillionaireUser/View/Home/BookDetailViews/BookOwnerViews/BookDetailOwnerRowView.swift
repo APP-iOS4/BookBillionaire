@@ -14,10 +14,21 @@ struct BookDetailOwnerRowView: View {
     
     var body: some View {
         HStack{
-            Image(user.image ?? "")
-                .resizable()
-                .clipShape(Circle())
-                .frame(width: 50, height: 50)
+            if let url = URL(string: user.image ?? "") {
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 50, height: 50)
+                } placeholder: {
+                    ProgressView()
+                }
+            } else {
+                Image("default")
+                    .resizable()
+                    .clipShape(Circle())
+                    .frame(width: 50, height: 50)
+            }
             Text(user.nickName).font(.headline)
             Spacer()
             StatusButton(status: book.rentalState)
