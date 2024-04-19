@@ -83,7 +83,6 @@ struct HomeView: View {
                                         .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
                                 }
-                                .padding(.top, 10)
                             }
                             
                             Divider()

@@ -84,6 +84,6 @@ struct ChatBubble: View {
 
 
 //#Preview {
-//    ChatBubble(messageText: "안녕하세요! 📖 책 대여 희망합니다!!", username: "최준영", style: .to, message: MessageViewState.init(message: "", roomId: "", username: "", timestamp: Date()))
+//    ChatBubble(messageText: "안녕하세요! 📖 책 대여 희망합니다!!", username: "최준영", style: .to, messageVM: MessageViewState.init(message: "", roomId: "", username: "", timestamp: Date()))
 //}
 
