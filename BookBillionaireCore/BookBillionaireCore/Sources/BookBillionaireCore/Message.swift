@@ -7,20 +7,20 @@
 
 import Foundation
 
-public struct Room: Identifiable, Codable {
-    public var id: String?
-    let lastMessage: String        // 마지막 메세지 (채팅방 목록 메세지 미리보기)
-    let sender: String             // 발신자
-    let receiver: String           // 수신자
-}
-
-public struct Message: Identifiable, Codable {
-    public var id: String?
-    var text: String = ""          // 메세지 텍스트
-    var timestamp: Date            // 메세지를 보낸 시간
-    var sender: String             // 발신자
-    let receiver: String           // 수신자
-}
+//public struct Room: Identifiable, Codable {
+//    public var id: String?
+//    let lastMessage: String        // 마지막 메세지 (채팅방 목록 메세지 미리보기)
+//    let sender: String             // 발신자
+//    let receiver: String           // 수신자
+//}
+//
+//public struct Message: Identifiable, Codable {
+//    public var id: String?
+//    var text: String = ""          // 메세지 텍스트
+//    var timestamp: Date            // 메세지를 보낸 시간
+//    var sender: String             // 발신자
+//    let receiver: String           // 수신자
+//}
 
 /*
  public struct ChatRoom: Identifiable, Codable {        // 채팅방

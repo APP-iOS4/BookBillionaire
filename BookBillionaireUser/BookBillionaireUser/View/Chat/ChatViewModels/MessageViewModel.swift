@@ -31,6 +31,10 @@ struct MessageViewModel { // 수정 예정
         message.timestamp
     }
     
+    var imageUrl: URL? {
+        message.imageUrl
+    }
+    
     func formatTimestamp(_ timestamp: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "a h:mm"

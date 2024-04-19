@@ -1,5 +1,5 @@
 //
-//  MessageView.swift
+//  ChatView.swift
 //  BookBillionaireUser
 //
 //  Created by 최준영 on 4/3/24.
@@ -11,13 +11,11 @@ import BookBillionaireCore
 
 struct ChatView: View {
     let room: RoomViewModel
-    @State private var chatImageURL: URL?
-
-    @State var message: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date())
     
     @StateObject private var messageListVM = MessageListViewModel()
+    @State var messageModel: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date())
     @State private var promiseViewShowing = false
-    @State private var messageText: String = ""
+    @State var messageText: String = ""
     @State private var cancellables: AnyCancellable?
     @State private var plusItemShowing = false
     @State private var isPresentedExitAlert = false
@@ -42,7 +40,7 @@ struct ChatView: View {
             messageTextField
             
             if plusItemShowing {
-                ChatPlusItem(message: $message, chatImageURL: $chatImageURL, messageVM: messageListVM)
+                ChatPlusItem(message: $messageModel, messageText: $messageText, messageListVM: messageListVM)
                     .padding(.bottom, 50)
                     .padding(.top, 30)
             }
@@ -57,7 +55,7 @@ struct ChatView: View {
     }
     
     private func sendMessage() {
-        let messageVS = Message(message: messageText, senderName: username ?? "", roomId: room.roomId, timestamp: Date())
+        let messageVS = Message(message: messageText, senderName: username ?? "", roomId: room.roomId, timestamp: Date(), imageUrl: messageModel.imageUrl)
         
         messageListVM.sendMessage(msg: messageVS) {
             messageText = ""
@@ -148,12 +146,11 @@ struct ChatView: View {
                         HStack {
                             if message.username == username {
                                 Spacer()
-                                ChatBubble(messageText: message.messageText, username: message.username, style: .from, messageVM: message)
+                                ChatBubble(messageText: message.messageText, username: message.username, imageUrl: message.imageUrl, style: .from, messageVM: message)
                             } else {
-                                ChatBubble(messageText: message.messageText, username: message.username, style: .to, messageVM: message)
+                                ChatBubble(messageText: message.messageText, username: message.username, imageUrl: message.imageUrl, style: .to, messageVM: message)
                                 Spacer()
-                            }
-                        }
+                            }                         }
                         .padding(.horizontal, 15)
                         .id(message.messageId)
                     }
@@ -178,19 +175,27 @@ struct ChatView: View {
     private var messageTextField: some View {
         HStack {
             Image(systemName: plusItemShowing ? "xmark" : "plus")
+                .foregroundStyle(.accent)
                 .onTapGesture {
                     plusItemShowing.toggle()
                     hideKeyboard()
                 }
                 .padding(.horizontal, 10)
             
-            
             TextField("메세지를 입력하세요.", text: $messageText)
                 .padding(10)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
                 .disableAutocorrection(true)
-            
+                .onChange(of: messageText) { newValue in
+                    if newValue.contains("https://firebasestorage") {
+                        if let urlString = messageModel.imageUrl?.absoluteString {
+                            messageText = urlString
+                        }
+                        sendMessage()
+                        messageText = ""
+                    }
+                }
             Button {
                 if messageText != "" {
                     sendMessage()

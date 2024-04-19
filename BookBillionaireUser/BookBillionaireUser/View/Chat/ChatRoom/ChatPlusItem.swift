@@ -16,10 +16,11 @@ struct ChatPlusItem: View {
     @State private var isShowingPhotosPicker: Bool = false
 
     @Binding var message: Message
-    @Binding var chatImageURL: URL?
+    @Binding var messageText: String
+    
     @Environment(\.colorScheme) var colorScheme
 
-    var messageVM: MessageListViewModel
+    var messageListVM: MessageListViewModel
     var path: String?
 
     var body: some View {
@@ -47,10 +48,16 @@ struct ChatPlusItem: View {
                         if let image = UIImage(data: data) {
                             selectedImage = image
                             
-                            messageVM.uploadPhoto(selectedImage: selectedImage) { imageURL in
+                            messageListVM.uploadPhoto(selectedImage: selectedImage) { imageURL in
                                 if let imageURL = imageURL {
                                     print("업로드 이미지 URL 받아오기 성공: \(imageURL) 🎉")
-                                    self.chatImageURL = imageURL
+                                    // 메세지 텍스트 필드로 url 전달
+                                    message.imageUrl = imageURL
+                                    
+                                    if let urlString = message.imageUrl?.absoluteString {
+                                        messageText = urlString
+                                        print("22=============\(String(describing: message.imageUrl))")
+                                    }
                                 } else {
                                     // 이미지 업로드에 실패한 경우 또는 다운로드 URL을 가져오는 데 실패한 경우
                                     print("업로드 이미지 URL 다운로드를 실패했습니다 🥲")
@@ -58,6 +65,7 @@ struct ChatPlusItem: View {
                             }
                         }
                     }
+                    selectedItem = nil
                 }
             }
             .padding(.trailing, 40)
@@ -101,7 +109,6 @@ struct ChatPlusItem: View {
         }
     }
 }
-
 
 //#Preview {
 //    ChatPlusItem()
