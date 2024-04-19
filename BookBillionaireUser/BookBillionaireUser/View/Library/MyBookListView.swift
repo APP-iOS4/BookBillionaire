@@ -10,10 +10,11 @@ import BookBillionaireCore
 
 struct MyBookListView: View {
     @EnvironmentObject var bookService: BookService
+    @EnvironmentObject var userService: UserService
     @State private var myBooks: [Book] = []
-    @State private var users: [User] = []
     @State private var isShowingAlert: Bool = false
     @State private var showToast = false
+    @State private var alertBookID: String = ""
     
     var body: some View {
         VStack {
@@ -54,7 +55,7 @@ struct MyBookListView: View {
                             HStack(alignment: .top) {
                                 NavigationLink {
                                     RentalCreateView(book: $myBooks[index])
-                                    .toolbar(.hidden, for: .tabBar)
+                                        .toolbar(.hidden, for: .tabBar)
                                 } label: {
                                     BookItem(book: myBooks[index])
                                 }
@@ -62,11 +63,12 @@ struct MyBookListView: View {
                                 // 메뉴 버튼
                                 Menu {
                                     NavigationLink {
-                                        BookCreateView()
+                                        //                                        BookCreateView()
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
                                     Button(role: .destructive) {
+                                        alertBookID = myBooks[index].id
                                         isShowingAlert.toggle()
                                     } label: {
                                         Label("삭제", systemImage: "trash.circle.fill")
@@ -78,7 +80,6 @@ struct MyBookListView: View {
                                         .frame(width: 17, height: 17)
                                         .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
-//                                        .padding()
                                 }
                                 // 알럿
                                 .alert("경고", isPresented: $isShowingAlert) {
@@ -89,8 +90,9 @@ struct MyBookListView: View {
                                     }
                                     // 1. 삭제시 rentalService에 remove 메서드 구현해서 추가 해야함.
                                     Button(role: .destructive) {
-                                        deleteMyBook(myBooks[index])
+                                        deleteMyBook(alertBookID)
                                         showToastMessage()
+                                        isShowingAlert.toggle()
                                     } label: {
                                         Text("삭제")
                                     }
@@ -112,35 +114,31 @@ struct MyBookListView: View {
         .onAppear{
             loadMybook()
         }
-    }
-    
-    private func loadMybook() {
-        Task {
-            if let user = AuthViewModel.shared.currentUser {
-                myBooks = bookService.filterByOwenerID(user.uid)
-            }
+        
+        .onReceive(bookService.$books) { _ in
+            loadMybook()
         }
     }
     
-    private func deleteMyBook(_ book: Book) {
+    // 내 책 불러오기 함수
+    private func loadMybook() {
         Task {
-            await bookService.deleteBook(book)
-            if let index = myBooks.firstIndex(where: { $0.id == book.id }) {
+            myBooks = bookService.filterByOwenerID(userService.currentUser.id)
+        }
+    }
+    
+    // 내 책 삭제 함수
+    private func deleteMyBook(_ bookID: String) {
+        if let index = myBooks.firstIndex(where: { $0.id == bookID }) {
+            let book = myBooks[index]
+            Task {
+                await bookService.deleteBook(book)
                 myBooks.remove(at: index)
             }
         }
     }
-    // BookDetailView에 전달할 User를 가져오는 메서드
-    // User 반환
-    private func user(for book: Book) -> User {
-        // book.ownerID == user.id 일치 확인 후 값 return
-        if let user = users.first(where: { $0.id == book.ownerID }) {
-            return user
-        }
-        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-        return User(nickName: "정보 없음", address: "정보 없음")
-    }
     
+    // 토스트 함수
     func showToastMessage() {
         withAnimation {
             self.showToast = true
@@ -157,5 +155,6 @@ struct MyBookListView: View {
     NavigationStack {
         MyBookListView()
             .environmentObject(BookService())
+            .environmentObject(UserService())
     }
 }
