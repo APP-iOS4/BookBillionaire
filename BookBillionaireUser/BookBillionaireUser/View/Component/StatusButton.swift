@@ -16,11 +16,11 @@ struct StatusButton: View {
     var statusButtonColor: Color {
         switch status {
         case .renting:
-            return Color.orange
+            return Color("SecondColor")
         case .rentalNotPossible:
             return Color.red
         case .rentalAvailable:
-            return Color("SecondColor")
+            return Color.orange
         }
     }
     

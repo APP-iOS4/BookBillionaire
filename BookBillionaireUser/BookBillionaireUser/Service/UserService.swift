@@ -11,6 +11,7 @@ import BookBillionaireCore
 
 class UserService: ObservableObject {
     @Published var users: [User] = []
+    @Published var currentUser: User = User()
     private let allUserRef = Firestore.firestore().collection("User")
     
     /// 모든 유저들의 정보를 가져오는 함수

@@ -13,6 +13,9 @@ struct HomeView: View {
     @State private var isShowingMenuSet: Bool = false
     @EnvironmentObject var bookService: BookService
     @EnvironmentObject var userService: UserService
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @AppStorage("recentlyPic") var recentlyPic: String = ""
+
     // 메뉴에 따라 필터로 책 불러오기
     var filteredBooks: [Book] {
            return bookService.filterByCategory(menuTitle)
@@ -42,22 +45,24 @@ struct HomeView: View {
                 .padding(.top)
             
             // 메뉴 버튼
-            HStack(alignment: .center) {
-                ForEach(BookCategory.allCases, id: \.self) { menu in
-                    Button{
-                        menuTitle = menu
-                    } label: {
-                        Text("\(menu.buttonTitle)")
-                            .fontWeight(menuTitle == menu ? .bold : .regular)
-                            .foregroundStyle(menuTitle == menu ? .white : .black)
-                            .minimumScaleFactor(0.5)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center) {
+                    ForEach(BookCategory.allCases, id: \.self) { menu in
+                        Button{
+                            menuTitle = menu
+                        } label: {
+                            Text("\(menu.buttonTitle)")
+                                .fontWeight(menuTitle == menu ? .bold : .regular)
+                                .foregroundStyle(menuTitle == menu ? .white : .black)
+                                .minimumScaleFactor(0.5)
+                                .frame(width: 70, height: 20)
+                        }
+                        .padding(10)
+                        .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.6))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
-                    .padding(10)
-                    .background(menuTitle == menu ? Color("AccentColor") : Color("SecondColor").opacity(0.6))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .fixedSize()
+                    .padding(.vertical, 20)
                 }
-                .padding(.vertical, 20)
             }
             // 리스트
             ScrollView(showsIndicators: false) {
@@ -95,6 +100,7 @@ struct HomeView: View {
                                 }
                                 .padding(.top, 10)
                             }
+                            
                             Divider()
                                 .background(Color.gray)
                                 .padding(.vertical, 10)
@@ -106,10 +112,13 @@ struct HomeView: View {
                 }
             }
         }
+        .padding()
         .onAppear {
             userService.fetchUsers()
         }
-        .padding()
+        .onReceive(AuthViewModel.shared.$state) { _ in
+            userService.currentUser = userService.loadUserByID(authViewModel.currentUser?.uid ?? "")
+        }
     }
 }
 
@@ -117,4 +126,5 @@ struct HomeView: View {
     HomeView()
         .environmentObject(BookService())
         .environmentObject(UserService())
+        .environmentObject(AuthViewModel())
 }

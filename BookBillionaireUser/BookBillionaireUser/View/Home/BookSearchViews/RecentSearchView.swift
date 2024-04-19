@@ -40,6 +40,9 @@ struct RecentSearchView: View {
                                     .foregroundStyle(.gray)
                             })
                         }
+                        .onTapGesture {
+                                searchBook = search
+                            }
                         Divider()
                     }
                 }
