@@ -23,8 +23,8 @@ public struct User: Identifiable, Codable {
         self.image = ""
     }
     
-    public init(id: String, nickName: String, address: String, image: String? = nil, point: Int? = 0, rentalBooks: [String]? = []) {
-        self.id = id
+    public init(nickName: String, address: String, image: String? = nil, point: Int? = 0, rentalBooks: [String]? = []) {
+        self.id = UUID().uuidString
         self.nickName = nickName
         self.address = address
         self.image = image

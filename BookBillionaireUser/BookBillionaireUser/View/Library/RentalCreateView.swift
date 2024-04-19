@@ -9,8 +9,9 @@ import SwiftUI
 import BookBillionaireCore
 
 struct RentalCreateView: View {
-    @State var book: Book
-    @State var rental: Rental = Rental(id: UUID().uuidString, bookOwner: "", rentalStartDay: Date(), rentalEndDay: Date(), map: "", mapDetail: "", latitude: 0.0, longitude: 0.0)
+    @Binding var book: Book
+    @State var rental: Rental = Rental()
+    @EnvironmentObject var bookService: BookService
     let rentalService: RentalService = RentalService()
     @Environment(\.dismiss) var dismiss
     
@@ -20,8 +21,9 @@ struct RentalCreateView: View {
                 BookItem(book: book)
                 Spacer()
             }
-            RentalPeriodView(rental: $rental)
+            RentalInfoView(rental: $rental)
             Button {
+                _ = bookService.registerBook(book)
                 _ = rentalService.registerRental(rental)
                 dismiss()
             } label: {
@@ -36,13 +38,14 @@ struct RentalCreateView: View {
         .onAppear {
             rental.bookOwner = book.ownerID
             book.rental = rental.id
+            rental.bookID = book.id
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        RentalCreateView(book: Book(ownerID: "", title: "Test", contents: "", authors: ["Test1"], rentalState: .rentalAvailable))
+        RentalCreateView(book: .constant(Book()))
             .environmentObject(BookService())
     }
 }

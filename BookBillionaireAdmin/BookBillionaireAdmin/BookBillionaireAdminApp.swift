@@ -22,8 +22,8 @@ struct BookBillionaireUserApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(category: .qna)
-                .environmentObject(qnaService)
+//            ContentView(category: .qna)
+//                .environmentObject(qnaService)
         }
     }
 }

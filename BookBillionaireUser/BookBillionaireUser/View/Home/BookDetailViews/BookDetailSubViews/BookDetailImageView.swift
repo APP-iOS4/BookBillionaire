@@ -14,21 +14,21 @@ struct BookDetailImageView: View {
     
     var body: some View {
         ZStack{
-                AsyncImage(url: URL(string: book.thumbnail)){ image in
-                    image.resizable(resizingMode: .stretch)
-                        .ignoresSafeArea()
-                        .blur(radius: 8.0,opaque: true)
-                } placeholder: {
-                    Rectangle().background(.black)
-                }
-                .background(Color.gray)
-      
+            AsyncImage(url: URL(string: book.thumbnail)){ image in
+                image.resizable(resizingMode: .stretch)
+                    .ignoresSafeArea()
+                    .blur(radius: 8.0,opaque: true)
+            } placeholder: {
+                Rectangle().background(.black)
+            }
+            .background(Color.gray)
+            
             VStack(alignment: .center){
-                    UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
-                        .frame(height: 100)
-                        .foregroundStyle(colorScheme == .dark ? .black : .white) 
-                        .padding(.top, 200)
-                }
+                UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
+                    .frame(height: 100)
+                    .foregroundStyle(colorScheme == .dark ? .black : .white)
+                    .padding(.top, 200)
+            }
             
             GeometryReader { geometry in
                 AsyncImage(url: URL(string: book.thumbnail)){ image in
@@ -42,6 +42,9 @@ struct BookDetailImageView: View {
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)
             }
         }
+        Rectangle()
+            .frame(height: 50)
+            .foregroundStyle(.clear)
     }
 }
 

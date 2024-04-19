@@ -50,13 +50,6 @@ struct Comments: Identifiable {
     
     static var example2 = Comments(
         user: User(),
-        comment: "안나오세요?",
-        star: 2,
-        date: Date(timeIntervalSinceNow: 60 * 60 * 24 * 5)
-    )
-    
-    static var example3 = Comments(
-        user: User(),
         comment: "잘 봤습니다",
         star: 4,
         date: Date()

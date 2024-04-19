@@ -42,7 +42,7 @@ struct BookCreateView: View {
             .buttonStyle(AccentButtonStyle())
             .disabled(isBookEmpty(book: book))
             .padding()
-            Spacer()
+            Spacer() 
         }
         .navigationTitle("책 등록")
         .navigationBarTitleDisplayMode(.inline)
