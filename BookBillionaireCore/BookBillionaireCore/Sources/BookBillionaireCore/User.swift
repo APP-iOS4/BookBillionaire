@@ -29,7 +29,6 @@ public struct User: Identifiable, Codable {
         self.address = address
         self.image = image
         self.point = point
-        self.rentalBooks = rentalBooks
     }
     
     public init(from decoder: any Decoder) throws {

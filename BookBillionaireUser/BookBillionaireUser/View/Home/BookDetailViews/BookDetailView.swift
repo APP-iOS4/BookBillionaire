@@ -49,7 +49,12 @@ struct BookDetailView: View {
                         .fontWeight(.bold)
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
-                    FavoriteButton(isSaveBook: $isFavorite)
+                    
+                    // 로그인 해야 좋아요 가능
+                    if authViewModel.state == .loggedIn {
+                        FavoriteButton(isSaveBook: $isFavorite)
+                    }
+                   
                     Spacer()
                     
                     // 대여 상태
@@ -156,11 +161,15 @@ struct BookDetailView: View {
                                     Label("게시물 공유하기", systemImage: "square.and.arrow.up")
                                 }
                                 
-                                Button(role: .destructive) {
-                                    isShowingSheet = true
-                                } label: {
-                                    Label("신고하기", systemImage: "exclamationmark.triangle")
+                                // 로그인 해야 신고 가능
+                                if authViewModel.state == .loggedIn {
+                                    Button(role: .destructive) {
+                                        isShowingSheet = true
+                                    } label: {
+                                        Label("신고하기", systemImage: "exclamationmark.triangle")
+                                    }
                                 }
+                          
                             } label: {
                                 Image(systemName: "ellipsis")
                                     .resizable()
