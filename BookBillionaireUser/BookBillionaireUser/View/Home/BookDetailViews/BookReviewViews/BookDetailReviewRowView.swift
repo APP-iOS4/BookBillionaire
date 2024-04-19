@@ -59,5 +59,5 @@ struct BookDetailReviewRowView: View {
 }
 
 #Preview {
-    BookDetailReviewRowView(user: User(id: "", nickName: "", address: ""), comment: Comments.example)
+    BookDetailReviewRowView(user: User(nickName: "", address: ""), comment: Comments.example)
 }

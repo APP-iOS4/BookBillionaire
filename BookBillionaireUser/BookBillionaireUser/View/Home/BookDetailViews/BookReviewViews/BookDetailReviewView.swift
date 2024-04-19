@@ -58,7 +58,7 @@ struct BookDetailReviewView: View {
 }
 
 #Preview {
-    BookDetailReviewView(comments: [Comments.example, Comments.example2], user: User(id: "", nickName: "", address: ""))
+    BookDetailReviewView(comments: [Comments.example, Comments.example2], user: User(nickName: "", address: ""))
 }
 
 

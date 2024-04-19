@@ -70,5 +70,5 @@ struct CreateBookReviewView: View {
 }
 
 #Preview {
-    CreateBookReviewView(user: User(id: "", nickName: "유저", address: ""))
+    CreateBookReviewView(user: User(nickName: "유저", address: ""))
 }

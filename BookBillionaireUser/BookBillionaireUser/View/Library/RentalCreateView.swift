@@ -38,6 +38,7 @@ struct RentalCreateView: View {
         .onAppear {
             rental.bookOwner = book.ownerID
             book.rental = rental.id
+            rental.bookID = book.id
         }
     }
 }

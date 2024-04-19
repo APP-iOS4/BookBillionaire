@@ -138,7 +138,7 @@ struct MyBookListView: View {
             return user
         }
         // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-        return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
+        return User(nickName: "정보 없음", address: "정보 없음")
     }
     
     func showToastMessage() {
