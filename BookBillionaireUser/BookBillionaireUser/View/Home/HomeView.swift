@@ -24,12 +24,10 @@ struct HomeView: View {
         VStack {
             // 헤더 & 서치
             HStack(alignment: .center) {
-                Image("applogoShortcut")
+                Image("mainPageLogo")
                     .resizable()
-                    .frame(width: 20, height: 20)
-                Text("BOOK BILLIONAIRE")
-                    .foregroundStyle(.accent)
-                
+                    .scaledToFit()
+                    .padding(.trailing, 80)
                 Spacer()
                 
                 NavigationLink(destination: BookSearchView()) {
