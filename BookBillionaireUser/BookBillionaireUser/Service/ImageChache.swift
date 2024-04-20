@@ -17,14 +17,12 @@ class ImageCache {
     func getImage(for url: URL, completion: @escaping (UIImage?) -> Void) {
         if let cachedImage = cache[url] {
             completion(cachedImage)
-            print("캐시안의 이미지")
         } else {
             downloadImage(from: url) { image in
                 if let image = image {
                     self.cache[url] = image
                 }
                 completion(image)
-                print("캐시 전 이미지")
             }
         }
     }
