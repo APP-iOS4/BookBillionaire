@@ -14,7 +14,6 @@ struct HomeView: View {
     @EnvironmentObject var bookService: BookService
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var authViewModel: AuthViewModel
-    @AppStorage("recentlyPic") var recentlyPic: String = ""
     
     // 메뉴에 따라 필터로 책 불러오기
     var filteredBooks: [Book] {
