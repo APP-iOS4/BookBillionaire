@@ -34,16 +34,19 @@ struct BookItem: View {
                 // 책 정보
                 VStack(alignment: .leading) {
                     Text(book.title)
-                        .font(.subheadline)
+                        .monospaced()
                         .padding(.bottom, 5)
+                        .font(.subheadline)
+                        .bold()
+                    Spacer()
+                    Text("저서정보")
+                        .fontWeight(.semibold)
                     if book.authors.isEmpty {
-                        Text("\(book.title)")
-                            .fontWeight(.semibold)
                         Text("\(book.translators?.joined(separator: ", ") ?? "")")
+                        Text("\(book.publisher ?? "출판사 정보 없음")")
                     } else {
-                        Text("\(book.title)")
-                            .fontWeight(.semibold)
                         Text("\(book.authors.joined(separator: ", "))")
+                        Text("\(book.publisher ?? "출판사 정보 없음")")
                     }
                 }
                 .padding(.bottom, 10)

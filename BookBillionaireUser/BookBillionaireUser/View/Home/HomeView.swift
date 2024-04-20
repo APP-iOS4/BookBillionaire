@@ -27,7 +27,7 @@ struct HomeView: View {
                 Image("mainPageLogo")
                     .resizable()
                     .scaledToFit()
-                    .padding(.trailing, 80)
+                    .padding(.trailing, 50)
                 Spacer()
                 
                 NavigationLink(destination: BookSearchView()) {
