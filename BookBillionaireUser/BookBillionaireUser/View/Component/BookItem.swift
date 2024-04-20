@@ -32,7 +32,6 @@ struct BookItem: View {
                     .resizable()
                     .frame(width: 100, height: 140)
             }
-            
                 // 책 정보
                 VStack(alignment: .leading) {
                     Text(book.title)
