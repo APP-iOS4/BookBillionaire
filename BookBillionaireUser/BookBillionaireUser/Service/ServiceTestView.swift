@@ -23,10 +23,11 @@ struct ServiceTestView: View {
     @State var rental: Rental = Rental()
     
     var body: some View {
+        Text(userService.currentUser.id)
         Button("함수 실행") {
             Task{
-                rental = await rentalService.getRental("0435FF97-97DD-40E3-9FB1-90D0947551B4")
-                rentalTime = await rentalService.getRentalDay("0435FF97-97DD-40E3-9FB1-90D0947551B4")
+                await userService.userFavoriteBook(
+bookID: "08E91171-79BE-4A1E-A5CE-561368C9D504")
             }
         }
     }

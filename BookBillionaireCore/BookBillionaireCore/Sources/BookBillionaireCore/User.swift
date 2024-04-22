@@ -13,8 +13,10 @@ public struct User: Identifiable, Codable {
     public var address: String
     public var image: String?
     public var point: Int?
+    public var favorite: [String]?
     public var myBooks: [String]? //북정보를 가지고 있음
     public var rentalBooks: [String]? //렌탈정보를 가지고 있음
+    public var createAt: Date = Date()
 
     public init() {
         self.id = UUID().uuidString
