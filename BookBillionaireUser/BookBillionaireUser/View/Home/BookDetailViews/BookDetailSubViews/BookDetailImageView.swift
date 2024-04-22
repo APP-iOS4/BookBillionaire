@@ -6,22 +6,36 @@
 //
 
 import SwiftUI
+import FirebaseStorage
 import BookBillionaireCore
 
 struct BookDetailImageView: View {
     @Environment(\.colorScheme) var colorScheme
     let book: Book
+    let imageChache = ImageCache.shared
+    @State private var imageUrl: URL?
+    @State private var loadedImage: UIImage?
     
     var body: some View {
         ZStack{
-            AsyncImage(url: URL(string: book.thumbnail)){ image in
-                image.resizable(resizingMode: .stretch)
-                    .ignoresSafeArea()
-                    .blur(radius: 8.0,opaque: true)
-            } placeholder: {
-                Rectangle().background(.black)
+            if let url = imageUrl, !url.absoluteString.isEmpty {
+                Image(uiImage: loadedImage ?? UIImage(named: "default")!)
+                        .resizable(resizingMode: .stretch)
+                        .ignoresSafeArea()
+                        .blur(radius: 8.0,opaque: true)
+                        .background(Color.gray)
+                    .onAppear {
+                        ImageCache.shared.getImage(for: url) { image in
+                            loadedImage = image
+                        }
+                    }
+            } else {
+                Image("default")
+                        .resizable(resizingMode: .stretch)
+                        .ignoresSafeArea()
+                        .blur(radius: 8.0,opaque: true)
+                        .background(Color.gray)
             }
-            .background(Color.gray)
             
             VStack(alignment: .center){
                 UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
@@ -31,20 +45,34 @@ struct BookDetailImageView: View {
             }
             
             GeometryReader { geometry in
-                AsyncImage(url: URL(string: book.thumbnail)){ image in
-                    image.resizable()
-                        .ignoresSafeArea()
-                        .frame(width: 200)
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)
+                Image(uiImage: loadedImage ?? UIImage(named: "default")!)
+                    .resizable()
+                    .ignoresSafeArea()
+                    .frame(width: 200)
+                    .background(Color.gray)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)
             }
         }
         Rectangle()
             .frame(height: 50)
             .foregroundStyle(.clear)
+            .onAppear {
+                // 앞글자에 따라 imageURL에 할당하는 조건
+                if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
+                    imageUrl = URL(string: book.thumbnail)
+                } else {
+                    // Firebase Storage 경로 URL 다운로드
+                    let storageRef = Storage.storage().reference(withPath: book.thumbnail)
+                    storageRef.downloadURL { (url, error) in
+                        if let error = error {
+                            print("Error getting download URL: \(error)")
+                        } else if let url = url {
+                            imageUrl = url
+                        }
+                    }
+                }
+            }
     }
 }
 
