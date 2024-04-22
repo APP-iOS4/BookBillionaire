@@ -54,8 +54,7 @@ struct BookCreateView: View {
             Button {
                 uploadPhoto()
                 assignCurrentUserIDToBook(book: &book)
-                book.id = UUID().uuidString
-                _ = bookService.registerBook(book)
+                updateBook()
                 dismiss()
             } label: {
                 Text("완료")
@@ -70,6 +69,17 @@ struct BookCreateView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    // 책 업데이트
+    private func updateBook() {
+        Task {
+            switch viewType {
+            case .edit:
+                await bookService.updateBookByID(book.id, book: book)
+            case .input, .searchResult:
+                _ = bookService.registerBook(book)
+            }
+        }
+    }
     // 현재 유저정보 할당 함수
     private func assignCurrentUserIDToBook(book: inout Book) {
         if let currentUser = AuthViewModel.shared.currentUser {

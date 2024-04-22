@@ -109,4 +109,21 @@ class BookService: ObservableObject {
         }
         self.fetchBooks()
     }
+    
+    func updateBookByID(_ bookID: String, book: Book) async {
+        let userRef = bookRef.document(bookID)
+        do {
+            try await userRef.updateData([
+                "authors" : book.authors,
+                "contents" : book.contents,
+                "thumbnail" : book.thumbnail,
+                "title" : book.title,
+                "rentalState" : book.rentalState.rawValue
+            ])
+            print("책 변경 성공")
+        } catch let error {
+            print("Error updating book: \(error)")
+        }
+        self.fetchBooks()
+    }
 }
