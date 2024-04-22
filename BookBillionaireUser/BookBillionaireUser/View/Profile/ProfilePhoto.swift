@@ -16,6 +16,7 @@ struct ProfilePhoto: View {
     
     var body: some View {
         Group {
+            // 프로필 이미지
             if let image = selectedImage {
                 Image(uiImage: image)
                     .resizable()
@@ -28,7 +29,10 @@ struct ProfilePhoto: View {
                         .frame(width: 80, height: 80)
                         .clipShape(Circle())
                 } placeholder: {
-                    ProgressView()
+                    Image("defaultUser1")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .clipShape(Circle())
                 }
             } else {
                 Image("defaultUser1")
@@ -38,13 +42,12 @@ struct ProfilePhoto: View {
             }
         }
         .onAppear {
+            // Firebase Storage 경로 URL로 다운로드
             let storageRef = Storage.storage().reference(withPath: user.image ?? "profile/defaultUser")
             storageRef.downloadURL { (url, error) in
                 if let error = error {
-                    // Handle any errors
                     print("Error getting download URL: \(error)")
                 } else if let url = url {
-                    // Use the download URL
                     imageUrl = url
                 }
             }

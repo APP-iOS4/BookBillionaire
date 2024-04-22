@@ -15,32 +15,43 @@ struct BookDetailReviewRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 1) {
             HStack(alignment: .center) {
-                Image(user.image ?? "")
-                    .resizable()
-                    .clipShape(Circle())
-                    .frame(width: 50, height: 50)
+                if let url = URL(string: user.image ?? "") {
+                    AsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 50, height: 50)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                } else {
+                    Image("default")
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 50, height: 50)
+                }
                 Text(user.nickName)
                     .font(.headline)
                 Spacer()
                 VStack(alignment: .trailing) {
-                    HStack(alignment: .top) {
+                    HStack(alignment: .top, spacing: 2) {
                         ForEach(1...5, id: \.self) { index in // star의 값에 따라 별의 개수를 표시
-                            if index <= comment.star {
-                                Image(systemName: "star.fill")
-                                    .foregroundStyle(.yellow)
-                            } else {
-                                Image(systemName: "star")
-                                    .foregroundStyle(.gray)
-                            }
+                            StarView(filled: index <= comment.star)
                         }
                     }
+                    .padding(.bottom, 5)
                     Text("\(comment.relativeTime)")
                         .font(.caption)
                 }
             }
-
-                .padding(.vertical, 8)
+            .padding(.vertical, 8)
             Text(comment.comment)
+//            HStack {
+//                Spacer()
+//                Text("삭제")
+//                Text("수정")
+//            }
+            .font(.caption)
         }
         .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
         .background(Color.gray.opacity(0.1))
@@ -48,5 +59,5 @@ struct BookDetailReviewRowView: View {
 }
 
 #Preview {
-    BookDetailReviewRowView(user: User(id: "", nickName: "", address: ""), comment: Comments.example)
+    BookDetailReviewRowView(user: User(nickName: "", address: ""), comment: Comments.example)
 }

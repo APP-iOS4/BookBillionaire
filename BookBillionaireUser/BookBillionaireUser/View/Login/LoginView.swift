@@ -16,6 +16,7 @@ struct LoginView: View {
     @State var emailText: String = ""
     @State var passwordText: String = ""
     #endif
+    
     @State private var isSignUpScreen: Bool = false
     var PrivatePolicyUrl = Bundle.main.url(forResource: "PrivatePolicy", withExtension: "html")!
     @State private var isPrivateSheet: Bool = false

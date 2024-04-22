@@ -11,7 +11,7 @@ struct HomePagingView: View {
     @State var banners: [String] = ["banner1", "banner2", "banner3"]
     @State private var currentIndex = 0
     // 타이머
-    private let timer = Timer.publish(every: 2.5, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
     // 재생/일시정지
     @State var isPlaying = true
     
