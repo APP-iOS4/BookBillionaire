@@ -33,6 +33,7 @@
 		084FE4D12BD0D3ED00AACD4A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 084FE4D02BD0D3ED00AACD4A /* FirebaseFirestore */; };
 		084FE4D32BD0D3F300AACD4A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 084FE4D22BD0D3F300AACD4A /* FirebaseFirestoreSwift */; };
 		085CE9C32BD0184F002B7B20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 085CE9C22BD0184F002B7B20 /* GoogleService-Info.plist */; };
+		085D708D2BD65E8700EDE5FA /* SignUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D708C2BD65E8700EDE5FA /* SignUpDetailView.swift */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
 		088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260412BBD2B4C007BEA25 /* LocationSharedView.swift */; };
@@ -65,7 +66,6 @@
 		35EAF2172BCF67FE0051B38B /* CommnetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF2152BCF67FE0051B38B /* CommnetViewModel.swift */; };
 		35EAF2182BCF67FE0051B38B /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF2162BCF67FE0051B38B /* Comments.swift */; };
 		35EAF21E2BCFE31D0051B38B /* BookDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF21D2BCFE31D0051B38B /* BookDetailInfoView.swift */; };
-		35EC3AFA2BD13D5400652D9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35EC3AF92BD13D5300652D9B /* GoogleService-Info.plist */; };
 		35ED71C42BD0B990006AC2A0 /* MenuScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ED71C32BD0B990006AC2A0 /* MenuScrollView.swift */; };
 		35ED71C62BD0BE18006AC2A0 /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ED71C52BD0BE18006AC2A0 /* StarView.swift */; };
 		8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */; };
@@ -122,6 +122,7 @@
 		04DCAF9B2BCA985900B9B146 /* RLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RLoginView.swift; path = BookBillionaireUser/RLoginView.swift; sourceTree = SOURCE_ROOT; };
 		04DCAF9F2BCAACE800B9B146 /* RLoginInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLoginInfoView.swift; sourceTree = "<group>"; };
 		085CE9C22BD0184F002B7B20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		085D708C2BD65E8700EDE5FA /* SignUpDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpDetailView.swift; path = "../../../../../../../Downloads/BookBillionaire-develop-3/BookBillionaireUser/BookBillionaireUser/View/Login/SignUpDetailView.swift"; sourceTree = "<group>"; };
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260412BBD2B4C007BEA25 /* LocationSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharedView.swift; sourceTree = "<group>"; };
@@ -486,6 +487,7 @@
 				8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */,
 				04A59AB32BC4FDE0009FBF6E /* UnlogginedView.swift */,
 				8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */,
+				085D708C2BD65E8700EDE5FA /* SignUpDetailView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -682,6 +684,7 @@
 				35EAF2112BCF67F80051B38B /* BookDetailOwnerRowView.swift in Sources */,
 				04A59A982BC19813009FBF6E /* AccentButtonStyle.swift in Sources */,
 				088260442BBD2B5E007BEA25 /* PhotoSharedView.swift in Sources */,
+				085D708D2BD65E8700EDE5FA /* SignUpDetailView.swift in Sources */,
 				35EAF2122BCF67F80051B38B /* BookDetailReviewView.swift in Sources */,
 				35EAF20A2BCF670D0051B38B /* FavoriteButton.swift in Sources */,
 				EF6C38A52BCFE60D00098E18 /* MapView.swift in Sources */,
