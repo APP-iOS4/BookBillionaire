@@ -17,7 +17,7 @@ struct BookDetailView: View {
     
     //채팅
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State var roomListVM: RoomListViewModel = RoomListViewModel()
+    @State var roomListVM: ChatListViewModel = ChatListViewModel()
     @State var roomModel: ChatRoom = ChatRoom(id: "", receiverName: "", lastTimeStamp: Date(), lastMessage: "", users: [])
     @State private var isShowingSheet: Bool = false
     @State private var isFavorite: Bool = false

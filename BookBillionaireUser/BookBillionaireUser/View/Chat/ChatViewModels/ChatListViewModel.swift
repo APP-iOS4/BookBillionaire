@@ -5,7 +5,6 @@
 //  Created by 최준영 on 4/7/24.
 //
 
-//import BookBillionaireCore
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -31,7 +30,7 @@ struct RoomViewModel: Hashable { // 수정 예정
     }
 }
 
-class RoomListViewModel: ObservableObject {
+class ChatListViewModel: ObservableObject {
     
     @Published var rooms: [RoomViewModel] = []
     let db = Firestore.firestore().collection("chat")
@@ -40,13 +39,12 @@ class RoomListViewModel: ObservableObject {
     var receiverId: String = "임시 Id"
     var roomId: String = "임시 roomId"
     
-    // [임시] 채팅방 목록을 불러오는 함수 - 추후 로그인 Id에 맞춰서 array-contains 사용하여 필터링 하여 가져와야함
-    
-    func getAllRooms() {
-        db.order(by: "lastTimeStamp", descending: true)
+    /// 유저가 포함된 채팅방의 목록을 불러오는 메서드
+    func getAllRooms(userId: String) {
+        print("방을 생성한 유저 아이디 : \(userId)")
+        db.whereField("users", arrayContains: userId)
+            .order(by: "lastTimeStamp", descending: true)
             .getDocuments { (snapshot, error) in
-                // async await 공식 문서 찾아보기
-                // weak 약한 참조 문서도 확인해보기
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
@@ -55,16 +53,15 @@ class RoomListViewModel: ObservableObject {
                             guard var room = try? doc.data(as: ChatRoom.self) else {
                                 return nil
                             }
-                            
                             room.id = doc.documentID
                             return RoomViewModel(room: room)
                         }
-                            self.rooms = rooms
+                        self.rooms = rooms
                     }
                 }
             }
     }
-    
+
     /// 채팅방 생성 메서드
     func createRoom(completion: @escaping (String?) -> Void) {
         
@@ -78,18 +75,62 @@ class RoomListViewModel: ObservableObject {
             try newRoomRef.setData(from: room, encoder: Firestore.Encoder()) { (error) in
                 if let error = error {
                     print(error.localizedDescription)
-                    completion(nil) // 에러가 발생하면 nil 반환
+                    completion(nil)
                 } else {
                     print("방 생성 \(user) with ID: \(room.id)")
                     self.roomId = room.id
-                    completion(room.id) // 성공적으로 생성되면 문서 ID 반환
+                    completion(room.id)
                 }
             }
         } catch let error {
             print(error.localizedDescription)
-            completion(nil) // 예외 발생 시 nil 반환
+            completion(nil)
         }
     }
+    
+    /// 이미 있는 방을 찾는 메서드
+    func findExistingRoom(completion: @escaping (String?) -> Void) {
+        let user: String = String(AuthViewModel.shared.currentUser?.uid ?? "")
+        
+        // users 필드에 현재 유저 ID가 있는 방을 조회
+        db.whereField("users", arrayContains: user)
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    completion(nil)
+                } else {
+                    if let snapshot = snapshot {
+                        // 이미 있는 방이 있다면 첫 번째 방의 ID를 반환
+                        if let doc = snapshot.documents.first {
+                            let roomId = doc.documentID
+                            print("이미 있는 방 ID: \(roomId)")
+                            completion(roomId)
+                        } else {
+                            // 이미 있는 방이 없으면 nil 반환
+                            print("이미 있는 방이 없습니다.")
+                            completion(nil)
+                        }
+                    }
+                }
+            }
+    }
+
+    /// 채팅방 생성 또는 이미 있는 방으로 이동하는 메서드
+    func createOrNavigateToRoom(completion: @escaping (String?) -> Void) {
+        // 이미 있는 방을 찾음
+        findExistingRoom { existingRoomId in
+            if let existingRoomId = existingRoomId {
+                // 이미 있는 방이 있다면 해당 방 ID를 반환
+                completion(existingRoomId)
+            } else {
+                // 이미 있는 방이 없다면 새로운 방 생성
+                self.createRoom { newRoomId in
+                    completion(newRoomId)
+                }
+            }
+        }
+    }
+
     
     ///생성된 채팅방 ID 값을 가져오는 함수
     func loadChatRoomByID(_ roomId: String) async -> ChatRoom {

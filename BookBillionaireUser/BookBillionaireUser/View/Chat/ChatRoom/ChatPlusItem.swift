@@ -20,7 +20,7 @@ struct ChatPlusItem: View {
     
     @Environment(\.colorScheme) var colorScheme
 
-    var messageListVM: MessageListViewModel
+    var messageListVM: ChatViewModel
     var path: String?
 
     var body: some View {

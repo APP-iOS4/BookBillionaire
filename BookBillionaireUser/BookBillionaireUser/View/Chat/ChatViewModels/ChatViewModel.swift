@@ -5,7 +5,6 @@
 //  Created by 최준영 on 4/7/24.
 //
 
-//import BookBillionaireCore
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -42,33 +41,72 @@ struct MessageViewModel { // 수정 예정
     }
 }
 
-class MessageListViewModel: ObservableObject {
+class ChatViewModel: ObservableObject {
     
     let chatDB = Firestore.firestore().collection("chat")
     @Published var messages: [MessageViewModel] = []
+    var lastDoc: QueryDocumentSnapshot?
+    var isLoading = false
+    var shouldScrollToBottom = true // 스크롤 하단 맞춤 제어를 위한 상태 변수
     
-    /// 채팅방 정보 변경 감지 메서드
-    func registerUpdatesForRoom(room: RoomViewModel) {
-        
+      // 채팅방 정보 변경 감지 및 최초 메세지 불러오기 메서드
+      func registerUpdatesForRoom(room: RoomViewModel, pageSize: Int) {
+          chatDB
+              .document(room.roomId)
+              .collection("messages")
+              .order(by: "timestamp", descending: true)
+              .limit(to: pageSize)
+              .addSnapshotListener { [weak self] (snapshot, error) in
+                  guard let self = self else { return }
+                  if let error = error {
+                      print(error.localizedDescription)
+                  } else {
+                      if let snapshot = snapshot {
+                          var messages: [MessageViewModel] = snapshot.documents.compactMap { doc in
+                              guard var message: Message = try? doc.data(as: Message.self) else { return nil }
+                              message.id = doc.documentID
+                              return MessageViewModel(message: message)
+                          }
+                          messages.reverse()
+                          DispatchQueue.main.async {
+                              self.messages = messages
+                              self.lastDoc = snapshot.documents.last
+                          }
+                      }
+                  }
+                  self.lastDoc = snapshot?.documents.last
+              }
+      }
+
+      /// 추가 채팅 페이지네이션 메서드
+    func loadMoreChat(room: RoomViewModel, pageSize: Int) {
+        guard let lastDoc = self.lastDoc else { return } // 마지막 문서 체크
+        guard !isLoading else { return } // 이미 로딩 중이면 함수 종료
+        isLoading = true // 로딩 시작
+
         chatDB
             .document(room.roomId)
             .collection("messages")
-            .order(by: "timestamp", descending: false)
-            .addSnapshotListener { (snapshot, error) in
+            .order(by: "timestamp", descending: true)
+            .limit(to: pageSize)
+            .start(afterDocument: lastDoc) // 마지막 문서 기준으로 이전 메시지 검색
+            .getDocuments { [weak self] (snapshot, error) in
+                guard let self = self else { return }
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
                     if let snapshot = snapshot {
-                        
-                        let messages: [MessageViewModel] = snapshot.documents.compactMap { doc in
+                        var newMessages: [MessageViewModel] = snapshot.documents.compactMap { doc in
                             guard var message: Message = try? doc.data(as: Message.self) else { return nil }
                             message.id = doc.documentID
                             return MessageViewModel(message: message)
                         }
+                        newMessages.reverse() // 불러온 메시지 순서 뒤집기
                         
-                        DispatchQueue.main.async {
-                            self.messages = messages
-                        }
+                        // 기존 메시지 배열에 새로운 메시지 추가
+                        self.messages.insert(contentsOf: newMessages, at: 0)
+                        self.lastDoc = snapshot.documents.last // 새로운 마지막 문서 업데이트
+                        isLoading = false // 로딩 상태 업데이트
                     }
                 }
             }

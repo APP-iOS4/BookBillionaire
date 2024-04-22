@@ -12,7 +12,7 @@ import BookBillionaireCore
 struct ChatView: View {
     let room: RoomViewModel
     
-    @StateObject private var messageListVM = MessageListViewModel()
+    @StateObject private var messageListVM = ChatViewModel()
     @State var messageModel: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date())
     @State private var promiseViewShowing = false
     @State var messageText: String = ""
@@ -46,9 +46,6 @@ struct ChatView: View {
             }
         }
         .navigationTitle(room.receiverName)
-        .onAppear {
-            messageListVM.registerUpdatesForRoom(room: room)
-        }
         .navigationBarItems(trailing:
                                 exitView
         )
@@ -115,7 +112,7 @@ struct ChatView: View {
                             ////            NavigationLink(destination: PromiseConfirmView(user: User, book: <#Book#>)) {
                             ////                Text("약속잡기")
                             //            }
-                           
+                            
                         }
                         .padding(7)
                         .padding(.horizontal, 17)
@@ -139,34 +136,73 @@ struct ChatView: View {
     
     // MARK: - 채팅 메세지 버블
     private var chatBubble: some View {
-        ScrollView {
-            ScrollViewReader { scrollView in
-                VStack {
-                    ForEach(messageListVM.messages, id: \.messageId) { message in
-                        HStack {
-                            if message.username == username {
-                                Spacer()
-                                ChatBubble(messageText: message.messageText, username: message.username, imageUrl: message.imageUrl, style: .from, messageVM: message)
-                            } else {
-                                ChatBubble(messageText: message.messageText, username: message.username, imageUrl: message.imageUrl, style: .to, messageVM: message)
-                                Spacer()
-                            }                         }
-                        .padding(.horizontal, 15)
-                        .id(message.messageId)
+        ScrollViewReader { scrollView in
+            ScrollView {
+                if messageListVM.messages.isEmpty {
+                    HStack {
+                        VStack {
+                            Text("서로를 존중하고 배려하는 마음으로 소통해주세요!")
+                                .foregroundStyle(.gray)
+                            Text("욕설 및 비방을 할 경우 이용 제한 조치를 취할 수 있습니다")
+                                .foregroundStyle(.gray)
+                                .font(.caption)
+                        }
+                        .rotationEffect(Angle(degrees: 180))
+                        .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                        .padding(.vertical, 200)
                     }
-                }
-                // MARK: - 메세지 스크롤 하단 맞춤
-                .onAppear(perform: {
-                    cancellables = messageListVM.$messages.sink { messages in
-                        if messages.count > 0 {
+                } else {
+                    LazyVStack {
+                        ForEach(messageListVM.messages.indices, id: \.self) { index in
+                            let message = messageListVM.messages[index]
+                            if index > 0 {
+                                let prevMessage = messageListVM.messages[index - 1]
+                                if !Calendar.current.isDate(prevMessage.messageTimestamp, inSameDayAs: message.messageTimestamp) {
+                                    // 이전 메시지와 현재 메시지의 날짜가 다를 경우 날짜 표시
+                                    HStack {
+                                        Text(formatDate(message.messageTimestamp))
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                            .padding(.vertical, 10)
+                                    }
+                                }
+                            }
+                            HStack {
+                                if message.username == username {
+                                    Spacer()
+                                    ChatBubble(messageText: message.messageText, username: message.username, imageUrl: message.imageUrl, style: .from, messageVM: message)
+                                } else {
+                                    ChatBubble(messageText: message.messageText, username: message.username, imageUrl: message.imageUrl, style: .to, messageVM: message)
+                                    Spacer()
+                                }
+                            }
+                            .padding(.horizontal, 15)
+                            .id(message.messageId)
+                        }
+                    }
+                    .rotationEffect(Angle(degrees: 180))
+                    .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                    // MARK: - 메세지 스크롤 하단 맞춤
+                    .onAppear(perform: {
+                        cancellables = messageListVM.$messages.sink { messages in
+                            guard messages.count > 0, messageListVM.shouldScrollToBottom else { return }
                             DispatchQueue.main.async {
                                 withAnimation {
-                                    scrollView.scrollTo(messages[messages.endIndex - 1].messageId, anchor: .bottom)
+                                    scrollView.scrollTo(messages.last!.messageId, anchor: .bottom)
                                 }
                             }
                         }
-                    }
-                })
+                    })
+                }
+            }
+            .rotationEffect(Angle(degrees: 180))
+            .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+            .onAppear {
+                messageListVM.registerUpdatesForRoom(room: room, pageSize: .max)
+                // 일단 임시로 max
+                // 채팅방의 채팅을 20개만 먼저 가져오기
+                print("최초 채팅 20개 불러오기")
             }
         }
     }
@@ -238,13 +274,19 @@ struct ChatView: View {
     }
 }
 
-
 extension View {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
+// MARK: - DateFormatter를 이용하여 날짜 포맷 변환
+private func formatDate(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    dateFormatter.dateFormat = "M월 d일 EEEE"
+    return dateFormatter.string(from: date)
+}
 
 #Preview {
     ChatView(room: RoomViewModel(room: ChatRoom(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "", users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"])))

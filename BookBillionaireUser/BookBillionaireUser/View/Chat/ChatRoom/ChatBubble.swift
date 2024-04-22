@@ -24,18 +24,24 @@ struct ChatBubble: View {
     var body: some View {
         VStack(alignment: style == .from ? .trailing : .leading) {
             if style == .from {
+               
                 HStack(alignment: .bottom) {
-                    Text("\(messageVM.formatTimestamp(messageVM.messageTimestamp))")
+                    Text(messageVM.formatTimestamp(messageVM.messageTimestamp))
                         .font(.caption2)
                         .foregroundColor(.gray)
                     
                     if messageText.hasPrefix("https://firebasestorage") {
                         if let url = messageVM.imageUrl {
                             AsyncImage(url: url) { image in
-                                image.resizable()
-                                    .frame(width: 100, height: 140)
+                                image
+                                    .resizable()
+                                    .scaledToFit()
                                     .cornerRadius(10)
-                            } placeholder: {
+                                    .padding(.top, 10)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .frame(width: UIScreen.main.bounds.width * 0.4)
+                            }
+                        placeholder: {
                                 ZStack {
                                     Color.gray
                                         .frame(width: 100, height: 140)
@@ -84,13 +90,17 @@ struct ChatBubble: View {
                             if messageText.hasPrefix("https://firebasestorage") {
                                 if let url = messageVM.imageUrl {
                                     AsyncImage(url: url) { image in
-                                        image.resizable()
-                                            .frame(width: 100, height: 140)
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
                                             .cornerRadius(10)
+                                            .padding(.top, 10)
+                                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                            .frame(width: UIScreen.main.bounds.width * 0.4)
                                     } placeholder: {
                                         ZStack {
                                             Color.gray
-                                                .frame(width: 100, height: 140)
+                                                .scaledToFit()
                                                 .cornerRadius(10)
                                             ProgressView()
                                         }
@@ -114,8 +124,7 @@ struct ChatBubble: View {
                                     .cornerRadius(15)
                             }
                         }
-                        
-                        Text("\(messageVM.formatTimestamp(messageVM.messageTimestamp))")
+                        Text(messageVM.formatTimestamp(messageVM.messageTimestamp))
                             .font(.caption2)
                             .foregroundColor(.gray)
                     }
@@ -125,9 +134,4 @@ struct ChatBubble: View {
         }
     }
 }
-
-
-//#Preview {
-//    ChatBubble(messageText: "안녕하세요! 📖 책 대여 희망합니다!!", username: "최준영", style: .to, message: MessageViewState.init(message: "", roomId: "", username: "", timestamp: Date()))
-//}
 
