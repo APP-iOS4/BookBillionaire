@@ -21,19 +21,24 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
             return nil
         }
     
-    func signUp(email: String, userName: String, password: String) {
+    func signUp(email: String, userName: String, password: String, completion: @escaping (Bool) -> Void) {
         // 중복 체크
         checkEmailDuplication(email) { [weak self] isEmailUnique in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion(false)
+                return
+            }
             
             if !isEmailUnique {
                 print("이미 등록된 이메일입니다.")
+                completion(false)
                 return
             }
             
             self.checkNicknameDuplication(userName) { isNicknameUnique in
                 if !isNicknameUnique {
                     print("이미 사용 중인 닉네임입니다.")
+                    completion(false)
                     return
                 }
                 
@@ -41,44 +46,52 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
                 Auth.auth().createUser(withEmail: email, password: password) { result, error in
                     if let error = error {
                         print("error: \(error.localizedDescription)")
+                        completion(false)
                         return
                     }
                     
-                    if let result = result {
-                        let changeRequest = result.user.createProfileChangeRequest()
-                        changeRequest.displayName = userName
-                        changeRequest.commitChanges { error in
+                    guard let result = result else {
+                        completion(false)
+                        return
+                    }
+                    
+                    let changeRequest = result.user.createProfileChangeRequest()
+                    changeRequest.displayName = userName
+                    changeRequest.commitChanges { error in
+                        if let error = error {
+                            print("Error updating profile: \(error.localizedDescription)")
+                            completion(false)
+                            return
+                        }
+                        
+                        // Firestore에 사용자 정보 및 생성일자 저장
+                        let db = Firestore.firestore()
+                        let userData: [String: Any] = [
+                            "emailEqualtoAuth": email,
+                            "nickname": userName,
+                            "createdAt": Timestamp(date: Date()),
+                            "id": result.user.uid,
+                            "introduction": "",
+                            "profileImage": "person.crop.circle"
+                        ]
+                        db.collection("User").document(result.user.uid).setData(userData) { error in
                             if let error = error {
-                                print("Error updating profile: \(error.localizedDescription)")
+                                print("Error saving user data: \(error.localizedDescription)")
+                                completion(false)
                                 return
                             }
+                            print("사용자 데이터가 성공적으로 저장되었습니다.")
                             
-                            // Firestore에 사용자 정보 및 생성일자 저장
-                            let db = Firestore.firestore()
-                            let userData: [String: Any] = [
-                                "emailEqualtoAuth": email,
-                                "nickname": userName,
-                                "createdAt": Timestamp(date: Date()), // 현재 시간을 Timestamp로 변환하여 저장
-                                "id": result.user.uid,
-                                "introduction": "",
-                                "profileImage": "person.crop.circle"
-                            ]
-                            db.collection("User").document(result.user.uid).setData(userData) { error in
-                                if let error = error {
-                                    print("Error saving user data: \(error.localizedDescription)")
-                                    return
-                                }
-                                print("사용자 데이터가 성공적으로 저장되었습니다.")
-                                
-                                // 사용자 데이터를 다시 읽어와서 출력
-                                self.readUserData(uid: result.user.uid)
-                            }
+                            // 사용자 데이터를 다시 읽어와서 출력
+                            self.readUserData(uid: result.user.uid)
+                            completion(true)
                         }
                     }
                 }
             }
         }
     }
+
     
     func signIn(email: String?, password: String?) {
         if let email = email, let password = password {
