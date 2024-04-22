@@ -40,7 +40,10 @@ class ChatListViewModel: ObservableObject {
     var roomId: String = "임시 roomId"
     
     /// 유저가 포함된 채팅방의 목록을 불러오는 메서드
-    func getAllRooms(userId: String) {
+    func getAllRooms() {
+        let userId = AuthViewModel.shared.currentUser?.uid ?? "" // 현재 로그인한 사용자의 ID
+        // currentUser
+        // 파라미터로 userId 받는 형식으로 수정해야함
         print("방을 생성한 유저 아이디 : \(userId)")
         db.whereField("users", arrayContains: userId)
             .order(by: "lastTimeStamp", descending: true)

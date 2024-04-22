@@ -160,11 +160,17 @@ struct ChatView: View {
                                 if !Calendar.current.isDate(prevMessage.messageTimestamp, inSameDayAs: message.messageTimestamp) {
                                     // 이전 메시지와 현재 메시지의 날짜가 다를 경우 날짜 표시
                                     HStack {
+                                        Rectangle()
+                                            .fill(Color.gray)
+                                            .frame(height: 0.2)
                                         Text(formatDate(message.messageTimestamp))
                                             .font(.caption)
                                             .foregroundColor(.gray)
                                             .frame(maxWidth: .infinity, alignment: .center)
                                             .padding(.vertical, 10)
+                                        Rectangle()
+                                            .fill(Color.gray)
+                                            .frame(height: 0.2)
                                     }
                                 }
                             }

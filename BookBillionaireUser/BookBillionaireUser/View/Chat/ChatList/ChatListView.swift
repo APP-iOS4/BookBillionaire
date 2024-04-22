@@ -11,7 +11,7 @@ struct ChatListView: View {
     @State private var isEditing: Bool = false
     @StateObject private var roomListVM = ChatListViewModel()
     @EnvironmentObject var authViewModel: AuthViewModel
-    let userId = AuthViewModel.shared.currentUser?.uid ?? ""
+//    let userId = AuthViewModel.shared.currentUser?.uid ?? ""
     
     var body: some View {
         switch authViewModel.state {
@@ -36,11 +36,11 @@ struct ChatListView: View {
             .navigationTitle("채팅")
             .navigationBarTitleDisplayMode(.inline)
             .refreshable {
-                roomListVM.getAllRooms(userId: userId)
+                roomListVM.getAllRooms()
             }
             
             .onAppear(perform: {
-                roomListVM.getAllRooms(userId: userId)
+                roomListVM.getAllRooms()
             })
         case .loggedOut:
             UnlogginedView()
