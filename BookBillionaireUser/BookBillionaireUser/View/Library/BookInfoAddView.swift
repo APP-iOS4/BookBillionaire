@@ -29,6 +29,19 @@ struct BookInfoAddView: View {
                             .resizable()
                             .frame(width: 100, height: 140)
                     }
+                } else if let url = URL(string: book.thumbnail), !book.thumbnail.isEmpty {
+                    Button {
+                        isShowingDialog.toggle()
+                    } label: {
+                        AsyncImage(url: url) { image in
+                            image.resizable()
+                                .frame(width: 100, height: 140)
+                        } placeholder: {
+                            Image("default")
+                                .resizable()
+                                .frame(width: 100, height: 140)
+                        }
+                    }
                 } else {
                     Button {
                         isShowingDialog.toggle()
