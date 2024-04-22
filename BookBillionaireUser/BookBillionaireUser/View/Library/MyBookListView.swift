@@ -63,7 +63,7 @@ struct MyBookListView: View {
                                 // 메뉴 버튼
                                 Menu {
                                     NavigationLink {
-                                        //                                        BookCreateView()
+                                        BookCreateView(viewType: .edit(book: myBooks[index]))
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }

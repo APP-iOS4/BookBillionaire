@@ -40,8 +40,7 @@ struct LibraryView: View {
                         }
                         
                         NavigationLink {
-                            BookCreateView()
-                            .toolbar(.hidden, for: .tabBar)
+                            BookCreateView(viewType: .input)
                         } label: {
                             Label("입력으로 등록하기", systemImage: "square.and.pencil")
                         }
