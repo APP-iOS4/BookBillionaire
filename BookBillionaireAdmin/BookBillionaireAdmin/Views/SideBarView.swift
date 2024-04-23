@@ -21,13 +21,13 @@ struct SideBarView: View {
                                 case .userManage:
                                     UserManageView(topic: topic)
                                 case .book:
-                                    BookManageView()
+                                    BookManageView(topic: topic)
                                 case .user:
                                     UserManageView(topic: topic)
                                 case .bookManage:
-                                    BookManageView()
+                                    BookManageView(topic: topic)
                                 case .blackList:
-                                    BlackListView()
+                                    ComplainListView(topic: topic)
                                 }
                             }
                         } label: {
