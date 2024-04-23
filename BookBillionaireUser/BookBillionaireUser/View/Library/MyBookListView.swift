@@ -11,10 +11,14 @@ import BookBillionaireCore
 struct MyBookListView: View {
     @EnvironmentObject var bookService: BookService
     @EnvironmentObject var userService: UserService
-    @State private var myBooks: [Book] = []
+    var myBooks: [Book] {
+        return  bookService.filterByOwenerID(userService.currentUser.id)
+    }
     @State private var isShowingAlert: Bool = false
     @State private var showToast = false
     @State private var alertBookID: String = ""
+    @State private var isShowingEdit: Bool = false
+    @State private var selectedBook: Book?
     
     var body: some View {
         VStack {
@@ -54,7 +58,7 @@ struct MyBookListView: View {
                         ForEach(myBooks.indices, id: \.self) { index in
                             HStack(alignment: .top) {
                                 NavigationLink {
-                                    RentalCreateView(book: $myBooks[index])
+                                    RentalCreateView(book: myBooks[index])
                                         .toolbar(.hidden, for: .tabBar)
                                 } label: {
                                     BookItem(book: myBooks[index])
@@ -62,8 +66,9 @@ struct MyBookListView: View {
                                 Spacer()
                                 // 메뉴 버튼
                                 Menu {
-                                    NavigationLink {
-                                        BookCreateView(viewType: .edit(book: myBooks[index]))
+                                    Button {
+                                        selectedBook = myBooks[index]
+                                        isShowingEdit = true
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
@@ -81,6 +86,7 @@ struct MyBookListView: View {
                                         .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
                                 }
+                                
                                 // 알럿
                                 .alert("경고", isPresented: $isShowingAlert) {
                                     Button(role: .cancel) {
@@ -109,35 +115,26 @@ struct MyBookListView: View {
                 }
             }
         }
+        .fullScreenCover(item: $selectedBook) { bookToEdit in
+            NavigationStack {
+                BookCreateView(viewType: .edit(book: bookToEdit), isShowing: $isShowingEdit)
+            }
+        }
         // 토스트 메시지
         .toast(isShowing: $showToast, text: Text("도서가 삭제되었습니다."))
-        .onAppear{
-            loadMybook()
-        }
-        
-        .onReceive(bookService.$books) { _ in
-            loadMybook()
-        }
-    }
-    
-    // 내 책 불러오기 함수
-    private func loadMybook() {
-        Task {
-            myBooks = bookService.filterByOwenerID(userService.currentUser.id)
+        .onAppear {
+            bookService.fetchBooks()
         }
     }
     
     // 내 책 삭제 함수
     private func deleteMyBook(_ bookID: String) {
-        if let index = myBooks.firstIndex(where: { $0.id == bookID }) {
-            let book = myBooks[index]
+        if let book = myBooks.first(where: { $0.id == bookID}) {
             Task {
                 await bookService.deleteBook(book)
-                myBooks.remove(at: index)
             }
         }
     }
-    
     // 토스트 함수
     func showToastMessage() {
         withAnimation {

@@ -10,7 +10,8 @@ import SwiftUI
 struct LibraryView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var selectedIndex: Int = 0
-    @State private var isShowing: Bool = false
+    @State private var isShowingInput: Bool = false
+    @State private var isShowingSearch: Bool = false
     
     var body: some View {
         switch authViewModel.state {
@@ -32,15 +33,14 @@ struct LibraryView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     // 메뉴 버튼
                     Menu {
-                        NavigationLink {
-                            APISearchView(isShowing: $isShowing)
-                            .toolbar(.hidden, for: .tabBar)
+                        Button {
+                            isShowingSearch.toggle()
                         } label: {
                             Label("검색으로 등록하기", systemImage: "magnifyingglass")
                         }
                         
-                        NavigationLink {
-                            BookCreateView(viewType: .input)
+                        Button {
+                            isShowingInput.toggle()
                         } label: {
                             Label("입력으로 등록하기", systemImage: "square.and.pencil")
                         }
@@ -52,6 +52,15 @@ struct LibraryView: View {
                         }
                     }
                     
+                }
+            }
+            .fullScreenCover(isPresented: $isShowingSearch) {
+                    APISearchView(isShowing: $isShowingSearch)
+                        .toolbar(.hidden, for: .tabBar)
+            }
+            .fullScreenCover(isPresented: $isShowingInput) {
+                NavigationStack {
+                    BookCreateView(viewType: .input, isShowing: $isShowingInput)
                 }
             }
         case .loggedOut:
@@ -66,5 +75,6 @@ struct LibraryView: View {
         LibraryView()
             .environmentObject(AuthViewModel())
             .environmentObject(BookService())
+            .environmentObject(UserService())
     }
 }
