@@ -1,5 +1,7 @@
 # Book Billionaire
 <img src="https://github.com/APP-iOS4/BookBillionaire/assets/145957641/0923f76b-1162-4639-acc9-7293c9b0e57b" width=200px />
+<img src="https://github.com/APP-iOS4/BookBillionaire/assets/145957641/71e36a96-37d5-4262-bbdd-e71519ed7670" width=400px />
+
 <br><br>
 
 ## ADS
