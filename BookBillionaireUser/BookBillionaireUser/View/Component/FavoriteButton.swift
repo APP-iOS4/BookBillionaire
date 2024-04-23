@@ -14,11 +14,8 @@ struct FavoriteButton: View {
         Image(systemName: isSaveBook ? "heart.fill" : "heart")
             .resizable()
             .scaledToFit()
-            .frame(width: 30)
+            .frame(width: 20)
             .foregroundStyle(isSaveBook ? Color.red : Color.gray.opacity(0.3))
-            .onTapGesture {
-                isSaveBook.toggle()
-            }
     }
 }
 

@@ -34,13 +34,13 @@ struct CreateBookReviewView: View {
             .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
             
             HStack {
-                Button {
-                    // 포토피커 사용?
-                    photoItemShowing.toggle()
-                } label: {
-                    photoItemShowing ? Image(systemName: "xmark") : Image(systemName: "plus")
-                }
-                .padding(.horizontal,10)
+                Image(systemName: photoItemShowing ? "xmark" : "plus")
+                    .padding(.horizontal, 10)
+                    .foregroundStyle(.accent)
+                    .onTapGesture {
+                        photoItemShowing.toggle()
+                    }
+                    .frame(width: 40)
                 
                 TextField("코멘트를 입력해주세요.", text: $textComment)
                     .padding(10)
@@ -49,10 +49,11 @@ struct CreateBookReviewView: View {
                     .disableAutocorrection(true)
                 
                 Button {
-                    commentViewModel.add(user: user, commentText: textComment, star: rating, date: Date())
-                    textComment = ""
-                    rating = 0
-                    
+                    if !textComment.isEmpty {
+                        commentViewModel.add(user: user, commentText: textComment, star: rating, date: Date())
+                        textComment = ""
+                        rating = 0
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
@@ -63,13 +64,11 @@ struct CreateBookReviewView: View {
                     .frame(width: 40, height: 40)
                 }
             }
-            .padding(.bottom, 8)
-            .padding(.top, 0)
-            .padding(.horizontal)
+            .padding(EdgeInsets(top: 0, leading: 10, bottom: 8, trailing: 10))
         }
     }
 }
 
 #Preview {
-    CreateBookReviewView(user: User(id: "", nickName: "유저", address: ""))
+    CreateBookReviewView(user: User(nickName: "유저", address: ""))
 }

@@ -32,13 +32,12 @@ struct RecentSearchView: View {
                             Text("\(search)")
                                 .foregroundColor(.primary)
                             Spacer()
-                            
-                            Button(action: {
+                            Button {
                                 searchService.removeSearchHistory(search: search)
-                            }, label: {
+                            } label: {
                                 Image(systemName: "multiply.circle.fill")
                                     .foregroundStyle(.gray)
-                            })
+                            }
                         }
                         .onTapGesture {
                                 searchBook = search

@@ -7,13 +7,21 @@
 
 import SwiftUI
 import PhotosUI
+import FirebaseStorage
 
 struct ChatPlusItem: View {
     @State private var selectedImage: UIImage?
+    @State private var image: String?
     @State private var selectedItem: PhotosPickerItem?
+    @State private var isShowingPhotosPicker: Bool = false
+
     @Binding var message: Message
-    var messageVM: MessageListViewModel
+    @Binding var messageText: String
+    
     @Environment(\.colorScheme) var colorScheme
+
+    var messageListVM: ChatViewModel
+    var path: String?
 
     var body: some View {
         HStack {
@@ -39,11 +47,25 @@ struct ChatPlusItem: View {
                        let data = try? await selectedItem.loadTransferable(type: Data.self) {
                         if let image = UIImage(data: data) {
                             selectedImage = image
-                            message.ImageURL = "\(image)"
-                            messageVM.uploadPhoto(selectedImage: selectedImage, photoImage: message.ImageURL ?? "")
-                            print(message.ImageURL!)
+                            
+                            messageListVM.uploadPhoto(selectedImage: selectedImage) { imageURL in
+                                if let imageURL = imageURL {
+                                    print("업로드 이미지 URL 받아오기 성공: \(imageURL) 🎉")
+                                    // 메세지 텍스트 필드로 url 전달
+                                    message.imageUrl = imageURL
+                                    
+                                    if let urlString = message.imageUrl?.absoluteString {
+                                        messageText = urlString
+                                        print("22=============\(String(describing: message.imageUrl))")
+                                    }
+                                } else {
+                                    // 이미지 업로드에 실패한 경우 또는 다운로드 URL을 가져오는 데 실패한 경우
+                                    print("업로드 이미지 URL 다운로드를 실패했습니다 🥲")
+                                }
+                            }
                         }
                     }
+                    selectedItem = nil
                 }
             }
             .padding(.trailing, 40)
@@ -87,7 +109,6 @@ struct ChatPlusItem: View {
         }
     }
 }
-
 
 //#Preview {
 //    ChatPlusItem()

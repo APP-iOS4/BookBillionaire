@@ -22,7 +22,22 @@ public struct Book: Identifiable, Codable, Hashable {
     public var bookCategory: BookCategory?
     public var rental: String //Rental ID
     public var rentalState: RentalStateType
+    public var createAt: Date = Date()
 
+    public init() {
+        self.ownerID = ""
+        self.isbn = ""
+        self.title = ""
+        self.contents = ""
+        self.publisher = ""
+        self.authors = [""]
+        self.translators = [""]
+        self.price = 0
+        self.thumbnail = ""
+        self.rental = ""
+        self.rentalState = .rentalAvailable
+    }
+    
     /// 일반 초기화
     public init(ownerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", rental: String = "", rentalState: RentalStateType) {
         
@@ -38,7 +53,6 @@ public struct Book: Identifiable, Codable, Hashable {
         self.rental = rental
         self.rentalState = rentalState
     }
-
 }
 
 ///책 카테고리에 대한 enum

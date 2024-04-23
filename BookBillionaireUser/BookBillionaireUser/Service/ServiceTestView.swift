@@ -11,7 +11,6 @@ import FirebaseStorage
 import BookBillionaireCore
 
 struct ServiceTestView: View {
-    let mapService: MapService = MapService.shared
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var bookService: BookService
 
@@ -24,8 +23,13 @@ struct ServiceTestView: View {
     @State var rental: Rental = Rental()
     @State var isFavorite: Bool = false
     var body: some View {
+        Text(userService.currentUser.id)
         Button("함수 실행") {
             Task{
+
+                await userService.toggleFavoriteStatus(
+bookID: "08E91171-79BE-4A1E-A5CE-561368C9D504")
+
             }
         }
     }

@@ -70,29 +70,54 @@ class UserService: ObservableObject {
             print("Error updating user: \(error)")
         }
     }
-    
-    // 유저 찜하기 등록시 사용하는 함수
-    func userFavoriteBook(bookID: String) async {
+   
+    func toggleFavoriteStatus(bookID: String) async -> Bool? {
         let userRef = allUserRef.document(currentUser.id)
         do {
-            try await userRef.updateData([
-                "favorite": FieldValue.arrayUnion([bookID])
-            ])
-            print("유저 찜하기 등록 성공")
+            let userData = try await userRef.getDocument()
+            // "favorite" 필드를 가져와서 해당 필드가 배열인지 확인
+            if var favorites = userData["favorite"] as? [String] {
+                if favorites.contains(bookID) {
+                    favorites.removeAll { $0 == bookID }
+                    try await userRef.updateData(["favorite": favorites])
+                    print("즐겨찾기 해제 성공")
+                    return false
+                    
+                } else {
+                    try await userRef.updateData([
+                        "favorite": FieldValue.arrayUnion([bookID])
+                    ])
+                    print("즐겨찾기 등록 성공")
+                    return true
+                }
+                
+            } else {
+                try await userRef.updateData([
+                    "favorite": [bookID]
+                ])
+                print("즐겨찾기 등록 성공")
+                return true
+            }
+            
         } catch let error {
             print("Error updating user: \(error)")
+            return nil
         }
     }
-
-    func isInFavoriteBook(userID:String, bookID: String) -> Bool {
-        if let favorites = loadUserByID(userID).favorite {
-            if favorites.contains(bookID) {
-                return true
+  
+    func checkFavoriteStatus(bookID: String) async -> Bool {
+        let userRef = allUserRef.document(currentUser.id)
+        do {
+            let userData = try await userRef.getDocument()
+            // "favorite" 필드를 가져와서 해당 필드가 배열인지 확인
+            if let favorites = userData["favorite"] as? [String] {
+                return favorites.contains(bookID)
             } else {
                 return false
             }
+        } catch {
+            print("Error checking favorite status: \(error)")
+            return false
         }
-        return true
     }
 }
-

@@ -11,35 +11,42 @@ import FirebaseStorage
 
 struct BookItem: View {
     let book: Book
+    let imageChache = ImageCache.shared
     @State private var imageUrl: URL?
+    @State private var loadedImage: UIImage?
     
     var body: some View {
-            HStack(alignment: .top) {
-                // 책 이미지 부분
-                if let url = imageUrl {
-                    AsyncImage(url: url) { image in
-                        image.resizable()
-                            .frame(width: 100, height: 140)
-                    } placeholder: {
-                        ProgressView()
+        HStack(alignment: .top) {
+            //책 이미지
+            if let url = imageUrl, !url.absoluteString.isEmpty {
+                Image(uiImage: loadedImage ?? UIImage(named: "default")!)
+                    .resizable()
+                    .frame(width: 100, height: 140)
+                    .onAppear {
+                        ImageCache.shared.getImage(for: url) { image in
+                            loadedImage = image
+                        }
                     }
-                } else {
-                    Image("default")
-                        .resizable()
-                        .frame(width: 100, height: 140)
-                }
-                
-                // 책 정보 부분
+            } else {
+                Image("default")
+                    .resizable()
+                    .frame(width: 100, height: 140)
+            }
+                // 책 정보
                 VStack(alignment: .leading) {
                     Text(book.title)
-                        .font(.subheadline)
+                        .monospaced()
                         .padding(.bottom, 5)
+                        .font(.subheadline)
+                        .bold()
+                    Text("저서정보")
+                        .fontWeight(.semibold)
                     if book.authors.isEmpty {
-                        Text("\(book.title)")
                         Text("\(book.translators?.joined(separator: ", ") ?? "")")
+                        Text("\(book.publisher ?? "출판사 정보 없음")")
                     } else {
-                        Text("\(book.title)")
                         Text("\(book.authors.joined(separator: ", "))")
+                        Text("\(book.publisher ?? "출판사 정보 없음")")
                     }
                 }
                 .padding(.bottom, 10)
@@ -54,7 +61,7 @@ struct BookItem: View {
             if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
                 imageUrl = URL(string: book.thumbnail)
             } else {
-                // Firebase Storage 경로
+                // Firebase Storage 경로 URL 다운로드
                 let storageRef = Storage.storage().reference(withPath: book.thumbnail)
                 storageRef.downloadURL { (url, error) in
                     if let error = error {

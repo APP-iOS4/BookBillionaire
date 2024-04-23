@@ -11,18 +11,39 @@ import FirebaseStorage
 import FirebaseFirestore
 
 struct BookCreateView: View {
-    @State var book: Book = Book(ownerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable)
+    @State var book: Book = Book()
     @EnvironmentObject var bookService: BookService
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingSheet: Bool = false
     @State private var selectedImage: UIImage?
+    private let viewType: ViewType
     
-    // 선택적 파라미터 초기값 설정
-    init(searchBook: SearchBook? = nil) {
-        if let searchBook = searchBook {
+    enum ViewType {
+        case input
+        case searchResult(searchBook: SearchBook)
+        case edit(book: Book)
+        
+        var navigationTitle: String {
+            switch self {
+            case .input, .searchResult:
+                return "책 등록"
+            case .edit:
+                return "책 편집"
+            }
+        }
+    }
+
+    // ViewType에 따른 초기값
+    init(viewType: ViewType) {
+        self.viewType = viewType
+        
+        switch viewType {
+        case .searchResult(let searchBook):
             _book = State(initialValue: Book(ownerID: "", isbn: searchBook.isbn, title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
-        } else {
-            _book = State(initialValue: Book(ownerID: "", title: "", contents: "", authors: [""], thumbnail: "", rentalState: .rentalAvailable))
+        case .input:
+            _book = State(initialValue: Book())
+        case .edit(let book):
+            _book = State(initialValue: book)
         }
     }
     
@@ -33,8 +54,7 @@ struct BookCreateView: View {
             Button {
                 uploadPhoto()
                 assignCurrentUserIDToBook(book: &book)
-                book.id = UUID().uuidString
-                _ = bookService.registerBook(book)
+                updateBook()
                 dismiss()
             } label: {
                 Text("완료")
@@ -44,10 +64,22 @@ struct BookCreateView: View {
             .padding()
             Spacer()
         }
-        .navigationTitle("책 등록")
+        .toolbar(.hidden, for: .tabBar)
+        .navigationTitle(viewType.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    // 책 업데이트
+    private func updateBook() {
+        Task {
+            switch viewType {
+            case .edit:
+                await bookService.updateBookByID(book.id, book: book)
+            case .input, .searchResult:
+                _ = bookService.registerBook(book)
+            }
+        }
+    }
     // 현재 유저정보 할당 함수
     private func assignCurrentUserIDToBook(book: inout Book) {
         if let currentUser = AuthViewModel.shared.currentUser {
@@ -75,7 +107,7 @@ struct BookCreateView: View {
         let path = "images/\(UUID().uuidString).jpg"
         book.thumbnail = path
         let fileRef = storageRef.child(path)
-        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+        let _ = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
             } else if let error = error {
                 print("Error uploading image: \(error)")
@@ -86,7 +118,7 @@ struct BookCreateView: View {
 
 #Preview {
     NavigationStack {
-        BookCreateView()
+        BookCreateView(viewType: .input)
     }
 }
 

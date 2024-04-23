@@ -10,10 +10,11 @@ import BookBillionaireCore
 
 struct MyBookListView: View {
     @EnvironmentObject var bookService: BookService
+    @EnvironmentObject var userService: UserService
     @State private var myBooks: [Book] = []
-    @State private var users: [User] = []
     @State private var isShowingAlert: Bool = false
     @State private var showToast = false
+    @State private var alertBookID: String = ""
     
     var body: some View {
         VStack {
@@ -25,6 +26,7 @@ struct MyBookListView: View {
                 Spacer()
             }
             .padding()
+            // 보유도서가 없을 때
             if myBooks.isEmpty {
                 VStack(spacing: 10) {
                     Spacer()
@@ -46,22 +48,27 @@ struct MyBookListView: View {
                 .fontWeight(.medium)
                 .foregroundStyle(.gray)
             } else {
+                // 보유도서가 있을 때
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(myBooks) { book in
+                        ForEach(myBooks.indices, id: \.self) { index in
                             HStack(alignment: .top) {
-                                NavigationLink(value: book) {
-                                    BookItem(book: book)
+                                NavigationLink {
+                                    RentalCreateView(book: $myBooks[index])
+                                        .toolbar(.hidden, for: .tabBar)
+                                } label: {
+                                    BookItem(book: myBooks[index])
                                 }
                                 Spacer()
                                 // 메뉴 버튼
                                 Menu {
                                     NavigationLink {
-//                                        BookCreateView(book: book)
+                                        BookCreateView(viewType: .edit(book: myBooks[index]))
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
                                     Button(role: .destructive) {
+                                        alertBookID = myBooks[index].id
                                         isShowingAlert.toggle()
                                     } label: {
                                         Label("삭제", systemImage: "trash.circle.fill")
@@ -70,11 +77,12 @@ struct MyBookListView: View {
                                     Image(systemName: "ellipsis")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 17)
+                                        .frame(width: 17, height: 17)
                                         .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
                                 }
-                                .alert("", isPresented: $isShowingAlert) {
+                                // 알럿
+                                .alert("경고", isPresented: $isShowingAlert) {
                                     Button(role: .cancel) {
                                         
                                     } label: {
@@ -82,63 +90,55 @@ struct MyBookListView: View {
                                     }
                                     // 1. 삭제시 rentalService에 remove 메서드 구현해서 추가 해야함.
                                     Button(role: .destructive) {
-                                        deleteMyBook(book)
+                                        deleteMyBook(alertBookID)
                                         showToastMessage()
+                                        isShowingAlert.toggle()
                                     } label: {
                                         Text("삭제")
                                     }
                                 } message: {
                                     Text("""
                                         삭제시 복구가 불가능 합니다.
-                                        삭제하시겠습니까?
                                         """)
                                 }
-                                .padding()
                             }
                         }
                     }
                     .padding()
-                    .navigationDestination(for: Book.self) { book in
-                        RentalCreateView(book: book)
-                        .toolbar(.hidden, for: .tabBar)
-                    }
                     SpaceBox()
                 }
             }
         }
-        .toast(isShowing: $showToast, text: Text("성공했습니다!"))
+        // 토스트 메시지
+        .toast(isShowing: $showToast, text: Text("도서가 삭제되었습니다."))
         .onAppear{
+            loadMybook()
+        }
+        
+        .onReceive(bookService.$books) { _ in
             loadMybook()
         }
     }
     
+    // 내 책 불러오기 함수
     private func loadMybook() {
         Task {
-            if let user = AuthViewModel.shared.currentUser {
-                myBooks = bookService.filterByOwenerID(user.uid)
-            }
+            myBooks = bookService.filterByOwenerID(userService.currentUser.id)
         }
     }
     
-    private func deleteMyBook(_ book: Book) {
-        Task {
-            await bookService.deleteBook(book)
-            if let index = myBooks.firstIndex(where: { $0.id == book.id }) {
+    // 내 책 삭제 함수
+    private func deleteMyBook(_ bookID: String) {
+        if let index = myBooks.firstIndex(where: { $0.id == bookID }) {
+            let book = myBooks[index]
+            Task {
+                await bookService.deleteBook(book)
                 myBooks.remove(at: index)
             }
         }
     }
-    // BookDetailView에 전달할 User를 가져오는 메서드
-    // User 반환
-    private func user(for book: Book) -> User {
-        // book.ownerID == user.id 일치 확인 후 값 return
-        if let user = users.first(where: { $0.id == book.ownerID }) {
-            return user
-        }
-        // 일치값 없으면 일단 그냥 샘플 불러오게 처리
-        return User(id: "정보 없음", nickName: "정보 없음", address: "정보 없음")
-    }
     
+    // 토스트 함수
     func showToastMessage() {
         withAnimation {
             self.showToast = true
@@ -155,5 +155,6 @@ struct MyBookListView: View {
     NavigationStack {
         MyBookListView()
             .environmentObject(BookService())
+            .environmentObject(UserService())
     }
 }

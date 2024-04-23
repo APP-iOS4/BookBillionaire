@@ -26,7 +26,6 @@ struct BookBillionaireUserApp: App {
             ContentView()
                 .environmentObject(userService)
                 .environmentObject(bookService)
-
         }
     }
 }

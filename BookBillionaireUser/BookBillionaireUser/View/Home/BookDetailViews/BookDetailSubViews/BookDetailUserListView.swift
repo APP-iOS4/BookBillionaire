@@ -14,7 +14,7 @@ struct BookDetailUserListView: View {
     
     var body: some View {
         HStack{
-            Image(user.image ?? "")
+            Image(user.image ?? "default")
                 .resizable()
                 .clipShape(Circle())
                 .frame(width: 50, height: 50)
@@ -26,5 +26,5 @@ struct BookDetailUserListView: View {
 }
 
 #Preview {
-    BookDetailUserListView(book: Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable), user: User(id: "아이디", nickName: "닉네임", address: "주소"))
+    BookDetailUserListView(book: Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
 }
