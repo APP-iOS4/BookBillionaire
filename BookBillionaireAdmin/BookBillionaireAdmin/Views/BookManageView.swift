@@ -12,8 +12,8 @@ struct BookManageView: View {
     @EnvironmentObject private var bookService: BookService
     @State var books : [Book] = []
     @State var multiSelectedBooks: [Book] = []
+    var topic: Topic
     var body: some View {
-        
         Grid {
             GridRow {
                 Text("책이름")
@@ -26,6 +26,7 @@ struct BookManageView: View {
                 Text("World")
             }
         }
+        .navigationTitle(topic.name)
         .task{
                 bookService.fetchBooks()
         }
@@ -35,6 +36,8 @@ struct BookManageView: View {
 }
 
 #Preview {
-    BookManageView()
-        .environmentObject(BookService())
+    NavigationStack {
+        BookManageView(topic: Topic(name: "책 목록확인", Icon: "books.vertical.fill", topicTitle: .book))
+            .environmentObject(BookService())
+    }
 }
