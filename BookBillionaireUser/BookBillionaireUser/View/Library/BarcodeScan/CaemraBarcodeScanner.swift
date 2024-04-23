@@ -35,6 +35,7 @@ struct CameraBarcodeScanner: UIViewControllerRepresentable {
         func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
             if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
                 if let stringValue = metadataObject.stringValue {
+                    print("Barcode found: \(stringValue)") // Debug: print the barcode value
                     parent.barcodeValue = stringValue
                     parent.presentationMode.wrappedValue.dismiss()
                 }
@@ -42,3 +43,4 @@ struct CameraBarcodeScanner: UIViewControllerRepresentable {
         }
     }
 }
+

@@ -46,42 +46,44 @@ struct APISearchView: View {
         return query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!.replacingOccurrences(of: "+", with: "%20")
     }
     
+    func performSearch() {
+        guard let query = searchBook, !query.isEmpty else { return }
+        isLoading = true
+        let queryEncoded = encodeQuery(query)
+        let url = URL(string: "https://dapi.kakao.com/v3/search/book?query=\(queryEncoded)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue(apiKey, forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                isLoading = false
+                if let error = error {
+                    print("오류 발생:", error)
+                    return
+                }
+                
+                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                    print("잘못된 응답:", response!)
+                    return
+                }
+                
+                guard let data = data else {
+                    print("데이터 없음")
+                    return
+                }
+                
+                let decoder = JSONDecoder()
+                if let searchResponse = try? decoder.decode(apiSearchResponse.self, from: data) {
+                    self.books = searchResponse.documents
+                }
+            }
+        }.resume()
+    }
+    
     var body: some View {
         VStack {
-            APISearchBar(searchBook: $searchBook, onSearch: {
-                guard let query = searchBook else { return }
-                isLoading = true
-                let queryEncoded = encodeQuery(query)
-                let url = URL(string: "https://dapi.kakao.com/v3/search/book?query=\(queryEncoded)")!
-                var request = URLRequest(url: url)
-                request.httpMethod = "GET"
-                request.addValue(apiKey, forHTTPHeaderField: "Authorization")
-                
-                URLSession.shared.dataTask(with: request) { data, response, error in
-                    DispatchQueue.main.async {
-                        isLoading = false
-                        if let error = error {
-                            print("오류 발생:", error)
-                            return
-                        }
-                        
-                        guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                            print("잘못된 응답:", response!)
-                            return
-                        }
-                        
-                        guard let data = data else {
-                            print("데이터 없음")
-                            return
-                        }
-                        
-                        let decoder = JSONDecoder()
-                        if let searchResponse = try? decoder.decode(apiSearchResponse.self, from: data) {
-                            self.books = searchResponse.documents
-                        }
-                    }
-                }.resume()
-            })
+            APISearchBar(searchBook: $searchBook, onSearch: performSearch)
             
             if isLoading {
                 ProgressView()
@@ -96,13 +98,16 @@ struct APISearchView: View {
                 .listStyle(.plain)
             } else {
                 Text("검색 결과가 없습니다.")
+                    .padding()
             }
             Spacer()
         }
         .onAppear {
             fetchMyKey()
+            performSearch() // 검색을 여기에서도 호출
         }
         .navigationTitle("책 검색")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
