@@ -30,6 +30,7 @@ struct APISearchView: View {
     @State private var isLoading = false
     @State private var apiKey = ""
     @Binding var isShowing: Bool
+    @Environment(\.dismiss) private var dismiss
     
     private func fetchMyKey() {
         // 번들된 key.plist 파일을 읽는다
@@ -50,6 +51,7 @@ struct APISearchView: View {
     }
     
     var body: some View {
+        NavigationStack {
             VStack(alignment: .center) {
                 APISearchBar(searchBook: $searchBook, onSearch: {
                     self.isLoading = true
@@ -90,7 +92,8 @@ struct APISearchView: View {
                 } else if books.count != 0 {
                     List(books, id: \.id) { book in
                         NavigationLink {
-                            BookCreateView(viewType: .searchResult(searchBook: book))
+                            BookCreateView(viewType: .searchResult(searchBook: book), isShowing: $isShowing)
+                                .navigationBarBackButtonHidden(true)
                         } label: {
                             APISearchListRowView(book: book)
                         }
@@ -101,10 +104,20 @@ struct APISearchView: View {
                 }
                 Spacer()
             }
-            .onAppear{
-                fetchMyKey()
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("뒤로 가기", systemImage: "chevron.backward")
+                    }
+                }
             }
             .navigationTitle("책 검색")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear{
+                fetchMyKey()
+            }
+        }
     }
 }

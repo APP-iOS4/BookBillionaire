@@ -15,6 +15,8 @@ struct MyBookListView: View {
     @State private var isShowingAlert: Bool = false
     @State private var showToast = false
     @State private var alertBookID: String = ""
+    @State private var isShowingEdit: Bool = false
+    @State private var selectedBook: Book?
     
     var body: some View {
         VStack {
@@ -62,8 +64,9 @@ struct MyBookListView: View {
                                 Spacer()
                                 // 메뉴 버튼
                                 Menu {
-                                    NavigationLink {
-                                        BookCreateView(viewType: .edit(book: myBooks[index]))
+                                    Button {
+                                        selectedBook = myBooks[index]
+                                        isShowingEdit = true
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
@@ -81,6 +84,7 @@ struct MyBookListView: View {
                                         .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
                                 }
+                                
                                 // 알럿
                                 .alert("경고", isPresented: $isShowingAlert) {
                                     Button(role: .cancel) {
@@ -107,6 +111,11 @@ struct MyBookListView: View {
                     .padding()
                     SpaceBox()
                 }
+            }
+        }
+        .fullScreenCover(item: $selectedBook) { bookToEdit in
+            NavigationStack {
+                BookCreateView(viewType: .edit(book: bookToEdit), isShowing: $isShowingEdit)
             }
         }
         // 토스트 메시지
