@@ -15,10 +15,12 @@ struct APISearchListRowView: View {
         HStack {
             AsyncImage(url: URL(string: book.thumbnail)){ image in
                 image.resizable()
-                    .frame(maxWidth: 80, maxHeight: 120)
+                    .frame(width: 100, height: 140)
                     .aspectRatio(contentMode: .fill)
             } placeholder: {
-                ProgressView()
+                Image("default")
+                    .resizable()
+                    .frame(width: 100, height: 140)
             }
             .padding(.trailing)
             VStack(alignment:.leading) {
