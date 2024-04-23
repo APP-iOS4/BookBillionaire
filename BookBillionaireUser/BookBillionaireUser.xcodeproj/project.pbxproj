@@ -32,8 +32,6 @@
 		04DCAFA02BCAACE800B9B146 /* RLoginInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCAF9F2BCAACE800B9B146 /* RLoginInfoView.swift */; };
 		084FE4D12BD0D3ED00AACD4A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 084FE4D02BD0D3ED00AACD4A /* FirebaseFirestore */; };
 		084FE4D32BD0D3F300AACD4A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 084FE4D22BD0D3F300AACD4A /* FirebaseFirestoreSwift */; };
-		085CE9C32BD0184F002B7B20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 085CE9C22BD0184F002B7B20 /* GoogleService-Info.plist */; };
-		085D708D2BD65E8700EDE5FA /* SignUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D708C2BD65E8700EDE5FA /* SignUpDetailView.swift */; };
 		0882603E2BBD2AC3007BEA25 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603D2BBD2AC3007BEA25 /* ChatListView.swift */; };
 		088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0882603F2BBD2B0C007BEA25 /* ComplainView.swift */; };
 		088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260412BBD2B4C007BEA25 /* LocationSharedView.swift */; };
@@ -98,6 +96,7 @@
 		EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7A2B942BBF99A00068D100 /* CameraView.swift */; };
 		EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */; };
 		EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */; };
+		EF808F5B2BD739B800D28090 /* SignUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF808F5A2BD739B800D28090 /* SignUpDetailView.swift */; };
 		EF8178CD2BBD749700ADAE2E /* RentalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8178CC2BBD749700ADAE2E /* RentalInfoView.swift */; };
 		EF88A1842BC4E6AC00E0EEAA /* BookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */; };
 		EFCF32252BCCDF5400DA478F /* CameraOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF32242BCCDF5400DA478F /* CameraOverlay.swift */; };
@@ -124,7 +123,6 @@
 		04DCAF9B2BCA985900B9B146 /* RLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RLoginView.swift; path = BookBillionaireUser/RLoginView.swift; sourceTree = SOURCE_ROOT; };
 		04DCAF9F2BCAACE800B9B146 /* RLoginInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLoginInfoView.swift; sourceTree = "<group>"; };
 		085CE9C22BD0184F002B7B20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		085D708C2BD65E8700EDE5FA /* SignUpDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpDetailView.swift; path = "../../../../../../../Downloads/BookBillionaire-develop-3/BookBillionaireUser/BookBillionaireUser/View/Login/SignUpDetailView.swift"; sourceTree = "<group>"; };
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260412BBD2B4C007BEA25 /* LocationSharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharedView.swift; sourceTree = "<group>"; };
@@ -188,6 +186,7 @@
 		EF7A2B942BBF99A00068D100 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalStateSheetView.swift; sourceTree = "<group>"; };
 		EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoAddView.swift; sourceTree = "<group>"; };
+		EF808F5A2BD739B800D28090 /* SignUpDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpDetailView.swift; sourceTree = "<group>"; };
 		EF8178CC2BBD749700ADAE2E /* RentalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalInfoView.swift; sourceTree = "<group>"; };
 		EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookItem.swift; sourceTree = "<group>"; };
 		EFCF32242BCCDF5400DA478F /* CameraOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraOverlay.swift; sourceTree = "<group>"; };
@@ -491,7 +490,7 @@
 				8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */,
 				04A59AB32BC4FDE0009FBF6E /* UnlogginedView.swift */,
 				8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */,
-				085D708C2BD65E8700EDE5FA /* SignUpDetailView.swift */,
+				EF808F5A2BD739B800D28090 /* SignUpDetailView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -689,7 +688,6 @@
 				35EAF2112BCF67F80051B38B /* BookDetailOwnerRowView.swift in Sources */,
 				04A59A982BC19813009FBF6E /* AccentButtonStyle.swift in Sources */,
 				088260442BBD2B5E007BEA25 /* PhotoSharedView.swift in Sources */,
-				085D708D2BD65E8700EDE5FA /* SignUpDetailView.swift in Sources */,
 				35EAF2122BCF67F80051B38B /* BookDetailReviewView.swift in Sources */,
 				35EAF20A2BCF670D0051B38B /* FavoriteButton.swift in Sources */,
 				EF6C38A52BCFE60D00098E18 /* MapView.swift in Sources */,
@@ -697,6 +695,7 @@
 				04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */,
 				04A59A952BC143E7009FBF6E /* SpaceBox.swift in Sources */,
 				EF30EED52BCE18E500D929D9 /* ProfilePhoto.swift in Sources */,
+				EF808F5B2BD739B800D28090 /* SignUpDetailView.swift in Sources */,
 				EF1AA4DF2BBE7B3600B248A7 /* UserStore.swift in Sources */,
 				EF7C83022BBE27BF009D59FB /* RentalStateSheetView.swift in Sources */,
 				EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */,
