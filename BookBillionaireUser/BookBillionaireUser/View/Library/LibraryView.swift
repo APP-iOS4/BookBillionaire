@@ -11,6 +11,8 @@ struct LibraryView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var selectedIndex: Int = 0
     @State private var isShowing: Bool = false
+    @State private var barcodeValue: String? = ""
+    @State private var isScannerPresented = false
     
     var body: some View {
         switch authViewModel.state {
@@ -33,10 +35,23 @@ struct LibraryView: View {
                     // 메뉴 버튼
                     Menu {
                         NavigationLink {
-                            APISearchView(isShowing: $isShowing)
-                            .toolbar(.hidden, for: .tabBar)
+                            APISearchView(searchBook: $barcodeValue, isShowing: $isShowing)
+                                .toolbar(.hidden, for: .tabBar)
                         } label: {
                             Label("검색으로 등록하기", systemImage: "magnifyingglass")
+                        }
+
+                        Button(action: {
+                            isScannerPresented = true
+                        }) {
+                            Label("스캔으로 등록하기", systemImage: "camera.viewfinder")
+                        }
+                        .sheet(isPresented: $isScannerPresented, onDismiss: {
+                            if let barcode = barcodeValue {
+                                isShowing = true
+                            }
+                        }) {
+                            CameraBarcodeScanner(barcodeValue: $barcodeValue)
                         }
                         
                         NavigationLink {
@@ -52,7 +67,6 @@ struct LibraryView: View {
                                 .foregroundStyle(Color.accentColor)
                         }
                     }
-                    
                 }
             }
         case .loggedOut:
