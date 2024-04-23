@@ -55,7 +55,10 @@ struct BookInfoAddView: View {
                 }
                 VStack(alignment: .leading) {
                     TextField("책 이름을 입력해주세요", text: $book.title)
-                    TextField("작가 이름을 입력해주세요", text: $book.authors[0])
+                    TextField("작가 이름을 입력해주세요", text: Binding(
+                        get: { self.book.authors.joined(separator: ",") },
+                        set: { self.book.authors = $0.components(separatedBy: ",") }
+                    ))
                     HStack {
                         Button {
                             isShowingSheet.toggle()
