@@ -10,6 +10,7 @@ import SwiftUI
 import BookBillionaireCore
 
 struct BookDetailView: View {
+    @Environment(\.colorScheme) var colorScheme
     let book: Book
     @State var user: User = User()
     @EnvironmentObject var userService: UserService
@@ -40,6 +41,7 @@ struct BookDetailView: View {
     var body: some View {
         ScrollView {
             BookDetailImageView(book: book)
+                .frame(height: 200)
             
             // 대여신청 섹션
             VStack(alignment: .leading) {
@@ -53,8 +55,21 @@ struct BookDetailView: View {
                     // 로그인 해야 좋아요 가능
                     if authViewModel.state == .loggedIn {
                         FavoriteButton(isSaveBook: $isFavorite)
+                            .onTapGesture {
+                                Task {
+                                    if let loadUsersFavorite = await userService.toggleFavoriteStatus(bookID: book.id) {
+                                        isFavorite = loadUsersFavorite
+                                    }
+                                }
+                            }
+                            .onAppear {
+                                // 뷰가 나타날 때마다 즐겨찾기 상태 업데이트
+                                Task {
+                                    isFavorite = await userService.checkFavoriteStatus(bookID: book.id)
+                                }
+                            }
                     }
-                   
+                    
                     Spacer()
                     
                     // 대여 상태
@@ -169,7 +184,7 @@ struct BookDetailView: View {
                                         Label("신고하기", systemImage: "exclamationmark.triangle")
                                     }
                                 }
-                          
+                                
                             } label: {
                                 Image(systemName: "ellipsis")
                                     .resizable()
@@ -187,7 +202,7 @@ struct BookDetailView: View {
                 }
         }
         // 추후 리뷰 쓰는곳 옮김
-//        CreateBookReviewView(user: user, commentViewModel: commentViewModel)
+        //        CreateBookReviewView(user: user, commentViewModel: commentViewModel)
     }
     
 }
@@ -197,4 +212,6 @@ struct BookDetailView: View {
         BookDetailView(book: Book(ownerID: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
             .navigationBarTitleDisplayMode(.inline)
     }
+    .environmentObject(AuthViewModel())
+    .environmentObject(UserService())
 }
