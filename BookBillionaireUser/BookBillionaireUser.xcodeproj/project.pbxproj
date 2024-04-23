@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */ = {isa = PBXBuildFile; fileRef = 048C72302BCFC4A800865316 /* PrivatePolicy.html */; };
+		048C72582BD6401600865316 /* ImageChache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72572BD6401600865316 /* ImageChache.swift */; };
 		04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A3F2BBD29C1009FBF6E /* BookService.swift */; };
 		04A59A452BBD2F66009FBF6E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59A442BBD2F66009FBF6E /* BookBillionaireCore */; };
 		04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A802BBE85C2009FBF6E /* UserService.swift */; };
@@ -101,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		048C72302BCFC4A800865316 /* PrivatePolicy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PrivatePolicy.html; sourceTree = "<group>"; };
+		048C72572BD6401600865316 /* ImageChache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageChache.swift; sourceTree = "<group>"; };
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		04A59A822BBE8876009FBF6E /* ServiceTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTestView.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				04A59A822BBE8876009FBF6E /* ServiceTestView.swift */,
 				04A59A8A2BBFB7F7009FBF6E /* RentalService.swift */,
 				35082EFB2BCCDF140008AA90 /* SearchService.swift */,
+				048C72572BD6401600865316 /* ImageChache.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -697,6 +700,8 @@
 				353704572BCD183D00E6F531 /* CustomAlert.swift in Sources */,
 				35EAF2142BCF67F80051B38B /* BookAnotherOwnerView.swift in Sources */,
 				EF8178CD2BBD749700ADAE2E /* RentalPeriodView.swift in Sources */,
+				048C72582BD6401600865316 /* ImageChache.swift in Sources */,
+				EF8178CD2BBD749700ADAE2E /* RentalInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,15 +22,11 @@ struct ServiceTestView: View {
     @State var books: [Book] = []
     @State var rentalTime: (Date, Date) = (Date(), Date())
     @State var rental: Rental = Rental()
-    
+    @State var isFavorite: Bool = false
     var body: some View {
         Button("함수 실행") {
             Task{
-                rental = await rentalService.getRental("0435FF97-97DD-40E3-9FB1-90D0947551B4")
-                rentalTime = await rentalService.getRentalDay("0435FF97-97DD-40E3-9FB1-90D0947551B4")
             }
-            print("\(rental)")
-            print("\(rentalTime)")
         }
     }
 }

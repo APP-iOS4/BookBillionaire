@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		040216692BCE12C200A7C922 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 040216682BCE12C200A7C922 /* GoogleService-Info.plist */; };
 		0402166C2BCE16D900A7C922 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0402166B2BCE16D900A7C922 /* FirebaseAuth */; };
 		0402166E2BCE16D900A7C922 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 0402166D2BCE16D900A7C922 /* FirebaseAuthCombine-Community */; };
 		040216702BCE16D900A7C922 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0402166F2BCE16D900A7C922 /* FirebaseFirestore */; };
@@ -18,18 +17,42 @@
 		0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167A2BCE1A6900A7C922 /* SettingView.swift */; };
 		0402167E2BCE5CBB00A7C922 /* QnA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167D2BCE5CBB00A7C922 /* QnA.swift */; };
 		040216802BCEB03A00A7C922 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167F2BCEB03A00A7C922 /* Category.swift */; };
+		048C72402BD4053300865316 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C723F2BD4053300865316 /* GoogleService-Info.plist */; };
+		048C72422BD4059200865316 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72412BD4059200865316 /* UserService.swift */; };
+		048C72472BD40A5500865316 /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048C72462BD40A5500865316 /* BookBillionaireCore */; };
+		048C72492BD40ADD00865316 /* UserManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72482BD40ADD00865316 /* UserManageView.swift */; };
+		048C724C2BD421B000865316 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C724B2BD421B000865316 /* Button.swift */; };
+		048C724E2BD5E75A00865316 /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C724D2BD5E75A00865316 /* BookService.swift */; };
+		048C72502BD628E400865316 /* SideBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C724F2BD628E400865316 /* SideBarService.swift */; };
+		048C72522BD6291400865316 /* SideBarGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72512BD6291400865316 /* SideBarGroup.swift */; };
+		048C72542BD62C3400865316 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72532BD62C3400865316 /* Topic.swift */; };
+		048C72562BD6337700865316 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72552BD6337700865316 /* SideBarView.swift */; };
+		048C725C2BD6A44700865316 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C725B2BD6A44700865316 /* LoginView.swift */; };
+		048C725E2BD7461200865316 /* BookManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C725D2BD7461200865316 /* BookManageView.swift */; };
+		048C72602BD76F2000865316 /* BlackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C725F2BD76F2000865316 /* BlackListView.swift */; };
 		EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */; };
 		EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A32BBCF80C00E37D0D /* ContentView.swift */; };
 		EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		040216682BCE12C200A7C922 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		040216762BCE19A300A7C922 /* DashBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardView.swift; sourceTree = "<group>"; };
 		040216782BCE19D500A7C922 /* QnAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnAView.swift; sourceTree = "<group>"; };
 		0402167A2BCE1A6900A7C922 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0402167D2BCE5CBB00A7C922 /* QnA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnA.swift; sourceTree = "<group>"; };
 		0402167F2BCEB03A00A7C922 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		048C723F2BD4053300865316 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		048C72412BD4059200865316 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		048C72482BD40ADD00865316 /* UserManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageView.swift; sourceTree = "<group>"; };
+		048C724B2BD421B000865316 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		048C724D2BD5E75A00865316 /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
+		048C724F2BD628E400865316 /* SideBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarService.swift; sourceTree = "<group>"; };
+		048C72512BD6291400865316 /* SideBarGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarGroup.swift; sourceTree = "<group>"; };
+		048C72532BD62C3400865316 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		048C72552BD6337700865316 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
+		048C725B2BD6A44700865316 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		048C725D2BD7461200865316 /* BookManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookManageView.swift; sourceTree = "<group>"; };
+		048C725F2BD76F2000865316 /* BlackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListView.swift; sourceTree = "<group>"; };
 		EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBillionaireAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookBillionaireAdminApp.swift; sourceTree = "<group>"; };
 		EF0F74A32BBCF80C00E37D0D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,6 +70,7 @@
 				040216722BCE16D900A7C922 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				0402166E2BCE16D900A7C922 /* FirebaseAuthCombine-Community in Frameworks */,
 				040216702BCE16D900A7C922 /* FirebaseFirestore in Frameworks */,
+				048C72472BD40A5500865316 /* BookBillionaireCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,10 +80,14 @@
 		040216752BCE199500A7C922 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0402167C2BCE5C9F00A7C922 /* Model */,
 				040216762BCE19A300A7C922 /* DashBoardView.swift */,
 				040216782BCE19D500A7C922 /* QnAView.swift */,
 				0402167A2BCE1A6900A7C922 /* SettingView.swift */,
+				048C72482BD40ADD00865316 /* UserManageView.swift */,
+				048C72552BD6337700865316 /* SideBarView.swift */,
+				048C725B2BD6A44700865316 /* LoginView.swift */,
+				048C725D2BD7461200865316 /* BookManageView.swift */,
+				048C725F2BD76F2000865316 /* BlackListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -69,8 +97,36 @@
 			children = (
 				0402167D2BCE5CBB00A7C922 /* QnA.swift */,
 				0402167F2BCEB03A00A7C922 /* Category.swift */,
+				048C72512BD6291400865316 /* SideBarGroup.swift */,
+				048C72532BD62C3400865316 /* Topic.swift */,
 			);
-			path = Model;
+			name = Model;
+			path = Views/Model;
+			sourceTree = "<group>";
+		};
+		048C72442BD406EB00865316 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				048C72412BD4059200865316 /* UserService.swift */,
+				048C724D2BD5E75A00865316 /* BookService.swift */,
+				048C724F2BD628E400865316 /* SideBarService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		048C72452BD40A5500865316 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		048C724A2BD41FC800865316 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				048C724B2BD421B000865316 /* Button.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		EF0F74952BBCF80C00E37D0D = {
@@ -78,6 +134,7 @@
 			children = (
 				EF0F74A02BBCF80C00E37D0D /* BookBillionaireAdmin */,
 				EF0F749F2BBCF80C00E37D0D /* Products */,
+				048C72452BD40A5500865316 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,10 +149,12 @@
 		EF0F74A02BBCF80C00E37D0D /* BookBillionaireAdmin */ = {
 			isa = PBXGroup;
 			children = (
-				040216812BCEDE3300A7C922 /* GoogleService-Info.plist */,
+				048C724A2BD41FC800865316 /* Component */,
+				048C72442BD406EB00865316 /* Service */,
+				0402167C2BCE5C9F00A7C922 /* Model */,
 				040216752BCE199500A7C922 /* Views */,
 				EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */,
-				040216682BCE12C200A7C922 /* GoogleService-Info.plist */,
+				048C723F2BD4053300865316 /* GoogleService-Info.plist */,
 				EF0F74A32BBCF80C00E37D0D /* ContentView.swift */,
 				EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */,
 				EF0F74A72BBCF80E00E37D0D /* BookBillionaireAdmin.entitlements */,
@@ -125,6 +184,7 @@
 				0402166F2BCE16D900A7C922 /* FirebaseFirestore */,
 				040216712BCE16D900A7C922 /* FirebaseFirestoreCombine-Community */,
 				040216732BCE16D900A7C922 /* FirebaseFirestoreSwift */,
+				048C72462BD40A5500865316 /* BookBillionaireCore */,
 			);
 			productName = BookBillionaireAdmin;
 			productReference = EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */;
@@ -172,7 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */,
-				040216692BCE12C200A7C922 /* GoogleService-Info.plist in Resources */,
+				048C72402BD4053300865316 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,10 +246,21 @@
 				EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */,
 				0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */,
 				040216772BCE19A300A7C922 /* DashBoardView.swift in Sources */,
+				048C72562BD6337700865316 /* SideBarView.swift in Sources */,
 				EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */,
+				048C72422BD4059200865316 /* UserService.swift in Sources */,
+				048C724C2BD421B000865316 /* Button.swift in Sources */,
+				048C72522BD6291400865316 /* SideBarGroup.swift in Sources */,
+				048C725E2BD7461200865316 /* BookManageView.swift in Sources */,
 				040216802BCEB03A00A7C922 /* Category.swift in Sources */,
 				0402167E2BCE5CBB00A7C922 /* QnA.swift in Sources */,
+				048C725C2BD6A44700865316 /* LoginView.swift in Sources */,
 				040216792BCE19D500A7C922 /* QnAView.swift in Sources */,
+				048C72492BD40ADD00865316 /* UserManageView.swift in Sources */,
+				048C72602BD76F2000865316 /* BlackListView.swift in Sources */,
+				048C72502BD628E400865316 /* SideBarService.swift in Sources */,
+				048C724E2BD5E75A00865316 /* BookService.swift in Sources */,
+				048C72542BD62C3400865316 /* Topic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +518,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0402166A2BCE16D900A7C922 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		048C72462BD40A5500865316 /* BookBillionaireCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BookBillionaireCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

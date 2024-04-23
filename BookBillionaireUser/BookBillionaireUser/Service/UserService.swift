@@ -70,5 +70,29 @@ class UserService: ObservableObject {
             print("Error updating user: \(error)")
         }
     }
+    
+    // 유저 찜하기 등록시 사용하는 함수
+    func userFavoriteBook(bookID: String) async {
+        let userRef = allUserRef.document(currentUser.id)
+        do {
+            try await userRef.updateData([
+                "favorite": FieldValue.arrayUnion([bookID])
+            ])
+            print("유저 찜하기 등록 성공")
+        } catch let error {
+            print("Error updating user: \(error)")
+        }
+    }
+
+    func isInFavoriteBook(userID:String, bookID: String) -> Bool {
+        if let favorites = loadUserByID(userID).favorite {
+            if favorites.contains(bookID) {
+                return true
+            } else {
+                return false
+            }
+        }
+        return true
+    }
 }
 
