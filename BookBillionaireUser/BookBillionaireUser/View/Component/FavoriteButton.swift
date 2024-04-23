@@ -16,9 +16,6 @@ struct FavoriteButton: View {
             .scaledToFit()
             .frame(width: 20)
             .foregroundStyle(isSaveBook ? Color.red : Color.gray.opacity(0.3))
-            .onTapGesture {
-                isSaveBook.toggle()
-            }
     }
 }
 

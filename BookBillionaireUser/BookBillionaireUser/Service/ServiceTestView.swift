@@ -26,7 +26,7 @@ struct ServiceTestView: View {
         Text(userService.currentUser.id)
         Button("함수 실행") {
             Task{
-                await userService.userFavoriteBook(
+                await userService.toggleFavoriteStatus(
 bookID: "08E91171-79BE-4A1E-A5CE-561368C9D504")
             }
         }
