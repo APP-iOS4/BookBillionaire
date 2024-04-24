@@ -10,14 +10,15 @@ import WebKit
 import BookBillionaireCore
 
 struct BookSearchView: View {
-    @State private var searchBook = ""
-    @State private var filteredBooks: [Book] = [] // 필터링된 책 목록 추가
+    @State private var searchBookText = ""
+    @State private var filteredBooks: [Book] = []
     @State private var isWebViewPresented = false
     @State private var selectedBookstoreSettings: BookStoreSettings?
+    @Binding var selectedTab: ContentView.Tab
     
     var body: some View {
         VStack(alignment: .center) {
-            BookSearchBarView(searchBook: $searchBook, filteredBooks: $filteredBooks)
+            BookSearchBar(searchBookText: $searchBookText, filteredBooks: $filteredBooks, selectedTab: $selectedTab)
             Spacer()
             VStack(alignment: .leading, spacing: 10) {
                 Text("찾는 책이 없다면? 찾아보러가기")
@@ -50,7 +51,7 @@ struct BookSearchView: View {
     }
 }
 
-// url 링크
+
 enum BookStoreSettings: String, CaseIterable {
     case kyobo = "교보문고"
     case yes24 = "Yes24"
@@ -69,7 +70,7 @@ enum BookStoreSettings: String, CaseIterable {
             return URL(string: "https://www.naver.com")!
         }
     }
-    // 아이콘
+
     var image: Image {
         switch self {
         case .kyobo:
@@ -85,7 +86,6 @@ enum BookStoreSettings: String, CaseIterable {
 }
 
 
-// 웹뷰
 struct WebView: UIViewRepresentable {
     var url: URL
     
@@ -99,8 +99,8 @@ struct WebView: UIViewRepresentable {
 }
 
 
-#Preview {
-    NavigationStack {
-        BookSearchView()
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        BookSearchView()
+//    }
+//}

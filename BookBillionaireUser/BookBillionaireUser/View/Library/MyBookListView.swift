@@ -11,21 +11,17 @@ import BookBillionaireCore
 struct MyBookListView: View {
     @EnvironmentObject var bookService: BookService
     @EnvironmentObject var userService: UserService
-    @State private var myBooks: [Book] = []
+    var myBooks: [Book] {
+        return  bookService.filterByOwenerID(userService.currentUser.id)
+    }
     @State private var isShowingAlert: Bool = false
     @State private var showToast = false
     @State private var alertBookID: String = ""
+    @State private var isShowingEdit: Bool = false
+    @State private var selectedBook: Book?
     
     var body: some View {
         VStack {
-            HStack {
-                Text("보유도서 목록")
-                    .font(.title3)
-                    .foregroundStyle(Color.accentColor)
-                    .fontWeight(.medium)
-                Spacer()
-            }
-            .padding()
             // 보유도서가 없을 때
             if myBooks.isEmpty {
                 VStack(spacing: 10) {
@@ -51,24 +47,22 @@ struct MyBookListView: View {
                 // 보유도서가 있을 때
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(myBooks.indices, id: \.self) { index in
+                        ForEach(myBooks) { book in
                             HStack(alignment: .top) {
-                                NavigationLink {
-                                    RentalCreateView(book: $myBooks[index])
-                                        .toolbar(.hidden, for: .tabBar)
-                                } label: {
-                                    BookItem(book: myBooks[index])
+                                NavigationLink(value: book) {
+                                    BookItem(book: book)
                                 }
                                 Spacer()
                                 // 메뉴 버튼
                                 Menu {
-                                    NavigationLink {
-                                        BookCreateView(viewType: .edit(book: myBooks[index]))
+                                    Button {
+                                        selectedBook = book
+                                        isShowingEdit = true
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
                                     Button(role: .destructive) {
-                                        alertBookID = myBooks[index].id
+                                        alertBookID = book.id
                                         isShowingAlert.toggle()
                                     } label: {
                                         Label("삭제", systemImage: "trash.circle.fill")
@@ -81,6 +75,7 @@ struct MyBookListView: View {
                                         .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
                                 }
+                                
                                 // 알럿
                                 .alert("경고", isPresented: $isShowingAlert) {
                                     Button(role: .cancel) {
@@ -103,41 +98,34 @@ struct MyBookListView: View {
                                 }
                             }
                         }
+                        .navigationDestination(for: Book.self) { book in
+                            RentalCreateView(book: book)
+                        }
                     }
                     .padding()
                     SpaceBox()
                 }
             }
         }
+        .fullScreenCover(item: $selectedBook) { bookToEdit in
+            NavigationStack {
+                BookCreateView(viewType: .edit(book: bookToEdit), isShowing: $isShowingEdit)
+            }
+        }
         // 토스트 메시지
         .toast(isShowing: $showToast, text: Text("도서가 삭제되었습니다."))
-        .onAppear{
-            loadMybook()
-        }
-        
-        .onReceive(bookService.$books) { _ in
-            loadMybook()
+        .onAppear {
+            bookService.fetchBooks()
         }
     }
-    
-    // 내 책 불러오기 함수
-    private func loadMybook() {
-        Task {
-            myBooks = bookService.filterByOwenerID(userService.currentUser.id)
-        }
-    }
-    
     // 내 책 삭제 함수
     private func deleteMyBook(_ bookID: String) {
-        if let index = myBooks.firstIndex(where: { $0.id == bookID }) {
-            let book = myBooks[index]
+        if let book = myBooks.first(where: { $0.id == bookID}) {
             Task {
                 await bookService.deleteBook(book)
-                myBooks.remove(at: index)
             }
         }
     }
-    
     // 토스트 함수
     func showToastMessage() {
         withAnimation {

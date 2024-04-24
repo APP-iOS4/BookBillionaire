@@ -17,6 +17,7 @@ struct BookCreateView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingSheet: Bool = false
     @State private var selectedImage: UIImage?
+    @Binding var isShowing: Bool
     private let viewType: ViewType
     
     enum ViewType {
@@ -35,8 +36,9 @@ struct BookCreateView: View {
     }
     
     // ViewType에 따른 초기값
-    init(viewType: ViewType) {
+    init(viewType: ViewType, isShowing: Binding<Bool>) {
         self.viewType = viewType
+        self._isShowing = isShowing
         
         switch viewType {
         case .searchResult(let searchBook):
@@ -56,7 +58,7 @@ struct BookCreateView: View {
                 uploadPhoto()
                 assignCurrentUserIDToBook(book: &book)
                 updateBook()
-                dismiss()
+                goToRootView()
             } label: {
                 Text("완료")
             }
@@ -66,10 +68,27 @@ struct BookCreateView: View {
             Spacer()
         }
         .toolbar(.hidden, for: .tabBar)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    dismiss()
+                } label: {
+                    Label("뒤로 가기", systemImage: "chevron.backward")
+                }
+            }
+        }
         .navigationTitle(viewType.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
     }
-    
+    // RootView 이동방법
+    private func goToRootView() {
+        switch viewType {
+        case .edit:
+            dismiss()
+        case .input, .searchResult:
+            isShowing = false
+        }
+    }
     // 책 업데이트
     private func updateBook() {
         Task {
@@ -86,13 +105,11 @@ struct BookCreateView: View {
         book.ownerID = userService.currentUser.id
         book.ownerNickname = userService.currentUser.nickName
     }
-    
-    
+
     // 버튼 활성화 조건 함수
     private func isBookEmpty(book: Book) -> Bool {
         return book.title.isEmpty || book.contents.isEmpty || book.authors.isEmpty
     }
-    
     // Firebase Storage 업로드 함수
     private func uploadPhoto() {
         guard selectedImage != nil else {
@@ -119,7 +136,7 @@ struct BookCreateView: View {
 
 #Preview {
     NavigationStack {
-        BookCreateView(viewType: .input)
+        BookCreateView(viewType: .input, isShowing: .constant(false))
     }
 }
 

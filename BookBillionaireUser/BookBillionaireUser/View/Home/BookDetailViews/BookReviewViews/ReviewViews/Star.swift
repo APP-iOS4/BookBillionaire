@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StarView: View {
+struct Star: View {
     let filled: Bool
 
     var body: some View {
@@ -20,5 +20,5 @@ struct StarView: View {
 }
 
 #Preview {
-    StarView(filled: true)
+    Star(filled: true)
 }

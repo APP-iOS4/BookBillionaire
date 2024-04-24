@@ -13,7 +13,6 @@ struct BookAnotherOwnerView: View {
     let user: User
     
     var body: some View {
-        // 책 목록
         VStack{
             HStack(alignment: .center) {
                 Text("📖 읽고싶은 책인데 대여중이라면?")
@@ -21,20 +20,9 @@ struct BookAnotherOwnerView: View {
                     .fontWeight(.bold)
                     .padding(.bottom, 5)
                 Spacer()
-//                Button {
-//                    // 동일 책 소유자 유저 리스트 더 나올거 sheet
-//                } label: {
-//                    Text("더 보기")
-//                        .font(.caption)
-//                    Image(systemName: "chevron.right")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 4)
-//                }
             }
             
             VStack {
-                // 각각 디테일 뷰 연결
                 BookDetailOwnerRowView(book: book, user: user)
                 BookDetailOwnerRowView(book: book, user: user)
                 BookDetailOwnerRowView(book: book, user: user)
