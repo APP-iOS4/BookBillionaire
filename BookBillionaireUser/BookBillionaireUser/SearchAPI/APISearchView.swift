@@ -86,6 +86,7 @@ struct APISearchView: View {
                 
                 if isLoading {
                     ProgressView()
+                        .padding()
                 } else if books.count != 0 {
                     List(books, id: \.id) { book in
                         NavigationLink {
