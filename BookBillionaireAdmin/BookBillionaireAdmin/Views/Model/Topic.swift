@@ -20,6 +20,8 @@ public enum TopicTitle {
     case bookManage
     case userManage
     case complain
+    case qna
+    case notice
 }
 
 

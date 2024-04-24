@@ -14,7 +14,10 @@ struct UserListView: View {
         VStack{
                 List{
                     ForEach(userService.users) { user in
-                        Text(user.nickName)
+                        HStack{
+                            Text(user.nickName)
+                            Text(user.id)
+                        }
                     }
                 }
                 .listStyle(.plain)
