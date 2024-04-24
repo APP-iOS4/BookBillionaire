@@ -35,7 +35,11 @@
 		048C726E2BD8CBC900865316 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C726D2BD8CBC900865316 /* GridCell.swift */; };
 		048C72702BD8F8C800865316 /* CategroyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C726F2BD8F8C800865316 /* CategroyEditView.swift */; };
 		048C72722BD8FAB300865316 /* GridCellInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72712BD8FAB300865316 /* GridCellInfo.swift */; };
-		048C72602BD76F2000865316 /* ComplainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C725F2BD76F2000865316 /* ComplainListView.swift */; };
+		048C72742BD9256F00865316 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72732BD9256F00865316 /* NoticeView.swift */; };
+		048C72782BD93B9A00865316 /* QnAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72772BD93B9A00865316 /* QnAService.swift */; };
+		048C727B2BD93D6A00865316 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C727A2BD93D6A00865316 /* NoticeService.swift */; };
+		048C727D2BD93D8C00865316 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C727C2BD93D8C00865316 /* Notice.swift */; };
+		048C72812BD9529A00865316 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72802BD9529A00865316 /* ComplainView.swift */; };
 		EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */; };
 		EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A32BBCF80C00E37D0D /* ContentView.swift */; };
 		EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */; };
@@ -64,6 +68,12 @@
 		048C726D2BD8CBC900865316 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		048C726F2BD8F8C800865316 /* CategroyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategroyEditView.swift; sourceTree = "<group>"; };
 		048C72712BD8FAB300865316 /* GridCellInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellInfo.swift; sourceTree = "<group>"; };
+		048C72732BD9256F00865316 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
+		048C72772BD93B9A00865316 /* QnAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnAService.swift; sourceTree = "<group>"; };
+		048C72792BD93C6700865316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		048C727A2BD93D6A00865316 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
+		048C727C2BD93D8C00865316 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		048C72802BD9529A00865316 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBillionaireAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookBillionaireAdminApp.swift; sourceTree = "<group>"; };
 		EF0F74A32BBCF80C00E37D0D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				040216762BCE19A300A7C922 /* DashBoardView.swift */,
+				048C72802BD9529A00865316 /* ComplainView.swift */,
 				040216782BCE19D500A7C922 /* QnAView.swift */,
 				0402167A2BCE1A6900A7C922 /* SettingView.swift */,
 				048C72482BD40ADD00865316 /* UserManageView.swift */,
@@ -101,7 +112,7 @@
 				048C72632BD7909E00865316 /* BookListView.swift */,
 				048C72692BD7D6BD00865316 /* UserListView.swift */,
 				048C726F2BD8F8C800865316 /* CategroyEditView.swift */,
-				048C725F2BD76F2000865316 /* ComplainListView.swift */,
+				048C72732BD9256F00865316 /* NoticeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -261,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */,
+				048C72812BD9529A00865316 /* ComplainView.swift in Sources */,
 				048C726E2BD8CBC900865316 /* GridCell.swift in Sources */,
 				0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */,
 				040216772BCE19A300A7C922 /* DashBoardView.swift in Sources */,
@@ -279,7 +291,7 @@
 				048C72662BD7983B00865316 /* ImageCacheService.swift in Sources */,
 				048C72702BD8F8C800865316 /* CategroyEditView.swift in Sources */,
 				048C72492BD40ADD00865316 /* UserManageView.swift in Sources */,
-				048C72602BD76F2000865316 /* ComplainListView.swift in Sources */,
+				048C727B2BD93D6A00865316 /* NoticeService.swift in Sources */,
 				048C72502BD628E400865316 /* SideBarService.swift in Sources */,
 				048C724E2BD5E75A00865316 /* BookService.swift in Sources */,
 				048C72542BD62C3400865316 /* Topic.swift in Sources */,
