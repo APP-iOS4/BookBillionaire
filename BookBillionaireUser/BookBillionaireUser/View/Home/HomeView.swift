@@ -38,9 +38,6 @@ struct HomeView: View {
         .padding()
         .onAppear {
             userService.fetchUsers()
-            Task {
-                await bookService.loadBooks()
-            }
         }
         .onReceive(AuthViewModel.shared.$state) { _ in
             userService.currentUser = userService.loadUserByID(authViewModel.currentUser?.uid ?? "")
@@ -120,20 +117,20 @@ extension HomeView {
                         .foregroundStyle(.primary)
                         Spacer()
                         // 설정 버튼
-                        Menu {
-                            Button {
+                        // Menu {
+                        //     Button {
                                 
-                            } label: {
-                                Label("게시물 숨기기", systemImage: "eye.slash")
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 17, height: 20)
-                                .foregroundStyle(.gray.opacity(0.4))
-                                .rotationEffect(.degrees(90))
-                        }
+                        //     } label: {
+                        //         Label("게시물 숨기기", systemImage: "eye.slash")
+                        //     }
+                        // } label: {
+                        //     Image(systemName: "ellipsis")
+                        //         .resizable()
+                        //         .scaledToFit()
+                        //         .frame(width: 17, height: 20)
+                        //         .foregroundStyle(.gray.opacity(0.4))
+                        //         .rotationEffect(.degrees(90))
+                        // }
                     }
                     Divider()
                         .background(Color.gray)
