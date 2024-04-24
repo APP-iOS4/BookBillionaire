@@ -20,8 +20,8 @@
         }
       ],
       "color" : {
-        "platform" : "osx",
-        "reference" : "placeholderTextColor"
+        "platform" : "ios",
+        "reference" : "tertiaryLabelColor"
       },
       "idiom" : "universal"
     }

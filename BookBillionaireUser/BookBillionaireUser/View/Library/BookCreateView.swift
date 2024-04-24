@@ -16,13 +16,36 @@ struct BookCreateView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingSheet: Bool = false
     @State private var selectedImage: UIImage?
+    @Binding var isShowing: Bool
+    private let viewType: ViewType
     
-    // 선택적 파라미터 초기값 설정
-    init(searchBook: SearchBook? = nil) {
-        if let searchBook = searchBook {
+    enum ViewType {
+        case input
+        case searchResult(searchBook: SearchBook)
+        case edit(book: Book)
+        
+        var navigationTitle: String {
+            switch self {
+            case .input, .searchResult:
+                return "책 등록"
+            case .edit:
+                return "책 편집"
+            }
+        }
+    }
+
+    // ViewType에 따른 초기값
+    init(viewType: ViewType, isShowing: Binding<Bool>) {
+        self.viewType = viewType
+        self._isShowing = isShowing
+        
+        switch viewType {
+        case .searchResult(let searchBook):
             _book = State(initialValue: Book(ownerID: "", isbn: searchBook.isbn, title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
-        } else {
+        case .input:
             _book = State(initialValue: Book())
+        case .edit(let book):
+            _book = State(initialValue: book)
         }
     }
     
@@ -33,33 +56,59 @@ struct BookCreateView: View {
             Button {
                 uploadPhoto()
                 assignCurrentUserIDToBook(book: &book)
-                book.id = UUID().uuidString
-                _ = bookService.registerBook(book)
-                dismiss()
+                updateBook()
+                goToRootView()
             } label: {
                 Text("완료")
             }
             .buttonStyle(AccentButtonStyle())
             .disabled(isBookEmpty(book: book))
             .padding()
-            Spacer() 
+            Spacer()
         }
-        .navigationTitle("책 등록")
+        .toolbar(.hidden, for: .tabBar)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    dismiss()
+                } label: {
+                    Label("뒤로 가기", systemImage: "chevron.backward")
+                }
+            }
+        }
+        .navigationTitle(viewType.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
     }
-    
+    // RootView 이동방법
+    private func goToRootView() {
+        switch viewType {
+        case .edit:
+            dismiss()
+        case .input, .searchResult:
+            isShowing = false
+        }
+    }
+    // 책 업데이트
+    private func updateBook() {
+        Task {
+            switch viewType {
+            case .edit:
+                await bookService.updateBookByID(book.id, book: book)
+            case .input, .searchResult:
+                _ = bookService.registerBook(book)
+            }
+        }
+    }
     // 현재 유저정보 할당 함수
     private func assignCurrentUserIDToBook(book: inout Book) {
         if let currentUser = AuthViewModel.shared.currentUser {
             book.ownerID = currentUser.uid
         }
     }
-    
     // 버튼 활성화 조건 함수
     private func isBookEmpty(book: Book) -> Bool {
         return book.title.isEmpty || book.contents.isEmpty || book.authors.isEmpty
     }
-    
     // Firebase Storage 업로드 함수
     private func uploadPhoto() {
         guard selectedImage != nil else {
@@ -86,7 +135,7 @@ struct BookCreateView: View {
 
 #Preview {
     NavigationStack {
-        BookCreateView()
+        BookCreateView(viewType: .input, isShowing: .constant(false))
     }
 }
 

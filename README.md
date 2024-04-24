@@ -1,6 +1,7 @@
 # Book Billionaire
-<img src="https://github.com/APP-iOS4/project3-team-f-Bamyanggang-prototype/assets/145957641/f6a6f3f2-1c0e-4164-be3f-23023f848ffa" width=500px />
-<img src="https://github.com/APP-iOS4/project3-team-f-Bamyanggang-prototype/assets/145957641/75ed7763-4ec8-426a-a9f0-b5b10d85fe11" width=300px />
+<img src="https://github.com/APP-iOS4/BookBillionaire/assets/145957641/0923f76b-1162-4639-acc9-7293c9b0e57b" width=200px />
+<img src="https://github.com/APP-iOS4/BookBillionaire/assets/145957641/71e36a96-37d5-4262-bbdd-e71519ed7670" width=400px />
+
 <br><br>
 
 ## ADS
@@ -15,14 +16,13 @@
 <br>
 
 ### 앱 실행 방법
-  1. main 브랜치에서 Git 프로젝트 Clone.
-  2. 프로젝트 폴더의 BookBillionare.xcodeproj 실행.
-  3. 실행기기 iOS 15 Pro 시뮬레이터 설정
-  4. Xcode상에서 Run.
+  1. TestFlight로 실행해주세요.
 <br>
 
 ### 실행 화면
-
+<img src="https://github.com/APP-iOS4/BookBillionaire/assets/145957641/5a6fa0a2-6a5b-47f7-b543-d64599ac7c7d" width=200px />
+<img src="https://github.com/APP-iOS4/BookBillionaire/assets/145957641/bf41c8d3-6a71-4195-8925-3b633f3c8062" width=200px />
+<img src="https://github.com/APP-iOS4/BookBillionaire/assets/145957641/33fffe6a-00d3-4c9d-8571-cd9e3fa7cc99" width=200px />
 
 ### 팀소개
 |이미지|이름|깃주소|

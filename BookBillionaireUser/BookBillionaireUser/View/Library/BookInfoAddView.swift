@@ -29,6 +29,19 @@ struct BookInfoAddView: View {
                             .resizable()
                             .frame(width: 100, height: 140)
                     }
+                } else if let url = URL(string: book.thumbnail), !book.thumbnail.isEmpty {
+                    Button {
+                        isShowingDialog.toggle()
+                    } label: {
+                        AsyncImage(url: url) { image in
+                            image.resizable()
+                                .frame(width: 100, height: 140)
+                        } placeholder: {
+                            Image("default")
+                                .resizable()
+                                .frame(width: 100, height: 140)
+                        }
+                    }
                 } else {
                     Button {
                         isShowingDialog.toggle()
@@ -42,7 +55,10 @@ struct BookInfoAddView: View {
                 }
                 VStack(alignment: .leading) {
                     TextField("책 이름을 입력해주세요", text: $book.title)
-                    TextField("작가 이름을 입력해주세요", text: $book.authors[0])
+                    TextField("작가 이름을 입력해주세요", text: Binding(
+                        get: { self.book.authors.joined(separator: ",") },
+                        set: { self.book.authors = $0.components(separatedBy: ",") }
+                    ))
                     HStack {
                         Button {
                             isShowingSheet.toggle()

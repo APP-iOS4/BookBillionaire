@@ -19,7 +19,7 @@ struct BookDetailOwnerRowView: View {
                     image
                         .resizable()
                         .clipShape(Circle())
-                        .frame(width: 50, height: 50)
+                        .frame(width: 40, height: 40)
                 } placeholder: {
                     ProgressView()
                 }
@@ -27,7 +27,7 @@ struct BookDetailOwnerRowView: View {
                 Image("default")
                     .resizable()
                     .clipShape(Circle())
-                    .frame(width: 50, height: 50)
+                    .frame(width: 40, height: 40)
             }
             Text(user.nickName).font(.headline)
             Spacer()

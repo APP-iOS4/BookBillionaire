@@ -14,7 +14,6 @@ struct HomeView: View {
     @EnvironmentObject var bookService: BookService
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var authViewModel: AuthViewModel
-    @AppStorage("recentlyPic") var recentlyPic: String = ""
     
     // 메뉴에 따라 필터로 책 불러오기
     var filteredBooks: [Book] {
@@ -24,12 +23,10 @@ struct HomeView: View {
         VStack {
             // 헤더 & 서치
             HStack(alignment: .center) {
-                Image("applogoShortcut")
+                Image("mainPageLogo")
                     .resizable()
-                    .frame(width: 20, height: 20)
-                Text("BOOK BILLIONAIRE")
-                    .foregroundStyle(.accent)
-                
+                    .scaledToFit()
+                    .padding(.trailing, 50)
                 Spacer()
                 
                 NavigationLink(destination: BookSearchView()) {
@@ -83,7 +80,6 @@ struct HomeView: View {
                                         .foregroundStyle(.gray.opacity(0.4))
                                         .rotationEffect(.degrees(90))
                                 }
-                                .padding(.top, 10)
                             }
                             
                             Divider()
