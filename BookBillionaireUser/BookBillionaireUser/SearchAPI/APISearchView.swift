@@ -30,6 +30,7 @@ struct APISearchView: View {
     @State private var isLoading = false
     @State private var apiKey = ""
     @Binding var isShowing: Bool
+    @Environment(\.dismiss) private var dismiss
     
     private func fetchMyKey() {
         if let plistPath = Bundle.main.path(forResource: "key", ofType: "plist"),
@@ -76,6 +77,57 @@ struct APISearchView: View {
                 let decoder = JSONDecoder()
                 if let searchResponse = try? decoder.decode(apiSearchResponse.self, from: data) {
                     self.books = searchResponse.documents
+    var body: some View {
+        NavigationStack {
+            VStack(alignment: .center) {
+                APISearchBar(searchBook: $searchBook, onSearch: {
+                    self.isLoading = true
+                    
+                    let queryEncoded = encodeQuery(searchBook)
+                    let url = URL(string: "https://dapi.kakao.com/v3/search/book?query=\(queryEncoded)")!
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "GET"
+                    request.addValue(apiKey, forHTTPHeaderField: "Authorization")
+                    
+                    URLSession.shared.dataTask(with: request) { data, response, error in
+                        self.isLoading = false
+                        
+                        if let error = error {
+                            print("오류 발생:", error)
+                            return
+                        }
+                        
+                        guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                            print("\(apiKey)")
+                            print("잘못된 응답:", response!)
+                            return
+                        }
+                        
+                        guard let data = data else {
+                            print("데이터 없음")
+                            return
+                        }
+                        
+                        let decoder = JSONDecoder()
+                        let searchResponse = try! decoder.decode(apiSearchResponse.self, from: data)
+                        self.books = searchResponse.documents
+                    }.resume()
+                })
+                
+                if isLoading {
+                    ProgressView()
+                } else if books.count != 0 {
+                    List(books, id: \.id) { book in
+                        NavigationLink {
+                            BookCreateView(viewType: .searchResult(searchBook: book), isShowing: $isShowing)
+                                .navigationBarBackButtonHidden(true)
+                        } label: {
+                            APISearchListRowView(book: book)
+                        }
+                    }
+                    .listStyle(.plain)
+                } else {
+                    EmptyView()
                 }
             }
         }.resume()
@@ -108,6 +160,21 @@ struct APISearchView: View {
         }
         .navigationTitle("책 검색")
         .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("뒤로 가기", systemImage: "chevron.backward")
+                    }
+                }
+            }
+            .navigationTitle("책 검색")
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear{
+                fetchMyKey()
+            }
+        }
     }
 }
 

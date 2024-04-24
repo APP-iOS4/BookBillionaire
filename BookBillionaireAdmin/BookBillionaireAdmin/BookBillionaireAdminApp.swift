@@ -18,12 +18,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct BookBillionaireUserApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject private var qnaService: QnAService = QnAService()
+    @StateObject var userService: UserService = UserService()
+    @StateObject var bookService: BookService = BookService()
     
     var body: some Scene {
         WindowGroup {
-//            ContentView(category: .qna)
-//                .environmentObject(qnaService)
+            ContentView()
+                .environmentObject(userService)
+                .environmentObject(bookService)
         }
     }
 }

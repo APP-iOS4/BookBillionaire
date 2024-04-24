@@ -9,10 +9,9 @@ struct LoginView: View {
     @Environment(\.dismiss) private var dismiss
 
     @Binding var isPresentedLogin: Bool
-    
-    #if DEBUG
-    @State var emailText: String = "sample1@naver.com"
-    @State var passwordText: String = "qwer1234"
+#if DEBUG
+    @State var emailText: String = "2@gmail.com"
+    @State var passwordText: String = "12341234"
     #else
     @State var emailText: String = ""
     @State var passwordText: String = ""
