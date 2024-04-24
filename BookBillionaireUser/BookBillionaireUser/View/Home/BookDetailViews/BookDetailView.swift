@@ -8,14 +8,18 @@
 
 import SwiftUI
 import BookBillionaireCore
+import FirebaseStorage
 
 struct BookDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     let book: Book
     @State var user: User = User()
     @EnvironmentObject var userService: UserService
-    @StateObject var commentViewModel = CommnetViewModel()
+    @StateObject var commentViewModel = ReviewViewModel()
     
+    let imageChache = ImageCache.shared
+    @State private var imageUrl: URL?
+    @State private var loadedImage: UIImage?
     //채팅
     @EnvironmentObject var authViewModel: AuthViewModel
     @State var roomListVM: RoomListViewModel = RoomListViewModel()
@@ -37,45 +41,13 @@ struct BookDetailView: View {
         return formatter
     }
     
-    
     var body: some View {
         ScrollView {
-            BookDetailImageView(book: book)
-                .frame(height: 200)
+            bookDetailImage
+                .frame(height: 300)
             
-            // 대여신청 섹션
             VStack(alignment: .leading) {
-                HStack(alignment: .center){
-                    Text(book.title)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.5)
-                    
-                    // 로그인 해야 좋아요 가능
-                    if authViewModel.state == .loggedIn {
-                        FavoriteButton(isSaveBook: $isFavorite)
-                            .onTapGesture {
-                                Task {
-                                    if let loadUsersFavorite = await userService.toggleFavoriteStatus(bookID: book.id) {
-                                        isFavorite = loadUsersFavorite
-                                    }
-                                }
-                            }
-                            .onAppear {
-                                // 뷰가 나타날 때마다 즐겨찾기 상태 업데이트
-                                Task {
-                                    isFavorite = await userService.checkFavoriteStatus(bookID: book.id)
-                                }
-                            }
-                    }
-                    
-                    Spacer()
-                    
-                    // 대여 상태
-                    StatusButton(status: book.rentalState)
-                }
-                
+                bookTitleView
                 // 채팅하기 버튼 채팅방으로 이동
                 VStack(alignment: .leading) {
                     HStack {
@@ -120,63 +92,36 @@ struct BookDetailView: View {
                     }
                     
                     Spacer()
-                    // 책 소유자 / 렌탈 기간
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("책 소유자 : \(user.nickName)")
-                            if let url = URL(string: user.image ?? "") {
-                                AsyncImage(url: url) { image in
-                                    image
-                                        .resizable()
-                                        .clipShape(Circle())
-                                        .frame(width: 30, height: 30)
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                            } else {
-                                Image("default")
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .frame(width: 30, height: 30)
+                    
+                    bookDetailInfo
+                        .onAppear {
+                            Task {
+                                rentalTime = await rentalService.getRentalDay(rental.id)
                             }
                         }
-                        // 대여기간 표시
-                        Text("대여기간: \(dateFormatter.string(from: rentalTime.0)) ~ \(dateFormatter.string(from: rentalTime.1))")
-                    }
-                    .font(.headline)
-                    .onAppear {
-                        Task {
-                            rentalTime = await rentalService.getRentalDay(rental.id)
-                        }
-                    }
                 }
+                
                 Divider()
                     .padding(.vertical, 10)
-                
-                // 책 정보 섹션
-                BookDetailInfoView(book: book)
-                Divider()
-                    .padding(.vertical, 10)
-                
-                // 책 소유자 리스트
                 BookAnotherOwnerView(book: book, user: user)
+                
                 Divider()
                     .padding(.vertical, 10)
-                // 사용자들 후기
                 BookDetailReviewView(comments: commentViewModel.comments, user: user)
             }
             .padding(.horizontal)
             .navigationTitle(book.title)
             SpaceBox()
-                .toolbar {  // 찜하기, 설정 버튼
+                .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
                             Menu {
-                                ShareLink(item: URL(string: "https://github.com/tv1039")!) {
-                                    Label("게시물 공유하기", systemImage: "square.and.arrow.up")
+                                if let url = URL(string: "https://github.com/tv1039") {
+                                    ShareLink(item: url) {
+                                        Label("게시물 공유하기", systemImage: "square.and.arrow.up")
+                                    }
                                 }
                                 
-                                // 로그인 해야 신고 가능
                                 if authViewModel.state == .loggedIn {
                                     Button(role: .destructive) {
                                         isShowingSheet = true
@@ -193,7 +138,7 @@ struct BookDetailView: View {
                                     .foregroundStyle(.gray.opacity(0.3))
                                     .rotationEffect(.degrees(90))
                             }
-                        } // 신고시트
+                        }
                         .sheet(isPresented: $isShowingSheet) {
                             BottomSheet(isShowingSheet: $isShowingSheet)
                                 .presentationDetents([.fraction(0.8), .large])
@@ -201,17 +146,194 @@ struct BookDetailView: View {
                     }
                 }
         }
-        // 추후 리뷰 쓰는곳 옮김
-        //        CreateBookReviewView(user: user, commentViewModel: commentViewModel)
     }
     
 }
 
 #Preview {
-    NavigationView{
-        BookDetailView(book: Book(ownerID: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
-            .navigationBarTitleDisplayMode(.inline)
+    BookDetailView(book: Book(ownerID: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
+        .environmentObject(AuthViewModel())
+        .environmentObject(UserService())
+}
+
+extension BookDetailView {
+    var bookTitleView: some View {
+        HStack(alignment: .center){
+            Text(book.title)
+                .font(.title2)
+                .fontWeight(.bold)
+                .lineLimit(2)
+                .minimumScaleFactor(0.5)
+            
+            if authViewModel.state == .loggedIn {
+                FavoriteButton(isSaveBook: $isFavorite)
+                    .onTapGesture {
+                        Task {
+                            if let loadUsersFavorite = await userService.toggleFavoriteStatus(bookID: book.id) {
+                                isFavorite = loadUsersFavorite
+                            }
+                        }
+                    }
+                    .onAppear {
+                        // 뷰가 나타날 때마다 즐겨찾기 상태 업데이트
+                        Task {
+                            isFavorite = await userService.checkFavoriteStatus(bookID: book.id)
+                        }
+                    }
+            }
+            Spacer()
+            StatusButton(status: book.rentalState)
+        }
     }
-    .environmentObject(AuthViewModel())
-    .environmentObject(UserService())
+}
+
+extension BookDetailView {
+    var bookDetailImage: some View {
+        ZStack{
+            if let url = imageUrl, !url.absoluteString.isEmpty {
+                Image(uiImage: loadedImage ?? UIImage(named: "default")!)
+                    .resizable(resizingMode: .stretch)
+                    .ignoresSafeArea()
+                    .blur(radius: 8.0,opaque: true)
+                    .background(Color.gray)
+                    .onAppear {
+                        ImageCache.shared.getImage(for: url) { image in
+                            loadedImage = image
+                        }
+                    }
+            } else {
+                Image("default")
+                    .resizable(resizingMode: .stretch)
+                    .ignoresSafeArea()
+                    .blur(radius: 8.0,opaque: true)
+                    .background(Color.gray)
+            }
+            
+            VStack(alignment: .center){
+                UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
+                    .frame(height: 300)
+                    .foregroundStyle(colorScheme == .dark ? .black : .white)
+                    .padding(.top, 300)
+            }
+            
+            GeometryReader { geometry in
+                if let image = loadedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 200, height: 300)
+                        .background(Color.gray)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                } else {
+                    Image(uiImage: UIImage(named: "default") ?? UIImage())
+                        .resizable()
+                        .frame(width: 200, height: 300)
+                        .background(Color.gray)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                }
+            }
+
+        }
+        .onAppear {
+            // 앞글자에 따라 imageURL에 할당하는 조건
+            if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
+                imageUrl = URL(string: book.thumbnail)
+            } else {
+                // Firebase Storage 경로 URL 다운로드
+                let storageRef = Storage.storage().reference(withPath: book.thumbnail)
+                storageRef.downloadURL { (url, error) in
+                    if let error = error {
+                        print("Error getting download URL: \(error)")
+                    } else if let url = url {
+                        imageUrl = url
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension BookDetailView {
+    var bookDetailInfo: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("책 소유자 : \(user.nickName)")
+                if let url = URL(string: user.image ?? "") {
+                    AsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 30, height: 30)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                } else {
+                    Image("default")
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 30, height: 30)
+                }
+            }
+            Text("대여기간: \(dateFormatter.string(from: rentalTime.0)) ~ \(dateFormatter.string(from: rentalTime.1))")
+                .font(.headline)
+            
+            Divider()
+                .padding(.vertical, 10)
+            
+            Text("📖 기본 정보")
+                .font(.title3)
+                .fontWeight(.bold)
+                .padding(.bottom, 5)
+            
+            Text("책 소개")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .foregroundStyle(.primary)
+                .padding(.bottom, 3)
+            Text(book.contents)
+                .lineSpacing(5)
+                .font(.caption)
+            Divider()
+                .padding(.vertical, 10)
+            
+            VStack(alignment: .leading) {
+                Text("저자 및 역자")
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.primary)
+                    .padding(.bottom, 5)
+                
+                HStack(alignment: .center){
+                    if book.authors.isEmpty {
+                        Text("저자를 찾을 수 없어요.")
+                    } else {
+                        // 작가가 여러명일수도 있어서 ForEach
+                        ForEach(book.authors, id: \.self) { author in
+                            Text("\(author)")
+                        }
+                    }
+                    // 번역자도 여러명일수도 있어서 ForEach
+                    if let translators = book.translators, !translators.isEmpty {
+                        // 번역자가 있으면 표시
+                        ForEach(translators, id: \.self) { translator in
+                            Text("옮긴이: \(translator)")
+                        }
+                    }
+                }
+            }
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            .font(.caption)
+            .padding(.bottom, 10)
+            
+            Text("카테고리")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .padding(.bottom, 5)
+            Text(book.bookCategory?.rawValue ?? "카테고리")
+                .font(.caption)
+            
+        }
+    }
 }

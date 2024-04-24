@@ -10,7 +10,7 @@ import BookBillionaireCore
 
 struct BookDetailReviewRowView: View {
     let user: User
-    let comment: Comments
+    let comment: Reviews
     
     var body: some View {
         VStack(alignment: .leading, spacing: 1) {
@@ -36,7 +36,7 @@ struct BookDetailReviewRowView: View {
                 VStack(alignment: .trailing) {
                     HStack(alignment: .top, spacing: 2) {
                         ForEach(1...5, id: \.self) { index in // star의 값에 따라 별의 개수를 표시
-                            StarView(filled: index <= comment.star)
+                            Star(filled: index <= comment.star)
                         }
                     }
                     .padding(.bottom, 5)
@@ -46,11 +46,7 @@ struct BookDetailReviewRowView: View {
             }
             .padding(.vertical, 8)
             Text(comment.comment)
-//            HStack {
-//                Spacer()
-//                Text("삭제")
-//                Text("수정")
-//            }
+
             .font(.caption)
         }
         .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
@@ -59,5 +55,5 @@ struct BookDetailReviewRowView: View {
 }
 
 #Preview {
-    BookDetailReviewRowView(user: User(nickName: "", address: ""), comment: Comments.example)
+    BookDetailReviewRowView(user: User(nickName: "", address: ""), comment: Reviews.example)
 }
