@@ -27,6 +27,7 @@ struct APISearchView: View {
     @State private var isLoading = false
     @State private var apiKey = ""
     @Binding var isShowing: Bool
+    @Environment(\.dismiss) private var dismiss
     
     private func fetchMyKey() {
         if let plistPath = Bundle.main.path(forResource: "key", ofType: "plist"),
@@ -79,31 +80,43 @@ struct APISearchView: View {
     }
     
     var body: some View {
-        VStack {
-            APISearchBar(searchBook: $searchBook, onSearch: performSearch)
-            
-            if isLoading {
-                ProgressView()
-            } else if books.count != 0 {
-                List(books, id: \.id) { book in
-                    NavigationLink {
-                        //  BookCreateView(searchBook: book)
+        NavigationStack {
+            VStack {
+                APISearchBar(searchBook: $searchBook, onSearch: performSearch)
+                
+                if isLoading {
+                    ProgressView()
+                } else if books.count != 0 {
+                    List(books, id: \.id) { book in
+                        NavigationLink {
+                            BookCreateView(viewType: .searchResult(searchBook: book), isShowing: $isShowing)
+                                .navigationBarBackButtonHidden(true)
+                        } label: {
+                            APISearchListRowView(book: book)
+                        }
+                    }
+                    .listStyle(.plain)
+                } else {
+                    Text("검색 결과가 없습니다.")
+                        .padding()
+                }
+                Spacer()
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
                     } label: {
-                        APISearchListRowView(book: book)
+                        Label("뒤로 가기", systemImage: "chevron.backward")
                     }
                 }
-                .listStyle(.plain)
-            } else {
-                Text("검색 결과가 없습니다.")
-                    .padding()
             }
-            Spacer()
+            .onAppear {
+                fetchMyKey()
+                performSearch() // 검색을 여기에서도 호출
+            }
+            .navigationTitle("책 검색")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .onAppear {
-            fetchMyKey()
-            performSearch() // 검색을 여기에서도 호출
-        }
-        .navigationTitle("책 검색")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
