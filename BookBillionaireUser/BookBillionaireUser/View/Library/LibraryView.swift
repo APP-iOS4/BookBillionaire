@@ -15,6 +15,7 @@ struct LibraryView: View {
     @State private var isShowingSearch: Bool = false
     @State private var barcodeValue: String? = nil
     @State private var isActive: Bool = false
+    @State private var searchText: String = ""
     
     var body: some View {
         NavigationStack {
@@ -64,8 +65,13 @@ struct LibraryView: View {
                     }
                 }
                 .fullScreenCover(isPresented: $isShowingSearch) {
-                    APISearchView(searchBook: .constant(""), isShowing: $isShowingSearch)
-                            .toolbar(.hidden, for: .tabBar)
+                    // 커스텀 바인딩 생성
+                    let binding = Binding<String?>(
+                        get: { searchText },
+                        set: { searchText = $0 ?? "" }
+                    )
+                    APISearchView(searchBook: binding, isShowing: $isShowingSearch)
+                        .toolbar(.hidden, for: .tabBar)
                 }
                 .fullScreenCover(isPresented: $isShowingInput) {
                     NavigationStack {
