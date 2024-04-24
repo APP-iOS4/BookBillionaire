@@ -46,7 +46,6 @@ class ChatViewModel: ObservableObject {
     let chatDB = Firestore.firestore().collection("chat")
     @Published var messages: [MessageViewModel] = []
     var lastDoc: QueryDocumentSnapshot?
-    var isLoading = false
     var shouldScrollToBottom = true // 스크롤 하단 맞춤 제어를 위한 상태 변수
     
       // 채팅방 정보 변경 감지 및 최초 메세지 불러오기 메서드
@@ -81,8 +80,6 @@ class ChatViewModel: ObservableObject {
       /// 추가 채팅 페이지네이션 메서드
     func loadMoreChat(room: RoomViewModel, pageSize: Int) {
         guard let lastDoc = self.lastDoc else { return } // 마지막 문서 체크
-        guard !isLoading else { return } // 이미 로딩 중이면 함수 종료
-        isLoading = true // 로딩 시작
 
         chatDB
             .document(room.roomId)
@@ -106,7 +103,6 @@ class ChatViewModel: ObservableObject {
                         // 기존 메시지 배열에 새로운 메시지 추가
                         self.messages.insert(contentsOf: newMessages, at: 0)
                         self.lastDoc = snapshot.documents.last // 새로운 마지막 문서 업데이트
-                        isLoading = false // 로딩 상태 업데이트
                     }
                 }
             }

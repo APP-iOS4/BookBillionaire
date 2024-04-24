@@ -14,6 +14,7 @@ struct BookSearchBar: View {
     @Binding var filteredBooks: [Book]
     @StateObject private var searchViewModel = SearchViewModel()
     @EnvironmentObject var userService: UserService
+    @Binding var selectedTab: ContentView.Tab
     
     var body: some View {
         VStack(spacing: 0) {
@@ -74,10 +75,10 @@ struct BookSearchBar: View {
     
 }
 
-#Preview {
-    BookSearchBar(searchBookText: .constant(""), filteredBooks: .constant([Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]))
-        .environmentObject(UserService())
-}
+//#Preview {
+//    BookSearchBar(searchBookText: .constant(""), filteredBooks: .constant([Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]), selectedTab: <#Binding<ContentView.Tab>#>)
+//        .environmentObject(UserService())
+//}
 
 extension BookSearchBar {
     var recentSearchList: some View {
@@ -137,7 +138,7 @@ extension BookSearchBar {
                 LazyVStack(alignment: .leading, spacing: 10) {
                     ForEach(filteredBooks) { book in
                         NavigationLink {
-                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID))
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), selectedTab: $selectedTab)
                         } label: {
                             BookItem(book: book)
                         }

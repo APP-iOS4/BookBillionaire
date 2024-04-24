@@ -45,11 +45,23 @@ struct ChatView: View {
                     .padding(.top, 30)
             }
         }
-        .navigationTitle(room.receiverName)
+        .navigationTitle(getUserName())
         .navigationBarItems(trailing:
                                 exitView
         )
     }
+    
+    private func getUserName() -> String {
+           guard let currentUser = AuthViewModel.shared.currentUser else {
+               return ""
+           }
+
+           if currentUser.displayName == room.receiverName {
+               return currentUser.displayName ?? ""
+           } else {
+               return room.receiverName
+           }
+       }
     
     private func sendMessage() {
         let messageVS = Message(message: messageText, senderName: username ?? "", roomId: room.roomId, timestamp: Date(), imageUrl: messageModel.imageUrl)
@@ -210,6 +222,9 @@ struct ChatView: View {
                 // 채팅방의 채팅을 20개만 먼저 가져오기
                 print("최초 채팅 20개 불러오기")
             }
+            // messageListVM.loadMoreChat(room: room, pageSize: 20)
+            // 추가 20개 불러오기
+            // 페이지 네이션 추후 구현하기
         }
     }
     

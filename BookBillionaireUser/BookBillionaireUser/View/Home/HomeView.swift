@@ -14,6 +14,7 @@ struct HomeView: View {
     @EnvironmentObject var bookService: BookService
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var authViewModel: AuthViewModel
+    @Binding var selectedTab: ContentView.Tab
     
     // 메뉴에 따라 필터로 책 불러오기
     var filteredBooks: [Book] {
@@ -46,7 +47,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(selectedTab: .constant(.home))
         .environmentObject(BookService())
         .environmentObject(UserService())
         .environmentObject(AuthViewModel())
@@ -62,7 +63,7 @@ extension HomeView {
                 .padding(.trailing, 50)
             Spacer()
             
-            NavigationLink(destination: BookSearchView()) {
+            NavigationLink(destination: BookSearchView(selectedTab: $selectedTab)) {
                 Image(systemName: "magnifyingglass")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -137,7 +138,7 @@ extension HomeView {
                         .padding(.vertical, 10)
                 }
                 .navigationDestination(for: Book.self) { book in
-                    BookDetailView(book: book, user: userService.loadUserByID(book.ownerID))
+                    BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), selectedTab: $selectedTab)
                 }
             }
         }

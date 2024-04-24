@@ -28,7 +28,7 @@ struct BookDetailView: View {
     @State private var isFavorite: Bool = false
     @State private var showLoginAlert = false
     @State private var isChatViewPresented = false
-    
+    @Binding var selectedTab: ContentView.Tab
     @State private var roomId: String? // 생성한 방의 id를 담는 변수
     
     // 렌탈
@@ -60,8 +60,7 @@ struct BookDetailView: View {
                                         print("성공적으로 방을 생성했습니다. 방 ID: \(newRoomId)")
                                         self.roomId = newRoomId
                                         // 현재 채팅룸의 아이디 값
-                                        
-                                        isChatViewPresented.toggle()
+                                        selectedTab = .chat
                                     } else {
                                         print("방을 생성하는 데 실패했습니다.")
                                     }
@@ -72,12 +71,12 @@ struct BookDetailView: View {
                         } label: {
                             Text("채팅하기")
                         }
-                        .background(
-                            NavigationLink(destination: ChatListView(), isActive: $isChatViewPresented) {
-                                EmptyView()
-                            }
-                                .hidden()
-                        )
+//                        .background(
+//                            NavigationLink(destination: ChatListView(), isActive: $isChatViewPresented) {
+//                                EmptyView()
+//                            }
+//                                .hidden()
+//                        )
                     }
                     .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
                     .alert(isPresented: $showLoginAlert) {
@@ -151,7 +150,7 @@ struct BookDetailView: View {
 }
 
 #Preview {
-    BookDetailView(book: Book(ownerID: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
+    BookDetailView(book: Book(ownerID: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
         .environmentObject(AuthViewModel())
         .environmentObject(UserService())
 }

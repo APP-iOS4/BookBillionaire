@@ -14,10 +14,11 @@ struct BookSearchView: View {
     @State private var filteredBooks: [Book] = []
     @State private var isWebViewPresented = false
     @State private var selectedBookstoreSettings: BookStoreSettings?
+    @Binding var selectedTab: ContentView.Tab
     
     var body: some View {
         VStack(alignment: .center) {
-            BookSearchBar(searchBookText: $searchBookText, filteredBooks: $filteredBooks)
+            BookSearchBar(searchBookText: $searchBookText, filteredBooks: $filteredBooks, selectedTab: $selectedTab)
             Spacer()
             VStack(alignment: .leading, spacing: 10) {
                 Text("찾는 책이 없다면? 찾아보러가기")
@@ -98,8 +99,8 @@ struct WebView: UIViewRepresentable {
 }
 
 
-#Preview {
-    NavigationStack {
-        BookSearchView()
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        BookSearchView()
+//    }
+//}
