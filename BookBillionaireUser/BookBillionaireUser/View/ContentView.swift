@@ -34,7 +34,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
-                HomeView()
+                HomeView(selectedTab: $selectedTab)
             }
             .tag(Tab.home)
             .tabItem {

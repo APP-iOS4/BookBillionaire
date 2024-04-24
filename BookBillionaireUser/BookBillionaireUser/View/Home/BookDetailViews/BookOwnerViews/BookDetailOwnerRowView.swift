@@ -21,7 +21,10 @@ struct BookDetailOwnerRowView: View {
                         .clipShape(Circle())
                         .frame(width: 40, height: 40)
                 } placeholder: {
-                    ProgressView()
+                    Image("default")
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 40, height: 40)
                 }
             } else {
                 Image("default")

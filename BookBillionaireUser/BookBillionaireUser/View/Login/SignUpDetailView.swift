@@ -1,4 +1,3 @@
-//
 //  SignUpDetailView.swift
 //  BookBillionaireUser
 //
