@@ -266,7 +266,10 @@ extension BookDetailView {
                             .clipShape(Circle())
                             .frame(width: 30, height: 30)
                     } placeholder: {
-                        ProgressView()
+                        Image("default")
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 50, height: 50)
                     }
                 } else {
                     Image("default")
