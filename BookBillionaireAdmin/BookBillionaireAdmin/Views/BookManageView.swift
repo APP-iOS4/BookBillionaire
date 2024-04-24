@@ -10,31 +10,33 @@ import BookBillionaireCore
 
 struct BookManageView: View {
     @EnvironmentObject private var bookService: BookService
-    @State var books : [Book] = []
+    @State var books: [Book] = []
     @State var multiSelectedBooks: [Book] = []
+    @State private var loadedImage: UIImage?
+    let imageCache = ImageCacheService.shared
+    var topic: Topic
     var body: some View {
-        
-        Grid {
-            GridRow {
-                Text("책이름")
-                
-                Image(systemName: "globe")
+        VStack{
+            List(books) { book in
+                HStack{
+                    
+                }
             }
-            Divider()
-            GridRow {
-                Image(systemName: "hand.wave")
-                Text("World")
-            }
+            
         }
+        .navigationTitle(topic.name)
         .task{
-                bookService.fetchBooks()
+            bookService.fetchBooks()
         }
-        .onReceive(bookService.$books, perform: { _ in books = bookService.books })
-
+        .task {
+            books = bookService.books
+        }
     }
 }
 
 #Preview {
-    BookManageView()
-        .environmentObject(BookService())
+    NavigationStack {
+        BookManageView(topic: Topic(name: "책 목록확인", Icon: "books.vertical.fill", topicTitle: .book))
+            .environmentObject(BookService())
+    }
 }

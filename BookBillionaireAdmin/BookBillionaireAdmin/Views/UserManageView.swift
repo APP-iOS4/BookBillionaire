@@ -13,17 +13,15 @@ struct UserManageView: View {
     @State var users: [User] = []
     var topic : Topic
     var body: some View {
-        NavigationStack{
             VStack{
                 HStack{
                     Button("동기화") {
                     }.buttonStyle(AccentButtonStyle(height: 40))
-                        .padding(.leading, 1000)
                 }
-                
+                Grid {
+                }
             }
             .navigationTitle(topic.name)
-        }
         .task{
             userService.fetchUsers()
         }
@@ -32,6 +30,8 @@ struct UserManageView: View {
 }
 
 #Preview {
-    UserManageView(topic: Topic(name: "유저 등록 및 수정", Icon: "person.2.badge.gearshape", topicTitle: .userManage))
-        .environmentObject(UserService())
+    NavigationStack {
+        UserManageView(topic: Topic(name: "유저 등록 및 수정", Icon: "person.2.badge.gearshape", topicTitle: .userManage))
+            .environmentObject(UserService())
+    }
 }

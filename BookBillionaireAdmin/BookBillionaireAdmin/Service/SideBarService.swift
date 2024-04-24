@@ -19,7 +19,7 @@ public class SideBarService: ObservableObject {
             SideBarGroup(category: "유저 관리", topics: [
                 Topic(name: "유저 목록확인", Icon: "person.3.fill", topicTitle: .user),
                 Topic(name: "유저 등록 및 수정", Icon: "person.2.badge.gearshape", topicTitle: .userManage),
-                Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .blackList)
+                Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .complain)
             ])
         ]
     }
