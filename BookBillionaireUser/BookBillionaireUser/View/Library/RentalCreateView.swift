@@ -9,12 +9,19 @@ import SwiftUI
 import BookBillionaireCore
 
 struct RentalCreateView: View {
-    @Binding var book: Book
+    var book: Book
     @State var rental: Rental = Rental()
     @EnvironmentObject var bookService: BookService
     let rentalService: RentalService = RentalService()
     @Environment(\.dismiss) var dismiss
     
+    init(book: Book) {
+        self.book = book
+        
+        rental.bookOwner = book.ownerID
+        self.book.rental = rental.id
+        rental.bookID = book.id
+    }
     var body: some View {
         VStack {
             HStack {
@@ -23,7 +30,7 @@ struct RentalCreateView: View {
             }
             RentalInfoView(rental: $rental)
             Button {
-                _ = bookService.registerBook(book)
+                updateBook()
                 _ = rentalService.registerRental(rental)
                 dismiss()
             } label: {
@@ -35,17 +42,19 @@ struct RentalCreateView: View {
         }
         .navigationTitle("대여 상태 등록")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            rental.bookOwner = book.ownerID
-            book.rental = rental.id
-            rental.bookID = book.id
+    }
+    
+    // 책 업데이트
+    private func updateBook() {
+        Task {
+            await bookService.updateBookByID(book.id, book: book)
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        RentalCreateView(book: .constant(Book()))
+        RentalCreateView(book: Book())
             .environmentObject(BookService())
     }
 }

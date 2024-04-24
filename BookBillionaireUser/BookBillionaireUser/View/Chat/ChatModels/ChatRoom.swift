@@ -13,4 +13,5 @@ struct ChatRoom: Codable, Hashable {
     let lastTimeStamp: Date     // 마지막 메세지의 시간
     let lastMessage: String     // 마지막 메세지
     var users: [String]         // [대화 참여 인원의 ID]
+//    let usersUnreadCountInfo: [String: Int]?
 }

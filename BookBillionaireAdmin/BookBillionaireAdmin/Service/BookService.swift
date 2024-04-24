@@ -1,8 +1,8 @@
 //
-//  UserService.swift
-//  BookBillionaireUser
+//  BookService.swift
+//  BookBillionaireAdmin
 //
-//  Created by YUJIN JEON on 4/3/24.
+//  Created by YUJIN JEON on 4/22/24.
 //
 
 import Foundation
@@ -21,13 +21,11 @@ class BookService: ObservableObject {
             userRef.updateData([
                 "myBooks": FieldValue.arrayUnion([book.id])
             ])
-            self.fetchBooks()
             return true
         } catch let error {
             print("\(#function) 책 저장 함수 오류: \(error)")
             return false
         }
-        
     }
     
     /// 유저들이 등록한 모든 책을 다 가져오는 함수
@@ -106,23 +104,6 @@ class BookService: ObservableObject {
             print("카테고리 변경 성공🧚‍♀️")
         } catch let error {
             print("\(#function) 카테고리 변경 실패했음☄️ \(error)")
-        }
-        self.fetchBooks()
-    }
-    
-    func updateBookByID(_ bookID: String, book: Book) async {
-        let userRef = bookRef.document(bookID)
-        do {
-            try await userRef.updateData([
-                "authors" : book.authors,
-                "contents" : book.contents,
-                "thumbnail" : book.thumbnail,
-                "title" : book.title,
-                "rentalState" : book.rentalState.rawValue
-            ])
-            print("책 변경 성공")
-        } catch let error {
-            print("Error updating book: \(error)")
         }
         self.fetchBooks()
     }
