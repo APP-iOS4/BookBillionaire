@@ -22,14 +22,6 @@ struct MyBookListView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("보유도서 목록")
-                    .font(.title3)
-                    .foregroundStyle(Color.accentColor)
-                    .fontWeight(.medium)
-                Spacer()
-            }
-            .padding()
             // 보유도서가 없을 때
             if myBooks.isEmpty {
                 VStack(spacing: 10) {
@@ -55,25 +47,22 @@ struct MyBookListView: View {
                 // 보유도서가 있을 때
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(myBooks.indices, id: \.self) { index in
+                        ForEach(myBooks) { book in
                             HStack(alignment: .top) {
-                                NavigationLink {
-                                    RentalCreateView(book: myBooks[index])
-                                        .toolbar(.hidden, for: .tabBar)
-                                } label: {
-                                    BookItem(book: myBooks[index])
+                                NavigationLink(value: book) {
+                                    BookItem(book: book)
                                 }
                                 Spacer()
                                 // 메뉴 버튼
                                 Menu {
                                     Button {
-                                        selectedBook = myBooks[index]
+                                        selectedBook = book
                                         isShowingEdit = true
                                     } label: {
                                         Label("편집", systemImage: "pencil")
                                     }
                                     Button(role: .destructive) {
-                                        alertBookID = myBooks[index].id
+                                        alertBookID = book.id
                                         isShowingAlert.toggle()
                                     } label: {
                                         Label("삭제", systemImage: "trash.circle.fill")
@@ -109,6 +98,9 @@ struct MyBookListView: View {
                                 }
                             }
                         }
+                        .navigationDestination(for: Book.self) { book in
+                            RentalCreateView(book: book)
+                        }
                     }
                     .padding()
                     SpaceBox()
@@ -126,7 +118,6 @@ struct MyBookListView: View {
             bookService.fetchBooks()
         }
     }
-    
     // 내 책 삭제 함수
     private func deleteMyBook(_ bookID: String) {
         if let book = myBooks.first(where: { $0.id == bookID}) {
