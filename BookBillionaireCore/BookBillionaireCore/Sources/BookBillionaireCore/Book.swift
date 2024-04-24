@@ -11,6 +11,7 @@ import Foundation
 public struct Book: Identifiable, Codable, Hashable {
     public var id: String = UUID().uuidString
     public var ownerID: String
+    public var ownerNickname: String
     public var isbn: String?
     public var title: String
     public var contents: String
@@ -26,6 +27,7 @@ public struct Book: Identifiable, Codable, Hashable {
 
     public init() {
         self.ownerID = ""
+        self.ownerNickname = ""
         self.isbn = ""
         self.title = ""
         self.contents = ""
@@ -39,9 +41,10 @@ public struct Book: Identifiable, Codable, Hashable {
     }
     
     /// 일반 초기화
-    public init(ownerID: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", rental: String = "", rentalState: RentalStateType) {
+    public init(ownerID: String, ownerNickname: String, isbn: String? = "", title: String, contents: String, publisher: String? = "", authors: [String], translators: [String]? = [""], price: Int? = 0, thumbnail: String = "default", rental: String = "", rentalState: RentalStateType) {
         
         self.ownerID = ownerID
+        self.ownerNickname = ownerNickname
         self.isbn = isbn
         self.title = title
         self.contents = contents

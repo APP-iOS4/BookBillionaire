@@ -71,5 +71,5 @@ struct BookDetailInfoView: View {
 }
 
 #Preview {
-    BookDetailInfoView(book: Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable))
+    BookDetailInfoView(book: Book(ownerID: "", ownerNickname: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable))
 }

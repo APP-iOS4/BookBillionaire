@@ -44,7 +44,7 @@ struct BookSearchListView: View {
 }
 
 #Preview {
-    BookSearchListView(searchBook: .constant("재채기 멋있게 하는 방법"), filteredBooks: .constant([Book(ownerID: "", title: "재채기 멋있게 하는 방법", contents: "", authors: [""], rentalState: .rentalAvailable)]))
+    BookSearchListView(searchBook: .constant("재채기 멋있게 하는 방법"), filteredBooks: .constant([Book(ownerID: "",ownerNickname: "", title: "재채기 멋있게 하는 방법", contents: "", authors: [""], rentalState: .rentalAvailable)]))
         .environmentObject(UserService())
 }
 

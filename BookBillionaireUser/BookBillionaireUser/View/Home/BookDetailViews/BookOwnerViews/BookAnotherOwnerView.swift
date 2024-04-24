@@ -45,5 +45,5 @@ struct BookAnotherOwnerView: View {
 }
 
     #Preview {
-        BookAnotherOwnerView(book: Book(ownerID: "", title: "책이름", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
+        BookAnotherOwnerView(book: Book(ownerID: "", ownerNickname: "", title: "책이름", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
     }

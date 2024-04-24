@@ -13,6 +13,7 @@ import FirebaseFirestore
 struct BookCreateView: View {
     @State var book: Book = Book()
     @EnvironmentObject var bookService: BookService
+    @EnvironmentObject var userService: UserService
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingSheet: Bool = false
     @State private var selectedImage: UIImage?
@@ -32,14 +33,14 @@ struct BookCreateView: View {
             }
         }
     }
-
+    
     // ViewType에 따른 초기값
     init(viewType: ViewType) {
         self.viewType = viewType
         
         switch viewType {
         case .searchResult(let searchBook):
-            _book = State(initialValue: Book(ownerID: "", isbn: searchBook.isbn, title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
+            _book = State(initialValue: Book(ownerID: "", ownerNickname: "", isbn: searchBook.isbn, title: searchBook.title, contents: searchBook.contents, authors: searchBook.authors, thumbnail: searchBook.thumbnail, rentalState: .rentalAvailable))
         case .input:
             _book = State(initialValue: Book())
         case .edit(let book):
@@ -82,10 +83,10 @@ struct BookCreateView: View {
     }
     // 현재 유저정보 할당 함수
     private func assignCurrentUserIDToBook(book: inout Book) {
-        if let currentUser = AuthViewModel.shared.currentUser {
-            book.ownerID = currentUser.uid
-        }
+        book.ownerID = userService.currentUser.id
+        book.ownerNickname = userService.currentUser.nickName
     }
+    
     
     // 버튼 활성화 조건 함수
     private func isBookEmpty(book: Book) -> Bool {

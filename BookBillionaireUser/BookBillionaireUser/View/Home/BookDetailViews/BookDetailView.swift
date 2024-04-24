@@ -209,7 +209,7 @@ struct BookDetailView: View {
 
 #Preview {
     NavigationView{
-        BookDetailView(book: Book(ownerID: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
+        BookDetailView(book: Book(ownerID: "", ownerNickname: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
             .navigationBarTitleDisplayMode(.inline)
     }
     .environmentObject(AuthViewModel())

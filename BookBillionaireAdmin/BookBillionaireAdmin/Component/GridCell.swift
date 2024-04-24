@@ -34,7 +34,7 @@ struct GridCell: View {
                         .scaledToFill()
                         .frame(width: 120, height: 140)
                 }
-                    Text(book.title)
+                    Text(book.id)
                         .multilineTextAlignment(.leading)
                         .lineLimit(1)
                         .bold()

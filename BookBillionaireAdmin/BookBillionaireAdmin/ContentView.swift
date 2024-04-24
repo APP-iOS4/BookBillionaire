@@ -13,6 +13,8 @@ struct ContentView: View {
     @State var isFirstIn = true
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var bookService: BookService
+    var noticeService = NoticeService()
+    var qnaService =  QnAService()
     
     var body: some View {
         NavigationSplitView(columnVisibility: $navigationSplitViewVisibility) {
@@ -29,6 +31,8 @@ struct ContentView: View {
             if isFirstIn {
                 userService.fetchUsers()
                 bookService.fetchBooks()
+                noticeService.fetchNotice()
+                qnaService.fetchQnA()
                 isFirstIn = false
             }
         }
