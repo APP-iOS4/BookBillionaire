@@ -77,5 +77,5 @@ struct BookItem: View {
 
 
 #Preview {
-    BookItem(book: Book(ownerID: "", title: "제목", contents: "내용", authors: ["작가"], rentalState: .rentalAvailable))
+    BookItem(book: Book(ownerID: "", ownerNickname: "사용자닉네임", title: "제목", contents: "내용", authors: ["작가"], rentalState: .rentalAvailable))
 }

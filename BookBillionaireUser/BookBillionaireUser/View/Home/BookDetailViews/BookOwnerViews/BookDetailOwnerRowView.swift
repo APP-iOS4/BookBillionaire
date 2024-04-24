@@ -40,5 +40,5 @@ struct BookDetailOwnerRowView: View {
 }
 
 #Preview {
-    BookDetailOwnerRowView(book: Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
+    BookDetailOwnerRowView(book: Book(ownerID: "", ownerNickname:"", title: "", contents: "", authors: [""], rentalState: .rentalAvailable), user: User(nickName: "닉네임", address: "주소"))
 }

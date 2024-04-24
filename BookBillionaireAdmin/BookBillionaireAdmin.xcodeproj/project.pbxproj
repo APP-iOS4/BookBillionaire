@@ -124,6 +124,7 @@
 				0402167F2BCEB03A00A7C922 /* Category.swift */,
 				048C72512BD6291400865316 /* SideBarGroup.swift */,
 				048C72532BD62C3400865316 /* Topic.swift */,
+				048C727C2BD93D8C00865316 /* Notice.swift */,
 			);
 			name = Model;
 			path = Views/Model;
@@ -136,6 +137,8 @@
 				048C724D2BD5E75A00865316 /* BookService.swift */,
 				048C724F2BD628E400865316 /* SideBarService.swift */,
 				048C72652BD7983B00865316 /* ImageCacheService.swift */,
+				048C72772BD93B9A00865316 /* QnAService.swift */,
+				048C727A2BD93D6A00865316 /* NoticeService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 		EF0F74A02BBCF80C00E37D0D /* BookBillionaireAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				048C72792BD93C6700865316 /* Info.plist */,
 				048C724A2BD41FC800865316 /* Component */,
 				048C72442BD406EB00865316 /* Service */,
 				0402167C2BCE5C9F00A7C922 /* Model */,
@@ -284,9 +288,12 @@
 				048C724C2BD421B000865316 /* AccentButtonStyle.swift in Sources */,
 				048C72522BD6291400865316 /* SideBarGroup.swift in Sources */,
 				048C725E2BD7461200865316 /* BookManageView.swift in Sources */,
+				048C72782BD93B9A00865316 /* QnAService.swift in Sources */,
 				040216802BCEB03A00A7C922 /* Category.swift in Sources */,
+				048C72742BD9256F00865316 /* NoticeView.swift in Sources */,
 				0402167E2BCE5CBB00A7C922 /* QnA.swift in Sources */,
 				048C725C2BD6A44700865316 /* LoginView.swift in Sources */,
+				048C727D2BD93D8C00865316 /* Notice.swift in Sources */,
 				040216792BCE19D500A7C922 /* QnAView.swift in Sources */,
 				048C72662BD7983B00865316 /* ImageCacheService.swift in Sources */,
 				048C72702BD8F8C800865316 /* CategroyEditView.swift in Sources */,
@@ -429,6 +436,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BookBillionaireAdmin/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -468,6 +476,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BookBillionaireAdmin/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

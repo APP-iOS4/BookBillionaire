@@ -21,12 +21,12 @@ struct BookListView: View {
                 Text("해당 화면에서 책의 이미지와 해당 정보에 대한 수정 가능")
                     .padding(.leading)
                 Spacer()
-                Button("카테고리 변경") {
-                    isPresentedEditCategory = true
-                }
-                .frame(width: 200)
-                .padding(.trailing)
-                .buttonStyle(AccentButtonStyle())
+//                Button("카테고리 변경") {
+//                    isPresentedEditCategory = true
+//                }
+//                .frame(width: 200)
+//                .padding(.trailing)
+//                .buttonStyle(AccentButtonStyle())
                 Button("삭제하기") {
                     for book in selectedBooks {
                         deleteBooks(book)

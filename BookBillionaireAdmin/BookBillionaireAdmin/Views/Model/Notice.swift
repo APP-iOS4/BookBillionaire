@@ -1,13 +1,13 @@
 //
-//  QnA.swift
+//  Notice.swift
 //  BookBillionaireAdmin
 //
-//  Created by YUJIN JEON on 4/16/24.
+//  Created by YUJIN JEON on 4/24/24.
 //
 
 import Foundation
 
-struct QnA : Identifiable, Codable {
+struct Notice : Identifiable, Codable {
     var id: String
     var title: String
     var content: String

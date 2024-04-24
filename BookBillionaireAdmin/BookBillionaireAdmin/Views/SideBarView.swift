@@ -28,6 +28,10 @@ struct SideBarView: View {
                                     BookManageView(topic: topic)
                                 case .complain:
                                     ComplainView(topic: topic)
+                                case .qna:
+                                    QnAView(topic: topic)
+                                case .notice:
+                                    NoticeView(topic: topic)
                                 }
                             }
                         } label: {

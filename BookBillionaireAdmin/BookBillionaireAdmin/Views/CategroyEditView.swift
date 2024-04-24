@@ -11,15 +11,16 @@ import BookBillionaireCore
 struct CategroyEditView: View {
     @Binding var bookCategory: BookCategory
     @Binding var books: [Book]
-    var gridLayout: [GridItem] = Array(repeating: .init(.flexible()), count: 4)
+    var gridLayout: [GridItem] = Array(repeating: .init(.flexible()), count: 1)
     var body: some View {
         VStack{
             Text("카테고리 변경 신청 목록")
+                .padding()
+                .font(.title)
             ScrollView {
                 LazyVGrid(columns: gridLayout, spacing: 10) {
                     ForEach(books, id: \.self) { book in
                         GridCellInfo(book: book)
-                            .padding(10)
                     }
                     .padding(5)
                 }
