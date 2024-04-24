@@ -8,25 +8,35 @@
 import SwiftUI
 
 struct APISearchBar: View {
-    @Binding var searchBook: String
+    @Binding var searchBook: String?
     var onSearch: () -> Void
     
     var body: some View {
-        VStack{
-            HStack {
-                TextField("검색어 입력", text: $searchBook)
-                    .keyboardType(.webSearch)
-                    .textFieldStyle(.roundedBorder)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color("AccentColor"),lineWidth: 1)
-                    }
-                Button(action: onSearch) {
-                    Image(systemName: "magnifyingglass")
-                }
+        HStack {
+            TextField("검색어 입력", text: $searchBook.orEmpty)
+                .keyboardType(.webSearch)
+                .textFieldStyle(.roundedBorder)
+                .submitLabel(.search)
+                .onSubmit(onSearch)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.accentColor, lineWidth: 1)
+                )
+            
+            Button(action: onSearch) {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.accentColor)
             }
-            .padding()
+            .buttonStyle(.bordered)
         }
+        .padding(.horizontal)
+    }
+}
+
+extension Optional where Wrapped == String {
+    var orEmpty: String {
+        get { self ?? "" }
+        set { self = newValue }
     }
 }
 
