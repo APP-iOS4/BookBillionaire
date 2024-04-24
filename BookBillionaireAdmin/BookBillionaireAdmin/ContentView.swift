@@ -10,6 +10,9 @@ import SwiftUI
 struct ContentView: View {
     @State var selectedTabIndex: Int = 0
     @State var navigationSplitViewVisibility: NavigationSplitViewVisibility = .all
+    @State var isFirstIn = true
+    @EnvironmentObject var userService: UserService
+    @EnvironmentObject var bookService: BookService
     
     var body: some View {
         NavigationSplitView(columnVisibility: $navigationSplitViewVisibility) {
@@ -21,6 +24,13 @@ struct ContentView: View {
                 .scaledToFit()
             Text("Select a board")
                 .font(.title)
+        }
+        .onAppear{
+            if isFirstIn {
+                userService.fetchUsers()
+                bookService.fetchBooks()
+                isFirstIn = false
+            }
         }
     }
 }
