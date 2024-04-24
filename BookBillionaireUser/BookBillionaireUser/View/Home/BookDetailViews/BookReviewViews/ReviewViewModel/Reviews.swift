@@ -8,7 +8,7 @@
 import Foundation
 import BookBillionaireCore
 
-struct Comments: Identifiable {
+struct Reviews: Identifiable {
     var user: User
     var id: UUID = UUID()
     var comment: String = ""
@@ -41,14 +41,14 @@ struct Comments: Identifiable {
     }
     
     // 샘플
-    static var example = Comments(
+    static var example = Reviews(
         user: User(),
         comment: "마지막 페이지 어디갔나요?",
         star: 3,
         date: Date(timeIntervalSinceNow: 60 * 60 * 24 * 20)
     )
     
-    static var example2 = Comments(
+    static var example2 = Reviews(
         user: User(),
         comment: "잘 봤습니다",
         star: 4,

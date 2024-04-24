@@ -10,7 +10,7 @@ import BookBillionaireCore
 
 struct CreateBookReviewView: View {
     let user: User
-    @StateObject var commentViewModel = CommnetViewModel()
+    @StateObject var reviewViewModel = ReviewViewModel()
     @State private var textComment: String = ""
     @State private var rating: Int = 0
     @State private var photoItemShowing = false
@@ -50,7 +50,7 @@ struct CreateBookReviewView: View {
                 
                 Button {
                     if !textComment.isEmpty {
-                        commentViewModel.add(user: user, commentText: textComment, star: rating, date: Date())
+                        reviewViewModel.add(user: user, commentText: textComment, star: rating, date: Date())
                         textComment = ""
                         rating = 0
                     }

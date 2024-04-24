@@ -10,9 +10,8 @@ import FirebaseFirestore
 import BookBillionaireCore
 
 
-class SearchService: ObservableObject {
-    @Published var searchBook: String = ""
-    @Published var filteredBooks: [Book] = []
+class SearchViewModel: ObservableObject {
+    @Published var searchBookText: String = ""
     @Published var isSearching = false
     @Published var recentSearches: [String] = UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
    
@@ -20,8 +19,8 @@ class SearchService: ObservableObject {
     
     // 검색어 저장
     func saveSearchHistory() {
-        if !searchBook.isEmpty && !recentSearches.contains(searchBook) {
-            recentSearches.append(searchBook)
+        if !searchBookText.isEmpty && !recentSearches.contains(searchBookText) {
+            recentSearches.append(searchBookText)
             // 최근 검색어 UserDefaults에 저장
             UserDefaults.standard.set(recentSearches, forKey: "RecentSearches")
         }
@@ -30,9 +29,9 @@ class SearchService: ObservableObject {
     // 검색어 되돌리기
     func removeSearchHistory(search: String) {
         if let index = recentSearches.firstIndex(of: search) {
+            recentSearches.remove(at: index)
             // 최근 검색어 UserDefaults에서 업데이트
             UserDefaults.standard.set(recentSearches, forKey: "RecentSearches")
-            recentSearches.remove(at: index)
         }
     }
     
