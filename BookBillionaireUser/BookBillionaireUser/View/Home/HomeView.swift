@@ -16,7 +16,6 @@ struct HomeView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @Binding var selectedTab: ContentView.Tab
     
-    // 메뉴에 따라 필터로 책 불러오기
     var filteredBooks: [Book] {
         return bookService.filterByCategory(menuTitle)
     }

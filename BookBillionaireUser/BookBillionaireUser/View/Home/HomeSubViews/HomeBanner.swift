@@ -9,9 +9,9 @@ import SwiftUI
 
 struct HomeBanner: View {
     @State var banners: [String] = ["banner1", "banner2", "banner3"]
-    @State private var currentIndex = 0
+    @State private var currentIndex = 1
     private let timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
-    @State var isPlaying = true
+    @State var isPlaying = false
     
     var extendedBanners: [String] {
         var banners = self.banners
@@ -38,7 +38,7 @@ struct HomeBanner: View {
                 HStack {
                     ForEach(0..<banners.count, id: \.self) { index in
                         Circle()
-                            .fill(index == (currentIndex) % banners.count ? .white : .gray.opacity(0.5))
+                            .fill(index == (currentIndex - 1) % banners.count ? .white : .gray.opacity(0.5))
                             .frame(width: 10, height: 10)
                             .padding(.horizontal, 2)
                     }
@@ -50,7 +50,7 @@ struct HomeBanner: View {
             )
             .overlay (
                 // 배너 페이지 수
-                Text("\((currentIndex % banners.count) + 1) / \(banners.count)")
+                Text("\(((currentIndex - 1) % banners.count) + 1) / \(banners.count)")
                     .font(.caption)
                     .padding(5)
                     .foregroundStyle(.white)
@@ -99,11 +99,11 @@ struct HomeBanner: View {
         )
         .onChange(of: currentIndex) { newValue in
             if newValue == 0 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                     currentIndex = extendedBanners.count - 2
                 }
             } else if newValue == extendedBanners.count - 1 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                     currentIndex = 1
                 }
             }

@@ -75,14 +75,14 @@ struct BookSearchBar: View {
     
 }
 
-//#Preview {
-//    BookSearchBar(searchBookText: .constant(""), filteredBooks: .constant([Book(ownerID: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]), selectedTab: <#Binding<ContentView.Tab>#>)
-//        .environmentObject(UserService())
-//}
+#Preview {
+    BookSearchBar(searchBookText: .constant(""), filteredBooks: .constant([Book(ownerID: "", ownerNickname: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]), selectedTab: .constant(.home))
+        .environmentObject(UserService())
+}
 
 extension BookSearchBar {
     var recentSearchList: some View {
-        VStack(spacing: 20) {
+        ScrollView(showsIndicators: false) {
             // 최근 검색어 표시
             HStack {
                 Text("최근 검색어")
@@ -122,7 +122,7 @@ extension BookSearchBar {
 
 extension BookSearchBar {
     var bookSearchList: some View {
-        VStack(spacing: 20) {
+        ScrollView(showsIndicators: false) {
             HStack {
                 Text("검색된 책 목록")
                     .font(.title3)
