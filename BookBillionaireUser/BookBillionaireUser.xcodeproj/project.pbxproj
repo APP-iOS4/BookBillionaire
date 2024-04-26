@@ -61,6 +61,7 @@
 		35EAF2172BCF67FE0051B38B /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF2152BCF67FE0051B38B /* ReviewViewModel.swift */; };
 		35EAF2182BCF67FE0051B38B /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF2162BCF67FE0051B38B /* Reviews.swift */; };
 		35ED71C62BD0BE18006AC2A0 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ED71C52BD0BE18006AC2A0 /* Star.swift */; };
+		35F056EF2BDB39BA00409B21 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F056EE2BDB39BA00409B21 /* BookDetailViewModel.swift */; };
 		35FCF1182BD76D3900A49EFD /* HomeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FCF1172BD76D3900A49EFD /* HomeBanner.swift */; };
 		8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */; };
 		8C1E20F32BC7AF0D00D92E95 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */; };
@@ -147,6 +148,7 @@
 		35EAF2152BCF67FE0051B38B /* ReviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		35EAF2162BCF67FE0051B38B /* Reviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
 		35ED71C52BD0BE18006AC2A0 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
+		35F056EE2BDB39BA00409B21 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		35FCF1172BD76D3900A49EFD /* HomeBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBanner.swift; sourceTree = "<group>"; };
 		8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModelGoogle.swift; sourceTree = "<group>"; };
 		8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
@@ -336,10 +338,8 @@
 		35B1F1C12BC80965006DF56D /* BookDetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				356DFFA62BCD5A3500007CDA /* BookDetailView.swift */,
-				35EAF2092BCF670D0051B38B /* FavoriteButton.swift */,
-				35EAF2192BCF8EEE0051B38B /* BookOwnerViews */,
-				35EAF21A2BCF8F040051B38B /* BookReviewViews */,
+				35F056ED2BDB399300409B21 /* DetailViews */,
+				35F056F02BDB446F00409B21 /* BookDetailViewModel */,
 			);
 			path = BookDetailViews;
 			sourceTree = "<group>";
@@ -356,6 +356,7 @@
 		35EAF2192BCF8EEE0051B38B /* BookOwnerViews */ = {
 			isa = PBXGroup;
 			children = (
+				35EAF21A2BCF8F040051B38B /* BookReviewViews */,
 				35EAF20F2BCF67F80051B38B /* BookAnotherOwnerView.swift */,
 				35EAF20C2BCF67F80051B38B /* BookDetailOwnerRowView.swift */,
 			);
@@ -378,6 +379,24 @@
 				35EAF2152BCF67FE0051B38B /* ReviewViewModel.swift */,
 			);
 			path = ReviewViewModel;
+			sourceTree = "<group>";
+		};
+		35F056ED2BDB399300409B21 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				356DFFA62BCD5A3500007CDA /* BookDetailView.swift */,
+				35EAF2092BCF670D0051B38B /* FavoriteButton.swift */,
+				35EAF2192BCF8EEE0051B38B /* BookOwnerViews */,
+			);
+			path = DetailViews;
+			sourceTree = "<group>";
+		};
+		35F056F02BDB446F00409B21 /* BookDetailViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				35F056EE2BDB39BA00409B21 /* BookDetailViewModel.swift */,
+			);
+			path = BookDetailViewModel;
 			sourceTree = "<group>";
 		};
 		35FCF1142BD75DB100A49EFD /* ReviewViews */ = {
@@ -712,6 +731,7 @@
 				8C1E20F32BC7AF0D00D92E95 /* AuthModel.swift in Sources */,
 				EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */,
 				8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */,
+				35F056EF2BDB39BA00409B21 /* BookDetailViewModel.swift in Sources */,
 				8C85928D2BBD23BD0082C8B8 /* SignUpView.swift in Sources */,
 				8C85928E2BBD23BD0082C8B8 /* LoginView.swift in Sources */,
 				EF0F74882BBCF7C500E37D0D /* BookBillionaireUserApp.swift in Sources */,

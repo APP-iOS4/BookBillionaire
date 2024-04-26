@@ -15,8 +15,10 @@ struct BookDetailView: View {
     let book: Book
     @State var user: User = User()
     @EnvironmentObject var userService: UserService
+    @StateObject var bookDetailViewModel: BookDetailViewModel
+    // 임시 리뷰
     @StateObject var commentViewModel = ReviewViewModel()
-    
+    // 이미지 캐싱?
     let imageChache = ImageCache.shared
     @State private var imageUrl: URL?
     @State private var loadedImage: UIImage?
@@ -30,16 +32,6 @@ struct BookDetailView: View {
     @State private var isChatViewPresented = false
     @Binding var selectedTab: ContentView.Tab
     @State private var roomId: String? // 생성한 방의 id를 담는 변수
-    
-    // 렌탈
-    let rentalService = RentalService()
-    @State var rentalTime: (Date, Date) = (Date(), Date())
-    @State var rental: Rental = Rental()
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM.dd"
-        return formatter
-    }
     
     var body: some View {
         ScrollView {
@@ -95,9 +87,7 @@ struct BookDetailView: View {
                         .padding(.vertical, 10)
                     bookDetailInfo
                         .onAppear {
-                            Task {
-                                rentalTime = await rentalService.getRentalDay(rental.id)
-                            }
+                            bookDetailViewModel.fetchRentalInfo()
                         }
                 }
                 
@@ -112,58 +102,57 @@ struct BookDetailView: View {
             .padding(.horizontal)
             .navigationTitle(book.title)
             .toolbarBackground(.visible, for: .navigationBar)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            Menu {
-                                if let url = URL(string: "https://github.com/tv1039") {
-                                    ShareLink(item: url) {
-                                        Label("게시물 공유하기", systemImage: "square.and.arrow.up")
-                                    }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Menu {
+                            if let url = URL(string: "https://github.com/tv1039") {
+                                ShareLink(item: url) {
+                                    Label("게시물 공유하기", systemImage: "square.and.arrow.up")
                                 }
-                                
-                                if authViewModel.state == .loggedIn {
-                                    Button(role: .destructive) {
-                                        isShowingSheet = true
-                                    } label: {
-                                        Label("신고하기", systemImage: "exclamationmark.triangle")
-                                    }
-                                }
-                                
-                            } label: {
-                                Image(systemName: "ellipsis")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundStyle(.gray.opacity(0.3))
-                                    .rotationEffect(.degrees(90))
                             }
+                            
+                            if authViewModel.state == .loggedIn {
+                                Button(role: .destructive) {
+                                    isShowingSheet = true
+                                } label: {
+                                    Label("신고하기", systemImage: "exclamationmark.triangle")
+                                }
+                            }
+                            
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundStyle(.gray.opacity(0.3))
+                                .rotationEffect(.degrees(90))
                         }
-                        .sheet(isPresented: $isShowingSheet) {
-                            BottomSheet(isShowingSheet: $isShowingSheet)
-                                .presentationDetents([.fraction(0.8), .large])
-                        }
-                        
                     }
+                    .sheet(isPresented: $isShowingSheet) {
+                        BottomSheet(isShowingSheet: $isShowingSheet)
+                            .presentationDetents([.fraction(0.8), .large])
+                    }
+                    
                 }
+            }
         }
     }
     
-    func calculateTotalDays() -> Int {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: rentalTime.0, to: rentalTime.1)
-        return components.day ?? 0
-    }
 }
 
 #Preview {
     NavigationStack {
-        BookDetailView(book: Book(ownerID: "", ownerNickname: "", title: "브라질에서 주식을 사라 비가 내리면", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
+        let book = Book(ownerID: "", ownerNickname: "", title: "책 제목", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: .rentalAvailable)
+        let user = User(nickName: "닉네임", address: "주소")
+        let bookDetailViewModel = BookDetailViewModel(book: book, user: user, rental: Rental(), rentalService: RentalService())
+        
+        return BookDetailView(book: book, user: user, bookDetailViewModel: bookDetailViewModel, selectedTab: .constant(.home))
             .environmentObject(AuthViewModel())
             .environmentObject(UserService())
             .navigationBarTitleDisplayMode(.inline)
     }
-
+    
 }
 
 
@@ -302,7 +291,7 @@ extension BookDetailView {
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
-                    Text("\(dateFormatter.string(from: rentalTime.0)) - \(dateFormatter.string(from: rentalTime.1)) (\(calculateTotalDays())일)")
+                    Text(bookDetailViewModel.formattedRentalTime())
                         .font(.subheadline)
                     Text("대여 가능 기간")
                         .font(.caption)
@@ -314,7 +303,7 @@ extension BookDetailView {
             Divider()
                 .padding(.vertical, 10)
             
-           Text("기본 정보")
+            Text("기본 정보")
                 .font(.title3)
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
@@ -340,7 +329,7 @@ extension BookDetailView {
                 VStack(alignment: .leading) {
                     if book.authors.isEmpty {
                         if let translators = book.translators,
-                            !translators.isEmpty{
+                           !translators.isEmpty{
                             ForEach(translators, id: \.self) { translator in
                                 Text("옮긴이: \(translator)")
                                     .font(.subheadline)

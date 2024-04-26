@@ -12,6 +12,7 @@ struct BookSearchBar: View {
     @State var isSearching = false
     @Binding var searchBookText: String
     @Binding var filteredBooks: [Book]
+    @StateObject private var bookDetailViewModel = BookDetailViewModel(book: Book(), user: User(), rental: Rental(), rentalService: RentalService())
     @StateObject private var searchViewModel = SearchViewModel()
     @EnvironmentObject var userService: UserService
     @Binding var selectedTab: ContentView.Tab
@@ -87,9 +88,13 @@ struct BookSearchBar: View {
 }
 
 #Preview {
-    BookSearchBar(searchBookText: .constant(""), filteredBooks: .constant([Book(ownerID: "", ownerNickname: "", title: "", contents: "", authors: [""], rentalState: .rentalAvailable)]), selectedTab: .constant(.home))
+    BookSearchBar(searchBookText: .constant(""), filteredBooks: .constant([]), selectedTab: .constant(.home))
         .environmentObject(UserService())
 }
+
+
+
+
 
 extension BookSearchBar {
     var recentSearchList: some View {
@@ -150,7 +155,7 @@ extension BookSearchBar {
                 if !filteredBooks.isEmpty {
                     ForEach(filteredBooks) { book in
                         NavigationLink {
-                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), selectedTab: $selectedTab)
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: bookDetailViewModel, selectedTab: $selectedTab)
                         } label: {
                             BookItem(book: book)
                         }

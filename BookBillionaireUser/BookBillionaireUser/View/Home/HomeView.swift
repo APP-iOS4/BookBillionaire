@@ -15,7 +15,7 @@ struct HomeView: View {
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var authViewModel: AuthViewModel
     @Binding var selectedTab: ContentView.Tab
-    
+    @StateObject private var bookDetailViewModel = BookDetailViewModel(book: Book(), user: User(), rental: Rental(), rentalService: RentalService())
     var filteredBooks: [Book] {
         return bookService.filterByCategory(menuTitle)
     }
@@ -140,7 +140,9 @@ extension HomeView {
                         .padding(.vertical, 10)
                 }
                 .navigationDestination(for: Book.self) { book in
-                    BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), selectedTab: $selectedTab)
+                    let bookDetailViewModel = BookDetailViewModel(book: book, user: userService.loadUserByID(book.ownerID), rental: Rental(), rentalService: RentalService())
+                    
+                    BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: bookDetailViewModel, selectedTab: $selectedTab)
                 }
             }
         }
