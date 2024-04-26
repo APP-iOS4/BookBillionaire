@@ -162,38 +162,6 @@ struct BookDetailView: View {
         .environmentObject(UserService())
 }
 
-extension BookDetailView {
-    var bookTitleView: some View {
-        HStack(alignment: .center){
-            Text(book.title)
-                .font(.title2)
-                .fontWeight(.bold)
-                .lineLimit(2)
-                .minimumScaleFactor(0.5)
-            
-            if authViewModel.state == .loggedIn {
-                FavoriteButton(isSaveBook: $isFavorite)
-                    .onTapGesture {
-                        Task {
-                            if let loadUsersFavorite = await userService.toggleFavoriteStatus(bookID: book.id) {
-                                isFavorite = loadUsersFavorite
-                            }
-                        }
-                    }
-                    .onAppear {
-                        // 뷰가 나타날 때마다 즐겨찾기 상태 업데이트
-                        Task {
-                            isFavorite = await userService.checkFavoriteStatus(bookID: book.id)
-                        }
-                    }
-            }
-            Spacer()
-            StatusButton(status: book.rentalState)
-        }
-    }
-
-}
-
 
 extension BookDetailView {
     var bookDetailImage: some View {
