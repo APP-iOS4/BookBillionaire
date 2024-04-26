@@ -51,34 +51,43 @@ struct BookCreateView: View {
     }
     
     var body: some View {
-        VStack {
-            BookInfoAddView(book: $book, selectedImage: $selectedImage)
-            DescriptionView(book: $book)
-            Button {
-                uploadPhoto()
-                assignCurrentUserIDToBook(book: &book)
-                updateBook()
-                goToRootView()
-            } label: {
-                Text("완료")
-            }
-            .buttonStyle(AccentButtonStyle())
-            .disabled(isBookEmpty(book: book))
-            .padding()
-            Spacer()
-        }
-        .toolbar(.hidden, for: .tabBar)
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
+        ScrollView {
+            VStack {
+                BookInfoAddView(book: $book, selectedImage: $selectedImage)
+                DescriptionView(book: $book)
                 Button {
-                    dismiss()
+                    uploadPhoto()
+                    assignCurrentUserIDToBook(book: &book)
+                    updateBook()
+                    goToRootView()
                 } label: {
-                    Label("뒤로 가기", systemImage: "chevron.backward")
+                    Text("완료")
+                }
+                .buttonStyle(AccentButtonStyle())
+                .disabled(isBookEmpty(book: book))
+                .padding()
+                Spacer()
+            }
+            .onTapGesture {
+                hideKeyboard()
+            }
+            .toolbar(.hidden, for: .tabBar)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("뒤로 가기", systemImage: "chevron.backward")
+                    }
                 }
             }
+            .navigationTitle(viewType.navigationTitle)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle(viewType.navigationTitle)
-        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     // RootView 이동방법
     private func goToRootView() {
@@ -105,7 +114,7 @@ struct BookCreateView: View {
         book.ownerID = userService.currentUser.id
         book.ownerNickname = userService.currentUser.nickName
     }
-
+    
     // 버튼 활성화 조건 함수
     private func isBookEmpty(book: Book) -> Bool {
         return book.title.isEmpty || book.contents.isEmpty || book.authors.isEmpty
@@ -139,4 +148,5 @@ struct BookCreateView: View {
         BookCreateView(viewType: .input, isShowing: .constant(false))
     }
 }
+
 
