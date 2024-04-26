@@ -8,8 +8,6 @@ import Firebase
 import GoogleSignIn
 
 class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
-    
-    @Published var state: AuthState = .loggedOut
     let signInMethod: SignInMethod = .google
     
     // google 로그인 절차
@@ -49,7 +47,6 @@ class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
                 print("Error signing in with Google: \(error.localizedDescription)")
             } else {
                 print("Successfully signed in with Google")
-                self.state = .loggedIn
                 AuthViewModel.shared.state = .loggedIn
 
                 print("사용자 이메일: \(String(describing: result?.user.email))")

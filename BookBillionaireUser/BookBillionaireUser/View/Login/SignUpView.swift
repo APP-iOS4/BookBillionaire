@@ -16,6 +16,7 @@ struct SignUpView: View {
     @State private var alertMessage = ""
     @State private var nicknameValidated = false
     @State private var emailValidated = false
+    @State private var disableControlls: Bool = false
     
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
@@ -27,7 +28,8 @@ struct SignUpView: View {
                     .resizable()
                     .scaledToFit()
                 Text("회원가입")
-                SignUpDetailView(nameText: $nameText, emailText: $emailText, passwordText: $passwordText, passwordConfirmText: $passwordConfirmText, nicknameValidated: $nicknameValidated, emailValidated: $emailValidated)
+                SignUpDetailView(nameText: $nameText, emailText: $emailText, passwordText: $passwordText, passwordConfirmText: $passwordConfirmText, nicknameValidated: $nicknameValidated, emailValidated: $emailValidated, disableControlls: $disableControlls)
+                Text(!isFormValid ? "모든 필드를 기입하시고 '중복체크'를 해주세요!" : "회원가입 버튼을 눌러 주세요!")
                 Button("회원 가입") {
                     performSignUp()
                 }
@@ -42,7 +44,7 @@ struct SignUpView: View {
             .padding(.bottom, 15)
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("회원가입 결과"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+            Alert(title: Text("회원가입"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
         }
     }
     
@@ -63,6 +65,7 @@ struct SignUpView: View {
                         print("이메일이 중복됩니다. 다른 이메일을 사용해주세요.")
                     } else {
                         // 모든 조건이 충족되면 실제 회원 가입 진행
+                        disableControlls = true
                         authViewModel.signUp(email: emailText, userName: nameText, password: passwordText) { success in
                             alertMessage = success ? "회원가입이 성공적으로 완료되었습니다." : "회원가입에 실패했습니다. 입력 정보를 확인하거나 나중에 다시 시도해주세요."
                             showAlert = true

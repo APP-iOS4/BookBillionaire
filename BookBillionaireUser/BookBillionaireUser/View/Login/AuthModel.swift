@@ -15,10 +15,10 @@ enum AuthState {
 enum SignInMethod {
     case email
     case google
+    case apple
 }
 
 protocol AuthViewModelProtocol {
-    var state: AuthState { get set }
     var signInMethod: SignInMethod { get }
     
     func signIn(email: String?, password: String?)
