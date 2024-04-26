@@ -101,12 +101,12 @@ struct ProfileView: View {
 }
 
 
-//#Preview {
-//    NavigationStack {
-//        ProfileView(user:)
-//            .environmentObject(AuthViewModel())
-//            .environmentObject(UserService())
-//            .environmentObject(BookService())
-//
-//    }
-//}
+#Preview {
+    NavigationStack {
+        ProfileView()
+            .environmentObject(AuthViewModel())
+            .environmentObject(UserService())
+            .environmentObject(BookService())
+
+    }
+}

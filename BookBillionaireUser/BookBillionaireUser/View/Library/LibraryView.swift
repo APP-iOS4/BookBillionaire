@@ -44,10 +44,10 @@ struct LibraryView: View {
                                 Label("검색으로 등록하기", systemImage: "magnifyingglass")
                             }
                             
-                            Button(action: {
+                            Button {
                                 isActive = true
-                            }) {
-                                Label("스캔으로 등록하기", systemImage: "camera.viewfinder")
+                            } label: {
+                                Label("스캔으로 등록하기", systemImage: "barcode.viewfinder")
                             }
                             
                             Button {

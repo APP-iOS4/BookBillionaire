@@ -7,16 +7,18 @@
 
 import Foundation
 
-struct QnA{
-    var id: UUID
+struct QnA : Identifiable, Codable {
+    var id: String
     var title: String
     var content: String
     var image: String?
-}
-
-class QnAService: ObservableObject {
-    public var lists: [QnA] = []
+    var createAt: Date
     
-
-   
+    init(title: String, content: String) {
+        self.id = UUID().uuidString
+        self.title = title
+        self.content = content
+        self.createAt = Date()
+    }
 }
+

@@ -10,6 +10,7 @@ import FirebaseFirestore
 import BookBillionaireCore
 
 class RentalService: ObservableObject {
+    @Published var rentals: [Rental] = []
     private let rentalRef = Firestore.firestore().collection("rentals")
     /// 약속일정을 잡을 때 등록하는 함수
     /// book에 렌탈아이디도 박아줘야함
@@ -56,6 +57,30 @@ class RentalService: ObservableObject {
             print("렌탈 디코딩 에러 \(error)")
         }
         return Rental()
+    }
+    
+    func loadRentals() async {
+        do {
+            let querySnapshot = try await rentalRef.getDocuments()
+            DispatchQueue.main.sync {
+                rentals = querySnapshot.documents.compactMap { document -> Rental? in
+                    do {
+                        let rental = try document.data(as: Rental.self)
+                        return rental
+                    } catch {
+                        print("Error decoding rental: \(error)")
+                        return nil
+                    }
+                }
+            }
+        } catch {
+            print("Error fetching documents: \(error)")
+        }
+    }
+    
+    /// 사용자가 대여한 모든 렌탈을 필터링하는 함수
+    func filterByBorrowerID(_ borrowerID: String) -> [Rental] {
+        return rentals.filter { $0.bookBorrower == borrowerID }
     }
 }
 
