@@ -16,29 +16,31 @@ struct BookItem: View {
     @State private var loadedImage: UIImage?
     
     var body: some View {
-        HStack(alignment: .top) {
-            //책 이미지
-            if let url = imageUrl, !url.absoluteString.isEmpty {
-                Image(uiImage: loadedImage ?? UIImage(named: "default")!)
-                    .resizable()
-                    .frame(width: 100, height: 140)
-                    .onAppear {
-                        ImageCache.shared.getImage(for: url) { image in
-                            loadedImage = image
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                //책 이미지
+                if let url = imageUrl, !url.absoluteString.isEmpty {
+                    Image(uiImage: loadedImage ?? UIImage(named: "default")!)
+                        .resizable()
+                        .frame(width: 100, height: 140)
+                        .onAppear {
+                            ImageCache.shared.getImage(for: url) { image in
+                                loadedImage = image
+                            }
                         }
-                    }
-            } else {
-                Image("default")
-                    .resizable()
-                    .frame(width: 100, height: 140)
-            }
+                } else {
+                    Image("default")
+                        .resizable()
+                        .frame(width: 100, height: 140)
+                }
                 // 책 정보
                 VStack(alignment: .leading) {
                     Text(book.title)
-                        .monospaced()
+                        .lineLimit(2)
                         .padding(.bottom, 5)
                         .font(.subheadline)
                         .bold()
+                        .minimumScaleFactor(0.5)
                     Text("저서정보")
                         .fontWeight(.semibold)
                     if book.authors.isEmpty {
@@ -49,13 +51,12 @@ struct BookItem: View {
                         Text("\(book.publisher ?? "출판사 정보 없음")")
                     }
                 }
-                .padding(.bottom, 10)
                 .font(.caption)
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(Color.primary)
             }
-            .padding(.leading, 10)
-
+        }
+        .frame(width: 250, alignment: .leading)
         .onAppear {
             // 앞글자에 따라 imageURL에 할당하는 조건
             if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {

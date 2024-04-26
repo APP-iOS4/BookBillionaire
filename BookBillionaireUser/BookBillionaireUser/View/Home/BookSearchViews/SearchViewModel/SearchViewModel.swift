@@ -35,6 +35,13 @@ class SearchViewModel: ObservableObject {
         }
     }
     
+    // 검색어 전체 삭제
+    func removeAllSearchHistory() {
+        recentSearches.removeAll()
+        // 최근 검색어 UserDefaults에서 업데이트
+        UserDefaults.standard.set(recentSearches, forKey: "RecentSearches")
+    }
+    
 
     // 책 검색 필터 (서치바)
     func searchBooksByTitle(title: String) async -> [Book] {

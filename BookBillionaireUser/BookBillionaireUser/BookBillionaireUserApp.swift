@@ -29,7 +29,7 @@ struct BookBillionaireUserApp: App {
     @StateObject private var authViewModelGoogle: AuthViewModelGoogle = AuthViewModelGoogle()
     @StateObject private var bookService: BookService = BookService()
     @StateObject private var userService: UserService = UserService()
-
+    @StateObject private var rentalService: RentalService = RentalService()
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -37,9 +37,11 @@ struct BookBillionaireUserApp: App {
                 .environmentObject(authViewModelGoogle)
                 .environmentObject(bookService)
                 .environmentObject(userService)
+                .environmentObject(rentalService)
                 .task {
                     await bookService.loadBooks()
                     await userService.loadUsers()
+                    await rentalService.loadRentals()
                 }
         }
     }

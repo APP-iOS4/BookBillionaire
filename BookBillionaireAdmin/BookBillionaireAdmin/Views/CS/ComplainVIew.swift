@@ -1,8 +1,8 @@
 //
-//  BlackListView.swift
+//  ComplainView.swift
 //  BookBillionaireAdmin
 //
-//  Created by YUJIN JEON on 4/23/24.
+//  Created by YUJIN JEON on 4/24/24.
 //
 
 import SwiftUI
@@ -25,7 +25,5 @@ struct ComplainView: View {
 
 
 #Preview {
-    NavigationStack{
-        ComplainView(topic: Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .complain))
-    }
+    ComplainView(topic: Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .complain))
 }
