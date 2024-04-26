@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 6.png",
+      "filename" : "ios_neutral_rd_SI@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "ios_neutral_rd_SI@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "ios_neutral_rd_SI@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

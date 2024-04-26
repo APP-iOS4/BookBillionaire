@@ -10,7 +10,6 @@
 		048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */ = {isa = PBXBuildFile; fileRef = 048C72302BCFC4A800865316 /* PrivatePolicy.html */; };
 		048C723E2BD2AB9300865316 /* ImageChache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C723D2BD2AB9300865316 /* ImageChache.swift */; };
 		048C72622BD77EDB00865316 /* ComplainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72612BD77EDB00865316 /* ComplainService.swift */; };
-		048C726C2BD8C38300865316 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C726B2BD8C38300865316 /* GoogleService-Info.plist */; };
 		04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A3F2BBD29C1009FBF6E /* BookService.swift */; };
 		04A59A452BBD2F66009FBF6E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59A442BBD2F66009FBF6E /* BookBillionaireCore */; };
 		04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A802BBE85C2009FBF6E /* UserService.swift */; };
@@ -75,6 +74,8 @@
 		8C5748B42BD886EE00F2554D /* CaemraBarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B12BD886EE00F2554D /* CaemraBarcodeScanner.swift */; };
 		8C5748B62BD8870400F2554D /* SignUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B52BD8870400F2554D /* SignUpDetailView.swift */; };
 		8C5748BA2BD8883B00F2554D /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C5748B92BD8883B00F2554D /* key.plist */; };
+		8C5748CB2BD8FB8700F2554D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C5748CA2BD8FB8700F2554D /* GoogleService-Info.plist */; };
+		8C5748CE2BDB2DEA00F2554D /* AuthViewModelApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748CD2BDB2DEA00F2554D /* AuthViewModelApple.swift */; };
 		8C85928C2BBD23BD0082C8B8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */; };
 		8C85928D2BBD23BD0082C8B8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */; };
 		8C85928E2BBD23BD0082C8B8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85928B2BBD23BD0082C8B8 /* LoginView.swift */; };
@@ -111,7 +112,6 @@
 		048C72302BCFC4A800865316 /* PrivatePolicy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PrivatePolicy.html; sourceTree = "<group>"; };
 		048C723D2BD2AB9300865316 /* ImageChache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChache.swift; sourceTree = "<group>"; };
 		048C72612BD77EDB00865316 /* ComplainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainService.swift; sourceTree = "<group>"; };
-		048C726B2BD8C38300865316 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		04A59A822BBE8876009FBF6E /* ServiceTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTestView.swift; sourceTree = "<group>"; };
@@ -169,6 +169,9 @@
 		8C5748B12BD886EE00F2554D /* CaemraBarcodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaemraBarcodeScanner.swift; sourceTree = "<group>"; };
 		8C5748B52BD8870400F2554D /* SignUpDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpDetailView.swift; sourceTree = "<group>"; };
 		8C5748B92BD8883B00F2554D /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../../Downloads/key.plist; sourceTree = "<group>"; };
+		8C5748CA2BD8FB8700F2554D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C5748CC2BDA383100F2554D /* BookBillionaireUser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookBillionaireUser.entitlements; sourceTree = "<group>"; };
+		8C5748CD2BDB2DEA00F2554D /* AuthViewModelApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelApple.swift; sourceTree = "<group>"; };
 		8C76334E2BBD3DCF002EF297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -442,7 +445,8 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
-				048C726B2BD8C38300865316 /* GoogleService-Info.plist */,
+				8C5748CC2BDA383100F2554D /* BookBillionaireUser.entitlements */,
+				8C5748CA2BD8FB8700F2554D /* GoogleService-Info.plist */,
 				8C5748B92BD8883B00F2554D /* key.plist */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
@@ -503,11 +507,12 @@
 			children = (
 				8C85928B2BBD23BD0082C8B8 /* LoginView.swift */,
 				8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */,
+				8C5748B52BD8870400F2554D /* SignUpDetailView.swift */,
 				8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */,
 				8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */,
 				04A59AB32BC4FDE0009FBF6E /* UnlogginedView.swift */,
 				8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */,
-				8C5748B52BD8870400F2554D /* SignUpDetailView.swift */,
+				8C5748CD2BDB2DEA00F2554D /* AuthViewModelApple.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -640,7 +645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C5748BA2BD8883B00F2554D /* key.plist in Resources */,
-				048C726C2BD8C38300865316 /* GoogleService-Info.plist in Resources */,
+				8C5748CB2BD8FB8700F2554D /* GoogleService-Info.plist in Resources */,
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
 				048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */,
 			);
@@ -665,6 +670,7 @@
 				04DCAF9C2BCA985900B9B146 /* RLoginView.swift in Sources */,
 				35537C582BBD8CA800FE8354 /* BookSearchView.swift in Sources */,
 				04A59AC32BC69538009FBF6E /* MeetingMapView.swift in Sources */,
+				8C5748CE2BDB2DEA00F2554D /* AuthViewModelApple.swift in Sources */,
 				08C46D832BC2D6C400DB6D1D /* ChatViewModel.swift in Sources */,
 				EF0F74C32BBCFA9F00E37D0D /* ProfileView.swift in Sources */,
 				088260402BBD2B0C007BEA25 /* ComplainView.swift in Sources */,
@@ -867,6 +873,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BookBillionaireUser/BookBillionaireUser.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -905,6 +912,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BookBillionaireUser/BookBillionaireUser.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
