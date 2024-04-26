@@ -79,6 +79,8 @@
 		EF0F74D22BBD38FA00E37D0D /* MyBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */; };
 		EF0F74D42BBD472D00E37D0D /* RentalBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */; };
 		EF0F74D62BBD6FF600E37D0D /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */; };
+		EF1235922BDB2F6C0028C445 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF1235902BDB2F6C0028C445 /* GoogleService-Info.plist */; };
+		EF1235932BDB2F6C0028C445 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF1235912BDB2F6C0028C445 /* key.plist */; };
 		EF1AA4DF2BBE7B3600B248A7 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA4DC2BBE7B3600B248A7 /* UserStore.swift */; };
 		EF1AA4E42BBE7BAD00B248A7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4E32BBE7BAD00B248A7 /* FirebaseAuth */; };
 		EF1AA4E62BBE7BC700B248A7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4E52BBE7BC700B248A7 /* FirebaseAuthCombine-Community */; };
@@ -169,6 +171,8 @@
 		EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookListView.swift; sourceTree = "<group>"; };
 		EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookListView.swift; sourceTree = "<group>"; };
 		EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		EF1235902BDB2F6C0028C445 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF1235912BDB2F6C0028C445 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../key.plist; sourceTree = "<group>"; };
 		EF1AA4DC2BBE7B3600B248A7 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreateView.swift; sourceTree = "<group>"; };
 		EF30EED22BCE153C00D929D9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -437,12 +441,14 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
-				357478DF2BD9D91B009BD893 /* GoogleService-Info.plist */,
+
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
 				8C76334E2BBD3DCF002EF297 /* Info.plist */,
 				EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */,
+				EF1235902BDB2F6C0028C445 /* GoogleService-Info.plist */,
+				EF1235912BDB2F6C0028C445 /* key.plist */,
 				EF0F74B02BBCF99000E37D0D /* View */,
 				EF0F748B2BBCF7C700E37D0D /* Assets.xcassets */,
 			);
@@ -631,9 +637,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF1235932BDB2F6C0028C445 /* key.plist in Resources */,
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
 				048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */,
-				357478E02BD9D91B009BD893 /* GoogleService-Info.plist in Resources */,
+				EF1235922BDB2F6C0028C445 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,7 +878,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TeamBB.BookBillionaireUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -909,7 +916,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TeamBB.BookBillionaireUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

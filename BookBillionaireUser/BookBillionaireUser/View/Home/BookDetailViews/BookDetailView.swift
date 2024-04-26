@@ -157,11 +157,39 @@ struct BookDetailView: View {
 }
 
 #Preview {
-    NavigationStack {
-        BookDetailView(book: Book(ownerID: "", ownerNickname: "", title: "브라질에서 주식을 사라 비가 내리면", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
-            .environmentObject(AuthViewModel())
-            .environmentObject(UserService())
-            .navigationBarTitleDisplayMode(.inline)
+    BookDetailView(book: Book(ownerID: "", ownerNickname: "책 소유자", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
+        .environmentObject(AuthViewModel())
+        .environmentObject(UserService())
+}
+
+extension BookDetailView {
+    var bookTitleView: some View {
+        HStack(alignment: .center){
+            Text(book.title)
+                .font(.title2)
+                .fontWeight(.bold)
+                .lineLimit(2)
+                .minimumScaleFactor(0.5)
+            
+            if authViewModel.state == .loggedIn {
+                FavoriteButton(isSaveBook: $isFavorite)
+                    .onTapGesture {
+                        Task {
+                            if let loadUsersFavorite = await userService.toggleFavoriteStatus(bookID: book.id) {
+                                isFavorite = loadUsersFavorite
+                            }
+                        }
+                    }
+                    .onAppear {
+                        // 뷰가 나타날 때마다 즐겨찾기 상태 업데이트
+                        Task {
+                            isFavorite = await userService.checkFavoriteStatus(bookID: book.id)
+                        }
+                    }
+            }
+            Spacer()
+            StatusButton(status: book.rentalState)
+        }
     }
 
 }

@@ -12,11 +12,13 @@ struct QnA : Identifiable, Codable {
     var title: String
     var content: String
     var image: String?
+    var createAt: Date
     
     init(title: String, content: String) {
         self.id = UUID().uuidString
         self.title = title
         self.content = content
+        self.createAt = Date()
     }
 }
 
