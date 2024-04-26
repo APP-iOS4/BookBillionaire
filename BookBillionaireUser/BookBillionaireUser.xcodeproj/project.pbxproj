@@ -98,6 +98,7 @@
 		EF88A1842BC4E6AC00E0EEAA /* BookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */; };
 		EFCF32252BCCDF5400DA478F /* CameraOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF32242BCCDF5400DA478F /* CameraOverlay.swift */; };
 		EFF5583A2BCABF9E003DC096 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF558392BCABF9E003DC096 /* Toast.swift */; };
+		EFFF88512BDA333E00676424 /* RentalBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF88502BDA333E00676424 /* RentalBookDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +185,7 @@
 		EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookItem.swift; sourceTree = "<group>"; };
 		EFCF32242BCCDF5400DA478F /* CameraOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraOverlay.swift; sourceTree = "<group>"; };
 		EFF558392BCABF9E003DC096 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		EFFF88502BDA333E00676424 /* RentalBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -524,17 +526,11 @@
 				8C5748B22BD886EE00F2554D /* BarcodeScan */,
 				EF0F74BC2BBCFA7F00E37D0D /* LibraryView.swift */,
 				EF0F74CF2BBD297B00E37D0D /* CategoryView.swift */,
-				EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */,
-				EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */,
-				EF8178CC2BBD749700ADAE2E /* RentalInfoView.swift */,
-				EF6C38A42BCFE60D00098E18 /* MapView.swift */,
-				EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */,
-				EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */,
-				EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */,
-				EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */,
-				EF6C38A22BCFD3ED00098E18 /* RentalCreateView.swift */,
-				EF7A2B942BBF99A00068D100 /* CameraView.swift */,
 				EFF558392BCABF9E003DC096 /* Toast.swift */,
+				EF1235942BDB3D230028C445 /* MyBookListView */,
+				EF1235952BDB3D690028C445 /* RentalBookListView */,
+				EF1235962BDB3D900028C445 /* BookCreateView */,
+				EF1235972BDB3DB10028C445 /* RentalCreateView */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -550,6 +546,45 @@
 				0882603C2BBD2A31007BEA25 /* PromiseConfirm */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		EF1235942BDB3D230028C445 /* MyBookListView */ = {
+			isa = PBXGroup;
+			children = (
+				EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */,
+			);
+			path = MyBookListView;
+			sourceTree = "<group>";
+		};
+		EF1235952BDB3D690028C445 /* RentalBookListView */ = {
+			isa = PBXGroup;
+			children = (
+				EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */,
+				EFFF88502BDA333E00676424 /* RentalBookDetailView.swift */,
+			);
+			path = RentalBookListView;
+			sourceTree = "<group>";
+		};
+		EF1235962BDB3D900028C445 /* BookCreateView */ = {
+			isa = PBXGroup;
+			children = (
+				EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */,
+				EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */,
+				EF7C83012BBE27BF009D59FB /* RentalStateSheetView.swift */,
+				EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */,
+				EF7A2B942BBF99A00068D100 /* CameraView.swift */,
+			);
+			path = BookCreateView;
+			sourceTree = "<group>";
+		};
+		EF1235972BDB3DB10028C445 /* RentalCreateView */ = {
+			isa = PBXGroup;
+			children = (
+				EF6C38A22BCFD3ED00098E18 /* RentalCreateView.swift */,
+				EF8178CC2BBD749700ADAE2E /* RentalInfoView.swift */,
+				EF6C38A42BCFE60D00098E18 /* MapView.swift */,
+			);
+			path = RentalCreateView;
 			sourceTree = "<group>";
 		};
 		EF1AA4DD2BBE7B3600B248A7 /* Store */ = {
@@ -694,6 +729,7 @@
 				04A59A912BBFCF6A009FBF6E /* APISearchView.swift in Sources */,
 				35EAF2112BCF67F80051B38B /* BookDetailOwnerRowView.swift in Sources */,
 				04A59A982BC19813009FBF6E /* AccentButtonStyle.swift in Sources */,
+				EFFF88512BDA333E00676424 /* RentalBookDetailView.swift in Sources */,
 				088260442BBD2B5E007BEA25 /* PhotoSharedView.swift in Sources */,
 				35EAF2122BCF67F80051B38B /* BookDetailReviewView.swift in Sources */,
 				35EAF20A2BCF670D0051B38B /* FavoriteButton.swift in Sources */,

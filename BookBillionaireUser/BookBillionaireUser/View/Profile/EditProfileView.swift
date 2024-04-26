@@ -73,7 +73,7 @@ struct EditProfileView: View {
                 }
             }
         }
-        .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItem)
+        .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItem, matching: .images)
         .confirmationDialog("프로필", isPresented: $isShowingDialog, actions: {
             Button{
                 isShowingPhotosPicker.toggle()
