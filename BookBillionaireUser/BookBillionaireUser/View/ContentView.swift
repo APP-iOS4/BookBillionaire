@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var bookService: BookService
     @State private var selectedTab: Tab = .home
     
@@ -36,6 +37,7 @@ struct ContentView: View {
             NavigationStack {
                 HomeView(selectedTab: $selectedTab)
             }
+            
             .tag(Tab.home)
             .tabItem {
                 Label(Tab.home.rawValue, systemImage: Tab.home.symbolImage)

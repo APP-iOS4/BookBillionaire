@@ -14,40 +14,54 @@ struct BookSearchView: View {
     @State private var filteredBooks: [Book] = []
     @State private var isWebViewPresented = false
     @State private var selectedBookstoreSettings: BookStoreSettings?
+    @State private var isKeyboardShowing = false
     @Binding var selectedTab: ContentView.Tab
     
     var body: some View {
         VStack(alignment: .center) {
             BookSearchBar(searchBookText: $searchBookText, filteredBooks: $filteredBooks, selectedTab: $selectedTab)
             Spacer()
-            VStack(alignment: .leading, spacing: 10) {
-                Text("찾는 책이 없다면? 찾아보러가기")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                
-                HStack(alignment: .center) {
-                    // 사이트 링크 & 아이콘
-                    ForEach(BookStoreSettings.allCases, id: \.self) { bookstore in
-                        Button {
-                            selectedBookstoreSettings = bookstore
-                            isWebViewPresented.toggle()
-                    
-                        } label: {
-                          bookstore.image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 60, height: 60)
-                        }
-                    }
-                    .sheet(isPresented: $isWebViewPresented) {
-                        if let selectedURL = selectedBookstoreSettings?.url {
-                            WebView(url: selectedURL)
+            if !isKeyboardShowing {
+                withAnimation() {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("찾는 책이 없다면? 찾아보러가기")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                        
+                        HStack(alignment: .center) {
+                            // 사이트 링크 & 아이콘
+                            ForEach(BookStoreSettings.allCases, id: \.self) { bookstore in
+                                Button {
+                                    selectedBookstoreSettings = bookstore
+                                    isWebViewPresented.toggle()
+                                    
+                                } label: {
+                                    bookstore.image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 60, height: 60)
+                                }
+                            }
+                            .sheet(isPresented: $isWebViewPresented) {
+                                if let selectedURL = selectedBookstoreSettings?.url {
+                                    WebView(url: selectedURL)
+                                }
+                            }
                         }
                     }
                 }
             }
         }
         .padding()
+        .onAppear {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
+                isKeyboardShowing = true
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+                isKeyboardShowing = false
+            }
+        }
     }
 }
 
@@ -70,7 +84,7 @@ enum BookStoreSettings: String, CaseIterable {
             return URL(string: "https://www.naver.com")!
         }
     }
-
+    
     var image: Image {
         switch self {
         case .kyobo:
@@ -99,8 +113,8 @@ struct WebView: UIViewRepresentable {
 }
 
 
-//#Preview {
-//    NavigationStack {
-//        BookSearchView()
-//    }
-//}
+#Preview {
+    NavigationStack {
+        BookSearchView(selectedTab: .constant(.home))
+    }
+}

@@ -26,7 +26,7 @@ struct BookDetailReviewView: View {
     var body: some View {
         VStack{
             HStack(alignment: .center) {
-                Text("📖 다른 이용자들 후기")
+              Text("다른 이용자들 후기")
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding(.bottom, 5)
