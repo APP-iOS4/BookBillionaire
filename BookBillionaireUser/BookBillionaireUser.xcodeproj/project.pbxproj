@@ -10,9 +10,6 @@
 		048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */ = {isa = PBXBuildFile; fileRef = 048C72302BCFC4A800865316 /* PrivatePolicy.html */; };
 		048C723E2BD2AB9300865316 /* ImageChache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C723D2BD2AB9300865316 /* ImageChache.swift */; };
 		048C72622BD77EDB00865316 /* ComplainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72612BD77EDB00865316 /* ComplainService.swift */; };
-		048C728A2BDA1C3800865316 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C72882BDA1C3800865316 /* GoogleService-Info.plist */; };
-		048C728B2BDA1C3800865316 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C72892BDA1C3800865316 /* key.plist */; };
-		048C728F2BDA1D1900865316 /* RoomCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C728E2BDA1D1900865316 /* RoomCellView.swift */; };
 		04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A3F2BBD29C1009FBF6E /* BookService.swift */; };
 		04A59A452BBD2F66009FBF6E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59A442BBD2F66009FBF6E /* BookBillionaireCore */; };
 		04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A802BBE85C2009FBF6E /* UserService.swift */; };
@@ -81,6 +78,8 @@
 		EF0F74D22BBD38FA00E37D0D /* MyBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */; };
 		EF0F74D42BBD472D00E37D0D /* RentalBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */; };
 		EF0F74D62BBD6FF600E37D0D /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */; };
+		EF1235922BDB2F6C0028C445 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF1235902BDB2F6C0028C445 /* GoogleService-Info.plist */; };
+		EF1235932BDB2F6C0028C445 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF1235912BDB2F6C0028C445 /* key.plist */; };
 		EF1AA4DF2BBE7B3600B248A7 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA4DC2BBE7B3600B248A7 /* UserStore.swift */; };
 		EF1AA4E42BBE7BAD00B248A7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4E32BBE7BAD00B248A7 /* FirebaseAuth */; };
 		EF1AA4E62BBE7BC700B248A7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4E52BBE7BC700B248A7 /* FirebaseAuthCombine-Community */; };
@@ -105,9 +104,6 @@
 		048C72302BCFC4A800865316 /* PrivatePolicy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PrivatePolicy.html; sourceTree = "<group>"; };
 		048C723D2BD2AB9300865316 /* ImageChache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChache.swift; sourceTree = "<group>"; };
 		048C72612BD77EDB00865316 /* ComplainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainService.swift; sourceTree = "<group>"; };
-		048C72882BDA1C3800865316 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		048C72892BDA1C3800865316 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = key.plist; sourceTree = "<group>"; };
-		048C728E2BDA1D1900865316 /* RoomCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCellView.swift; sourceTree = "<group>"; };
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		04A59A822BBE8876009FBF6E /* ServiceTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTestView.swift; sourceTree = "<group>"; };
@@ -173,6 +169,8 @@
 		EF0F74D12BBD38FA00E37D0D /* MyBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookListView.swift; sourceTree = "<group>"; };
 		EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookListView.swift; sourceTree = "<group>"; };
 		EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		EF1235902BDB2F6C0028C445 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF1235912BDB2F6C0028C445 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../key.plist; sourceTree = "<group>"; };
 		EF1AA4DC2BBE7B3600B248A7 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreateView.swift; sourceTree = "<group>"; };
 		EF30EED22BCE153C00D929D9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				0882603D2BBD2AC3007BEA25 /* ChatListView.swift */,
-				048C728E2BDA1D1900865316 /* RoomCellView.swift */,
 			);
 			path = ChatList;
 			sourceTree = "<group>";
@@ -425,8 +422,6 @@
 		EF0F747B2BBCF7C500E37D0D = {
 			isa = PBXGroup;
 			children = (
-				048C72882BDA1C3800865316 /* GoogleService-Info.plist */,
-				048C72892BDA1C3800865316 /* key.plist */,
 				EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */,
 				EF0F74852BBCF7C500E37D0D /* Products */,
 				04A59A432BBD2F66009FBF6E /* Frameworks */,
@@ -449,6 +444,8 @@
 				04A59A3E2BBD29A5009FBF6E /* Service */,
 				8C76334E2BBD3DCF002EF297 /* Info.plist */,
 				EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */,
+				EF1235902BDB2F6C0028C445 /* GoogleService-Info.plist */,
+				EF1235912BDB2F6C0028C445 /* key.plist */,
 				EF0F74B02BBCF99000E37D0D /* View */,
 				EF0F748B2BBCF7C700E37D0D /* Assets.xcassets */,
 			);
@@ -637,10 +634,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048C728B2BDA1C3800865316 /* key.plist in Resources */,
+				EF1235932BDB2F6C0028C445 /* key.plist in Resources */,
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
 				048C72322BCFC4A800865316 /* PrivatePolicy.html in Resources */,
-				048C728A2BDA1C3800865316 /* GoogleService-Info.plist in Resources */,
+				EF1235922BDB2F6C0028C445 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,7 +693,6 @@
 				088260422BBD2B4C007BEA25 /* LocationSharedView.swift in Sources */,
 				04A59A912BBFCF6A009FBF6E /* APISearchView.swift in Sources */,
 				35EAF2112BCF67F80051B38B /* BookDetailOwnerRowView.swift in Sources */,
-				048C728F2BDA1D1900865316 /* RoomCellView.swift in Sources */,
 				04A59A982BC19813009FBF6E /* AccentButtonStyle.swift in Sources */,
 				088260442BBD2B5E007BEA25 /* PhotoSharedView.swift in Sources */,
 				35EAF2122BCF67F80051B38B /* BookDetailReviewView.swift in Sources */,
@@ -879,7 +875,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TeamBB.BookBillionaireUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -917,7 +913,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TeamBB.BookBillionaireUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
