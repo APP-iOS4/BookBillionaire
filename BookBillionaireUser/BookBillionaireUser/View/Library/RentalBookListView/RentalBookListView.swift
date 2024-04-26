@@ -9,21 +9,17 @@ import SwiftUI
 import BookBillionaireCore
 
 struct RentalBookListView: View {
+    @EnvironmentObject var userService: UserService
+    @EnvironmentObject var rentalService: RentalService
     @EnvironmentObject var bookService: BookService
-    @State var myBooks: [Book] = []
+    var myRentals: [Rental] {
+        return rentalService.filterByBorrowerID(userService.currentUser.id)
+    }
     
     var body: some View {
         VStack {
-            HStack {
-                Text("빌린도서 목록")
-                    .font(.title3)
-                    .foregroundStyle(Color.accentColor)
-                    .fontWeight(.medium)
-                Spacer()
-            }
-            .padding()
-            // 빌린도서 목록 미구현으로 보유도서 목록으로 더미데이터 사용
-            if myBooks.isEmpty {
+            // 빌린도서 목록
+            if myRentals.isEmpty {
                 VStack(spacing: 10) {
                     Spacer()
                     Circle()
@@ -46,8 +42,14 @@ struct RentalBookListView: View {
             } else {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(myBooks, id: \.self) { book in
-                            
+                        ForEach(myRentals) { rental in
+                            if let book = bookService.books.first(where: { $0.id == rental.bookID }) {
+                                NavigationLink {
+                                    RentalBookDetailView(book: book, rental: rental)
+                                } label: {
+                                    BookItem(book: book)
+                                }
+                            }
                         }
                     }
                     .padding()
@@ -55,12 +57,18 @@ struct RentalBookListView: View {
                 }
             }
         }
-       }
+        .onAppear {
+            print("\(myRentals)")
+        }
+    }
 }
 
 
 #Preview {
     NavigationStack {
         RentalBookListView()
+            .environmentObject(UserService())
+            .environmentObject(RentalService())
+            .environmentObject(BookService())
     }
 }
