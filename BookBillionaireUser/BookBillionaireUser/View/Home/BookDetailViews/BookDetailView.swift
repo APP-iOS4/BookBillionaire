@@ -150,7 +150,7 @@ struct BookDetailView: View {
 }
 
 #Preview {
-    BookDetailView(book: Book(ownerID: "", ownerNickname: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
+    BookDetailView(book: Book(ownerID: "", ownerNickname: "책 소유자", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
         .environmentObject(AuthViewModel())
         .environmentObject(UserService())
 }
