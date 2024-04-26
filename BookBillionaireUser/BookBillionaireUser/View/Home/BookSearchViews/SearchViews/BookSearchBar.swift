@@ -59,16 +59,27 @@ struct BookSearchBar: View {
                 } label: {
                     Image(systemName: "magnifyingglass")
                 }
+                
             }
             .padding(.bottom, 20)
             
-            
             // 뷰 전환 - 검색 목록 & 최근 검색어
-            if isSearching || searchViewModel.searchBookText.isEmpty {
+            if isSearching {
                 bookSearchList
+            } else if searchViewModel.recentSearches.isEmpty {
+                VStack {
+                    Spacer()
+                    Text("최근 검색어 내역이 없습니다.")
+                        .foregroundColor(.gray)
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
             } else {
                 recentSearchList
             }
+
+           
         }
         .navigationTitle("책 검색하기")
     }
@@ -83,36 +94,41 @@ struct BookSearchBar: View {
 extension BookSearchBar {
     var recentSearchList: some View {
         ScrollView(showsIndicators: false) {
-            // 최근 검색어 표시
-            HStack {
-                Text("최근 검색어")
-                    .font(.title3)
-                    .foregroundStyle(.accent)
-                Spacer()
-            }
-            
-            if searchViewModel.recentSearches.isEmpty {
-                Text("최근에 검색한 기록이 없습니다.")
-                    .foregroundColor(.gray)
-                
-            } else {
-                LazyVStack {
+            LazyVStack {
+                // 최근 검색어 표시
+                HStack {
+                    Text("최근 검색어")
+                        .font(.title3)
+                        .foregroundStyle(.accent)
+                    Spacer()
+                    Text("전체 삭제")
+                        .font(.body)
+                        .foregroundStyle(.accent)
+                        .onTapGesture {
+                            searchViewModel.removeAllSearchHistory()
+                            searchViewModel.searchBookText = ""
+                        }
+                }
+                .padding(.bottom, 20)
+                if !searchViewModel.recentSearches.isEmpty {
                     ForEach(searchViewModel.recentSearches.reversed(), id: \.self) { search in
-                        HStack {
+                        HStack(alignment: .bottom) {
+                            Image(systemName: "magnifyingglass.circle.fill")
+                                .foregroundStyle(.gray.opacity(0.5))
                             Text("\(search)")
-                                .foregroundColor(.primary)
+                                .foregroundStyle(.primary)
                             Spacer()
                             Button {
                                 searchViewModel.removeSearchHistory(search: search)
                             } label: {
-                                Image(systemName: "multiply.circle.fill")
-                                    .foregroundStyle(.gray)
+                                Image(systemName: "xmark")
+                                    .foregroundColor(.gray.opacity(0.5))
                             }
                         }
+                        .padding(.bottom, 10)
                         .onTapGesture {
                             searchViewModel.searchBookText = search
                         }
-                        Divider()
                     }
                 }
             }
@@ -123,19 +139,15 @@ extension BookSearchBar {
 extension BookSearchBar {
     var bookSearchList: some View {
         ScrollView(showsIndicators: false) {
-            HStack {
-                Text("검색된 책 목록")
-                    .font(.title3)
-                    .foregroundStyle(.accent)
-                Spacer()
-            }
-            
-            if filteredBooks.isEmpty {
-                Text("검색한 책의 결과가 없습니다")
-                    .foregroundColor(.gray)
+            LazyVStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text("검색된 책 목록")
+                        .font(.title3)
+                        .foregroundStyle(.accent)
+                    Spacer()
+                }
                 
-            } else {
-                LazyVStack(alignment: .leading, spacing: 10) {
+                if !filteredBooks.isEmpty {
                     ForEach(filteredBooks) { book in
                         NavigationLink {
                             BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), selectedTab: $selectedTab)

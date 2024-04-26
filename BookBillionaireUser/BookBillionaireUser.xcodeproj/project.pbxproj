@@ -454,7 +454,7 @@
 			children = (
 				04DCAF9A2BCA984100B9B146 /* Renewal */,
 				EF0F74892BBCF7C500E37D0D /* ContentView.swift */,
-				EF0F74B22BBCF9D300E37D0D /* Component */,
+				EF0F74B22BBCF9D300E37D0D /* Common */,
 				EF0F74B72BBCFA1300E37D0D /* Chat */,
 				EF0F74B62BBCFA0C00E37D0D /* Library */,
 				EF0F74B52BBCFA0500E37D0D /* Home */,
@@ -464,7 +464,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		EF0F74B22BBCF9D300E37D0D /* Component */ = {
+		EF0F74B22BBCF9D300E37D0D /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				356DFFA42BCD442A00007CDA /* BottomSheet.swift */,
@@ -476,7 +476,7 @@
 				EFCF32242BCCDF5400DA478F /* CameraOverlay.swift */,
 				04A59A942BC143E7009FBF6E /* SpaceBox.swift */,
 			);
-			path = Component;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		EF0F74B32BBCF9F500E37D0D /* Profile */ = {

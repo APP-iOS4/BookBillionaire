@@ -17,7 +17,6 @@
 		0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167A2BCE1A6900A7C922 /* SettingView.swift */; };
 		0402167E2BCE5CBB00A7C922 /* QnA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167D2BCE5CBB00A7C922 /* QnA.swift */; };
 		040216802BCEB03A00A7C922 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167F2BCEB03A00A7C922 /* Category.swift */; };
-		048C72402BD4053300865316 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C723F2BD4053300865316 /* GoogleService-Info.plist */; };
 		048C72422BD4059200865316 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72412BD4059200865316 /* UserService.swift */; };
 		048C72472BD40A5500865316 /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048C72462BD40A5500865316 /* BookBillionaireCore */; };
 		048C72492BD40ADD00865316 /* UserManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72482BD40ADD00865316 /* UserManageView.swift */; };
@@ -51,7 +50,6 @@
 		0402167A2BCE1A6900A7C922 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0402167D2BCE5CBB00A7C922 /* QnA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnA.swift; sourceTree = "<group>"; };
 		0402167F2BCEB03A00A7C922 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		048C723F2BD4053300865316 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		048C72412BD4059200865316 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		048C72482BD40ADD00865316 /* UserManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageView.swift; sourceTree = "<group>"; };
 		048C724B2BD421B000865316 /* AccentButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButtonStyle.swift; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 				0402167C2BCE5C9F00A7C922 /* Model */,
 				040216752BCE199500A7C922 /* Views */,
 				EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */,
-				048C723F2BD4053300865316 /* GoogleService-Info.plist */,
 				EF0F74A32BBCF80C00E37D0D /* ContentView.swift */,
 				EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */,
 				EF0F74A72BBCF80E00E37D0D /* BookBillionaireAdmin.entitlements */,
@@ -264,7 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */,
-				048C72402BD4053300865316 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

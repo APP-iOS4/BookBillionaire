@@ -38,6 +38,9 @@ struct HomeView: View {
         .padding()
         .onAppear {
             userService.fetchUsers()
+            Task {
+                await bookService.loadBooks()
+            }
         }
         .onReceive(AuthViewModel.shared.$state) { _ in
             userService.currentUser = userService.loadUserByID(authViewModel.currentUser?.uid ?? "")
@@ -106,7 +109,7 @@ extension HomeView {
                 .fontWeight(.bold)
                 .padding(.bottom, 12)
             // 책 리스트
-            LazyVStack(alignment: .leading, spacing: 10) {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 ForEach(filteredBooks, id: \.self) { book in
                     HStack(alignment: .top, spacing: 0) {
                         NavigationLink(value: book) {
@@ -117,20 +120,20 @@ extension HomeView {
                         .foregroundStyle(.primary)
                         Spacer()
                         // 설정 버튼
-                        // Menu {
-                        //     Button {
-                                
-                        //     } label: {
-                        //         Label("게시물 숨기기", systemImage: "eye.slash")
-                        //     }
-                        // } label: {
-                        //     Image(systemName: "ellipsis")
-                        //         .resizable()
-                        //         .scaledToFit()
-                        //         .frame(width: 17, height: 20)
-                        //         .foregroundStyle(.gray.opacity(0.4))
-                        //         .rotationEffect(.degrees(90))
-                        // }
+//                         Menu {
+//                             Button {
+//                                
+//                             } label: {
+//                                 Label("게시물 숨기기", systemImage: "eye.slash")
+//                             }
+//                         } label: {
+//                             Image(systemName: "ellipsis")
+//                                 .resizable()
+//                                 .scaledToFit()
+//                                 .frame(width: 17, height: 20)
+//                                 .foregroundStyle(.gray.opacity(0.4))
+//                                 .rotationEffect(.degrees(90))
+//                         }
                     }
                     Divider()
                         .background(Color.gray)

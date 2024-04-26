@@ -37,14 +37,15 @@ struct BookDetailView: View {
     @State var rental: Rental = Rental()
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd"
+        formatter.dateFormat = "MM.dd"
         return formatter
     }
     
     var body: some View {
         ScrollView {
             bookDetailImage
-                .frame(height: 300)
+                .frame(height: 333)
+                .padding(.top, 30)
             
             VStack(alignment: .leading) {
                 bookTitleView
@@ -71,12 +72,12 @@ struct BookDetailView: View {
                         } label: {
                             Text("채팅하기")
                         }
-//                        .background(
-//                            NavigationLink(destination: ChatListView(), isActive: $isChatViewPresented) {
-//                                EmptyView()
-//                            }
-//                                .hidden()
-//                        )
+                        //                        .background(
+                        //                            NavigationLink(destination: ChatListView(), isActive: $isChatViewPresented) {
+                        //                                EmptyView()
+                        //                            }
+                        //                                .hidden()
+                        //                        )
                     }
                     .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
                     .alert(isPresented: $showLoginAlert) {
@@ -90,8 +91,8 @@ struct BookDetailView: View {
                         print("2 \(roomListVM.receiverId)")
                     }
                     
-                    Spacer()
-                    
+                    Divider()
+                        .padding(.vertical, 10)
                     bookDetailInfo
                         .onAppear {
                             Task {
@@ -110,7 +111,7 @@ struct BookDetailView: View {
             }
             .padding(.horizontal)
             .navigationTitle(book.title)
-            SpaceBox()
+            .toolbarBackground(.visible, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
@@ -142,17 +143,103 @@ struct BookDetailView: View {
                             BottomSheet(isShowingSheet: $isShowingSheet)
                                 .presentationDetents([.fraction(0.8), .large])
                         }
+                        
                     }
                 }
         }
     }
     
+    func calculateTotalDays() -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: rentalTime.0, to: rentalTime.1)
+        return components.day ?? 0
+    }
 }
 
 #Preview {
-    BookDetailView(book: Book(ownerID: "", ownerNickname: "", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
-        .environmentObject(AuthViewModel())
-        .environmentObject(UserService())
+    NavigationStack {
+        BookDetailView(book: Book(ownerID: "", ownerNickname: "", title: "브라질에서 주식을 사라 비가 내리면", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
+            .environmentObject(AuthViewModel())
+            .environmentObject(UserService())
+            .navigationBarTitleDisplayMode(.inline)
+    }
+
+}
+
+
+extension BookDetailView {
+    var bookDetailImage: some View {
+        ZStack{
+            if let url = imageUrl, !url.absoluteString.isEmpty {
+                if let loadedImage = loadedImage {
+                    Image(uiImage: loadedImage)
+                        .resizable(resizingMode: .stretch)
+                        .ignoresSafeArea()
+                        .blur(radius: 8.0, opaque: true)
+                        .background(Color.gray)
+                } else {
+                    Image("default")
+                        .resizable(resizingMode: .stretch)
+                        .ignoresSafeArea()
+                        .blur(radius: 8.0, opaque: true)
+                        .background(Color.gray)
+                        .onAppear {
+                            ImageCache.shared.getImage(for: url) { image in
+                                loadedImage = image
+                            }
+                        }
+                }
+            } else {
+                Image("default")
+                    .resizable(resizingMode: .stretch)
+                    .ignoresSafeArea()
+                    .blur(radius: 8.0, opaque: true)
+                    .background(Color.gray)
+            }
+            
+            VStack(alignment: .center){
+                UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
+                    .frame(height: 300)
+                    .foregroundStyle(colorScheme == .dark ? .black : .white)
+                    .padding(.top, 300)
+            }
+            
+            GeometryReader { geometry in
+                if let image = loadedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 200, height: 300)
+                        .background(Color.gray)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                } else {
+                    Image(uiImage: UIImage(named: "default") ?? UIImage())
+                        .resizable()
+                        .frame(width: 200, height: 300)
+                        .background(Color.gray)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                }
+            }
+            
+        }
+        .onAppear {
+            // 앞글자에 따라 imageURL에 할당하는 조건
+            if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
+                imageUrl = URL(string: book.thumbnail)
+            } else {
+                // Firebase Storage 경로 URL 다운로드
+                let storageRef = Storage.storage().reference(withPath: book.thumbnail)
+                storageRef.downloadURL { (url, error) in
+                    if let error = error {
+                        print("Error getting download URL: \(error)")
+                    } else if let url = url {
+                        imageUrl = url
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension BookDetailView {
@@ -185,79 +272,10 @@ extension BookDetailView {
         }
     }
 }
-
-extension BookDetailView {
-    var bookDetailImage: some View {
-        ZStack{
-            if let url = imageUrl, !url.absoluteString.isEmpty {
-                Image(uiImage: loadedImage ?? UIImage(named: "default")!)
-                    .resizable(resizingMode: .stretch)
-                    .ignoresSafeArea()
-                    .blur(radius: 8.0,opaque: true)
-                    .background(Color.gray)
-                    .onAppear {
-                        ImageCache.shared.getImage(for: url) { image in
-                            loadedImage = image
-                        }
-                    }
-            } else {
-                Image("default")
-                    .resizable(resizingMode: .stretch)
-                    .ignoresSafeArea()
-                    .blur(radius: 8.0,opaque: true)
-                    .background(Color.gray)
-            }
-            
-            VStack(alignment: .center){
-                UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
-                    .frame(height: 300)
-                    .foregroundStyle(colorScheme == .dark ? .black : .white)
-                    .padding(.top, 300)
-            }
-            
-            GeometryReader { geometry in
-                if let image = loadedImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: 200, height: 300)
-                        .background(Color.gray)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                } else {
-                    Image(uiImage: UIImage(named: "default") ?? UIImage())
-                        .resizable()
-                        .frame(width: 200, height: 300)
-                        .background(Color.gray)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                }
-            }
-
-        }
-        .onAppear {
-            // 앞글자에 따라 imageURL에 할당하는 조건
-            if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
-                imageUrl = URL(string: book.thumbnail)
-            } else {
-                // Firebase Storage 경로 URL 다운로드
-                let storageRef = Storage.storage().reference(withPath: book.thumbnail)
-                storageRef.downloadURL { (url, error) in
-                    if let error = error {
-                        print("Error getting download URL: \(error)")
-                    } else if let url = url {
-                        imageUrl = url
-                    }
-                }
-            }
-        }
-    }
-}
-
 extension BookDetailView {
     var bookDetailInfo: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("책 소유자 : \(user.nickName)")
                 if let url = URL(string: user.image ?? "") {
                     AsyncImage(url: url) { image in
                         image
@@ -268,7 +286,7 @@ extension BookDetailView {
                         Image("default")
                             .resizable()
                             .clipShape(Circle())
-                            .frame(width: 50, height: 50)
+                            .frame(width: 30, height: 30)
                     }
                 } else {
                     Image("default")
@@ -276,65 +294,79 @@ extension BookDetailView {
                         .clipShape(Circle())
                         .frame(width: 30, height: 30)
                 }
+                VStack(alignment: .leading) {
+                    Text("\(user.nickName)")
+                        .font(.body)
+                    Text("강서구")
+                        .font(.caption)
+                }
+                Spacer()
+                VStack(alignment: .trailing) {
+                    Text("\(dateFormatter.string(from: rentalTime.0)) - \(dateFormatter.string(from: rentalTime.1)) (\(calculateTotalDays())일)")
+                        .font(.subheadline)
+                    Text("대여 가능 기간")
+                        .font(.caption)
+                        .foregroundStyle(.gray)
+                }
+                
             }
-            Text("대여기간: \(dateFormatter.string(from: rentalTime.0)) ~ \(dateFormatter.string(from: rentalTime.1))")
-                .font(.headline)
             
             Divider()
                 .padding(.vertical, 10)
             
-            Text("📖 기본 정보")
+           Text("기본 정보")
                 .font(.title3)
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
             
             Text("책 소개")
-                .font(.subheadline)
+                .font(.body)
                 .fontWeight(.bold)
                 .foregroundStyle(.primary)
                 .padding(.bottom, 3)
             Text(book.contents)
                 .lineSpacing(5)
-                .font(.caption)
+                .font(.subheadline)
             Divider()
                 .padding(.vertical, 10)
             
             VStack(alignment: .leading) {
                 Text("저자 및 역자")
-                    .font(.subheadline)
+                    .font(.body)
                     .fontWeight(.bold)
                     .foregroundStyle(.primary)
                     .padding(.bottom, 5)
                 
-                HStack(alignment: .center){
+                VStack(alignment: .leading) {
                     if book.authors.isEmpty {
-                        Text("저자를 찾을 수 없어요.")
-                    } else {
-                        // 작가가 여러명일수도 있어서 ForEach
-                        ForEach(book.authors, id: \.self) { author in
-                            Text("\(author)")
+                        if let translators = book.translators,
+                            !translators.isEmpty{
+                            ForEach(translators, id: \.self) { translator in
+                                Text("옮긴이: \(translator)")
+                                    .font(.subheadline)
+                            }
                         }
                     }
-                    // 번역자도 여러명일수도 있어서 ForEach
-                    if let translators = book.translators, !translators.isEmpty {
-                        // 번역자가 있으면 표시
-                        ForEach(translators, id: \.self) { translator in
-                            Text("옮긴이: \(translator)")
+                    else {
+                        ForEach(book.authors, id: \.self) { author in
+                            Text("\(author)")
+                                .font(.subheadline)
                         }
                     }
                 }
             }
             .lineLimit(1)
             .minimumScaleFactor(0.5)
-            .font(.caption)
+            .font(.subheadline)
+            .foregroundStyle(.primary)
             .padding(.bottom, 10)
             
             Text("카테고리")
-                .font(.subheadline)
+                .font(.body)
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
             Text(book.bookCategory?.rawValue ?? "카테고리")
-                .font(.caption)
+                .font(.subheadline)
             
         }
     }

@@ -15,7 +15,10 @@ struct BookAnotherOwnerView: View {
     var body: some View {
         VStack{
             HStack(alignment: .center) {
-                Text("📖 읽고싶은 책인데 대여중이라면?")
+                Text("읽고싶은 책인데 대여중이라면?")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .padding(.bottom, 5)
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding(.bottom, 5)
