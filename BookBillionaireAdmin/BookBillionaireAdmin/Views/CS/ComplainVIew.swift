@@ -10,10 +10,19 @@ import SwiftUI
 struct ComplainView: View {
     var topic: Topic
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .navigationTitle(topic.name)
+        GeometryReader { geometry in
+            HStack(spacing: 0) {
+                Rectangle()
+                    .fill(Color.red)
+                    .frame(width: geometry.size.width / 3)
+                Rectangle()
+                    .fill(Color.blue)
+                    .frame(width: 2 * geometry.size.width / 3)
+            }
+        }
     }
 }
+
 
 #Preview {
     NavigationStack{

@@ -28,7 +28,6 @@
 		048C72562BD6337700865316 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72552BD6337700865316 /* SideBarView.swift */; };
 		048C725C2BD6A44700865316 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C725B2BD6A44700865316 /* LoginView.swift */; };
 		048C725E2BD7461200865316 /* BookManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C725D2BD7461200865316 /* BookManageView.swift */; };
-		048C72602BD76F2000865316 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		048C72642BD7909E00865316 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72632BD7909E00865316 /* BookListView.swift */; };
 		048C72662BD7983B00865316 /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72652BD7983B00865316 /* ImageCacheService.swift */; };
 		048C726A2BD7D6BD00865316 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72692BD7D6BD00865316 /* UserListView.swift */; };
@@ -42,9 +41,6 @@
 		048C72932BDAB1D900865316 /* ComplainVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72922BDAB1D900865316 /* ComplainVIew.swift */; };
 		048C72962BDAB26D00865316 /* CountBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72952BDAB26D00865316 /* CountBoxView.swift */; };
 		048C72982BDB609500865316 /* BookAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72972BDB609500865316 /* BookAddView.swift */; };
-		048C729B2BDB62AF00865316 /* APISerchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C729A2BDB62AF00865316 /* APISerchView.swift */; };
-		048C729D2BDB631400865316 /* APISerachListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C729C2BDB631400865316 /* APISerachListRow.swift */; };
-		048C729F2BDB638700865316 /* APISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C729E2BDB638700865316 /* APISearchBar.swift */; };
 		048C72A12BDB640300865316 /* SearchBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72A02BDB640300865316 /* SearchBook.swift */; };
 		048C72A32BDB65F100865316 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C72A22BDB65F100865316 /* key.plist */; };
 		EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */; };
@@ -82,9 +78,6 @@
 		048C72922BDAB1D900865316 /* ComplainVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplainVIew.swift; sourceTree = "<group>"; };
 		048C72952BDAB26D00865316 /* CountBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountBoxView.swift; sourceTree = "<group>"; };
 		048C72972BDB609500865316 /* BookAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAddView.swift; sourceTree = "<group>"; };
-		048C729A2BDB62AF00865316 /* APISerchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISerchView.swift; sourceTree = "<group>"; };
-		048C729C2BDB631400865316 /* APISerachListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISerachListRow.swift; sourceTree = "<group>"; };
-		048C729E2BDB638700865316 /* APISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchBar.swift; sourceTree = "<group>"; };
 		048C72A02BDB640300865316 /* SearchBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBook.swift; sourceTree = "<group>"; };
 		048C72A22BDB65F100865316 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../BookBillionaireUser/key.plist; sourceTree = "<group>"; };
 		EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBillionaireAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,16 +189,6 @@
 			path = DashBoard;
 			sourceTree = "<group>";
 		};
-		048C72992BDB627E00865316 /* APISearch */ = {
-			isa = PBXGroup;
-			children = (
-				048C729A2BDB62AF00865316 /* APISerchView.swift */,
-				048C729C2BDB631400865316 /* APISerachListRow.swift */,
-				048C729E2BDB638700865316 /* APISearchBar.swift */,
-			);
-			path = APISearch;
-			sourceTree = "<group>";
-		};
 		048C72A42BDB714E00865316 /* CS */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +233,6 @@
 				048C72792BD93C6700865316 /* Info.plist */,
 				048C72A22BDB65F100865316 /* key.plist */,
 				040216752BCE199500A7C922 /* Views */,
-				048C72992BDB627E00865316 /* APISearch */,
 				048C72442BD406EB00865316 /* Service */,
 				0402167C2BCE5C9F00A7C922 /* Model */,
 				EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */,
@@ -346,7 +328,6 @@
 				EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */,
 				048C726E2BD8CBC900865316 /* GridCell.swift in Sources */,
 				048C72962BDAB26D00865316 /* CountBoxView.swift in Sources */,
-				048C729F2BDB638700865316 /* APISearchBar.swift in Sources */,
 				0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */,
 				040216772BCE19A300A7C922 /* DashBoardView.swift in Sources */,
 				048C72562BD6337700865316 /* SideBarView.swift in Sources */,
@@ -365,13 +346,10 @@
 				048C727D2BD93D8C00865316 /* Notice.swift in Sources */,
 				040216792BCE19D500A7C922 /* QnAView.swift in Sources */,
 				048C72662BD7983B00865316 /* ImageCacheService.swift in Sources */,
-				048C729D2BDB631400865316 /* APISerachListRow.swift in Sources */,
 				048C72702BD8F8C800865316 /* CategroyEditView.swift in Sources */,
 				048C72A12BDB640300865316 /* SearchBook.swift in Sources */,
 				048C72492BD40ADD00865316 /* UserManageView.swift in Sources */,
 				048C727B2BD93D6A00865316 /* NoticeService.swift in Sources */,
-				048C729B2BDB62AF00865316 /* APISerchView.swift in Sources */,
-				048C72602BD76F2000865316 /* (null) in Sources */,
 				048C72982BDB609500865316 /* BookAddView.swift in Sources */,
 				048C72502BD628E400865316 /* SideBarService.swift in Sources */,
 				048C724E2BD5E75A00865316 /* BookService.swift in Sources */,

@@ -52,10 +52,10 @@ struct BookManageView: View {
                     """)
                 }
             }
-            .fullScreenCover(isPresented: $isShowingSearch) {
-                APISearchView(searchBook: $searchText, isShowing: $isShowingSearch)
-                    .toolbar(.hidden, for: .tabBar)
-            }
+//            .fullScreenCover(isPresented: $isShowingSearch) {
+//                APISearchView(searchBook: $searchText, isShowing: $isShowingSearch)
+//                    .toolbar(.hidden, for: .tabBar)
+//            }
             .navigationTitle(topic.name)
         }
         
