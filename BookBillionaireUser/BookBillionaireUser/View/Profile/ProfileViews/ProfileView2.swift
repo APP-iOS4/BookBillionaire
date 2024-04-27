@@ -33,7 +33,8 @@ struct ProfileView2: View {
     let imageChache = ImageCache.shared
     @State private var favoriteBooksImages: [String: URL] = [:]
     @State private var loadedImages: [String: UIImage] = [:]
-    
+    // 스크롤 추적
+    @State private var scrollViewOffset: CGFloat = 0
     var body: some View {
         VStack(alignment: .leading) {
             if authViewModel.state == .loggedIn {
@@ -185,13 +186,16 @@ extension ProfileView2 {
     }
 }
 
-
+// 상단 유저 프로필뷰의 즐겨찾기랑 겹치는거 같아서 이 부분에 뭘 넣어야 할지..
 extension ProfileView2 {
     var wishListScrollView: some View {
         VStack(spacing: 0) {
             GeometryReader { geometry in
                 ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(alignment: .center, spacing: 0) {
+                    LazyHStack(spacing: 0) {
+                        // 왼쪽 빈 이미지
+                        Color.clear.frame(width: geometry.size.width / 3)
+                        
                         ForEach(favoriteBooksImages.keys.sorted(), id: \.self) { bookID in
                             GeometryReader { imageGeometry in
                                 if let url = favoriteBooksImages[bookID],
@@ -207,13 +211,12 @@ extension ProfileView2 {
                                                 .blur(radius: 5)
                                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                                 .overlay(
-                                                        RoundedRectangle(cornerRadius: 10)
-                                                            .stroke(Color.white, lineWidth: 3)
-                                                    )
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(Color.white, lineWidth: 3)
+                                                )
                                                 .frame(width: 150)
                                         )
                                         .scaleEffect(scaleFactor(geometry: geometry, itemGeometry: imageGeometry))
-                                     
                                 } else {
                                     Image("default")
                                         .resizable()
@@ -226,9 +229,9 @@ extension ProfileView2 {
                                                 .blur(radius: 5)
                                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                                 .overlay(
-                                                        RoundedRectangle(cornerRadius: 10)
-                                                            .stroke(Color.white, lineWidth: 3)
-                                                    )
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(Color.white, lineWidth: 3)
+                                                )
                                                 .frame(width: 150)
                                         )
                                         .scaleEffect(scaleFactor(geometry: geometry, itemGeometry: imageGeometry))
@@ -243,11 +246,26 @@ extension ProfileView2 {
                                 }
                             }
                         }
+                        
+                        // 오른쪽 빈 이미지
+                        Color.clear.frame(width: geometry.size.width / 3)
                     }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            // 드래그 제스처로 스크롤 속도 및 방향을 제어
+                            let offset = value.translation.width
+                            let cardWidth = geometry.size.width / 3
+                            let currentIndex = Int((scrollViewOffset + cardWidth / 2) / cardWidth)
+                            let newOffset = CGFloat(currentIndex) * cardWidth + offset
+                            
+                            scrollViewOffset = max(0, min(newOffset, CGFloat(favoriteBooksImages.count) * cardWidth))
+                        }
+                )
             }
-            Spacer()
         }
     }
 }
+
