@@ -12,6 +12,7 @@ struct BookSearchBar: View {
     @State var isSearching = false
     @Binding var searchBookText: String
     @Binding var filteredBooks: [Book]
+    @StateObject private var bookDetailViewModel = BookDetailViewModel(book: Book(), user: User(), rental: Rental(), rentalService: RentalService())
     @StateObject private var searchViewModel = SearchViewModel()
     @EnvironmentObject var userService: UserService
     @Binding var selectedTab: ContentView.Tab
@@ -150,7 +151,9 @@ extension BookSearchBar {
                 if !filteredBooks.isEmpty {
                     ForEach(filteredBooks) { book in
                         NavigationLink {
-                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), selectedTab: $selectedTab)
+                            let bookDetailViewModel = BookDetailViewModel(book: book, user: userService.loadUserByID(book.ownerID), rental: Rental(), rentalService: RentalService())
+                            
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: bookDetailViewModel, selectedTab: $selectedTab)
                         } label: {
                             BookItem(book: book)
                         }

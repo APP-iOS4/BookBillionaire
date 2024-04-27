@@ -23,7 +23,6 @@ struct ProfileView: View {
     private var PrivatePolicyUrl = Bundle.main.url(forResource: "PrivatePolicy", withExtension: "html")!
     
     var body: some View {
-        NavigationStack{
             VStack(alignment: .leading) {
                 if authViewModel.state == .loggedOut {
                     UnlogginedView()
@@ -72,14 +71,11 @@ struct ProfileView: View {
                     }
                     .padding(.horizontal)
                     .padding(.top)
-                    .navigationTitle("마이 프로필")
                 }
             }
-           
-            //                    .onAppear{
-            //                        // loadMyProfile()
-            //                    }
-        }
+            .onAppear{
+                loadMyProfile()
+            }
     }
     func loadMyProfile() {
         Task {
@@ -107,6 +103,6 @@ struct ProfileView: View {
             .environmentObject(AuthViewModel())
             .environmentObject(UserService())
             .environmentObject(BookService())
-
+        
     }
 }
