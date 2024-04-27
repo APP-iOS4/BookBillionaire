@@ -28,7 +28,7 @@ struct EditProfileView: View {
                 isShowingDialog.toggle()
             } label: {
                 ProfilePhoto(user: user, selectedImage: $selectedImage)
-                    .overlay(CameraOverlay(), alignment: .bottomTrailing)
+                    .overlay(OverlayImage(imageName: "camera.circle.fill"), alignment: .bottomTrailing)
             }
             
             VStack {

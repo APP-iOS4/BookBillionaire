@@ -15,6 +15,7 @@ struct BookDetailView: View {
     let book: Book
     @State var user: User = User()
     @EnvironmentObject var userService: UserService
+    @StateObject var bookDetailViewModel: BookDetailViewModel
     @StateObject var commentViewModel = ReviewViewModel()
     
     let imageChache = ImageCache.shared
@@ -31,15 +32,6 @@ struct BookDetailView: View {
     @Binding var selectedTab: ContentView.Tab
     @State private var roomId: String? // 생성한 방의 id를 담는 변수
     
-    // 렌탈
-    let rentalService = RentalService()
-    @State var rentalTime: (Date, Date) = (Date(), Date())
-    @State var rental: Rental = Rental()
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM.dd"
-        return formatter
-    }
     
     var body: some View {
         ScrollView {
@@ -95,9 +87,7 @@ struct BookDetailView: View {
                         .padding(.vertical, 10)
                     bookDetailInfo
                         .onAppear {
-                            Task {
-                                rentalTime = await rentalService.getRentalDay(rental.id)
-                            }
+                            bookDetailViewModel.fetchRentalInfo()
                         }
                 }
                 
@@ -148,19 +138,19 @@ struct BookDetailView: View {
                 }
         }
     }
-    
-    func calculateTotalDays() -> Int {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: rentalTime.0, to: rentalTime.1)
-        return components.day ?? 0
-    }
 }
 
 #Preview {
-    BookDetailView(book: Book(ownerID: "", ownerNickname: "책 소유자", title: "책 제목", contents: "줄거리", authors: ["작가"], rentalState: RentalStateType(rawValue: "") ?? .rentalAvailable), user: User(nickName: "닉네임", address: "주소"), selectedTab: .constant(.home))
-        .environmentObject(AuthViewModel())
-        .environmentObject(UserService())
-}
+    let book = Book(ownerID: "", ownerNickname: "", title: "브라질에서 주식을 사라 비가 내리면", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: .rentalAvailable)
+       let user = User(nickName: "닉네임", address: "주소")
+       let bookDetailViewModel = BookDetailViewModel(book: book, user: user, rental: Rental(), rentalService: RentalService())
+       
+       return BookDetailView(book: book, user: user, bookDetailViewModel: bookDetailViewModel, selectedTab: .constant(.home))
+           .environmentObject(AuthViewModel())
+           .environmentObject(UserService())
+           .navigationBarTitleDisplayMode(.inline)
+   }
+
 
 
 extension BookDetailView {
@@ -272,7 +262,7 @@ extension BookDetailView {
     var bookDetailInfo: some View {
         VStack(alignment: .leading) {
             HStack {
-                if let url = URL(string: user.image ?? "") {
+                if let url = URL(string: userService.currentUser.image ?? "") {
                     AsyncImage(url: url) { image in
                         image
                             .resizable()
@@ -291,14 +281,14 @@ extension BookDetailView {
                         .frame(width: 30, height: 30)
                 }
                 VStack(alignment: .leading) {
-                    Text("\(user.nickName)")
+                    Text(userService.currentUser.nickName)
                         .font(.body)
-                    Text("강서구")
+                    Text(userService.currentUser.address)
                         .font(.caption)
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
-                    Text("\(dateFormatter.string(from: rentalTime.0)) - \(dateFormatter.string(from: rentalTime.1)) (\(calculateTotalDays())일)")
+                    Text("\(bookDetailViewModel.calculateTotalDays())")
                         .font(.subheadline)
                     Text("대여 가능 기간")
                         .font(.caption)
@@ -363,7 +353,6 @@ extension BookDetailView {
                 .padding(.bottom, 5)
             Text(book.bookCategory?.rawValue ?? "카테고리")
                 .font(.subheadline)
-            
         }
     }
 }

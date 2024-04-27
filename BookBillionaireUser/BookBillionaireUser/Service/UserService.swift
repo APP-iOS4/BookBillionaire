@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import BookBillionaireCore
+import FirebaseStorage
 
 class UserService: ObservableObject {
     @Published var users: [User] = []
@@ -70,7 +71,7 @@ class UserService: ObservableObject {
             print("Error updating user: \(error)")
         }
     }
-   
+    
     func toggleFavoriteStatus(bookID: String) async -> Bool? {
         let userRef = allUserRef.document(currentUser.id)
         do {
@@ -100,11 +101,11 @@ class UserService: ObservableObject {
             }
             
         } catch let error {
-            print("Error updating user: \(error)")
+            print("즐겨찾기 업데이트 실패: \(error)")
             return nil
         }
     }
-  
+    
     func checkFavoriteStatus(bookID: String) async -> Bool {
         let userRef = allUserRef.document(currentUser.id)
         do {
@@ -116,8 +117,51 @@ class UserService: ObservableObject {
                 return false
             }
         } catch {
-            print("Error checking favorite status: \(error)")
+            print("즐겨찾기 상태 여부 받아오기 실패: \(error)")
             return false
         }
     }
+    
+    func getFavoriteBooksCount(userID: String) async -> Int {
+        let userRef = allUserRef.document(userID)
+        do {
+            let userData = try await userRef.getDocument()
+            if let favorites = userData["favorite"] as? [String] {
+                return favorites.count
+            } else {
+                return 0
+            }
+        } catch {
+            print("즐겨찾기 개수 가져오기 실패: \(error)")
+            return 0
+        }
+    }
+    
+    func getFavoriteBooksImages(userID: String) async -> [String: URL] {
+        var images: [String: URL] = [:]
+        let userRef = allUserRef.document(userID)
+        let booksRef = Firestore.firestore().collection("books") // 책 정보를 저장하는 데이터베이스
+        do {
+            let userData = try await userRef.getDocument()
+            if let favorites = userData["favorite"] as? [String] {
+                for bookID in favorites {
+                    let bookData = try await booksRef.document(bookID).getDocument()
+                    if let thumbnail = bookData["thumbnail"] as? String {
+                        if thumbnail.hasPrefix("http://") || thumbnail.hasPrefix("https://") {
+                            images[bookID] = URL(string: thumbnail)
+                        } else {
+                            // Firebase Storage 경로 URL 다운로드
+                            let storageRef = Storage.storage().reference(withPath: thumbnail)
+                            let url = try await storageRef.downloadURL()
+                            images[bookID] = url
+                        }
+                    }
+                }
+            }
+        } catch {
+            print("책 이미지 불러오기 실패: \(error)")
+        }
+        return images
+    }
+    
 }
