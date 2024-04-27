@@ -34,6 +34,8 @@ struct SideBarView: View {
                                     NoticeView(topic: topic)
                                 case .chat:
                                     UserCSChatView(topic: topic)
+                                case .policy:
+                                    DocUploadView(topic: topic)
                                 }
                             }
                         } label: {
