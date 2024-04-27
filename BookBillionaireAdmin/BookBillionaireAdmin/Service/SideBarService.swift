@@ -13,17 +13,21 @@ public class SideBarService: ObservableObject {
     public init() {
         sideBarGroup = [
             SideBarGroup(category: "책 관리", topics: [
-                Topic(name: "책 목록확인", Icon: "books.vertical.fill", topicTitle: .book),
-                Topic(name: "책 등록 및 수정", Icon: "book.and.wrench", topicTitle: .bookManage)
+                Topic(name: "책 카테고리 변경", Icon: "character.book.closed", topicTitle: .book),
+                Topic(name: "책 목록 등록 및 수정", Icon: "books.vertical.fill", topicTitle: .bookManage)
             ]),
             SideBarGroup(category: "유저 관리", topics: [
                 Topic(name: "유저 목록확인", Icon: "person.3.fill", topicTitle: .user),
                 Topic(name: "유저 등록 및 수정", Icon: "person.2.badge.gearshape", topicTitle: .userManage),
-                Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .complain)
+                Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .complain),
+                Topic(name: "유저 CS관리", Icon: "ellipsis.message", topicTitle: .chat),
             ]),
             SideBarGroup(category: "게시글 관리", topics: [
                 Topic(name: "공지사항관리", Icon: "note.text", topicTitle: .notice),
-                Topic(name: "QnA관리", Icon: "doc.questionmark", topicTitle: .qna),
+                Topic(name: "QnA관리", Icon: "doc.plaintext", topicTitle: .qna),
+                Topic(name: "이용약관 및 개인정보처리방침", Icon: "person.badge.shield.checkmark", topicTitle: .policy)
+
+                
             ])
         ]
     }

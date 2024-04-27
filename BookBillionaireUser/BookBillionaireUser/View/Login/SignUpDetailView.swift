@@ -13,6 +13,7 @@ struct SignUpDetailView: View {
     @Binding var passwordConfirmText: String
     @Binding var nicknameValidated: Bool
     @Binding var emailValidated: Bool
+    @Binding var disableControlls: Bool
     
     @State private var isShowingAlert: Bool = false
     @State private var isPasswordCountError: Bool = false
@@ -41,6 +42,7 @@ struct SignUpDetailView: View {
                     .background(.thinMaterial)
                     .cornerRadius(10)
                     .textInputAutocapitalization(.never)
+                    .disabled(disableControlls)
                 Button(action: {
                     if !nameText.isEmpty {
                         if containsSpecialCharacters(nameText) {
@@ -64,8 +66,11 @@ struct SignUpDetailView: View {
                         }
                     }
                 }, label: {
+                    Text("중복체크")
+                        .foregroundColor(.primary)
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.primary)
+                    
                 })
                 .padding(.trailing, 15)
             }
@@ -87,6 +92,7 @@ struct SignUpDetailView: View {
                         emailErrorText2 = ""
                         emailValidated = false
                     })
+                    .disabled(disableControlls)
                 Button(action: {
                     if !signUpView.isValidEmail(emailText) {
                         emailErrorText = "올바른 이메일 형식이 아닙니다."
@@ -111,6 +117,8 @@ struct SignUpDetailView: View {
                         }
                     }
                 }, label: {
+                    Text("중복체크")
+                        .foregroundColor(.primary)
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.primary)
                 })
@@ -132,6 +140,7 @@ struct SignUpDetailView: View {
                         .padding()
                         .background(.thinMaterial)
                         .cornerRadius(10)
+                        .disabled(disableControlls)
                 } else {
                     TextField("비밀번호", text: $passwordText)
                         .padding()
@@ -139,6 +148,7 @@ struct SignUpDetailView: View {
                         .cornerRadius(10)
                         .textInputAutocapitalization(.none)
                         .autocapitalization(.none)
+                        .disabled(disableControlls)
                 }
                 Button {
                     isSecure.toggle()
@@ -158,16 +168,18 @@ struct SignUpDetailView: View {
                     SecureField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
                         .padding()
                         .background(.thinMaterial)
-                        .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
+//                        .border(.red, width: passwordConfirmText != passwordText ? 3 : 0)
                         .cornerRadius(10)
+                        .disabled(disableControlls)
                 } else {
                     TextField("비밀번호를 다시 입력해주세요", text: $passwordConfirmText)
                         .padding()
                         .background(.thinMaterial)
-                        .border(.red, width: passwordConfirmText != passwordText ? 1 : 0)
+//                        .border(.red, width: passwordConfirmText != passwordText ? 3 : 0)
                         .cornerRadius(10)
                         .textInputAutocapitalization(.none)
                         .autocapitalization(.none)
+                        .disabled(disableControlls)
                 }
                 Button {
                     isSecure.toggle()
@@ -176,6 +188,7 @@ struct SignUpDetailView: View {
                         .foregroundColor(.primary)
                 }
                 .padding(.trailing, 10)
+                .disabled(disableControlls)
             }
             Text("비밀번호가 서로 다릅니다.")
                 .foregroundColor(isPasswordUnCorrectError ? .red : .clear)

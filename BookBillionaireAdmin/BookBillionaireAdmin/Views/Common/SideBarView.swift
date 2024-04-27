@@ -32,6 +32,10 @@ struct SideBarView: View {
                                     QnAView(topic: topic)
                                 case .notice:
                                     NoticeView(topic: topic)
+                                case .chat:
+                                    UserCSChatView(topic: topic)
+                                case .policy:
+                                    DocUploadView(topic: topic)
                                 }
                             }
                         } label: {

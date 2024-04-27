@@ -6,10 +6,9 @@
 //  https://elisha0103.tistory.com/9
 import Firebase
 import GoogleSignIn
+import FirebaseAuth
 
 class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
-    
-    @Published var state: AuthState = .loggedOut
     let signInMethod: SignInMethod = .google
     
     // google 로그인 절차
@@ -49,7 +48,6 @@ class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
                 print("Error signing in with Google: \(error.localizedDescription)")
             } else {
                 print("Successfully signed in with Google")
-                self.state = .loggedIn
                 AuthViewModel.shared.state = .loggedIn
 
                 print("사용자 이메일: \(String(describing: result?.user.email))")
@@ -75,7 +73,7 @@ class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
                 "createdAt": Timestamp(date: Date()), // 현재 시간을 Timestamp로 변환하여 저장
                 "id": user.uid,
                 "introduction": "",
-                "profileImage": "person.crop.circle"
+                "profileImage": "profile/defaultUser.jpeg"
             ]
             db.collection("User").document(user.uid).setData(userData) { error in
                 if let error = error {

@@ -76,10 +76,11 @@ struct LoginView: View {
                     dismiss()
                 }) {
                     Image("SignInWithGoogle")
-                        .resizable()
-                        .frame(width: 335, height: 50)
+                        .scaledToFit()
                 }
                 .padding(.bottom, 10)
+                
+                AppleSigninButton()
                 
                 Spacer()
                 Spacer()

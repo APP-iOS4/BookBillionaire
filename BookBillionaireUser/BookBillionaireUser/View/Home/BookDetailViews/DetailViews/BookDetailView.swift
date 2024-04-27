@@ -151,8 +151,6 @@ struct BookDetailView: View {
            .navigationBarTitleDisplayMode(.inline)
    }
 
-
-
 extension BookDetailView {
     var bookDetailImage: some View {
         ZStack{

@@ -34,14 +34,22 @@ struct GridCell: View {
                         .scaledToFill()
                         .frame(width: 120, height: 140)
                 }
-                    Text(book.id)
+                    Text(book.title)
                         .multilineTextAlignment(.leading)
                         .lineLimit(1)
                         .bold()
+                    Text("소유자: " + book.ownerNickname)
+                    ZStack {
+                        Capsule()
+                            .stroke(Color.accentColor)
+                            .frame(height: 25)
+                        Text( book.bookCategory?.buttonTitle ?? "카테고리 미설정")
+                            .padding(.horizontal)
+                    }
+                    .fixedSize()
             }
-                .padding()
+                .padding(20)
         }
-        .padding()
         .onTapGesture {
             isToggle.toggle()
             if isToggle {
