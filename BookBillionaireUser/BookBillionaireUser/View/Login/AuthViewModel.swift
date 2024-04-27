@@ -72,7 +72,7 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
                             "createdAt": Timestamp(date: Date()),
                             "id": result.user.uid,
                             "introduction": "",
-                            "profileImage": "person.crop.circle"
+                            "profileImage": "profile/defaultUser.jpeg"
                         ]
                         db.collection("User").document(result.user.uid).setData(userData) { error in
                             if let error = error {

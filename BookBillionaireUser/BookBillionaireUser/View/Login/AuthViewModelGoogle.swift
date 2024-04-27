@@ -72,7 +72,7 @@ class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
                 "createdAt": Timestamp(date: Date()), // 현재 시간을 Timestamp로 변환하여 저장
                 "id": user.uid,
                 "introduction": "",
-                "profileImage": "person.crop.circle"
+                "profileImage": "profile/defaultUser.jpeg"
             ]
             db.collection("User").document(user.uid).setData(userData) { error in
                 if let error = error {
