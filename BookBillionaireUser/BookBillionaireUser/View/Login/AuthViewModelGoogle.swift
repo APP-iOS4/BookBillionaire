@@ -6,6 +6,7 @@
 //  https://elisha0103.tistory.com/9
 import Firebase
 import GoogleSignIn
+import FirebaseAuth
 
 class AuthViewModelGoogle: ObservableObject, AuthViewModelProtocol {
     let signInMethod: SignInMethod = .google
