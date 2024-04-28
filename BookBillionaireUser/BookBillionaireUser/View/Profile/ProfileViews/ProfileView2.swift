@@ -23,6 +23,7 @@ struct ProfileView2: View {
     @EnvironmentObject var bookService: BookService
     @State private var selectedImage: UIImage?
     @State private var favoriteBooksCount: Int = 0
+    @State private var myBooksCount: Int = 0
     @State var user = User()
     // 파베어스
     @State private var isLoggedIn: Bool = false
@@ -37,7 +38,7 @@ struct ProfileView2: View {
     @State private var scrollViewOffset: CGFloat = 0
     var body: some View {
         VStack(alignment: .leading) {
-            if authViewModel.state == .loggedIn {
+            if authViewModel.state == .loggedOut {
                 UnlogginedView()
                     .padding()
             } else {
@@ -46,13 +47,12 @@ struct ProfileView2: View {
                     Divider()
                         .padding(.vertical, 10)
                     VStack(alignment: .leading, spacing: 0){
-                        Text("내가 관심있는 책")
+                        Text("책 돌려주는 날")
                             .font(.title3)
                             .fontWeight(.bold)
                             .padding(.bottom, 10)
-                        wishListScrollView
-                            .frame(height: 250)
-                            
+                        Rectangle()
+                            .frame(height: 200)
                     }
                     
                     Divider()
@@ -69,7 +69,7 @@ struct ProfileView2: View {
                 .onAppear {
                     if let currnetUser = AuthViewModel.shared.currentUser {
                         loadFavoriteBooksCount(userID: currnetUser.uid)
-                        fetchFavoriteBooksImages(userID: currnetUser.uid)
+                        loadMyBooksCount(userID: currnetUser.uid)
                     }
                 }
             }
@@ -94,33 +94,18 @@ struct ProfileView2: View {
         }
     }
     
-    // 즐겨찾기
     func loadFavoriteBooksCount(userID: String) {
         Task {
             favoriteBooksCount = await userService.getFavoriteBooksCount(userID: userID)
         }
     }
     
-    // 이미지의 위치에 따라 스케일 팩터를 계산하는 함수
-    private func scaleFactor(geometry: GeometryProxy, itemGeometry: GeometryProxy) -> CGFloat {
-        let itemFrame = itemGeometry.frame(in: .global) // 이미지 위치 크기정보 (전역 좌표)
-        let itemViewCenter = itemFrame.minX + itemFrame.width / 2 // 이미지 중심 x좌표 계산
-        let viewCenter = geometry.size.width / 2 // 뷰 중심 x 좌표 계산
-        let distanceFromCenter = abs(itemViewCenter - viewCenter) // 이미지 중심과 뷰 중심 사이 거리 계산
-        // 이미지의 스케일 팩터 계산
-        let scaleFactor = 1 - (distanceFromCenter / geometry.size.width)
-        // 스케일은 최소 0.9, 최대 1입니다.
-        return max(0.8, min(scaleFactor, 1))
-    }
-
-
-    
-    // 이미지 불러오기
-    func fetchFavoriteBooksImages(userID: String) {
+    func loadMyBooksCount(userID: String) {
         Task {
-            favoriteBooksImages = await userService.getFavoriteBooksImages(userID: userID)
+            myBooksCount = await userService.getMyBookCount(userID: userID)
         }
     }
+
 }
 
 
@@ -157,7 +142,7 @@ extension ProfileView2 {
             HStack(spacing: 0) {
                 Spacer()
                 VStack {
-                    Text("5")
+                    Text("\(myBooksCount)")
                         .font(.title3)
                         .fontWeight(.bold)
                     Text("보유도서")
@@ -185,87 +170,3 @@ extension ProfileView2 {
         }
     }
 }
-
-// 상단 유저 프로필뷰의 즐겨찾기랑 겹치는거 같아서 이 부분에 뭘 넣어야 할지..
-extension ProfileView2 {
-    var wishListScrollView: some View {
-        VStack(spacing: 0) {
-            GeometryReader { geometry in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 0) {
-                        // 왼쪽 빈 이미지
-                        Color.clear.frame(width: geometry.size.width / 3)
-                        
-                        ForEach(favoriteBooksImages.keys.sorted(), id: \.self) { bookID in
-                            GeometryReader { imageGeometry in
-                                if let url = favoriteBooksImages[bookID],
-                                   let loadedImage = loadedImages[bookID] {
-                                    Image(uiImage: loadedImage)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: geometry.size.width / 3, height: 220)
-                                        .background(
-                                            Image(uiImage: loadedImage)
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .blur(radius: 5)
-                                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(Color.white, lineWidth: 3)
-                                                )
-                                                .frame(width: 150)
-                                        )
-                                        .scaleEffect(scaleFactor(geometry: geometry, itemGeometry: imageGeometry))
-                                } else {
-                                    Image("default")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: geometry.size.width / 3, height: 220)
-                                        .background(
-                                            Image("default")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .blur(radius: 5)
-                                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(Color.white, lineWidth: 3)
-                                                )
-                                                .frame(width: 150)
-                                        )
-                                        .scaleEffect(scaleFactor(geometry: geometry, itemGeometry: imageGeometry))
-                                }
-                            }
-                            .frame(width: geometry.size.width / 3)
-                            .onAppear {
-                                if let url = favoriteBooksImages[bookID] {
-                                    ImageCache.shared.getImage(for: url) { image in
-                                        loadedImages[bookID] = image
-                                    }
-                                }
-                            }
-                        }
-                        
-                        // 오른쪽 빈 이미지
-                        Color.clear.frame(width: geometry.size.width / 3)
-                    }
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            // 드래그 제스처로 스크롤 속도 및 방향을 제어
-                            let offset = value.translation.width
-                            let cardWidth = geometry.size.width / 3
-                            let currentIndex = Int((scrollViewOffset + cardWidth / 2) / cardWidth)
-                            let newOffset = CGFloat(currentIndex) * cardWidth + offset
-                            
-                            scrollViewOffset = max(0, min(newOffset, CGFloat(favoriteBooksImages.count) * cardWidth))
-                        }
-                )
-            }
-        }
-    }
-}
-
