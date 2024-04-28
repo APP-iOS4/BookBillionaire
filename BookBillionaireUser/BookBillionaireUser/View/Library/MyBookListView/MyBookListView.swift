@@ -122,7 +122,10 @@ struct MyBookListView: View {
     private func deleteMyBook(_ bookID: String) {
         if let book = myBooks.first(where: { $0.id == bookID}) {
             Task {
+                // 책 삭제
                 await bookService.deleteBook(book)
+                // 사용자의 myBooks 배열에서 책 ID 제거
+                await userService.removeBookFromUser(userID: userService.currentUser.id, bookID: book.id)
             }
         }
     }

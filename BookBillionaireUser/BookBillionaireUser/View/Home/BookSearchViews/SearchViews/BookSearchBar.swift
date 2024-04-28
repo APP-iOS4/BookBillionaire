@@ -68,14 +68,24 @@ struct BookSearchBar: View {
             if isSearching {
                 bookSearchList
             } else if searchViewModel.recentSearches.isEmpty {
-                VStack {
+                VStack(spacing: 10) {
                     Spacer()
+                    Circle()
+                        .stroke(lineWidth: 3)
+                        .overlay {
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(20)
+                        }
+                        .frame(width: 70, height: 70)
+                    
                     Text("최근 검색어 내역이 없습니다.")
-                        .foregroundColor(.gray)
-                        .font(.body)
-                        .multilineTextAlignment(.center)
                     Spacer()
                 }
+                .font(.title3)
+                .fontWeight(.medium)
+                .foregroundStyle(.gray)
             } else {
                 recentSearchList
             }
