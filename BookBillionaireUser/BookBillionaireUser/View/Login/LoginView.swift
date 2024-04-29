@@ -13,7 +13,6 @@ struct LoginView: View {
     @State var passwordText: String = ""
     
     @State private var isSignUpScreen: Bool = false
-    var PrivatePolicyUrl = Bundle.main.url(forResource: "PrivatePolicy", withExtension: "html")!
     @State private var isPrivateSheet: Bool = false
 
 
@@ -80,18 +79,18 @@ struct LoginView: View {
                 }
                 .padding(.bottom, 10)
                 
-                AppleSigninButton()
+               // AppleSigninButton()
                 
                 Spacer()
                 Spacer()
                 HStack{
-                    Text("가입 시,")
-                        Text("개인정보 처리방침")
-                            .underline()
-                            .onTapGesture {
-                                isPrivateSheet = true
-                            }
-                        Text("에 동의하게 됩니다.")
+//                    Text("가입 시,")
+//                        Text("개인정보 처리방침")
+//                            .underline()
+//                            .onTapGesture {
+//                                isPrivateSheet = true
+//                            }
+//                        Text("에 동의하게 됩니다.")
                 }
                 .font(.caption)
                 SpaceBox()
@@ -99,8 +98,8 @@ struct LoginView: View {
             .padding(.horizontal, 30)
             .navigationBarHidden(true)
             .sheet(isPresented: $isPrivateSheet, content: {
-                WebView(url: PrivatePolicyUrl)
-                    .padding(30)
+//                WebView(url: PrivatePolicyUrl)
+//                    .padding(30)
             })
             // Hide navigation bar
         }
