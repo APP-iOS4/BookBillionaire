@@ -49,8 +49,7 @@ struct BookDetailReviewRowView: View {
             }
             .padding(.vertical, 8)
             Text(comment.comment)
-
-            .font(.caption)
+                .font(.caption)
         }
         .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
         .background(Color.gray.opacity(0.1))
@@ -58,5 +57,5 @@ struct BookDetailReviewRowView: View {
 }
 
 #Preview {
-    BookDetailReviewRowView(user: User(nickName: "", address: "", email: "aaa@gmaail.com"), comment: Reviews.example)
+    BookDetailReviewRowView(user: User(nickName: "", address: "", email: ""), comment: Reviews.example)
 }

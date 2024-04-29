@@ -24,8 +24,6 @@ struct UnlogginedView: View {
                     .padding()
                     .padding(.top, 150)
                     .padding(.bottom, -20)
-                RLoginInfoView()
-                    .padding(.top, -30)
             }
             Button{
                 isShowingLoginSheet = true

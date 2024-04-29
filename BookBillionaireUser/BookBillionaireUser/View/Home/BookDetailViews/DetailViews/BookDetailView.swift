@@ -142,7 +142,7 @@ struct BookDetailView: View {
 
 #Preview {
     let book = Book(ownerID: "", ownerNickname: "", title: "브라질에서 주식을 사라 비가 내리면", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: .rentalAvailable)
-       let user = User(nickName: "닉네임", address: "주소")
+    let user = User(nickName: "닉네임", address: "주소", email: "")
        let bookDetailViewModel = BookDetailViewModel(book: book, user: user, rental: Rental(), rentalService: RentalService())
        
        return BookDetailView(book: book, user: user, bookDetailViewModel: bookDetailViewModel, selectedTab: .constant(.home))
@@ -260,7 +260,7 @@ extension BookDetailView {
     var bookDetailInfo: some View {
         VStack(alignment: .leading) {
             HStack {
-                if let url = URL(string: userService.currentUser.image ?? "") {
+                if let url = URL(string: user.image ?? "") {
                     AsyncImage(url: url) { image in
                         image
                             .resizable()
@@ -279,9 +279,9 @@ extension BookDetailView {
                         .frame(width: 30, height: 30)
                 }
                 VStack(alignment: .leading) {
-                    Text(userService.currentUser.nickName)
+                    Text(user.nickName)
                         .font(.body)
-                    Text(userService.currentUser.address)
+                    Text(user.address)
                         .font(.caption)
                 }
                 Spacer()

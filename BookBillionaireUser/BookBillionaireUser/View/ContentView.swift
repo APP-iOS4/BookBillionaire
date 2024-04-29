@@ -60,7 +60,7 @@ struct ContentView: View {
             }
             
             NavigationStack {
-                ProfileView2()
+                ProfileView()
             }
             .tag(Tab.profile)
             .tabItem {

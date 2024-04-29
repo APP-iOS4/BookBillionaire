@@ -11,78 +11,64 @@ import SwiftUI
 
 // 알림에 들어갈 타이틀과 설명
 enum AlertType {
-    case deleteList
-    case hidePost
+    case deleteBook
+    case overChat
+    case limitText
+    case login
     
     // Title 문구
     var title: String {
         switch self {
-        case .deleteList:
-            return "정말로 이 항목을 삭제하시겠습니까?"
-        case .hidePost:
-            return "게시물을 보관합니다."
+        case .deleteBook:
+            return "이 책을 정말로 삭제할까요?"
+        case .overChat:
+            return "채팅방을 나가시겠습니까?"
+        case .limitText:
+            return "글자 수 입력 제한 초과!"
+        case .login:
+            return "로그인이 필요해요!"
         }
-        
     }
+
     // Description 문구
     var notice: String {
         switch self {
-        case .deleteList:
-            return "한번 삭제한 항목은 되돌릴 수 없습니다."
-        case .hidePost:
-            return "게시물을 보관합니다."
+        case .deleteBook:
+            return "한 번 삭제하면 되돌릴 수 없어요. 계속할까요?"
+        case .overChat:
+            return "채팅을 나가면 상대방과의 대화가 종료돼요."
+        case .limitText:
+            return "글자 수가 너무 많아서 초과된 부분은 자동으로 삭제될 거예요."
+        case .login:
+           return "로그인하면 이 컨텐츠를 이용할 수 있어요."
         }
     }
 }
 
 struct CustomAlert: View {
     @Environment(\.colorScheme) var colorScheme
-    
+    var alertType: AlertType // Enum
+    var onConfirm: () -> Void
     var customAlertBackgroundColor: Color {
         colorScheme == .dark ? Color("BGColor") : Color.white
     }
-    
-    
-    var alertType: AlertType // Enum
-    
-    @Binding var isShowingDefualtAlert: Bool
-    @State var isShowingConfirmAlert: Bool = false
-    
-    // 상황별 confirm 문구
-    var confirmText: String {
-        switch alertType {
-        case .deleteList:
-            return "항목이 삭제 되었습니다."
-        case .hidePost:
-            return "게시물을 보관하였습니다."
-        }
-    }
-    
+
+
+    @Binding var isShowingCustomAlert: Bool
+
     var body: some View {
-        
-        if isShowingConfirmAlert {
-            confirmAlert
-            
-        } else if alertType == .hidePost {
-            confirmAlert
-        }
-        
-        else {
             defaultAlart
-        }
-        
-        
-        
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 
+//
+//#Preview {
+//    CustomAlert(alertType: .overChat, isShowingCustomAlert: .constant(true))
+//}
 
-#Preview {
-    CustomAlert(alertType: .hidePost, isShowingDefualtAlert: .constant(true))
-}
-
-// MARK: - 선택 Alert
+// MARK: - Alert
 extension CustomAlert {
     var defaultAlart: some View {
         ZStack {
@@ -99,46 +85,19 @@ extension CustomAlert {
                 
                 HStack {
                     Button {
-                        isShowingDefualtAlert.toggle()
+                        isShowingCustomAlert.toggle()
                     } label: {
                         Text("취소")
                     }
                     .buttonStyle(WhiteButtonStyle(height: 50.0))
                     
                     Button {
-                        isShowingConfirmAlert = true
+                      onConfirm()
                     } label: {
                         Text("확인")
                     }
                     .buttonStyle(AccentButtonStyle(height: 50.0))
                 }
-                
-            }
-            .padding(EdgeInsets(top: 40, leading: 30, bottom: 40, trailing: 30))
-            .background(customAlertBackgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .padding()
-        }
-    }
-}
-
-// MARK: - 확인 Alert
-extension CustomAlert {
-    var confirmAlert: some View {
-        ZStack {
-            Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center) {
-                Text(confirmText)
-                    .font(.title3)
-                    .padding(.bottom)
-                
-                Button {
-                    isShowingDefualtAlert = false
-                    isShowingConfirmAlert.toggle()
-                } label: {
-                    Text("확인")
-                }
-                .buttonStyle(AccentButtonStyle(height: 50.0))
                 
             }
             .padding(EdgeInsets(top: 40, leading: 30, bottom: 40, trailing: 30))
