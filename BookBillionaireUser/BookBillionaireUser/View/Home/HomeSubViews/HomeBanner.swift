@@ -31,7 +31,6 @@ struct HomeBanner: View {
                         .padding(.horizontal, 10)
                 }
             }
-            .frame(height: 200)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .overlay (
                 // 인디케이터

@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import BookBillionaireCore
 
-class HtmlLoadServicee: ObservableObject {
+class HtmlLoadService: ObservableObject {
     private let db = Firestore.firestore()
 
     func loadHtml(file: FileType) async -> [FileTypeHtml]{
