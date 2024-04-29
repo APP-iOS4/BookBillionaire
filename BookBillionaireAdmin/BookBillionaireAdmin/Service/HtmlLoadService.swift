@@ -1,6 +1,6 @@
 //
-//  HtmlLoadServicee.swift
-//  BookBillionaireUser
+//  HtmlLoadService.swift
+//  BookBillionaireAdmin
 //
 //  Created by YUJIN JEON on 4/29/24.
 //
