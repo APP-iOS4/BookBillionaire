@@ -36,8 +36,8 @@ struct RoomViewModel: Hashable { // 수정 예정
 }
 
 class ChatListViewModel: ObservableObject {
-    
     @Published var rooms: [RoomViewModel] = []
+    
     let db = Firestore.firestore().collection("chat")
     
     var receiverName: String = "임시 이름"

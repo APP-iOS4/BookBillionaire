@@ -32,7 +32,7 @@ struct CategroyEditView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     ForEach(books, id: \.self) { book in
-                        GridCellInfo(book: book)
+                        BookGridCellInfo(book: book)
                     }
                 }.padding(30)
             }

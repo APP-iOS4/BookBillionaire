@@ -27,7 +27,7 @@ struct BookListView: View {
                 ScrollView {
                     LazyVGrid(columns: gridLayout, spacing: 10) {
                         ForEach(bookService.books, id: \.self) { book in
-                            GridCell(book: book, selectedBooks: $selectedBooks)
+                            BookGridCell(book: book, selectedBooks: $selectedBooks)
                         }
                     }
                 }

@@ -50,8 +50,8 @@ class UserService: ObservableObject {
     }
     
     /// 유저 ID로 유저 정보를 불러오는 함수
-    func loadUserByID(_ UserID: String) -> User {
-        return users.filter { $0.id == UserID }.first ?? User()
+    func loadUserByID(_ UserID: String) -> [User] {
+        return users.filter { $0.id.contains(UserID) }
     }
     
     // 책 소유자 전체 유저 데이터 호출

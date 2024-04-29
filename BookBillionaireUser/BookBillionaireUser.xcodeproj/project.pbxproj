@@ -10,9 +10,9 @@
 		048C723E2BD2AB9300865316 /* ImageChache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C723D2BD2AB9300865316 /* ImageChache.swift */; };
 		048C72622BD77EDB00865316 /* ComplainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72612BD77EDB00865316 /* ComplainService.swift */; };
 		048C72A82BDBBCDE00865316 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C72A72BDBBCDE00865316 /* GoogleService-Info.plist */; };
-		048C72AA2BDBC88900865316 /* SwiftChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72A92BDBC88900865316 /* SwiftChartView.swift */; };
 		048C72BA2BDCE36700865316 /* RLoginInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72B92BDCE36700865316 /* RLoginInfoView.swift */; };
 		048C72BC2BDCE42300865316 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C72BB2BDCE42300865316 /* key.plist */; };
+		048C72C72BDF24F700865316 /* HtmlLoadServicee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72C62BDF24F700865316 /* HtmlLoadServicee.swift */; };
 		04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A3F2BBD29C1009FBF6E /* BookService.swift */; };
 		04A59A452BBD2F66009FBF6E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59A442BBD2F66009FBF6E /* BookBillionaireCore */; };
 		04A59A812BBE85C2009FBF6E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A802BBE85C2009FBF6E /* UserService.swift */; };
@@ -113,9 +113,9 @@
 		048C723D2BD2AB9300865316 /* ImageChache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChache.swift; sourceTree = "<group>"; };
 		048C72612BD77EDB00865316 /* ComplainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainService.swift; sourceTree = "<group>"; };
 		048C72A72BDBBCDE00865316 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		048C72A92BDBC88900865316 /* SwiftChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftChartView.swift; sourceTree = "<group>"; };
 		048C72B92BDCE36700865316 /* RLoginInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLoginInfoView.swift; sourceTree = "<group>"; };
 		048C72BB2BDCE42300865316 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = key.plist; sourceTree = SOURCE_ROOT; };
+		048C72C62BDF24F700865316 /* HtmlLoadServicee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlLoadServicee.swift; sourceTree = "<group>"; };
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		04A59A822BBE8876009FBF6E /* ServiceTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTestView.swift; sourceTree = "<group>"; };
@@ -166,7 +166,6 @@
 		35F057042BDB842D00409B21 /* NoticeDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDummy.swift; sourceTree = "<group>"; };
 		35F057062BDB857600409B21 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		35F057082BDB8AE900409B21 /* QAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAView.swift; sourceTree = "<group>"; };
-		35F056F72BDB51AB00409B21 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		35FCF1172BD76D3900A49EFD /* HomeBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBanner.swift; sourceTree = "<group>"; };
 		8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModelGoogle.swift; sourceTree = "<group>"; };
 		8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
@@ -234,6 +233,7 @@
 				04A59A8A2BBFB7F7009FBF6E /* RentalService.swift */,
 				048C723D2BD2AB9300865316 /* ImageChache.swift */,
 				048C72612BD77EDB00865316 /* ComplainService.swift */,
+				048C72C62BDF24F700865316 /* HtmlLoadServicee.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -552,11 +552,9 @@
 			children = (
 				354D6B312BDE863E00A29506 /* ProfileViewModel */,
 				35F057002BDB7F7000409B21 /* ProfileViews */,
-
 				EF0F74C22BBCFA9F00E37D0D /* ProfileView.swift */,
 				EF30EED22BCE153C00D929D9 /* EditProfileView.swift */,
 				EF30EED42BCE18E500D929D9 /* ProfilePhoto.swift */,
-				048C72A92BDBC88900865316 /* SwiftChartView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -777,17 +775,17 @@
 				8C85928C2BBD23BD0082C8B8 /* AuthViewModel.swift in Sources */,
 				356DFFA52BCD442A00007CDA /* BottomSheet.swift in Sources */,
 				8C5748B42BD886EE00F2554D /* CaemraBarcodeScanner.swift in Sources */,
-				048C72AA2BDBC88900865316 /* SwiftChartView.swift in Sources */,
 				04A59A932BBFCF6A009FBF6E /* APISearchBar.swift in Sources */,
 				04A59A8B2BBFB7F7009FBF6E /* RentalService.swift in Sources */,
 				35EAF2132BCF67F80051B38B /* CreateBookReviewView.swift in Sources */,
+				048C72C72BDF24F700865316 /* HtmlLoadServicee.swift in Sources */,
 				08C46D852BC2D7FA00DB6D1D /* ChatBubble.swift in Sources */,
 				EF0F74BB2BBCFA7100E37D0D /* BookSearchBar.swift in Sources */,
 				EF0F74D02BBD297B00E37D0D /* CategoryView.swift in Sources */,
 				04A59AC02BC68D79009FBF6E /* DatePickerView.swift in Sources */,
 				35EAF2182BCF67FE0051B38B /* Reviews.swift in Sources */,
 				EFCF32252BCCDF5400DA478F /* OverlayImage.swift in Sources */,
-				EFCF32252BCCDF5400DA478F /* CameraOverlay.swift in Sources */,
+				EFCF32252BCCDF5400DA478F /* OverlayImage.swift in Sources */,
 				EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */,
 				04A59A922BBFCF6A009FBF6E /* APISearchListRowView.swift in Sources */,
 				04A59A992BC19813009FBF6E /* WhiteButtonStyle.swift in Sources */,

@@ -6,24 +6,28 @@
 //
 
 import SwiftUI
+import BookBillionaireCore
 
 struct ComplainView: View {
     var topic: Topic
+    @State private var result: [User] = []
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: 0) {
-                Rectangle()
-                    .fill(Color.red)
-                    .frame(width: geometry.size.width / 3)
-                Rectangle()
-                    .fill(Color.blue)
-                    .frame(width: 2 * geometry.size.width / 3)
+                ZStack{
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(width: geometry.size.width / 3)
+                    VStack{
+                        
+                    }
+                }
+                ZStack{
+                    Rectangle()
+                        .fill(Color.blue)
+                        .frame(width: 2 * geometry.size.width / 3)
+                }
             }
         }
     }
-}
-
-
-#Preview {
-    ComplainView(topic: Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .complain))
 }

@@ -22,6 +22,8 @@ public enum TopicTitle {
     case complain
     case qna
     case notice
+    case chat
+    case policy
 }
 
 

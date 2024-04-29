@@ -8,7 +8,7 @@
 import SwiftUI
 import BookBillionaireCore
 
-struct GridCell: View {
+struct BookGridCell: View {
     var book: Book
     @State private var loadedImage: UIImage?
     @State var isToggle: Bool = false

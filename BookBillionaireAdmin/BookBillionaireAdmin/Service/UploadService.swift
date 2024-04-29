@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseStorage
 import FirebaseFirestore
+import BookBillionaireCore
 
 class UploadService : ObservableObject {
     var upLoadFile: FileTypeHtml = FileTypeHtml(type: .privatePolicy)

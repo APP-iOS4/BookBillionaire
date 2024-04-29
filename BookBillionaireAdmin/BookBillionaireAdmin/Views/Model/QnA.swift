@@ -11,7 +11,6 @@ struct QnA : Identifiable, Codable {
     var id: String
     var title: String
     var content: String
-    var image: String?
     var createAt: Date
     
     init(title: String, content: String) {

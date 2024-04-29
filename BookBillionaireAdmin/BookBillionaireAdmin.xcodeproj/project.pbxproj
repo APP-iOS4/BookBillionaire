@@ -30,9 +30,9 @@
 		048C72642BD7909E00865316 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72632BD7909E00865316 /* BookListView.swift */; };
 		048C72662BD7983B00865316 /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72652BD7983B00865316 /* ImageCacheService.swift */; };
 		048C726A2BD7D6BD00865316 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72692BD7D6BD00865316 /* UserListView.swift */; };
-		048C726E2BD8CBC900865316 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C726D2BD8CBC900865316 /* GridCell.swift */; };
+		048C726E2BD8CBC900865316 /* BookGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C726D2BD8CBC900865316 /* BookGridCell.swift */; };
 		048C72702BD8F8C800865316 /* CategroyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C726F2BD8F8C800865316 /* CategroyEditView.swift */; };
-		048C72722BD8FAB300865316 /* GridCellInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72712BD8FAB300865316 /* GridCellInfo.swift */; };
+		048C72722BD8FAB300865316 /* BookGridCellInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72712BD8FAB300865316 /* BookGridCellInfo.swift */; };
 		048C72742BD9256F00865316 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72732BD9256F00865316 /* NoticeView.swift */; };
 		048C72782BD93B9A00865316 /* QnAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72772BD93B9A00865316 /* QnAService.swift */; };
 		048C727B2BD93D6A00865316 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C727A2BD93D6A00865316 /* NoticeService.swift */; };
@@ -41,6 +41,10 @@
 		048C72962BDAB26D00865316 /* CountBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72952BDAB26D00865316 /* CountBoxView.swift */; };
 		048C72982BDB609500865316 /* BookAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72972BDB609500865316 /* BookAddView.swift */; };
 		3548B1E02BDE2C3B00A87844 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */; };
+		048C72B62BDBE9CE00865316 /* UserSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72B52BDBE9CE00865316 /* UserSearchBar.swift */; };
+		048C72B82BDCCB2E00865316 /* UserCSChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72B72BDCCB2E00865316 /* UserCSChatView.swift */; };
+		048C72BE2BDCE99600865316 /* HtmlDocUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72BD2BDCE99600865316 /* HtmlDocUploadView.swift */; };
+		048C72C22BDD4FC400865316 /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72C12BDD4FC400865316 /* UploadService.swift */; };
 		EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */; };
 		EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A32BBCF80C00E37D0D /* ContentView.swift */; };
 		EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */; };
@@ -66,9 +70,9 @@
 		048C72632BD7909E00865316 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
 		048C72652BD7983B00865316 /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		048C72692BD7D6BD00865316 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
-		048C726D2BD8CBC900865316 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		048C726D2BD8CBC900865316 /* BookGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookGridCell.swift; sourceTree = "<group>"; };
 		048C726F2BD8F8C800865316 /* CategroyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategroyEditView.swift; sourceTree = "<group>"; };
-		048C72712BD8FAB300865316 /* GridCellInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellInfo.swift; sourceTree = "<group>"; };
+		048C72712BD8FAB300865316 /* BookGridCellInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookGridCellInfo.swift; sourceTree = "<group>"; };
 		048C72732BD9256F00865316 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		048C72772BD93B9A00865316 /* QnAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnAService.swift; sourceTree = "<group>"; };
 		048C72792BD93C6700865316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +82,10 @@
 		048C72952BDAB26D00865316 /* CountBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountBoxView.swift; sourceTree = "<group>"; };
 		048C72972BDB609500865316 /* BookAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAddView.swift; sourceTree = "<group>"; };
 		3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		048C72B52BDBE9CE00865316 /* UserSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchBar.swift; sourceTree = "<group>"; };
+		048C72B72BDCCB2E00865316 /* UserCSChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCSChatView.swift; sourceTree = "<group>"; };
+		048C72BD2BDCE99600865316 /* HtmlDocUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlDocUploadView.swift; sourceTree = "<group>"; };
+		048C72C12BDD4FC400865316 /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
 		EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBillionaireAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookBillionaireAdminApp.swift; sourceTree = "<group>"; };
 		EF0F74A32BBCF80C00E37D0D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,6 +146,7 @@
 				048C72652BD7983B00865316 /* ImageCacheService.swift */,
 				048C72772BD93B9A00865316 /* QnAService.swift */,
 				048C727A2BD93D6A00865316 /* NoticeService.swift */,
+				048C72C12BDD4FC400865316 /* UploadService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -153,9 +162,10 @@
 			isa = PBXGroup;
 			children = (
 				048C724B2BD421B000865316 /* AccentButtonStyle.swift */,
-				048C726D2BD8CBC900865316 /* GridCell.swift */,
-				048C72712BD8FAB300865316 /* GridCellInfo.swift */,
+				048C726D2BD8CBC900865316 /* BookGridCell.swift */,
+				048C72712BD8FAB300865316 /* BookGridCellInfo.swift */,
 				048C72952BDAB26D00865316 /* CountBoxView.swift */,
+				048C72B52BDBE9CE00865316 /* UserSearchBar.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -191,8 +201,11 @@
 		048C72A42BDB714E00865316 /* CS */ = {
 			isa = PBXGroup;
 			children = (
+				048C72B12BDBE40100865316 /* ComplainVIew.swift */,
 				048C72732BD9256F00865316 /* NoticeView.swift */,
 				040216782BCE19D500A7C922 /* QnAView.swift */,
+				048C72B72BDCCB2E00865316 /* UserCSChatView.swift */,
+				048C72BD2BDCE99600865316 /* HtmlDocUploadView.swift */,
 			);
 			path = CS;
 			sourceTree = "<group>";
@@ -207,6 +220,7 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+
 		3548B1DC2BDE29E400A87844 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,15 +347,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */,
-				048C72812BD9529A00865316 /* ComplainView.swift in Sources */,
-				048C726E2BD8CBC900865316 /* GridCell.swift in Sources */,
+				048C726E2BD8CBC900865316 /* BookGridCell.swift in Sources */,
 				048C72962BDAB26D00865316 /* CountBoxView.swift in Sources */,
+				048C72B62BDBE9CE00865316 /* UserSearchBar.swift in Sources */,
+				048C72BE2BDCE99600865316 /* HtmlDocUploadView.swift in Sources */,
 				0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */,
 				040216772BCE19A300A7C922 /* DashBoardView.swift in Sources */,
+				048C72B22BDBE40100865316 /* ComplainVIew.swift in Sources */,
 				048C72562BD6337700865316 /* SideBarView.swift in Sources */,
 				EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */,
 				048C72642BD7909E00865316 /* BookListView.swift in Sources */,
 				048C72422BD4059200865316 /* UserService.swift in Sources */,
+				048C72B82BDCCB2E00865316 /* UserCSChatView.swift in Sources */,
 				048C726A2BD7D6BD00865316 /* UserListView.swift in Sources */,
 				048C724C2BD421B000865316 /* AccentButtonStyle.swift in Sources */,
 				048C72522BD6291400865316 /* SideBarGroup.swift in Sources */,
@@ -358,9 +375,10 @@
 				048C727B2BD93D6A00865316 /* NoticeService.swift in Sources */,
 				048C72982BDB609500865316 /* BookAddView.swift in Sources */,
 				048C72502BD628E400865316 /* SideBarService.swift in Sources */,
+				048C72C22BDD4FC400865316 /* UploadService.swift in Sources */,
 				048C724E2BD5E75A00865316 /* BookService.swift in Sources */,
 				048C72542BD62C3400865316 /* Topic.swift in Sources */,
-				048C72722BD8FAB300865316 /* GridCellInfo.swift in Sources */,
+				048C72722BD8FAB300865316 /* BookGridCellInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

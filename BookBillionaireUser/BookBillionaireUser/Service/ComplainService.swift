@@ -13,7 +13,7 @@ class ComplainService: ObservableObject {
     @Published var Complains: [Complain] = []
     private let complainRef = Firestore.firestore().collection("complains")
     
-    /// 책을 등록하는 함수
+    /// 컴플레인을 등록하는 함수
     func registerComplain(_ complain: Complain) {
         do {
             try complainRef.document(complain.id).setData(from: complain)
