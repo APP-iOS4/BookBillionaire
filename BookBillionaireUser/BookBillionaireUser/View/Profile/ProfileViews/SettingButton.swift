@@ -11,7 +11,7 @@ struct SettingButton: View {
     @State private var isGoToNotice: Bool = false
     @State private var isGoToQandA: Bool = false
     @State private var isGoToPolicy: Bool = false
-    @State private var PrivatePolicyUrl = Bundle.main.url(forResource: "PrivatePolicy", withExtension: "html")!
+    @Binding var sholudLogout: Bool
     var buttonType: SettingMenuType
     
     var body: some View {
@@ -35,7 +35,7 @@ struct SettingButton: View {
         
         }
         .navigationDestination(isPresented: $isGoToPolicy) {
-            WebView(url: PrivatePolicyUrl)
+
         }
     }
     
@@ -48,11 +48,11 @@ struct SettingButton: View {
         case .policy:
             isGoToPolicy = true
         case .logout:
-            isGoToPolicy = true
+            sholudLogout = true
         }
     }
 }
 
 #Preview {
-    SettingButton(buttonType: .notice)
+    SettingButton(sholudLogout: .constant(false), buttonType: .notice)
 }
