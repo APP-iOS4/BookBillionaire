@@ -294,8 +294,6 @@ extension BookDetailView {
                         await fetchRentalInfo(from: book.id)
                     }
                 }
-
-                
             }
             
             Divider()

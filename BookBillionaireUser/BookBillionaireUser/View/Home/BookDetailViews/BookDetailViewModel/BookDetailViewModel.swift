@@ -23,10 +23,14 @@ class BookDetailViewModel: ObservableObject {
     }
     
     func formattedRentalTime() -> String {
-        let startDateString = dateFormatter.string(from: rentalTime.0)
-        let endDateString = dateFormatter.string(from: rentalTime.1)
         let totalDays = calculateTotalDays()
-        return "\(startDateString) - \(endDateString) (\(totalDays)일)"
+        if totalDays == 0 {
+            return "1일 미만"
+        } else {
+            let startDateString = dateFormatter.string(from: rentalTime.0)
+            let endDateString = dateFormatter.string(from: rentalTime.1)
+            return "\(startDateString) - \(endDateString) (\(totalDays)일)"
+        }
     }
 
 }
