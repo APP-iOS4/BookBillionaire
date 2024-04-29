@@ -10,6 +10,7 @@ import Foundation
 public struct User: Identifiable, Codable {
     public var id: String
     public var nickName: String
+    public var email: String
     public var address: String
     public var image: String?
     public var point: Int?
@@ -23,14 +24,16 @@ public struct User: Identifiable, Codable {
         self.nickName = ""
         self.address = ""
         self.image = ""
+        self.email = ""
     }
     
-    public init(nickName: String, address: String, image: String? = nil, point: Int? = 0, rentalBooks: [String]? = []) {
+    public init(nickName: String, address: String, image: String? = nil, point: Int? = 0, rentalBooks: [String]? = [], email: String) {
         self.id = UUID().uuidString
         self.nickName = nickName
         self.address = address
         self.image = image
         self.point = point
+        self.email = email
     }
     
     public init(from decoder: any Decoder) throws {
@@ -41,6 +44,7 @@ public struct User: Identifiable, Codable {
         self.image = try container.decodeIfPresent(String.self, forKey: .image)
         self.myBooks = try container.decodeIfPresent([String].self, forKey: .myBooks) ?? [""]
         self.rentalBooks = try container.decodeIfPresent([String].self, forKey: .rentalBooks) ?? [""]
+        self.email = try container.decode(String.self, forKey: .email)
     }
 }
 
@@ -52,6 +56,5 @@ public enum UserCodingKeys: String, CodingKey {
     case pointUserID
     case myBooks
     case rentalBooks
+    case email = "emailEqualtoAuth"
 }
-
-
