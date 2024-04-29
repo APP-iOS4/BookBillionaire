@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		048C723E2BD2AB9300865316 /* ImageChache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C723D2BD2AB9300865316 /* ImageChache.swift */; };
 		048C72622BD77EDB00865316 /* ComplainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72612BD77EDB00865316 /* ComplainService.swift */; };
-		048C72A82BDBBCDE00865316 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C72A72BDBBCDE00865316 /* GoogleService-Info.plist */; };
 		048C72BA2BDCE36700865316 /* RLoginInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72B92BDCE36700865316 /* RLoginInfoView.swift */; };
-		048C72BC2BDCE42300865316 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048C72BB2BDCE42300865316 /* key.plist */; };
 		048C72C72BDF24F700865316 /* HtmlLoadServicee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72C62BDF24F700865316 /* HtmlLoadServicee.swift */; };
 		04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A59A3F2BBD29C1009FBF6E /* BookService.swift */; };
 		04A59A452BBD2F66009FBF6E /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04A59A442BBD2F66009FBF6E /* BookBillionaireCore */; };
@@ -47,7 +45,6 @@
 		08C46D892BC2EC2A00DB6D1D /* ChatPlusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D882BC2EC2A00DB6D1D /* ChatPlusItem.swift */; };
 		35082EFC2BCCDF140008AA90 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35082EFB2BCCDF140008AA90 /* SearchViewModel.swift */; };
 		353704572BCD183D00E6F531 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353704562BCD183D00E6F531 /* CustomAlert.swift */; };
-		3548B1DE2BDE2A1300A87844 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3548B1DD2BDE2A1300A87844 /* GoogleService-Info.plist */; };
 		354D6B302BDE825C00A29506 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354D6B2F2BDE825C00A29506 /* ProfileViewModel.swift */; };
 		35537C582BBD8CA800FE8354 /* BookSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35537C572BBD8CA800FE8354 /* BookSearchView.swift */; };
 		35537C5A2BBD8CB400FE8354 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35537C592BBD8CB400FE8354 /* HomeView.swift */; };
@@ -76,7 +73,6 @@
 		8C5748B32BD886EE00F2554D /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B02BD886EE00F2554D /* BarcodeScannerViewController.swift */; };
 		8C5748B42BD886EE00F2554D /* CaemraBarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B12BD886EE00F2554D /* CaemraBarcodeScanner.swift */; };
 		8C5748B62BD8870400F2554D /* SignUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B52BD8870400F2554D /* SignUpDetailView.swift */; };
-		8C5748CE2BDB2DEA00F2554D /* AuthViewModelApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748CD2BDB2DEA00F2554D /* AuthViewModelApple.swift */; };
 		8C85928C2BBD23BD0082C8B8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */; };
 		8C85928D2BBD23BD0082C8B8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85928A2BBD23BD0082C8B8 /* SignUpView.swift */; };
 		8C85928E2BBD23BD0082C8B8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85928B2BBD23BD0082C8B8 /* LoginView.swift */; };
@@ -95,8 +91,6 @@
 		EF1AA4EE2BBE7BCC00B248A7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4ED2BBE7BCC00B248A7 /* GoogleSignIn */; };
 		EF1AA4F02BBE7BCC00B248A7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4EF2BBE7BCC00B248A7 /* GoogleSignInSwift */; };
 		EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */; };
-		EF30EED32BCE153C00D929D9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF30EED22BCE153C00D929D9 /* EditProfileView.swift */; };
-		EF30EED52BCE18E500D929D9 /* ProfilePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF30EED42BCE18E500D929D9 /* ProfilePhoto.swift */; };
 		EF6C38A32BCFD3ED00098E18 /* RentalCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C38A22BCFD3ED00098E18 /* RentalCreateView.swift */; };
 		EF6C38A52BCFE60D00098E18 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C38A42BCFE60D00098E18 /* MapView.swift */; };
 		EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7A2B942BBF99A00068D100 /* CameraView.swift */; };
@@ -105,6 +99,10 @@
 		EF8178CD2BBD749700ADAE2E /* RentalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8178CC2BBD749700ADAE2E /* RentalInfoView.swift */; };
 		EF88A1842BC4E6AC00E0EEAA /* BookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */; };
 		EFCF32252BCCDF5400DA478F /* OverlayImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF32242BCCDF5400DA478F /* OverlayImage.swift */; };
+		EFE1D8132BDF2DC7005268F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFE1D8112BDF2DC7005268F1 /* GoogleService-Info.plist */; };
+		EFE1D8142BDF2DC7005268F1 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFE1D8122BDF2DC7005268F1 /* key.plist */; };
+		EFE1D8172BDF2DD5005268F1 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE1D8152BDF2DD5005268F1 /* EditProfileView.swift */; };
+		EFE1D8182BDF2DD5005268F1 /* ProfilePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE1D8162BDF2DD5005268F1 /* ProfilePhoto.swift */; };
 		EFF5583A2BCABF9E003DC096 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF558392BCABF9E003DC096 /* Toast.swift */; };
 		EFFF88512BDA333E00676424 /* RentalBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF88502BDA333E00676424 /* RentalBookDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -112,9 +110,7 @@
 /* Begin PBXFileReference section */
 		048C723D2BD2AB9300865316 /* ImageChache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChache.swift; sourceTree = "<group>"; };
 		048C72612BD77EDB00865316 /* ComplainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainService.swift; sourceTree = "<group>"; };
-		048C72A72BDBBCDE00865316 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		048C72B92BDCE36700865316 /* RLoginInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLoginInfoView.swift; sourceTree = "<group>"; };
-		048C72BB2BDCE42300865316 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = key.plist; sourceTree = SOURCE_ROOT; };
 		048C72C62BDF24F700865316 /* HtmlLoadServicee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlLoadServicee.swift; sourceTree = "<group>"; };
 		04A59A3F2BBD29C1009FBF6E /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		04A59A802BBE85C2009FBF6E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -143,7 +139,6 @@
 		08C46D882BC2EC2A00DB6D1D /* ChatPlusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPlusItem.swift; sourceTree = "<group>"; };
 		35082EFB2BCCDF140008AA90 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		353704562BCD183D00E6F531 /* CustomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
-		3548B1DD2BDE2A1300A87844 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		354D6B2F2BDE825C00A29506 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		35537C572BBD8CA800FE8354 /* BookSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookSearchView.swift; sourceTree = "<group>"; };
 		35537C592BBD8CB400FE8354 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -189,8 +184,6 @@
 		EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		EF1AA4DC2BBE7B3600B248A7 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreateView.swift; sourceTree = "<group>"; };
-		EF30EED22BCE153C00D929D9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
-		EF30EED42BCE18E500D929D9 /* ProfilePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoto.swift; sourceTree = "<group>"; };
 		EF6C38A22BCFD3ED00098E18 /* RentalCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCreateView.swift; sourceTree = "<group>"; };
 		EF6C38A42BCFE60D00098E18 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EF7A2B942BBF99A00068D100 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -199,6 +192,10 @@
 		EF8178CC2BBD749700ADAE2E /* RentalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalInfoView.swift; sourceTree = "<group>"; };
 		EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookItem.swift; sourceTree = "<group>"; };
 		EFCF32242BCCDF5400DA478F /* OverlayImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayImage.swift; sourceTree = "<group>"; };
+		EFE1D8112BDF2DC7005268F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EFE1D8122BDF2DC7005268F1 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../key.plist; sourceTree = "<group>"; };
+		EFE1D8152BDF2DD5005268F1 /* EditProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		EFE1D8162BDF2DD5005268F1 /* ProfilePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhoto.swift; sourceTree = "<group>"; };
 		EFF558392BCABF9E003DC096 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		EFFF88502BDA333E00676424 /* RentalBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -429,8 +426,8 @@
 			children = (
 				35F056FC2BDB69E500409B21 /* ProfileView.swift */,
 				35F056FE2BDB7B0F00409B21 /* SettingButton.swift */,
-				EF30EED22BCE153C00D929D9 /* EditProfileView.swift */,
-				EF30EED42BCE18E500D929D9 /* ProfilePhoto.swift */,
+				EFE1D8152BDF2DD5005268F1 /* EditProfileView.swift */,
+				EFE1D8162BDF2DD5005268F1 /* ProfilePhoto.swift */,
 				35BADAAD2BDBEDF500E04ED6 /* QAViews */,
 				35F057012BDB835100409B21 /* NoticeViews */,
 			);
@@ -504,13 +501,12 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
-
-				048C72BB2BDCE42300865316 /* key.plist */,
-				048C72A72BDBBCDE00865316 /* GoogleService-Info.plist */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				EF1AA4DD2BBE7B3600B248A7 /* Store */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
 				8C76334E2BBD3DCF002EF297 /* Info.plist */,
+				EFE1D8112BDF2DC7005268F1 /* GoogleService-Info.plist */,
+				EFE1D8122BDF2DC7005268F1 /* key.plist */,
 				EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */,
 				EF0F74B02BBCF99000E37D0D /* View */,
 				EF0F748B2BBCF7C700E37D0D /* Assets.xcassets */,
@@ -552,9 +548,6 @@
 			children = (
 				354D6B312BDE863E00A29506 /* ProfileViewModel */,
 				35F057002BDB7F7000409B21 /* ProfileViews */,
-				EF0F74C22BBCFA9F00E37D0D /* ProfileView.swift */,
-				EF30EED22BCE153C00D929D9 /* EditProfileView.swift */,
-				EF30EED42BCE18E500D929D9 /* ProfilePhoto.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -734,14 +727,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
+				EFE1D8142BDF2DC7005268F1 /* key.plist in Resources */,
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
-
-
-				048C72BC2BDCE42300865316 /* key.plist in Resources */,
 				EF0F748C2BBCF7C700E37D0D /* Assets.xcassets in Resources */,
-				048C72A82BDBBCDE00865316 /* GoogleService-Info.plist in Resources */,
-
+				EFE1D8132BDF2DC7005268F1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,9 +776,9 @@
 				EFCF32252BCCDF5400DA478F /* OverlayImage.swift in Sources */,
 				EFCF32252BCCDF5400DA478F /* OverlayImage.swift in Sources */,
 				EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */,
+				EFE1D8172BDF2DD5005268F1 /* EditProfileView.swift in Sources */,
 				04A59A922BBFCF6A009FBF6E /* APISearchListRowView.swift in Sources */,
 				04A59A992BC19813009FBF6E /* WhiteButtonStyle.swift in Sources */,
-				EF30EED32BCE153C00D929D9 /* EditProfileView.swift in Sources */,
 				EF0F748A2BBCF7C500E37D0D /* ContentView.swift in Sources */,
 				088260462BBD2B85007BEA25 /* PromiseConfirmView.swift in Sources */,
 				EF88A1842BC4E6AC00E0EEAA /* BookItem.swift in Sources */,
@@ -811,7 +800,6 @@
 				35F057092BDB8AE900409B21 /* QAView.swift in Sources */,
 				04A59A402BBD29C1009FBF6E /* BookService.swift in Sources */,
 				04A59A952BC143E7009FBF6E /* SpaceBox.swift in Sources */,
-				EF30EED52BCE18E500D929D9 /* ProfilePhoto.swift in Sources */,
 				8C5748B62BD8870400F2554D /* SignUpDetailView.swift in Sources */,
 				35F056F92BDB626900409B21 /* BookDetailViewModel.swift in Sources */,
 				EF1AA4DF2BBE7B3600B248A7 /* UserStore.swift in Sources */,
@@ -823,6 +811,7 @@
 				04A59AB42BC4FDE0009FBF6E /* UnlogginedView.swift in Sources */,
 				35F057032BDB837000409B21 /* NoticeItem.swift in Sources */,
 				35EAF2172BCF67FE0051B38B /* ReviewViewModel.swift in Sources */,
+				EFE1D8182BDF2DD5005268F1 /* ProfilePhoto.swift in Sources */,
 				048C72BA2BDCE36700865316 /* RLoginInfoView.swift in Sources */,
 				35537C5A2BBD8CB400FE8354 /* HomeView.swift in Sources */,
 				08C46D812BC2D61300DB6D1D /* ChatListViewModel.swift in Sources */,
