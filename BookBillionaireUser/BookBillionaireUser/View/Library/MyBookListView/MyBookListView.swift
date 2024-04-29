@@ -105,6 +105,9 @@ struct MyBookListView: View {
                     .padding()
                     SpaceBox()
                 }
+                .refreshable {
+                    bookService.fetchBooks()
+                }
             }
         }
         .fullScreenCover(item: $selectedBook) { bookToEdit in

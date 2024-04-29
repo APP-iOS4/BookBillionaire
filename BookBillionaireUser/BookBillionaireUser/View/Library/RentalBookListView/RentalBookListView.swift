@@ -12,14 +12,14 @@ struct RentalBookListView: View {
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var rentalService: RentalService
     @EnvironmentObject var bookService: BookService
-    var myRentals: [Rental] {
+    var rentalBooks: [Rental] {
         return rentalService.filterByBorrowerID(userService.currentUser.id)
     }
     
     var body: some View {
         VStack {
             // 빌린도서 목록
-            if myRentals.isEmpty {
+            if rentalBooks.isEmpty {
                 VStack(spacing: 10) {
                     Spacer()
                     Circle()
@@ -42,10 +42,10 @@ struct RentalBookListView: View {
             } else {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(myRentals) { rental in
+                        ForEach(rentalBooks) { rental in
                             if let book = bookService.books.first(where: { $0.id == rental.bookID }) {
                                 NavigationLink {
-                                    RentalBookDetailView(book: book, rental: rental)
+                                    RentalBookDetailView(book: book, rental: rental, user: userService.loadUserByID(book.ownerID))
                                 } label: {
                                     BookItem(book: book)
                                 }
@@ -55,10 +55,14 @@ struct RentalBookListView: View {
                     .padding()
                     SpaceBox()
                 }
+                .refreshable {
+                    rentalService.fetchRentals()
+                }
             }
         }
         .onAppear {
-            print("\(myRentals)")
+            rentalService.fetchRentals()
+            print("\(rentalBooks)")
         }
     }
 }

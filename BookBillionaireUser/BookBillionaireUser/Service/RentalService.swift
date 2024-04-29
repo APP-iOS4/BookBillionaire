@@ -82,6 +82,12 @@ class RentalService: ObservableObject {
     func filterByBorrowerID(_ borrowerID: String) -> [Rental] {
         return rentals.filter { $0.bookBorrower == borrowerID }
     }
+    
+    func fetchRentals() {
+        Task {
+            await loadRentals()
+        }
+    }
 }
 
 
