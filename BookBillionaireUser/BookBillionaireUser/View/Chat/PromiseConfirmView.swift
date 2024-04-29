@@ -16,8 +16,10 @@ struct PromiseConfirmView: View {
     @State var selectedDate = Date()
     @Environment (\.dismiss) private var dismiss
     @State var rentalService: RentalService = RentalService()
-    var user: User
+    var user: String
+    let room: RoomViewModel
     @State var book: Book
+    @EnvironmentObject var userService : UserService
 
     @Environment(\.presentationMode) var presentationMode
     
@@ -108,9 +110,9 @@ struct PromiseConfirmView: View {
 
 //                    HStack {
 //                        Text("장소")
-//                        
+//
 //                        Spacer()
-//                        
+//
 //                        Button {
 //                            // 맵 뷰 토글하기
 //                            mapViewShowing.toggle()
@@ -126,9 +128,8 @@ struct PromiseConfirmView: View {
 //                    }
 
                 }
-                .navigationBarTitle("\(user.nickName)님과의 약속")
+                .navigationBarTitle("\(roomName(users: room.room.users))님과의 약속")
                 .navigationBarTitleDisplayMode(.inline)
-                //  .toolbarTitleDisplayMode(.inline) //17버전에서 사용가능
                 .listStyle(.inset)
             }
             
@@ -141,6 +142,7 @@ struct PromiseConfirmView: View {
             }
             .buttonStyle(AccentButtonStyle())
             .padding(.horizontal, 30)
+            .padding(.bottom, 15)
         }
         
     }
@@ -177,6 +179,14 @@ struct PromiseConfirmView: View {
             await rentalService.updateRental(book.rental, rentalTime: combine(date: selectedDate, withTime: selectedTime) ?? Date())
             book.rentalState = .renting
         }
+    }
+    private func roomName(users: [String]) -> String {
+        for user in users {
+            if user != userService.currentUser.id {
+                return userService.loadUserByID(user).nickName
+            }
+        }
+        return "사용자 이름없음"
     }
 }
 

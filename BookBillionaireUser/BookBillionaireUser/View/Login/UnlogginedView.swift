@@ -19,6 +19,7 @@ struct UnlogginedView: View {
                 .resizable()
                 .scaledToFit()
             ZStack{
+                RLoginInfoView()
                 RoundedRectangle(cornerRadius: 25.0)
                     .foregroundStyle(Color.accentColor)
                     .padding()

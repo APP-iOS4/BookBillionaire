@@ -25,14 +25,13 @@ struct BookDetailView: View {
     @State private var loadedImage: UIImage?
     //채팅
     @State var roomListVM: ChatListViewModel = ChatListViewModel()
-    @State var roomModel: ChatRoom = ChatRoom(id: "", receiverName: "", lastTimeStamp: Date(), lastMessage: "", users: [])
     @State private var isShowingSheet: Bool = false
     @State private var isFavorite: Bool = false
     @State private var showLoginAlert = false
     @State private var isChatViewPresented = false
     @Binding var selectedTab: ContentView.Tab
-    @State private var roomId: String? // 생성한 방의 id를 담는 변수
-    
+    @State private var chatRoomId: String?
+
     
     var body: some View {
         ScrollView {
@@ -48,17 +47,15 @@ struct BookDetailView: View {
                         Button {
                             switch authViewModel.state {
                             case .loggedIn:
-                                roomListVM.createRoom { newRoomId in
-                                    if let newRoomId = newRoomId {
-                                        // 채팅방이 성공적으로 생성되었을 때의 처리
-                                        print("성공적으로 방을 생성했습니다. 방 ID: \(newRoomId)")
-                                        self.roomId = newRoomId
-                                        // 현재 채팅룸의 아이디 값
-                                        selectedTab = .chat
-                                    } else {
-                                        print("방을 생성하는 데 실패했습니다.")
-                                    }
+                                selectedTab = .chat
+                                roomListVM.createRoom(book: book) { roomId in
+                                    self.chatRoomId = roomId
+                                    isChatViewPresented = true
+                                    print(chatRoomId ?? "")
+                                    print(user.nickName)
+                                    print([user.id, book.ownerID])
                                 }
+                                
                             case .loggedOut:
                                 showLoginAlert = true
                             }
