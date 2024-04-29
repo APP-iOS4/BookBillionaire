@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import BookBillionaireCore
+import FirebaseStorage
 
 class UserService: ObservableObject {
     @Published var users: [User] = []
@@ -45,6 +46,19 @@ class UserService: ObservableObject {
         }
     }
     
+    // 유저의 myBooks 배열에서 특정 책 ID를 제거하는 함수
+    func removeBookFromUser(userID: String, bookID: String) async {
+        let userRef = allUserRef.document(userID)
+        do {
+            try await userRef.updateData([
+                "myBooks" : FieldValue.arrayRemove([bookID])
+            ])
+            print("책 ID 제거 성공🧚‍♀️")
+        } catch let error {
+            print("\(#function) 유저정보에서 책 ID를 제거하는 걸 실패했음☄️ \(error)")
+        }
+    }
+
     /// 유저 ID로 유저 정보를 불러오는 함수
     func loadUserByID(_ UserID: String) -> User {
         return users.filter { $0.id == UserID }.first ?? User()
@@ -70,7 +84,9 @@ class UserService: ObservableObject {
             print("Error updating user: \(error)")
         }
     }
-   
+    
+    // 특정 다른 사용자들의 정보를 참조 하려면 document(userID)로 다른 유저들의 상태 업데이트
+    // 로그인한 사용자(예: 프로필 같이 내 정보)의 상태를 업데이트 하려면 document(currentUser.id)로 바꿔서 사용하시길
     func toggleFavoriteStatus(bookID: String) async -> Bool? {
         let userRef = allUserRef.document(currentUser.id)
         do {
@@ -100,11 +116,11 @@ class UserService: ObservableObject {
             }
             
         } catch let error {
-            print("Error updating user: \(error)")
+            print("즐겨찾기 업데이트 실패: \(error)")
             return nil
         }
     }
-  
+    
     func checkFavoriteStatus(bookID: String) async -> Bool {
         let userRef = allUserRef.document(currentUser.id)
         do {
@@ -116,8 +132,71 @@ class UserService: ObservableObject {
                 return false
             }
         } catch {
-            print("Error checking favorite status: \(error)")
+            print("즐겨찾기 상태 여부 받아오기 실패: \(error)")
             return false
         }
     }
+    
+    func getFavoriteBooksCount(userID: String) async -> Int {
+        let userRef = allUserRef.document(currentUser.id)
+        do {
+            let userData = try await userRef.getDocument()
+            if let favorites = userData["favorite"] as? [String] {
+                return favorites.count
+            } else {
+                return 0
+            }
+        } catch {
+            print("즐겨찾기 개수 가져오기 실패: \(error)")
+            return 0
+        }
+    }
+    
+    func getFavoriteBooksImages(userID: String) async -> [String: URL] {
+        var images: [String: URL] = [:]
+        let userRef = allUserRef.document(currentUser.id)
+        let booksRef = Firestore.firestore().collection("books") // 책 정보를 저장하는 데이터베이스
+        do {
+            let userData = try await userRef.getDocument()
+            if let favorites = userData["favorite"] as? [String] {
+                for bookID in favorites {
+                    let bookData = try await booksRef.document(bookID).getDocument()
+                    if let thumbnail = bookData["thumbnail"] as? String {
+                        if thumbnail.hasPrefix("http://") || thumbnail.hasPrefix("https://") {
+                            images[bookID] = URL(string: thumbnail)
+                        } else {
+                            // Firebase Storage 경로 URL 다운로드
+                            let storageRef = Storage.storage().reference(withPath: thumbnail)
+                            let url = try await storageRef.downloadURL()
+                            images[bookID] = url
+                        }
+                    }
+                }
+            }
+        } catch {
+            print("책 이미지 불러오기 실패: \(error)")
+        }
+        return images
+    }
+    
+
+    func getMyBookCount(userID: String) async -> Int {
+        let userRef = allUserRef.document(currentUser.id)
+        do {
+            let userData = try await userRef.getDocument()
+            // "myBooks" 필드를 가져와서 해당 필드가 배열인지 확인 후 카운트
+            if let myBooks = userData["myBooks"] as? [String] {
+                return myBooks.count
+            } else {
+                return 0
+            }
+        } catch {
+            print("보유한 도서의 수를 받아오는데 실패: \(error)")
+            return 0
+        }
+    }
+
+
 }
+
+

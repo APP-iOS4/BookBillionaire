@@ -12,6 +12,7 @@ struct BookSearchBar: View {
     @State var isSearching = false
     @Binding var searchBookText: String
     @Binding var filteredBooks: [Book]
+    @StateObject private var bookDetailViewModel = BookDetailViewModel(book: Book(), user: User(), rental: Rental(), rentalService: RentalService())
     @StateObject private var searchViewModel = SearchViewModel()
     @EnvironmentObject var userService: UserService
     @Binding var selectedTab: ContentView.Tab
@@ -67,14 +68,24 @@ struct BookSearchBar: View {
             if isSearching {
                 bookSearchList
             } else if searchViewModel.recentSearches.isEmpty {
-                VStack {
+                VStack(spacing: 10) {
                     Spacer()
+                    Circle()
+                        .stroke(lineWidth: 3)
+                        .overlay {
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(20)
+                        }
+                        .frame(width: 70, height: 70)
+                    
                     Text("최근 검색어 내역이 없습니다.")
-                        .foregroundColor(.gray)
-                        .font(.body)
-                        .multilineTextAlignment(.center)
                     Spacer()
                 }
+                .font(.title3)
+                .fontWeight(.medium)
+                .foregroundStyle(.gray)
             } else {
                 recentSearchList
             }
@@ -150,7 +161,9 @@ extension BookSearchBar {
                 if !filteredBooks.isEmpty {
                     ForEach(filteredBooks) { book in
                         NavigationLink {
-                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), selectedTab: $selectedTab)
+                            let bookDetailViewModel = BookDetailViewModel(book: book, user: userService.loadUserByID(book.ownerID), rental: Rental(), rentalService: RentalService())
+                            
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: bookDetailViewModel, selectedTab: $selectedTab)
                         } label: {
                             BookItem(book: book)
                         }
