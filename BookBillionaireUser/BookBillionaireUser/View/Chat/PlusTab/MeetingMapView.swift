@@ -1,8 +1,8 @@
 //
 //  MeetingMapView.swift
-//  BookBillionaire
+//  BookBillionaireUser
 //
-//  Created by 최준영 on 3/20/24.
+//  Created by 최준영 on 4/29/24.
 //
 
 import SwiftUI
