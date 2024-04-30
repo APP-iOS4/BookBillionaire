@@ -12,19 +12,20 @@ struct RentalCreateView: View {
     @State var book: Book
     @State var rental: Rental = Rental()
     @EnvironmentObject var bookService: BookService
-    let rentalService: RentalService = RentalService()
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var rentalService: RentalService
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack {
+        ScrollView {
             HStack {
                 BookItem(book: book)
                 Spacer()
             }
+            .padding()
             RentalInfoView(rental: $rental)
             Button {
+                registerRental()
                 updateBook()
-                _ = rentalService.registerRental(rental)
                 dismiss()
             } label: {
                 Text("완료")
@@ -33,15 +34,37 @@ struct RentalCreateView: View {
             .padding()
             Spacer()
         }
-        .navigationTitle("대여 상태 등록")
-        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
+            if !book.rental.isEmpty {
+                getRental()
+            }
+        }
+        .navigationTitle("대여 정보 등록")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    // 렌탈 등록하기
+    private func registerRental() {
+        if book.rental == "" {
             rental.bookOwner = book.ownerID
-            book.rental = rental.id
             rental.bookID = book.id
+            book.rental = rental.id
+            _ = rentalService.registerRental(rental)
+        } else {
+            updateRental()
         }
     }
-    
+    // 렌탈 업데이트
+    private func updateRental() {
+        Task {
+            await rentalService.updateRental(rental)
+        }
+    }
+    // 렌탈 가져오기
+    private func getRental() {
+        Task {
+            rental = await rentalService.getRental(book.rental)
+        }
+    }
     // 책 업데이트
     private func updateBook() {
         Task {
