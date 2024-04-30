@@ -6,14 +6,20 @@
 //
 
 import SwiftUI
+import BookBillionaireCore
 
 struct SettingButton: View {
+    @EnvironmentObject var htmlLoadService: HtmlLoadService
     @State private var isGoToNotice: Bool = false
     @State private var isGoToQandA: Bool = false
     @State private var isGoToPolicy: Bool = false
-    @Binding var sholudLogout: Bool
+    @State private var isGoToTerms: Bool = false
+    @Binding var shouldLogout: Bool
     var buttonType: SettingMenuType
     
+    @State private var policyUrl: URL? = nil
+    @State private var termsUrl: URL? = nil
+
     var body: some View {
         VStack {
             HStack {
@@ -32,10 +38,21 @@ struct SettingButton: View {
         }
         .navigationDestination(isPresented: $isGoToQandA) {
             QAView()
-        
         }
         .navigationDestination(isPresented: $isGoToPolicy) {
-
+            if let url = policyUrl {
+                    WebView(url: url)
+                } else {
+               
+                    Text("Loading...")
+                }
+        }
+        .navigationDestination(isPresented: $isGoToTerms) {
+            if let url = termsUrl {
+                    WebView(url: url)
+                } else {
+                    Text("Loading...")
+                }
         }
     }
     
@@ -46,13 +63,28 @@ struct SettingButton: View {
         case .qanda:
             isGoToQandA = true
         case .policy:
-            isGoToPolicy = true
-        case .logout:
-            sholudLogout = true
+            Task {
+                let htmlFiles = await htmlLoadService.loadHtml(file: .privatePolicy)
+                if let privateFile = htmlFiles.first {
+                    policyUrl = privateFile.url
+                    isGoToPolicy = true
+                }
+            }
+        case .termsOfouse:
+            Task {
+                let htmlFiles = await htmlLoadService.loadHtml(file: .termsOfUse)
+                if let termsFile = htmlFiles.first {
+                    termsUrl = termsFile.url
+                    isGoToTerms = true
+                }
+            }
+
+        case .logOut:
+            shouldLogout = true
         }
     }
 }
 
 #Preview {
-    SettingButton(sholudLogout: .constant(false), buttonType: .notice)
+    SettingButton(shouldLogout: .constant(false), buttonType: .notice)
 }

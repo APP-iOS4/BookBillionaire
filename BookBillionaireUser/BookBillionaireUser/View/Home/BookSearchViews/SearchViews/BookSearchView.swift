@@ -22,7 +22,6 @@ struct BookSearchView: View {
             BookSearchBar(searchBookText: $searchBookText, filteredBooks: $filteredBooks, selectedTab: $selectedTab)
             Spacer()
             if !isKeyboardShowing {
-                withAnimation() {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("찾는 책이 없다면? 찾아보러가기")
                             .font(.title3)
@@ -50,7 +49,6 @@ struct BookSearchView: View {
                         }
                     }
                 }
-            }
         }
         .padding()
         .onAppear {
@@ -116,5 +114,6 @@ struct WebView: UIViewRepresentable {
 #Preview {
     NavigationStack {
         BookSearchView(selectedTab: .constant(.home))
+            .environmentObject(UserService())
     }
 }

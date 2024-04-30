@@ -75,6 +75,7 @@ struct ContentView: View {
         .environmentObject(BookService())
         .environmentObject(UserService())
         .environmentObject(AuthViewModel())
+        .environmentObject(RentalService())
 }
 
 
