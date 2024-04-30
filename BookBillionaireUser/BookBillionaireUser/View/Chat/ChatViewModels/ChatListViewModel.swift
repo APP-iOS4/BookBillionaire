@@ -48,6 +48,8 @@ class ChatListViewModel: ObservableObject {
     var receiverId: String = "임시 Id"
     var roomId: String = "임시 roomId"
     
+    let userId = AuthViewModel.shared.currentUser?.uid ?? ""
+    
     /// 유저가 포함된 채팅방의 목록을 불러오는 메서드
     func getAllRooms() {
         let userId = AuthViewModel.shared.currentUser?.uid ?? ""
@@ -76,13 +78,12 @@ class ChatListViewModel: ObservableObject {
     
     /// 채팅방 생성 메서드
     func createRoom(book: Book, completion: @escaping (String?) -> Void) {
-        let userId = AuthViewModel.shared.currentUser?.uid ?? ""
         let receiverId = book.ownerID
         
         // 기존 채팅방 조회
         db.whereField("users", isEqualTo: [userId, receiverId])
             .getDocuments { (snapshot, error) in
-                if let error = error {
+                if error != nil {
                     print("중복된 수신자를 확인하는데 오류")
                 } else {
                     if let snapshot = snapshot, !snapshot.isEmpty {
@@ -95,21 +96,21 @@ class ChatListViewModel: ObservableObject {
                             completion("중복된 채팅방 ID를 찾을 수 없음")
                         }
                     } else {
-                        var room = ChatRoom(receiverName: self.receiverName, lastTimeStamp: Date(), lastMessage: "대화를 시작해보세요!", users: [userId, receiverId], usersUnreadCountInfo: [:], book: book)
+                        var room = ChatRoom(receiverName: self.receiverName, lastTimeStamp: Date(), lastMessage: "대화를 시작해보세요!", users: [self.userId, receiverId], usersUnreadCountInfo: [:], book: book)
                         let newRoomRef = self.db.document()
                         room.id = newRoomRef.documentID
                         
                         do {
                             try newRoomRef.setData(from: room, encoder: Firestore.Encoder()) { (error) in
-                                if let error = error {
+                                if error != nil {
                                     print("문서 생성 중 에러 발생")
                                 } else {
                                     print("새로운 문서 생성 완료 - 방 ID: \(room.id)")
-                                    print("본인 아이디: \(userId), 상대방 아이디: \(receiverId)")
+                                    print("본인 아이디: \(self.userId), 상대방 아이디: \(receiverId)")
                                     completion(room.id)
                                 }
                             }
-                        } catch let error {
+                        } catch _ {
                             print("문서 생성 중 에러 발생")
                         }
                     }

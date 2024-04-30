@@ -117,7 +117,7 @@ struct ChatView: View {
     private var chatBubble: some View {
         ScrollViewReader { scrollView in
             ScrollView {
-                if messageListVM.messages.isEmpty {
+                if messageListVM.messages.count < 2 {
                     HStack {
                         VStack {
                             Text("서로를 존중하고 배려하는 마음으로 소통해주세요!")

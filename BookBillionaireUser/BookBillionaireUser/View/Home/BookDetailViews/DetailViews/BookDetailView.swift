@@ -24,13 +24,14 @@ struct BookDetailView: View {
     //채팅
     @EnvironmentObject var authViewModel: AuthViewModel
     @State var roomListVM: ChatListViewModel = ChatListViewModel()
+    @State var chatVM: ChatViewModel = ChatViewModel()
     @State private var isShowingSheet: Bool = false
     @State private var isFavorite: Bool = false
     @State private var showLoginAlert = false
     @State private var isChatViewPresented = false
     @Binding var selectedTab: ContentView.Tab
     @State private var chatRoomId: String?
-
+    @State private var bookInfoBubble: BookInfoBubble = BookInfoBubble()
     
     var body: some View {
         ScrollView {
@@ -51,8 +52,11 @@ struct BookDetailView: View {
                                     self.chatRoomId = roomId
                                     isChatViewPresented = true
                                     print(chatRoomId ?? "")
-                                    print(user.nickName)
-                                    print([user.id, book.ownerID])
+                                    print(roomListVM.receiverName)
+                                    print(book.title)
+                                    print([roomListVM.userId, book.ownerID])
+                                    
+                                    chatVM.sendMessage(msg: Message(message: "<\(book.title)> 빌려드립니다!", senderName: user.nickName, roomId: chatRoomId ?? "", timestamp: Date())) { }
                                 }
                                 
                             case .loggedOut:
@@ -63,7 +67,7 @@ struct BookDetailView: View {
                         }
 //                        .sheet(isPresented: $isChatViewPresented) { // ChatView를 표시하는 sheet
 //                            if let chatRoomId = chatRoomId {
-//                                ChatView(room: RoomViewModel(room: ChatRoom(id: chatRoomId, receiverName: user.nickName, lastTimeStamp: Date(), lastMessage: "", users: [user.id, book.ownerID], usersUnreadCountInfo: [:], book: book)))
+//                                ChatView(room: RoomViewModel(room: ChatRoom(id: chatRoomId, receiverName: user.nickName, lastTimeStamp: Date(), lastMessage: "", users: [roomListVM.userId, book.ownerID], usersUnreadCountInfo: [:], book: book)))
 //                            }
 //                        }
                     }
@@ -98,40 +102,40 @@ struct BookDetailView: View {
             .padding(.horizontal)
             .navigationTitle(book.title)
             .toolbarBackground(.visible, for: .navigationBar)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            Menu {
-                                if let url = URL(string: "https://github.com/tv1039") {
-                                    ShareLink(item: url) {
-                                        Label("게시물 공유하기", systemImage: "square.and.arrow.up")
-                                    }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Menu {
+                            if let url = URL(string: "https://github.com/tv1039") {
+                                ShareLink(item: url) {
+                                    Label("게시물 공유하기", systemImage: "square.and.arrow.up")
                                 }
-                                
-                                if authViewModel.state == .loggedIn {
-                                    Button(role: .destructive) {
-                                        isShowingSheet = true
-                                    } label: {
-                                        Label("신고하기", systemImage: "exclamationmark.triangle")
-                                    }
-                                }
-                                
-                            } label: {
-                                Image(systemName: "ellipsis")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundStyle(.gray.opacity(0.3))
-                                    .rotationEffect(.degrees(90))
                             }
+                            
+                            if authViewModel.state == .loggedIn {
+                                Button(role: .destructive) {
+                                    isShowingSheet = true
+                                } label: {
+                                    Label("신고하기", systemImage: "exclamationmark.triangle")
+                                }
+                            }
+                            
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundStyle(.gray.opacity(0.3))
+                                .rotationEffect(.degrees(90))
                         }
-                        .sheet(isPresented: $isShowingSheet) {
-                            BottomSheet(isShowingSheet: $isShowingSheet)
-                                .presentationDetents([.fraction(0.8), .large])
-                        }
-                        
                     }
+                    .sheet(isPresented: $isShowingSheet) {
+                        BottomSheet(isShowingSheet: $isShowingSheet)
+                            .presentationDetents([.fraction(0.8), .large])
+                    }
+                    
                 }
+            }
         }
     }
 }
@@ -139,14 +143,14 @@ struct BookDetailView: View {
 #Preview {
     let book = Book(ownerID: "", ownerNickname: "", title: "브라질에서 주식을 사라 비가 내리면", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: .rentalAvailable)
     let user = User(nickName: "닉네임", address: "주소", email: "aaa@gmail.com")
-
-       let bookDetailViewModel = BookDetailViewModel(book: book, user: user, rental: Rental(), rentalService: RentalService())
-       
-       return BookDetailView(book: book, user: user, bookDetailViewModel: bookDetailViewModel, selectedTab: .constant(.home))
-           .environmentObject(AuthViewModel())
-           .environmentObject(UserService())
-           .navigationBarTitleDisplayMode(.inline)
-   }
+    
+    let bookDetailViewModel = BookDetailViewModel(book: book, user: user, rental: Rental(), rentalService: RentalService())
+    
+    return BookDetailView(book: book, user: user, bookDetailViewModel: bookDetailViewModel, selectedTab: .constant(.home))
+        .environmentObject(AuthViewModel())
+        .environmentObject(UserService())
+        .navigationBarTitleDisplayMode(.inline)
+}
 
 extension BookDetailView {
     var bookDetailImage: some View {
@@ -295,7 +299,7 @@ extension BookDetailView {
             Divider()
                 .padding(.vertical, 10)
             
-           Text("기본 정보")
+            Text("기본 정보")
                 .font(.title3)
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
@@ -321,7 +325,7 @@ extension BookDetailView {
                 VStack(alignment: .leading) {
                     if book.authors.isEmpty {
                         if let translators = book.translators,
-                            !translators.isEmpty{
+                           !translators.isEmpty{
                             ForEach(translators, id: \.self) { translator in
                                 Text("옮긴이: \(translator)")
                                     .font(.subheadline)
