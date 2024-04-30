@@ -13,6 +13,7 @@ import FirebaseStorage
 
 struct ChatView: View {
     let room: RoomViewModel
+    let roomVM: ChatListViewModel
     
     @StateObject private var messageListVM = ChatViewModel()
     @State var messageModel: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date())
@@ -92,7 +93,7 @@ struct ChatView: View {
                     .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
             }
             
-            NavigationLink(destination: PromiseConfirmView(user: room.room.book.ownerNickname, room: room, book: room.room.book)) {
+            NavigationLink(destination: PromiseConfirmView(user: room.room.book.ownerNickname, room: room, roomVM: roomVM, book: room.room.book)) {
                 Text("약속잡기")
                     .font(.system(size: 15))
                     .foregroundStyle(.bbfont)
@@ -101,7 +102,7 @@ struct ChatView: View {
                     .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
             }
             
-            NavigationLink(destination: ComplainView(user: room.room.book.ownerNickname, room: room)) {
+            NavigationLink(destination: ComplainView(user: room.room.book.ownerNickname, room: room, roomVM: roomVM, book: room.room.book)) {
                 Text("신고하기")
                     .font(.system(size: 15))
                     .foregroundStyle(.bbfont)
@@ -117,7 +118,7 @@ struct ChatView: View {
     private var chatBubble: some View {
         ScrollViewReader { scrollView in
             ScrollView {
-                if messageListVM.messages.count < 2 {
+                if messageListVM.messages.isEmpty {
                     HStack {
                         VStack {
                             Text("서로를 존중하고 배려하는 마음으로 소통해주세요!")

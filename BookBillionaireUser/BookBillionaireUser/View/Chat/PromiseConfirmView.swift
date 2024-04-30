@@ -18,13 +18,13 @@ struct PromiseConfirmView: View {
     @State var rentalService: RentalService = RentalService()
     var user: String
     let room: RoomViewModel
+    let roomVM: ChatListViewModel
     @State var book: Book
     @EnvironmentObject var userService : UserService
 
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        
         NavigationStack {
             VStack(alignment: .leading) {
                 Text("\(book.title)에 대한 약속잡기")
@@ -55,7 +55,6 @@ struct PromiseConfirmView: View {
                         Text("시간")
                         Spacer()
                         Button {
-                            // 시간 뷰 토글하기
                             timeViewShowing.toggle()
                         } label: {
                             HStack {
@@ -69,64 +68,6 @@ struct PromiseConfirmView: View {
                                 .presentationDetents([.height(300)])
                         })
                     }
-                    //결제방식 일단 아웃
-                    //                    HStack {
-                    //                        Text("결제 방식")
-                    //
-                    //                        Spacer()
-                    //
-                    //                        Button {
-                    //                            // 결제 방식 고르기 창 조금 보여주기
-                    //                            // .sheet로 보여주면 될 듯
-                    //                        } label: {
-                    //                            HStack {
-                    //                                Text("결제 방식 선택")
-                    //                                    .foregroundStyle(.gray)
-                    //                                Image(systemName: "chevron.down")
-                    //                                    .foregroundStyle(.gray)
-                    //                            }
-                    //                        }
-                    //                    }
-                    
-
-                    //                    HStack {
-                    //                        Text("장소")
-                    //
-                    //                        Spacer()
-                    //
-                    //                        Button {
-                    //                            // 맵 뷰 토글하기
-                    //                            mapViewShowing.toggle()
-                    //                        } label: {
-                    //                            NavigationLink(destination: MeetingMapView()) {
-                    //                                HStack {
-                    //                                    Spacer()
-                    //                                    Text("장소 선택")
-                    //                                        .foregroundStyle(.gray)
-                    //                                }
-                    //                            }
-                    //                        }
-                    //                    }
-
-//                    HStack {
-//                        Text("장소")
-//
-//                        Spacer()
-//
-//                        Button {
-//                            // 맵 뷰 토글하기
-//                            mapViewShowing.toggle()
-//                        } label: {
-//                            NavigationLink(destination: MeetingMapView()) {
-//                                HStack {
-//                                    Spacer()
-//                                    Text("장소 선택")
-//                                        .foregroundStyle(.gray)
-//                                }
-//                            }
-//                        }
-//                    }
-
                 }
                 .navigationBarTitle("\(roomName(users: room.room.users))님과의 약속")
                 .navigationBarTitleDisplayMode(.inline)
@@ -136,7 +77,8 @@ struct PromiseConfirmView: View {
             Spacer()
             
             Button("약속 잡기") {
-                updateRental()
+//                updateRental()
+                roomVM.createPromise(booktitle: book.title, bookId: book.id, ownerId: book.ownerID, senderId: userService.currentUser.id, makeDate: Date(), selectedTime: selectedTime, selectedDate: selectedDate)
                 presentationMode.wrappedValue.dismiss()
                 
             }

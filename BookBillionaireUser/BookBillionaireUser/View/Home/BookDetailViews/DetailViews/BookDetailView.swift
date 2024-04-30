@@ -32,7 +32,7 @@ struct BookDetailView: View {
     @State private var isChatViewPresented = false
     @Binding var selectedTab: ContentView.Tab
     @State private var chatRoomId: String?
-    @State private var bookInfoBubble: BookInfoBubble = BookInfoBubble()
+//    @State private var bookInfoBubble: BookInfoBubble = BookInfoBubble()
     
     var body: some View {
         ScrollView {
@@ -57,7 +57,7 @@ struct BookDetailView: View {
                                     print(book.title)
                                     print([roomListVM.userId, book.ownerID])
                                     
-                                    chatVM.sendMessage(msg: Message(message: "<\(book.title)> 빌려드립니다!", senderName: user.nickName, roomId: chatRoomId ?? "", timestamp: Date())) { }
+//                                    chatVM.sendMessage(msg: Message(message: "<\(book.title)>\n빌려드립니다!", senderName: user.nickName, roomId: chatRoomId ?? "", timestamp: Date())) { }
                                 }
                                 
                             case .loggedOut:
