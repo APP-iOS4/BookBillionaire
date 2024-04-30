@@ -29,13 +29,17 @@ struct RentalInfoView: View {
                 Button {
                     isShowingSheet.toggle()
                 } label: {
-                    Text("\(rental.mapDetail)")
+                    if rental.mapDetail.isEmpty {
+                        Text("지역을 선택해주세요")
+                    } else {
+                        Text("\(rental.mapDetail)")
+                    }
                     Image(systemName: "chevron.down")
                 }
-                .padding()
+                .padding(10)
                 .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray).opacity(0.2))
             }
-
+            
             if rental.latitude != 0.0 && rental.longitude != 0.0 {
                 Text("(\(rental.map) \(rental.mapDetail))")
                     .font(.footnote)
