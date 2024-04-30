@@ -11,6 +11,7 @@ import BookBillionaireCore
 struct MyBookListView: View {
     @EnvironmentObject var bookService: BookService
     @EnvironmentObject var userService: UserService
+    @EnvironmentObject var rentalService: RentalService
     var myBooks: [Book] {
         return  bookService.filterByOwenerID(userService.currentUser.id)
     }
@@ -83,7 +84,6 @@ struct MyBookListView: View {
                                     } label: {
                                         Text("취소")
                                     }
-                                    // 1. 삭제시 rentalService에 remove 메서드 구현해서 추가 해야함.
                                     Button(role: .destructive) {
                                         deleteMyBook(alertBookID)
                                         showToastMessage()
@@ -100,6 +100,7 @@ struct MyBookListView: View {
                         }
                         .navigationDestination(for: Book.self) { book in
                             RentalCreateView(book: book)
+                                .toolbar(.hidden, for: .tabBar)
                         }
                     }
                     .padding()
@@ -125,10 +126,14 @@ struct MyBookListView: View {
     private func deleteMyBook(_ bookID: String) {
         if let book = myBooks.first(where: { $0.id == bookID}) {
             Task {
-                // 책 삭제
-                await bookService.deleteBook(book)
+                if !book.rental.isEmpty {
+                    // 렌탈 삭제
+                    await rentalService.deleteRentalFromBook(book)
+                }
                 // 사용자의 myBooks 배열에서 책 ID 제거
                 await userService.removeBookFromUser(userID: userService.currentUser.id, bookID: book.id)
+                // 책 삭제
+                await bookService.deleteBook(book)
             }
         }
     }
@@ -150,5 +155,6 @@ struct MyBookListView: View {
         MyBookListView()
             .environmentObject(BookService())
             .environmentObject(UserService())
+            .environmentObject(RentalService())
     }
 }
