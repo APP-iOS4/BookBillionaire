@@ -15,14 +15,15 @@ struct BookDetailView: View {
     let book: Book
     @State var user: User = User()
     @EnvironmentObject var userService: UserService
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var rentalService: RentalService
     @StateObject var bookDetailViewModel: BookDetailViewModel
     @StateObject var commentViewModel = ReviewViewModel()
-    
+    //이미지
     let imageChache = ImageCache.shared
     @State private var imageUrl: URL?
     @State private var loadedImage: UIImage?
     //채팅
-    @EnvironmentObject var authViewModel: AuthViewModel
     @State var roomListVM: ChatListViewModel = ChatListViewModel()
     @State var chatVM: ChatViewModel = ChatViewModel()
     @State private var isShowingSheet: Bool = false
@@ -86,9 +87,6 @@ struct BookDetailView: View {
                     Divider()
                         .padding(.vertical, 10)
                     bookDetailInfo
-                        .onAppear {
-                            bookDetailViewModel.fetchRentalInfo()
-                        }
                 }
                 
                 Divider()
@@ -138,19 +136,27 @@ struct BookDetailView: View {
             }
         }
     }
+    
+    func fetchRentalInfo(from bookID: String) async {
+        if let rentalID = await rentalService.getRentalID(from: bookID) {
+            let (startDate, endDate) = await rentalService.getRentalDay(rentalID)
+            bookDetailViewModel.rentalTime = (startDate, endDate)
+        }
+    }
+
 }
 
 #Preview {
     let book = Book(ownerID: "", ownerNickname: "", title: "브라질에서 주식을 사라 비가 내리면", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: .rentalAvailable)
     let user = User(nickName: "닉네임", address: "주소", email: "aaa@gmail.com")
-    
-    let bookDetailViewModel = BookDetailViewModel(book: book, user: user, rental: Rental(), rentalService: RentalService())
-    
-    return BookDetailView(book: book, user: user, bookDetailViewModel: bookDetailViewModel, selectedTab: .constant(.home))
-        .environmentObject(AuthViewModel())
-        .environmentObject(UserService())
-        .navigationBarTitleDisplayMode(.inline)
-}
+
+       
+       return BookDetailView(book: book, user: user, bookDetailViewModel: BookDetailViewModel(), selectedTab: .constant(.home))
+           .environmentObject(AuthViewModel())
+           .environmentObject(UserService())
+           .environmentObject(RentalService())
+           .navigationBarTitleDisplayMode(.inline)
+   }
 
 extension BookDetailView {
     var bookDetailImage: some View {
@@ -206,7 +212,6 @@ extension BookDetailView {
                         .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 }
             }
-            
         }
         .onAppear {
             // 앞글자에 따라 imageURL에 할당하는 조건
@@ -287,13 +292,17 @@ extension BookDetailView {
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
-                    Text("\(bookDetailViewModel.calculateTotalDays())")
+                    Text("\(bookDetailViewModel.formattedRentalTime())")
                         .font(.subheadline)
                     Text("대여 가능 기간")
                         .font(.caption)
                         .foregroundStyle(.gray)
                 }
-                
+                .onAppear {
+                    Task {
+                        await fetchRentalInfo(from: book.id)
+                    }
+                }
             }
             
             Divider()

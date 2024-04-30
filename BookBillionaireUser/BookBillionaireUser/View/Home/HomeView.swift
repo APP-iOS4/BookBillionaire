@@ -11,29 +11,43 @@ import BookBillionaireCore
 struct HomeView: View {
     @State private var menuTitle: BookCategory = .hometown
     @State private var isShowingMenuSet: Bool = false
-    @StateObject private var bookDetailViewModel = BookDetailViewModel(book: Book(), user: User(), rental: Rental(), rentalService: RentalService())
     @EnvironmentObject var bookService: BookService
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var authViewModel: AuthViewModel
     @Binding var selectedTab: ContentView.Tab
-    
+    @Namespace private var scrollID
     var filteredBooks: [Book] {
         return bookService.filterByCategory(menuTitle)
     }
     
     var body: some View {
-        VStack {
-            headerView
-            
-            ScrollView(showsIndicators: false) {
-                HomeBanner()
-                    .frame(height: 200)
-                    .padding(.top)
-                
-                menuScrollView
-                    .padding(.vertical, 20)
-                
-                bookListView
+        ScrollViewReader { scrollView in
+            ZStack {
+                VStack {
+                    headerView
+                    ScrollView(showsIndicators: false) {
+                        HomeBanner()
+                            .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 500 : 200)
+                            .padding(.top)
+                            .id(scrollID)
+                        menuScrollView
+                            .padding(.vertical, 20)
+                        
+                        bookListView
+                    }
+                }
+                Image(systemName: "arrow.up")
+                    .resizable()
+                    .frame(width: 10, height: 10)
+                    .padding()
+                    .background(Color.gray.opacity(0.8))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .clipShape(Circle())
+                    .onTapGesture {
+                        scrollView.scrollTo(scrollID, anchor: .top)
+                    }
+                    .offset(x: UIScreen.main.bounds.width/2 - 40, y: UIScreen.main.bounds.height/2 - 130)
             }
         }
         .padding()
@@ -83,8 +97,8 @@ extension HomeView {
                 HStack(alignment: .center) {
                     ForEach(BookCategory.allCases, id: \.self) { menu in
                         Button {
-                                menuTitle = menu
-                                proxy.scrollTo(menu, anchor: .center)
+                            menuTitle = menu
+                            proxy.scrollTo(menu, anchor: .center)
                         } label: {
                             Text("\(menu.buttonTitle)")
                                 .fontWeight(menuTitle == menu ? .bold : .regular)
@@ -126,11 +140,9 @@ extension HomeView {
                         .padding(.vertical, 10)
                 }
                 .navigationDestination(for: Book.self) { book in
-                    let bookDetailViewModel = BookDetailViewModel(book: book, user: userService.loadUserByID(book.ownerID), rental: Rental(), rentalService: RentalService())
-                    
-                    BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: bookDetailViewModel, selectedTab: $selectedTab)
+                    BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: BookDetailViewModel(), selectedTab: $selectedTab)
                 }
-
+                
             }
         }
     }

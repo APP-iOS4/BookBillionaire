@@ -13,15 +13,15 @@ import FirebaseStorage
 enum SettingMenuType: String, CaseIterable {
     case notice = "공지사항"
     case qanda = "Q&A"
-    case policy = "개인정보 처리방침"
-    case logout = "로그아웃"
+    case policy = "개인정보처리방침"
+    case termsOfouse = "위치기반서비스 이용약관"
+    case logOut = "로그아웃"
 }
 
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var bookService: BookService
-    @StateObject var profileViewModel = ProfileViewModel(userService: UserService(), bookService: BookService(), authViewModel: AuthViewModel())
     @State private var selectedImage: UIImage?
     @State private var favoriteBooksCount: Int = 0
     @State private var myBooksCount: Int = 0
@@ -32,10 +32,10 @@ struct ProfileView: View {
     @State private var userUID: String? // New state variable to hold user's UID
     // 네비
     @State private var isGoToProfilePhoto: Bool = false
-    @State private var sholudLogout: Bool = false
+    @State private var shouldLogout: Bool = false
     // 이미지
     let imageChache = ImageCache.shared
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             if authViewModel.state == .loggedOut {
@@ -59,36 +59,68 @@ struct ProfileView: View {
                         .padding(.vertical, 10)
                     LazyVStack(alignment: .leading) {
                         ForEach(SettingMenuType.allCases, id: \.self) { settingButton in
-                            SettingButton(sholudLogout: $sholudLogout, buttonType: settingButton)
+                            SettingButton(shouldLogout: $shouldLogout, buttonType: settingButton)
                         }
                     }
-                    .onChange(of: sholudLogout) { newValue in
-                        if newValue {
-                            profileViewModel.logout()
-                        }
-                    }
+                    .onChange(of: shouldLogout) { newValue in
+                                if newValue {
+                                    logout()
+                                }
+                            }
                 }
                 .padding()
                 .navigationTitle("마이 프로필")
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
                     if let currnetUser = AuthViewModel.shared.currentUser {
-                        profileViewModel.loadFavoriteBooksCount(userID: currnetUser.uid)
-                        profileViewModel.loadMyBooksCount(userID: currnetUser.uid)
+                        loadFavoriteBooksCount(userID: currnetUser.uid)
+                        loadMyBooksCount(userID: currnetUser.uid)
                     }
                 }
             }
         }
     }
+    
+    func loadMyProfile() {
+        Task {
+            if let currentUser = AuthViewModel.shared.currentUser {
+                user = userService.loadUserByID(currentUser.uid)
+            }
+        }
+    }
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            authViewModel.state = .loggedOut // 로그아웃 상태로 변경
+            userEmail = nil // 이메일 초기화
+            userUID = nil // UID 초기화
+        } catch {
+            print("로그아웃 중 오류 발생:", error.localizedDescription)
+        }
+    }
+    
+    func loadFavoriteBooksCount(userID: String) {
+        Task {
+            favoriteBooksCount = await userService.getFavoriteBooksCount(userID: userID)
+        }
+    }
+    
+    func loadMyBooksCount(userID: String) {
+        Task {
+            myBooksCount = await userService.getMyBookCount(userID: userID)
+        }
+    }
+    
 }
 
 
 #Preview {
     NavigationStack {
-        ProfileView(profileViewModel: ProfileViewModel(userService: UserService(), bookService: BookService(), authViewModel: AuthViewModel()))
+        ProfileView()
             .environmentObject(AuthViewModel())
             .environmentObject(UserService())
             .environmentObject(BookService())
+            .environmentObject(HtmlLoadService())
     }
 }
 
@@ -116,7 +148,7 @@ extension ProfileView {
             HStack(spacing: 0) {
                 Spacer()
                 VStack {
-                    Text("\(profileViewModel.myBooksCount)")
+                    Text("\(myBooksCount)")
                         .font(.title3)
                         .fontWeight(.bold)
                     Text("보유도서")
@@ -133,7 +165,7 @@ extension ProfileView {
                 }
                 Spacer()
                 VStack {
-                    Text("\(profileViewModel.favoriteBooksCount)")
+                    Text("\(favoriteBooksCount)")
                         .font(.title3)
                         .fontWeight(.bold)
                     Text("즐겨찾기")
