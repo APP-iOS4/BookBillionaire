@@ -30,7 +30,7 @@ struct BookBillionaireUserApp: App {
     @StateObject private var bookService: BookService = BookService()
     @StateObject private var userService: UserService = UserService()
     @StateObject private var rentalService: RentalService = RentalService()
-    @StateObject private var htmlLoadService: HtmlLoadServicee = HtmlLoadServicee()
+    @StateObject var htmlLoadService: HtmlLoadService = HtmlLoadService()
     var body: some Scene {
         WindowGroup {
             ContentView()

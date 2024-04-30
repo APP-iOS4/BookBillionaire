@@ -23,7 +23,7 @@ struct SideBarView: View {
                                 case .user:
                                     UserListView(topic: topic)
                                 case .complain:
-                                    ComplainView(topic: topic)
+                                    BookManageView(topic: topic)
                                 case .qna:
                                     QnAView(topic: topic)
                                 case .notice:

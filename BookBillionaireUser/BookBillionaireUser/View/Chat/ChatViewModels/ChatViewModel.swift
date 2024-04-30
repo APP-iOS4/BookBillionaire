@@ -39,6 +39,15 @@ struct MessageViewModel { // 수정 예정
         dateFormatter.dateFormat = "a h:mm"
         return dateFormatter.string(from: timestamp)
     }
+    
+    var isRead: Bool {
+        if let lastReadMessageID = message.lastReadMessageId,
+               messageId <= lastReadMessageID {
+                return true
+            } else {
+                return false
+            }
+        }
 }
 
 class ChatViewModel: ObservableObject {
@@ -70,14 +79,35 @@ class ChatViewModel: ObservableObject {
                           DispatchQueue.main.async {
                               self.messages = messages
                               self.lastDoc = snapshot.documents.last
+                              
+                              if let currentUserID = AuthViewModel.shared.currentUser?.uid {
+                                  let lastReadMessageID = messages.first?.messageId ?? ""
+                                  self.updateLastReadMessageID(roomId: room.roomId, userID: currentUserID, lastReadMessageID: lastReadMessageID)
+                              }
                           }
                       }
                   }
                   self.lastDoc = snapshot?.documents.last
               }
       }
+    
+    /// 마지막 메세지 ID 확인
+    func updateLastReadMessageID(roomId: String, userID: String, lastReadMessageID: String) {
+        chatDB
+            .document(roomId)
+            .updateData([
+                "lastReadMessageId": lastReadMessageID,
+                "usersUnreadCountInfo.\(userID)": 0 // Reset unread count for the current user
+            ]) { error in
+                if let error = error {
+                    print("Error updating last read message ID: \(error.localizedDescription)")
+                } else {
+                    print("Last read message ID updated successfully, \(userID)")
+                }
+            }
+    }
 
-      /// 추가 채팅 페이지네이션 메서드
+    /// 추가 채팅 페이지네이션 메서드
     func loadMoreChat(room: RoomViewModel, pageSize: Int) {
         guard let lastDoc = self.lastDoc else { return } // 마지막 문서 체크
 

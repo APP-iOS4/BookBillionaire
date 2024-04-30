@@ -37,18 +37,23 @@ class RentalService: ObservableObject {
     }
     
     /// 렌탈 날짜를 불러오는 함수 -> 리턴값 튜플
-    func getRentalDay(_ rentalID: String) async -> (Date, Date) {
-        let rentaldocRef = rentalRef.document(rentalID)
-        do {
-            let rental = try await rentaldocRef.getDocument(as: Rental.self)
-            return (rental.rentalStartDay, rental.rentalEndDay)
-        } catch {
-            print("렌탈 디코딩 에러 \(error)")
-        }
-        return (Date(), Date())
+       func getRentalDay(_ rentalID: String) async -> (Date, Date) {
+           var rentaldays: (Date, Date) = (Date(), Date())
+           let rentaldocRef = rentalRef.document(rentalID)
+           do {
+               let rental = try await rentaldocRef.getDocument(as: Rental.self)
+               rentaldays = (rental.rentalStartDay, rental.rentalEndDay)
+           } catch {
+               print("렌탈 디코딩 에러 \(error)")
+           }
+           return rentaldays
+       }
+    
+    func getRentalID(from bookID: String) async -> String? {
+        let querySnapshot = try? await rentalRef.whereField("bookID", isEqualTo: bookID).getDocuments()
+        return querySnapshot?.documents.first?.documentID
     }
-    
-    
+       
     func getRental(_ rentalID: String) async -> Rental {
         let rentaldocRef = rentalRef.document(rentalID)
         do {

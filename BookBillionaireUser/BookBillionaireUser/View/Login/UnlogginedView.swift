@@ -40,7 +40,7 @@ struct UnlogginedView: View {
                             .resizable()
                             .frame(width: 50, height: 50)
                             .clipShape(Circle())
-                        Text("   로그인하고 같이 책읽으러 가기")
+                        Text("로그인하고 같이 책읽으러 가기")
                             .tint(.bbfont)
                     }
                 }

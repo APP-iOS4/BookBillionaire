@@ -10,9 +10,11 @@ import GoogleSignIn
 import FirebaseAuth
 
 class AuthViewModel: ObservableObject, AuthViewModelProtocol {
+    
     static let shared = AuthViewModel()
     
     @Published public var state: AuthState = .loggedOut
+
     let signInMethod: SignInMethod = .email
     var currentUser: User? {
             if let user = Auth.auth().currentUser {
@@ -20,7 +22,7 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
             }
             return nil
         }
-    
+
     func signUp(email: String, userName: String, password: String, completion: @escaping (Bool) -> Void) {
         // 중복 체크
         checkEmailDuplication(email) { [weak self] isEmailUnique in

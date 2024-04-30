@@ -14,6 +14,7 @@ struct Message: Codable, Hashable {
     var roomId: String         // 대화방의 Id
     var timestamp: Date        // 메세지를 보낸 시간
     var imageUrl: URL?      // 사진 첨부
+    var lastReadMessageId: String?
 }
 
 
