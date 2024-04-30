@@ -30,6 +30,7 @@ struct BookBillionaireUserApp: App {
     @StateObject private var bookService: BookService = BookService()
     @StateObject private var userService: UserService = UserService()
     @StateObject private var rentalService: RentalService = RentalService()
+    @StateObject private var htmlLoadService: HtmlLoadServicee = HtmlLoadServicee()
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -38,10 +39,12 @@ struct BookBillionaireUserApp: App {
                 .environmentObject(bookService)
                 .environmentObject(userService)
                 .environmentObject(rentalService)
+                .environmentObject(htmlLoadService)
                 .task {
                     await bookService.loadBooks()
                     await userService.loadUsers()
                     await rentalService.loadRentals()
+                    await htmlLoadService.fetchAllDocs()
                 }
         }
     }

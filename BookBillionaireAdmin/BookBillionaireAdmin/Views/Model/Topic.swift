@@ -17,8 +17,6 @@ public struct Topic: Identifiable {
 public enum TopicTitle {
     case user
     case book
-    case bookManage
-    case userManage
     case complain
     case qna
     case notice

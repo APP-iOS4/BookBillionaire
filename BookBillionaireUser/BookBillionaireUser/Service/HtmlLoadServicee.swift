@@ -10,9 +10,12 @@ import FirebaseFirestore
 import BookBillionaireCore
 
 class HtmlLoadServicee: ObservableObject {
+    @Published var privatePolicy: [FileTypeHtml] = []
+    @Published var termsOfUse: [FileTypeHtml] = []
+    
     private let db = Firestore.firestore()
 
-    func loadHtml(file: FileType) async -> [FileTypeHtml]{
+    func loadHtml(file: FileType) async {
         var files: [FileTypeHtml] = []
         do {
             let querySnapshot = try await db.collection(file.rawValue).getDocuments()
@@ -26,10 +29,15 @@ class HtmlLoadServicee: ObservableObject {
                         return nil
                     }
                 }
+                if file == .privatePolicy { self.privatePolicy = files } else { self.termsOfUse = files }
             }
         } catch {
             print("Error fetching documents: \(error)")
         }
-        return files
+    }
+    
+    func fetchAllDocs() async {
+        await self.loadHtml(file: .privatePolicy)
+        await self.loadHtml(file: .termsOfUse)
     }
 }

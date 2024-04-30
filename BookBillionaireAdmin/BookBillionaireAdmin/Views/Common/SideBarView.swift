@@ -18,14 +18,10 @@ struct SideBarView: View {
                         NavigationLink {
                             NavigationStack {
                                 switch topic.topicTitle {
-                                case .userManage:
-                                    UserManageView(topic: topic)
                                 case .book:
                                     BookListView(topic: topic)
                                 case .user:
                                     UserListView(topic: topic)
-                                case .bookManage:
-                                    BookManageView(topic: topic)
                                 case .complain:
                                     ComplainView(topic: topic)
                                 case .qna:

@@ -63,8 +63,8 @@ class BookService: ObservableObject {
     }
     
     /// 책 ID로 책을 필터링 하는 함수
-    func filterByBookID(_ bookID: String) -> [Book] {
-        return books.filter { $0.id == bookID }
+    func filterByBookID(_ bookID: String) -> Book? {
+        return books.first { $0.id == bookID }
     }
     
     /// 카테고리 별 책 리스트 나열
