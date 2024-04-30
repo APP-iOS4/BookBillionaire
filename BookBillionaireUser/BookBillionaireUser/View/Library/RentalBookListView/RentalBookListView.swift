@@ -46,6 +46,7 @@ struct RentalBookListView: View {
                             if let book = bookService.books.first(where: { $0.id == rental.bookID }) {
                                 NavigationLink {
                                     RentalBookDetailView(book: book, rental: rental, user: userService.loadUserByID(book.ownerID))
+                                    .toolbar(.hidden, for: .tabBar)
                                 } label: {
                                     BookItem(book: book)
                                 }
