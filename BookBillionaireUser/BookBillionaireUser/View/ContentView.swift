@@ -37,7 +37,6 @@ struct ContentView: View {
             NavigationStack {
                 HomeView(selectedTab: $selectedTab)
             }
-            
             .tag(Tab.home)
             .tabItem {
                 Label(Tab.home.rawValue, systemImage: Tab.home.symbolImage)
@@ -73,9 +72,6 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environmentObject(BookService())
-        .environmentObject(UserService())
-        .environmentObject(AuthViewModel())
-        .environmentObject(RentalService())
 }
 
 

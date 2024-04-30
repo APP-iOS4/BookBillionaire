@@ -19,12 +19,13 @@ struct UnlogginedView: View {
                 .resizable()
                 .scaledToFit()
             ZStack{
-                RLoginInfoView()
                 RoundedRectangle(cornerRadius: 25.0)
                     .foregroundStyle(Color.accentColor)
                     .padding()
                     .padding(.top, 150)
                     .padding(.bottom, -20)
+                RLoginInfoView()
+                    .padding()
             }
             Button{
                 isShowingLoginSheet = true
