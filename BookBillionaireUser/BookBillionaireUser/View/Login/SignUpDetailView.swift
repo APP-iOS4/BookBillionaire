@@ -50,7 +50,9 @@ struct SignUpDetailView: View {
                             nicknameErrorText = "띄어쓰기 및 특수문자 입력이 제한됩니다."
                             nicknameValidated = false
                         } else {
-                            authViewModel.checkNicknameDuplication(nameText) { isUnique in
+                            let UserUID = AuthViewModel.shared.state == .loggedIn ? AuthViewModel.shared.currentUser?.uid : nil
+                            print("😀😀😀😀UserUID: \(String(describing: UserUID))")
+                            authViewModel.checkNicknameDuplication(nameText, excludingIdentifier: UserUID) { isUnique in
                                 if !isUnique {
                                     print("닉네임이 중복됩니다.")
                                     nicknameErrorTextColor = .red
@@ -100,7 +102,9 @@ struct SignUpDetailView: View {
                         emailValidated = false
                     } else {
                         if !emailText.isEmpty {
-                            authViewModel.checkEmailDuplication(emailText) { isUnique in
+                            let UserUID = AuthViewModel.shared.state == .loggedIn ? AuthViewModel.shared.currentUser?.uid : nil
+                            print("😀😀😀😀UserUID: \(String(describing: UserUID))")
+                            authViewModel.checkEmailDuplication(emailText, excludingIdentifier: UserUID) { isUnique in
                                 if !isUnique {
                                     print("이메일이 중복됩니다.")
                                     emailErrorText2Color = .red

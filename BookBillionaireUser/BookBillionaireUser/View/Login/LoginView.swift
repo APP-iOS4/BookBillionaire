@@ -14,6 +14,7 @@ struct LoginView: View {
     
     @State private var isSignUpScreen: Bool = false
     @State private var isPrivateSheet: Bool = false
+    @State private var showAlert = false  // State to control alert visibility
 
 
     var body: some View {
@@ -59,11 +60,13 @@ struct LoginView: View {
                     
                     Button("로그인") {
                         authViewModel.signIn(email: emailText, password: passwordText)
-                        dismiss()
                     }
                     .buttonStyle(WhiteButtonStyle(height: 40.0))
                     .foregroundStyle(emailText.isEmpty || passwordText.isEmpty ? .gray : .accentColor)
                     .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("로그인 실패"), message: Text(authViewModel.errorMessage ?? "알 수 없는 오류가 발생했습니다."), dismissButton: .default(Text("확인")))
+                    }
                 }
                 .padding(.top)
 
@@ -79,7 +82,7 @@ struct LoginView: View {
                 }
                 .padding(.bottom, 10)
                 
-               // AppleSigninButton()
+                AppleSigninButton()
                 
                 Spacer()
                 Spacer()
@@ -101,7 +104,11 @@ struct LoginView: View {
 //                WebView(url: PrivatePolicyUrl)
 //                    .padding(30)
             })
-            // Hide navigation bar
+            .onReceive(authViewModel.$errorMessage) { errorMessage in
+                if errorMessage != nil {
+                    showAlert = true  // Trigger the alert when there's an error message
+                }
+            }
         }
     }
 }
