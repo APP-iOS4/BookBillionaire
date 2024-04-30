@@ -24,7 +24,24 @@ class RentalService: ObservableObject {
         }
     }
     
-    func updateRental(_ rentalID: String, rentalTime: Date) async {
+    func updateRental(_ rental: Rental) async {
+        let rentaldocRef = rentalRef.document(rental.id)
+        do {
+            try await rentaldocRef.updateData([
+                "rentalStartDay" : rental.rentalStartDay,
+                "rentalEndDay" : rental.rentalEndDay,
+                "map" : rental.map,
+                "mapDetail" : rental.mapDetail,
+                "latitude" : rental.latitude,
+                "longitude" : rental.longitude
+            ])
+            print("렌탈 변경 성공🧚‍♀️")
+        } catch let error {
+            print("\(#function) 렌탈 변경 실패했음☄️ \(error)")
+        }
+    }
+    
+    func updateRentalTime(_ rentalID: String, rentalTime: Date) async {
         let rentaldocRef = rentalRef.document(rentalID)
         do {
             try await rentaldocRef.updateData([
@@ -48,11 +65,21 @@ class RentalService: ObservableObject {
         return (Date(), Date())
     }
     
+    func deleteRentalFromBook(_ book: Book) async {
+        do {
+            try await rentalRef.document(book.rental).delete()
+            print("렌탈 삭제완료")
+        } catch {
+            print("Error removing document: \(error)")
+        }
+        self.fetchRentals()
+    }
     
     func getRental(_ rentalID: String) async -> Rental {
         let rentaldocRef = rentalRef.document(rentalID)
         do {
-            return try await rentaldocRef.getDocument(as: Rental.self)
+            let document = try await rentaldocRef.getDocument(as: Rental.self)
+            return document
         } catch {
             print("렌탈 디코딩 에러 \(error)")
         }

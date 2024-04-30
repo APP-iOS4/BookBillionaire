@@ -135,7 +135,7 @@ struct PromiseConfirmView: View {
             Spacer()
             
             Button("약속 잡기") {
-                updateRental()
+                updateRentalTime()
                 presentationMode.wrappedValue.dismiss()
                 
             }
@@ -172,9 +172,9 @@ struct PromiseConfirmView: View {
         return calendar.date(from: combinedComponents)
     }
     
-    private func updateRental() {
+    private func updateRentalTime() {
         Task{
-            await rentalService.updateRental(book.rental, rentalTime: combine(date: selectedDate, withTime: selectedTime) ?? Date())
+            await rentalService.updateRentalTime(book.rental, rentalTime: combine(date: selectedDate, withTime: selectedTime) ?? Date())
             book.rentalState = .renting
         }
     }
