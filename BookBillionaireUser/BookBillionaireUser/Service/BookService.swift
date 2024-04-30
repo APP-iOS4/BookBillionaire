@@ -118,7 +118,8 @@ class BookService: ObservableObject {
                 "contents" : book.contents,
                 "thumbnail" : book.thumbnail,
                 "title" : book.title,
-                "rentalState" : book.rentalState.rawValue
+                "rentalState" : book.rentalState.rawValue,
+                "rental" : book.rental
             ])
             print("책 변경 성공")
         } catch let error {
