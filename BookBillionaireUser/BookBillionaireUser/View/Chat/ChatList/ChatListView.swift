@@ -121,7 +121,7 @@ struct RoomCellView: View {
                 return userService.loadUserByID(user).nickName
             }
         }
-        return "사용자 이름없음"
+        return "본인"
     }
 }
 

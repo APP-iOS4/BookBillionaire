@@ -14,6 +14,9 @@ struct ComplainView: View {
     @State private var badBookCheck = false
     @State private var userDirectInput = false
     @State private var userDirectInputText = ""
+    @State private var showAlert = false
+    @State private var alertMessage = "신고가 접수되었습니다."
+    
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userService : UserService
     
@@ -182,13 +185,17 @@ struct ComplainView: View {
                 if userDirectInput {
                     reason = userDirectInputText
                 }
+                showAlert = true
                 
-                roomVM.addComplaint(bookId: book.id, ownerId: book.ownerID, senderId: userService.currentUser.id, makeDate: Date(), reason: reason)
+                roomVM.addComplaint(bookId: book.id, ownerId: room.users[0], senderId: room.users[1], makeDate: Date(), reason: reason)
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("신고하기")
                     .foregroundStyle(.red)
             })
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text(alertMessage), dismissButton: .default(Text("확인")))
+            }
         }
     }
     

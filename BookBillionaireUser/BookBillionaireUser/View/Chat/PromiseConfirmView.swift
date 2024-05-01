@@ -21,6 +21,7 @@ struct PromiseConfirmView: View {
     let roomVM: ChatListViewModel
     @State var book: Book
     @EnvironmentObject var userService : UserService
+    @State private var showAlert = false
 
     @Environment(\.presentationMode) var presentationMode
     
@@ -77,16 +78,17 @@ struct PromiseConfirmView: View {
             Spacer()
             
             Button("약속 잡기") {
-//                updateRental()
-                roomVM.createPromise(booktitle: book.title, bookId: book.id, ownerId: book.ownerID, senderId: userService.currentUser.id, makeDate: Date(), selectedTime: selectedTime, selectedDate: selectedDate)
+                roomVM.createPromise(booktitle: book.title, bookId: book.id, ownerId: room.users[0], senderId: room.users[1], makeDate: Date(), selectedTime: selectedTime, selectedDate: selectedDate)
                 presentationMode.wrappedValue.dismiss()
-                
+                showAlert = true
             }
             .buttonStyle(AccentButtonStyle())
             .padding(.horizontal, 30)
             .padding(.bottom, 15)
         }
-        
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("약속이 확정되었습니다."), dismissButton: .default(Text("확인")))
+        }
     }
     
     private let dateFormatter: DateFormatter = {
