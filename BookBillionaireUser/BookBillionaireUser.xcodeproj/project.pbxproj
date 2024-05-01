@@ -39,7 +39,6 @@
 		088260462BBD2B85007BEA25 /* PromiseConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */; };
 		089F0B922BDF9AC400760134 /* MeetingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F0B912BDF9AC400760134 /* MeetingMapView.swift */; };
 		08BA5F8F2BE1DE1300DAA991 /* OverlayImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF32242BCCDF5400DA478F /* OverlayImage.swift */; };
-		08BA5F912BE1DF0400DAA991 /* AuthViewModelApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA5F902BE1DF0400DAA991 /* AuthViewModelApple.swift */; };
 		08C46D7D2BC2D40700DB6D1D /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D7C2BC2D40700DB6D1D /* ChatRoom.swift */; };
 		08C46D7F2BC2D4A700DB6D1D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D7E2BC2D4A700DB6D1D /* Message.swift */; };
 		08C46D812BC2D61300DB6D1D /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D802BC2D61300DB6D1D /* ChatListViewModel.swift */; };
@@ -77,6 +76,9 @@
 		8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */; };
 		8C1E20F32BC7AF0D00D92E95 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */; };
 		8C47EADB2BDF359200037CDB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C47EADA2BDF359200037CDB /* LocationManager.swift */; };
+		8C47EAEC2BE1E29200037CDB /* AuthViewModelApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C47EAEB2BE1E29200037CDB /* AuthViewModelApple.swift */; };
+		8C47EAEE2BE1E2B000037CDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C47EAED2BE1E2B000037CDB /* GoogleService-Info.plist */; };
+		8C47EAF02BE1E2BA00037CDB /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C47EAEF2BE1E2BA00037CDB /* key.plist */; };
 		8C5748B32BD886EE00F2554D /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B02BD886EE00F2554D /* BarcodeScannerViewController.swift */; };
 		8C5748B42BD886EE00F2554D /* CaemraBarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B12BD886EE00F2554D /* CaemraBarcodeScanner.swift */; };
 		8C5748B62BD8870400F2554D /* SignUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B52BD8870400F2554D /* SignUpDetailView.swift */; };
@@ -167,6 +169,9 @@
 		8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		8C47EADA2BDF359200037CDB /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8C47EADE2BDF42AA00037CDB /* BookBillionaireUser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookBillionaireUser.entitlements; sourceTree = "<group>"; };
+		8C47EAEB2BE1E29200037CDB /* AuthViewModelApple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewModelApple.swift; path = ../../../../../../../Downloads/AuthViewModelApple.swift; sourceTree = "<group>"; };
+		8C47EAED2BE1E2B000037CDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C47EAEF2BE1E2BA00037CDB /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../../Downloads/key.plist; sourceTree = "<group>"; };
 		8C5748B02BD886EE00F2554D /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		8C5748B12BD886EE00F2554D /* CaemraBarcodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaemraBarcodeScanner.swift; sourceTree = "<group>"; };
 		8C5748B52BD8870400F2554D /* SignUpDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpDetailView.swift; sourceTree = "<group>"; };
@@ -494,6 +499,8 @@
 		EF0F74862BBCF7C500E37D0D /* BookBillionaireUser */ = {
 			isa = PBXGroup;
 			children = (
+				8C47EAED2BE1E2B000037CDB /* GoogleService-Info.plist */,
+				8C47EAEF2BE1E2BA00037CDB /* key.plist */,
 				8C47EADE2BDF42AA00037CDB /* BookBillionaireUser.entitlements */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
@@ -552,7 +559,7 @@
 				8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */,
 				04A59AB32BC4FDE0009FBF6E /* UnlogginedView.swift */,
 				8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */,
-				08BA5F902BE1DF0400DAA991 /* AuthViewModelApple.swift */,
+				8C47EAEB2BE1E29200037CDB /* AuthViewModelApple.swift */,
 				8C5748B52BD8870400F2554D /* SignUpDetailView.swift */,
 			);
 			path = Login;
@@ -710,6 +717,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				048C72E52BE1CC0200865316 /* Assets.xcassets in Resources */,
+				8C47EAF02BE1E2BA00037CDB /* key.plist in Resources */,
+				8C47EAEE2BE1E2B000037CDB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,7 +766,7 @@
 				EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */,
 				8C47EADB2BDF359200037CDB /* LocationManager.swift in Sources */,
 				EFE1D8172BDF2DD5005268F1 /* (null) in Sources */,
-				08BA5F912BE1DF0400DAA991 /* AuthViewModelApple.swift in Sources */,
+				8C47EAEC2BE1E29200037CDB /* AuthViewModelApple.swift in Sources */,
 				04A59A922BBFCF6A009FBF6E /* APISearchListRowView.swift in Sources */,
 				04A59A992BC19813009FBF6E /* WhiteButtonStyle.swift in Sources */,
 				EF0F748A2BBCF7C500E37D0D /* ContentView.swift in Sources */,
