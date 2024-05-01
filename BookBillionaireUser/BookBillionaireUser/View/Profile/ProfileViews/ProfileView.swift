@@ -87,14 +87,10 @@ struct ProfileView: View {
         }
     }
     func logout() {
-        do {
             AuthViewModel.shared.signOut()
             authViewModel.state = .loggedOut // 로그아웃 상태로 변경
             userEmail = nil // 이메일 초기화
             userUID = nil // UID 초기화
-        } catch {
-            print("로그아웃 중 오류 발생:", error.localizedDescription)
-        }
     }
     
     func loadFavoriteBooksCount(userID: String) {
