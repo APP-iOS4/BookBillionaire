@@ -33,6 +33,10 @@ struct ProfileView: View {
     // 네비
     @State private var isGoToProfilePhoto: Bool = false
     @State private var shouldLogout: Bool = false
+    @State private var isGoToMyBooks = false
+    @State private var isGoToBorrowedBooks = false
+    @State private var isGoToFavorites = false
+    @State private var MyBookDetailInfoSelectedTab = 0
     // 이미지
     let imageChache = ImageCache.shared
     
@@ -44,16 +48,6 @@ struct ProfileView: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     userProfileView
-                    Divider()
-                        .padding(.vertical, 10)
-                    VStack(alignment: .leading, spacing: 0){
-                        Text("책 돌려주는 날")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .padding(.bottom, 10)
-                        Rectangle()
-                            .frame(height: 200)
-                    }
                     
                     Divider()
                         .padding(.vertical, 10)
@@ -63,10 +57,10 @@ struct ProfileView: View {
                         }
                     }
                     .onChange(of: shouldLogout) { newValue in
-                                if newValue {
-                                    logout()
-                                }
-                            }
+                        if newValue {
+                            logout()
+                        }
+                    }
                 }
                 .padding()
                 .navigationTitle("마이 프로필")
@@ -145,6 +139,7 @@ extension ProfileView {
             .navigationDestination(isPresented: $isGoToProfilePhoto) {
                 EditProfileView(user: $userService.currentUser, selectedImage: $selectedImage)
             }
+            // 각각의 상세 리스트 나오는 뷰로 이동
             HStack(spacing: 0) {
                 Spacer()
                 VStack {
@@ -154,14 +149,27 @@ extension ProfileView {
                     Text("보유도서")
                         .font(.body)
                 }
+                .onTapGesture {
+                    MyBookDetailInfoSelectedTab = 0
+                    isGoToMyBooks = true
+                }
+                .navigationDestination(isPresented: $isGoToMyBooks) {
+                    MyBookDetailInfoView(selectedTab: $MyBookDetailInfoSelectedTab)
+                }
                 Spacer()
-                
                 VStack {
                     Text("0")
                         .font(.title3)
                         .fontWeight(.bold)
                     Text("빌린도서")
                         .font(.body)
+                }
+                .onTapGesture {
+                    MyBookDetailInfoSelectedTab = 1
+                    isGoToBorrowedBooks = true
+                }
+                .navigationDestination(isPresented: $isGoToBorrowedBooks) {
+                    MyBookDetailInfoView(selectedTab: $MyBookDetailInfoSelectedTab)
                 }
                 Spacer()
                 VStack {
@@ -170,6 +178,13 @@ extension ProfileView {
                         .fontWeight(.bold)
                     Text("즐겨찾기")
                         .font(.body)
+                }
+                .onTapGesture {
+                    MyBookDetailInfoSelectedTab = 2
+                    isGoToFavorites = true
+                }
+                .navigationDestination(isPresented: $isGoToFavorites) {
+                    MyBookDetailInfoView(selectedTab: $MyBookDetailInfoSelectedTab)
                 }
             }
             .padding(.bottom, 50)

@@ -15,13 +15,13 @@ class BookDetailViewModel: ObservableObject {
         formatter.dateFormat = "MM.dd"
         return formatter
     }
-    
+    // Calendar.current 전체 날짜 계산
     func calculateTotalDays() -> Int {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.day], from: rentalTime.0, to: rentalTime.1)
         return components.day ?? 0
     }
-    
+
     func formattedRentalTime() -> String {
         let totalDays = calculateTotalDays()
         if totalDays == 0 {

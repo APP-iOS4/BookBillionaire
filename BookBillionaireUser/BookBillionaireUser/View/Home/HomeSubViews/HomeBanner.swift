@@ -12,7 +12,7 @@ struct HomeBanner: View {
     @State private var currentIndex = 1
     private let timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
     @State var isPlaying = false
-    
+    // 가상 배너 앞 뒤로 생성
     var extendedBanners: [String] {
         var banners = self.banners
         banners.insert(banners.last!, at: 0)
@@ -87,7 +87,7 @@ struct HomeBanner: View {
         .gesture(
             DragGesture()
                 .onEnded { value in
-                    withAnimation() {
+                    withAnimation() { // 50포인트 제스쳐시 다른 위치 배너로 이동
                         if value.predictedEndTranslation.width > 50 {
                             currentIndex = (currentIndex - 1 + extendedBanners.count) % banners.count
                         } else if value.predictedEndTranslation.width < -50 {
@@ -97,7 +97,7 @@ struct HomeBanner: View {
                 }
         )
         .onChange(of: currentIndex) { newValue in
-            if newValue == 0 {
+            if newValue == 0 { //  DispatchQueue.main.asyncAfter 딜레이를 주어서 배너가 바뀔때 자연스럽게 바뀌게 보이도록 합니다.
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                     currentIndex = extendedBanners.count - 2
                 }

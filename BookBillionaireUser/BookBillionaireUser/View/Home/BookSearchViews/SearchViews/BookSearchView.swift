@@ -51,7 +51,7 @@ struct BookSearchView: View {
                 }
         }
         .padding()
-        .onAppear {
+        .onAppear { // 키보드 감지 show/hide
             NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
                 isKeyboardShowing = true
             }
@@ -62,7 +62,6 @@ struct BookSearchView: View {
         }
     }
 }
-
 
 enum BookStoreSettings: String, CaseIterable {
     case kyobo = "교보문고"

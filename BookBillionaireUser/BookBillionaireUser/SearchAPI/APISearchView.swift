@@ -121,3 +121,7 @@ struct APISearchView: View {
         }
     }
 }
+
+#Preview {
+    APISearchView(searchBook: .constant(""), isShowing: .constant(true))
+}
