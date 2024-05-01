@@ -42,7 +42,7 @@ struct ProfileView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if authViewModel.state == .loggedIn {
+            if authViewModel.state == .loggedOut {
                 UnlogginedView()
                     .padding()
             } else {
