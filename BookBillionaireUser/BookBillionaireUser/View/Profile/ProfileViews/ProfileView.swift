@@ -42,15 +42,19 @@ struct ProfileView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if authViewModel.state == .loggedOut {
+            if authViewModel.state == .loggedIn {
                 UnlogginedView()
                     .padding()
             } else {
                 ScrollView(showsIndicators: false) {
                     userProfileView
-                    
                     Divider()
                         .padding(.vertical, 10)
+                    // 반납일자 캘린더
+                    userCalenderView
+                    Divider()
+                        .padding(.vertical, 10)
+                    // 공지사항 & 약관으로 이동
                     LazyVStack(alignment: .leading) {
                         ForEach(SettingMenuType.allCases, id: \.self) { settingButton in
                             SettingButton(shouldLogout: $shouldLogout, buttonType: settingButton)
@@ -118,6 +122,7 @@ struct ProfileView: View {
     }
 }
 
+//MARK: - 유저 사진 & 정보
 extension ProfileView {
     var userProfileView: some View {
         HStack(alignment: .center, spacing: 0) {
@@ -191,3 +196,23 @@ extension ProfileView {
         }
     }
 }
+
+
+//MARK: - 반납일자 캘린더
+extension ProfileView {
+    var userCalenderView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("책 돌려줄 날")
+                .font(.title3)
+                .fontWeight(.bold)
+                .padding(.bottom, 12)
+            CalenderView()
+                .padding(2)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.accentColor)
+                )
+        }
+    }
+}
+

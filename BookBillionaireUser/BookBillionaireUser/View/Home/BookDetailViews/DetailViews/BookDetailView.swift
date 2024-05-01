@@ -124,6 +124,9 @@ struct BookDetailView: View {
                 }
             }
         }
+        .refreshable {
+            userService.fetchUsers()
+        }
         .ignoresSafeArea(.all, edges: .top)
     }
     // 디테일 뷰에 표시될 대여기간 표시

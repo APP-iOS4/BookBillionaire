@@ -86,7 +86,7 @@ struct LoginView: View {
                 }
                 .padding(.bottom, 10)
                 
-                AppleSigninButton()
+//                AppleSigninButton()
                 
                 Spacer()
                 Spacer()
