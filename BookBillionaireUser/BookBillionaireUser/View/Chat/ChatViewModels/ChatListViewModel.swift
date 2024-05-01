@@ -266,7 +266,7 @@ class ChatListViewModel: ObservableObject {
         db.collection("rentals")
             .whereField("bookID", isEqualTo: bookId)
             .getDocuments { (querySnapshot, error) in
-                if let error = error {
+                if error != nil {
                     print("불러오기 실패")
                     return
                 }
