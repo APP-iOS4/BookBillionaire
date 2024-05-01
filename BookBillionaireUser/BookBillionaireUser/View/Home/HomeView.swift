@@ -41,7 +41,7 @@ struct HomeView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30, height: 30)
                         .padding(10)
-                        .background(Color.accentColor)
+                        .background(Color.accentColor.opacity(0.8))
                         .foregroundStyle(.white)
                         .clipShape(Circle())
                         .onTapGesture {
