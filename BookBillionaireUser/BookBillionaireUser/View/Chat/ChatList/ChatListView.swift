@@ -12,7 +12,7 @@ struct ChatListView: View {
     @State private var isEditing: Bool = false
     @StateObject private var roomListVM = ChatListViewModel()
     @EnvironmentObject var authViewModel: AuthViewModel
-
+    
     var body: some View {
         switch authViewModel.state {
         case .loggedIn:
@@ -24,7 +24,7 @@ struct ChatListView: View {
                 } else {
                     ScrollView {
                         ForEach(roomListVM.rooms, id: \.room.self) { room in
-                            NavigationLink(destination: ChatView(room: room)) {
+                            NavigationLink(destination: ChatView(room: room, roomVM: roomListVM)) {
                                 RoomCellView(room: room)
                             }
                             Divider()
@@ -66,18 +66,19 @@ struct RoomCellView: View {
                 // [임시] 상대방 이미지 받아와서 넣어주기
                 Image("defaultUser")
                     .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
             }
             .padding(.horizontal, 5)
             
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 5) {
                 HStack(alignment: .top) {
-                    Text(roomName(users: room.room.users))
+                    Text("\(roomName(users: room.room.users))")
+                        .lineLimit(1)
                         .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(Color(UIColor.label))
+                        .foregroundColor(Color(UIColor.label))
                     
                     Spacer()
                     
@@ -85,37 +86,33 @@ struct RoomCellView: View {
                         .font(.system(size: 10))
                         .foregroundColor(Color(.lightGray))
                 }
-                HStack {
-                    if room.lastMessage.hasPrefix("https://firebasestorage") {
-                        Text("사진")
-                            .font(.system(size: 14))
-                            .foregroundColor(Color(.lightGray))
-                            .lineLimit(1)
-                    } else {
-                        Text(room.lastMessage)
-                            .font(.system(size: 14))
-                            .foregroundColor(Color(.lightGray))
-                            .lineLimit(1)
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("<\(room.room.book.title)>")
+                        .lineLimit(1)
+                        .foregroundStyle(.bbfont)
+                        .font(.system(size: 14))
+                    
+                    HStack {
+                        if room.lastMessage.hasPrefix("https://firebasestorage") {
+                            Text("사진")
+                                .font(.system(size: 14))
+                                .foregroundColor(Color(.lightGray))
+                                .lineLimit(1)
+                        } else {
+                            Text(room.lastMessage)
+                                .font(.system(size: 14))
+                                .foregroundColor(Color(.lightGray))
+                                .lineLimit(1)
+                        }
+                        Spacer()
                     }
-                    
-                    Spacer()
-                    
-//                    ZStack {
-//                        //[임시] 안 읽은 메세지 숫자
-//                        Capsule()
-//                            .fill(Color.orange)
-//                            .frame(width: 35, height: 25)
-//                        Text("1")
-//                            .foregroundColor(.white)
-//                            .font(Font.system(size: 12, weight: .bold))
-//                    }
                 }
             }
         }
         .padding(.horizontal, 15)
         
         Divider()
-    
+        
     }
     
     func roomName(users: [String]) -> String {
@@ -124,7 +121,7 @@ struct RoomCellView: View {
                 return userService.loadUserByID(user).nickName
             }
         }
-        return "사용자 이름없음"
+        return "본인"
     }
 }
 

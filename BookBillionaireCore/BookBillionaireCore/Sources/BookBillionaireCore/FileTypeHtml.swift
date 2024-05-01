@@ -22,7 +22,7 @@ public struct FileTypeHtml: Identifiable, Codable {
 
 public enum FileType: String, Codable {
     case privatePolicy = "privatePolicy"
-    case termsOfUse = "Terms Of Use"
+    case termsOfUse = "TermsOfUse"
     
     
 }

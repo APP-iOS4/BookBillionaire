@@ -25,6 +25,7 @@ struct BookDetailView: View {
     @State private var loadedImage: UIImage?
     //채팅
     @State var roomListVM: ChatListViewModel = ChatListViewModel()
+    @State var chatVM: ChatViewModel = ChatViewModel()
     @State private var isShowingSheet: Bool = false
     @State private var isFavorite: Bool = false
     @State private var showLoginAlert = false
@@ -50,8 +51,11 @@ struct BookDetailView: View {
                                     self.chatRoomId = roomId
                                     isChatViewPresented = true
                                     print(chatRoomId ?? "")
-                                    print(user.nickName)
-                                    print([user.id, book.ownerID])
+                                    print(roomListVM.receiverName)
+                                    print(book.title)
+                                    print([roomListVM.userId, book.ownerID])
+                                    
+//                                    chatVM.sendMessage(msg: Message(message: "<\(book.title)>\n빌려드립니다!", senderName: user.nickName, roomId: chatRoomId ?? "", timestamp: Date())) { }
                                 }
                                 
                             case .loggedOut:
@@ -60,6 +64,11 @@ struct BookDetailView: View {
                         } label: {
                             Text("채팅하기")
                         }
+//                        .sheet(isPresented: $isChatViewPresented) { // ChatView를 표시하는 sheet
+//                            if let chatRoomId = chatRoomId {
+//                                ChatView(room: RoomViewModel(room: ChatRoom(id: chatRoomId, receiverName: user.nickName, lastTimeStamp: Date(), lastMessage: "", users: [roomListVM.userId, book.ownerID], usersUnreadCountInfo: [:], book: book)))
+//                            }
+//                        }
                     }
                     .buttonStyle(AccentButtonStyle(height: 40.0, font: .headline))
                     .alert(isPresented: $showLoginAlert) {

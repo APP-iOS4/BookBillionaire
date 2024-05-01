@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BookBillionaireCore
 
 struct ComplainView: View {
     @State private var TimeComplainCheck = false
@@ -13,11 +14,18 @@ struct ComplainView: View {
     @State private var badBookCheck = false
     @State private var userDirectInput = false
     @State private var userDirectInputText = ""
+    @State private var showAlert = false
+    @State private var alertMessage = "신고가 접수되었습니다."
+    
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userService : UserService
-
+    
     var user: String
     let room: RoomViewModel
+    let roomVM: ChatListViewModel
+    let book: Book
+    
+    @State private var reason: String = "" // 신고 사유를 저장할 변수 추가
     
     var body: some View {
         NavigationStack {
@@ -39,6 +47,7 @@ struct ComplainView: View {
                                 badWordsCheck = false
                                 badBookCheck = false
                                 userDirectInput = false
+                                reason = "거래 시간을 지키지 않았어요"
                             }
                         } label: {
                             if TimeComplainCheck {
@@ -66,6 +75,7 @@ struct ComplainView: View {
                                 TimeComplainCheck = false
                                 badBookCheck = false
                                 userDirectInput = false
+                                reason = "욕설, 비방, 혐오표현을 해요"
                             }
                         } label: {
                             if badWordsCheck {
@@ -93,6 +103,7 @@ struct ComplainView: View {
                                 TimeComplainCheck = false
                                 badWordsCheck = false
                                 userDirectInput = false
+                                reason = "책의 상태가 좋지않아요"
                             }
                         } label: {
                             if badBookCheck {
@@ -171,12 +182,20 @@ struct ComplainView: View {
             .listStyle(.inset)
             .navigationBarItems(trailing:
                                     Button {
-                // 신고하기 버튼 탭
+                if userDirectInput {
+                    reason = userDirectInputText
+                }
+                showAlert = true
+                
+                roomVM.addComplaint(bookId: book.id, ownerId: room.users[0], senderId: room.users[1], createAt: Date(), reason: reason)
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("신고하기")
                     .foregroundStyle(.red)
             })
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text(alertMessage), dismissButton: .default(Text("확인")))
+            }
         }
     }
     

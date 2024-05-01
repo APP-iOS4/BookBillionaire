@@ -13,6 +13,7 @@ import FirebaseStorage
 
 struct ChatView: View {
     let room: RoomViewModel
+    let roomVM: ChatListViewModel
     
     @StateObject private var messageListVM = ChatViewModel()
     @State var messageModel: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date())
@@ -81,27 +82,28 @@ struct ChatView: View {
     // MARK: - 상단 약속 잡기 배너
     private var promiseBanner: some View {
         HStack(spacing: 0) {
-            Button {
-                
-            } label: {
+            NavigationLink(destination: MeetingMapView(book: room.room.book, roomVM: roomVM)) {
                 Text("위치확인")
                     .font(.subheadline)
+                    .foregroundStyle(.bbfont)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
             }
             
-            NavigationLink(destination: PromiseConfirmView(user: room.room.book.ownerNickname, room: room, book: room.room.book)) {
+            NavigationLink(destination: PromiseConfirmView(user: room.room.book.ownerNickname, room: room, roomVM: roomVM, book: room.room.book)) {
                 Text("약속잡기")
-                    .font(.system(size: 15))
+                    .font(.subheadline)
+                    .foregroundStyle(.bbfont)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
             }
             
-            NavigationLink(destination: ComplainView(user: room.room.book.ownerNickname, room: room)) {
+            NavigationLink(destination: ComplainView(user: room.room.book.ownerNickname, room: room, roomVM: roomVM, book: room.room.book)) {
                 Text("신고하기")
-                    .font(.system(size: 15))
+                    .font(.subheadline)
+                    .foregroundStyle(.bbfont)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
