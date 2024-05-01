@@ -71,11 +71,12 @@ class UserService: ObservableObject {
         }
     }
     
-    func updateUserByID(_ userID: String, nickname: String, imageUrl: String, address: String) async {
+    func updateUserByID(_ userID: String, nickname: String, imageUrl: String, address: String, emailEqualtoAuth: String) async {
         let userRef = allUserRef.document(userID)
         do {
             try await userRef.updateData([
                 "nickname": nickname,
+                "emailEqualtoAuth": emailEqualtoAuth,
                 "profileImage": imageUrl,
                 "address": address
             ])
