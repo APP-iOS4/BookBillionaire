@@ -230,16 +230,26 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
             completion(false)
             return
         }
-
-        user.sendEmailVerification(beforeUpdatingEmail: newEmail, completion: { error in
+        
+        // 정상 작동하지 않음
+        user.updateEmail(to: newEmail) { error in
             if let error = error {
-                print("Error sending verification email: \(error.localizedDescription)")
                 completion(false)
             } else {
-                print("Verification email sent successfully to \(newEmail)")
                 completion(true)
             }
-        })
+        }
+        
+        // 정상 작동하지 않음
+//        user.sendEmailVerification(beforeUpdatingEmail: newEmail, completion: { error in
+//            if let error = error {
+//                print("Error sending verification email: \(error.localizedDescription)")
+//                completion(false)
+//            } else {
+//                print("Verification email sent successfully to \(newEmail)")
+//                completion(true)
+//            }
+//        })
     }
 
     func updateUserPassword(newPassword: String, completion: @escaping (Bool) -> Void) {
