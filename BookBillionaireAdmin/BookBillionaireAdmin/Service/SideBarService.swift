@@ -13,12 +13,10 @@ public class SideBarService: ObservableObject {
     public init() {
         sideBarGroup = [
             SideBarGroup(category: "책 관리", topics: [
-                Topic(name: "책 카테고리 변경", Icon: "character.book.closed", topicTitle: .book),
-                Topic(name: "책 목록 등록 및 수정", Icon: "books.vertical.fill", topicTitle: .bookManage)
+                Topic(name: "책 목록 등록 및 수정", Icon: "books.vertical.fill", topicTitle: .book),
             ]),
             SideBarGroup(category: "유저 관리", topics: [
                 Topic(name: "유저 목록확인", Icon: "person.3.fill", topicTitle: .user),
-                Topic(name: "유저 등록 및 수정", Icon: "person.2.badge.gearshape", topicTitle: .userManage),
                 Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .complain),
                 Topic(name: "유저 CS관리", Icon: "ellipsis.message", topicTitle: .chat),
             ]),

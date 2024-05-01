@@ -12,16 +12,12 @@ struct UserListView: View {
     var topic: Topic
     var body: some View {
         VStack{
-                List{
-                    ForEach(userService.users) { user in
-                        HStack{
-                            Text(user.nickName)
-                            Text(user.id)
-                        }
-                    }
+            ScrollView{
+                ForEach(userService.users) { user in
+                    UserRow(user: user)
                 }
-                .listStyle(.plain)
                 .padding(10)
+            }
         }
         .navigationTitle(topic.name)
     }

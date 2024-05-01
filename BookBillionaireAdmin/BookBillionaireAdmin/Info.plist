@@ -6,7 +6,5 @@
 	<string>YES</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>NSDocumentsFolderUsageDescription</key>
-	<string></string>
 </dict>
 </plist>

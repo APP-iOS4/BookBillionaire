@@ -18,7 +18,6 @@
 		0402167E2BCE5CBB00A7C922 /* QnA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402167D2BCE5CBB00A7C922 /* QnA.swift */; };
 		048C72422BD4059200865316 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72412BD4059200865316 /* UserService.swift */; };
 		048C72472BD40A5500865316 /* BookBillionaireCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048C72462BD40A5500865316 /* BookBillionaireCore */; };
-		048C72492BD40ADD00865316 /* UserManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72482BD40ADD00865316 /* UserManageView.swift */; };
 		048C724C2BD421B000865316 /* AccentButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C724B2BD421B000865316 /* AccentButtonStyle.swift */; };
 		048C724E2BD5E75A00865316 /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C724D2BD5E75A00865316 /* BookService.swift */; };
 		048C72502BD628E400865316 /* SideBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C724F2BD628E400865316 /* SideBarService.swift */; };
@@ -26,7 +25,6 @@
 		048C72542BD62C3400865316 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72532BD62C3400865316 /* Topic.swift */; };
 		048C72562BD6337700865316 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72552BD6337700865316 /* SideBarView.swift */; };
 		048C725C2BD6A44700865316 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C725B2BD6A44700865316 /* LoginView.swift */; };
-		048C725E2BD7461200865316 /* BookManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C725D2BD7461200865316 /* BookManageView.swift */; };
 		048C72642BD7909E00865316 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72632BD7909E00865316 /* BookListView.swift */; };
 		048C72662BD7983B00865316 /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72652BD7983B00865316 /* ImageCacheService.swift */; };
 		048C726A2BD7D6BD00865316 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72692BD7D6BD00865316 /* UserListView.swift */; };
@@ -37,14 +35,18 @@
 		048C72782BD93B9A00865316 /* QnAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72772BD93B9A00865316 /* QnAService.swift */; };
 		048C727B2BD93D6A00865316 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C727A2BD93D6A00865316 /* NoticeService.swift */; };
 		048C727D2BD93D8C00865316 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C727C2BD93D8C00865316 /* Notice.swift */; };
-		048C72812BD9529A00865316 /* ComplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72802BD9529A00865316 /* ComplainView.swift */; };
 		048C72962BDAB26D00865316 /* CountBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72952BDAB26D00865316 /* CountBoxView.swift */; };
 		048C72982BDB609500865316 /* BookAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72972BDB609500865316 /* BookAddView.swift */; };
-		3548B1E02BDE2C3B00A87844 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */; };
 		048C72B62BDBE9CE00865316 /* UserSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72B52BDBE9CE00865316 /* UserSearchBar.swift */; };
 		048C72B82BDCCB2E00865316 /* UserCSChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72B72BDCCB2E00865316 /* UserCSChatView.swift */; };
 		048C72BE2BDCE99600865316 /* HtmlDocUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72BD2BDCE99600865316 /* HtmlDocUploadView.swift */; };
 		048C72C22BDD4FC400865316 /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72C12BDD4FC400865316 /* UploadService.swift */; };
+		048C72CF2BDF3F7300865316 /* HtmlLoadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72CE2BDF3F7300865316 /* HtmlLoadService.swift */; };
+		048C72D12BDF659200865316 /* ComplainVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72D02BDF659200865316 /* ComplainVIew.swift */; };
+		048C72D72BE1165300865316 /* AddBookSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72D62BE1165300865316 /* AddBookSearchView.swift */; };
+		048C72D92BE1166D00865316 /* AddBookWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72D82BE1166D00865316 /* AddBookWriteView.swift */; };
+		048C72DB2BE12A4600865316 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72DA2BE12A4600865316 /* UserRow.swift */; };
+		3548B1E02BDE2C3B00A87844 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */; };
 		EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */; };
 		EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A32BBCF80C00E37D0D /* ContentView.swift */; };
 		EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */; };
@@ -58,7 +60,6 @@
 		0402167A2BCE1A6900A7C922 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0402167D2BCE5CBB00A7C922 /* QnA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnA.swift; sourceTree = "<group>"; };
 		048C72412BD4059200865316 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		048C72482BD40ADD00865316 /* UserManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageView.swift; sourceTree = "<group>"; };
 		048C724B2BD421B000865316 /* AccentButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentButtonStyle.swift; sourceTree = "<group>"; };
 		048C724D2BD5E75A00865316 /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
 		048C724F2BD628E400865316 /* SideBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarService.swift; sourceTree = "<group>"; };
@@ -66,7 +67,6 @@
 		048C72532BD62C3400865316 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		048C72552BD6337700865316 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		048C725B2BD6A44700865316 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		048C725D2BD7461200865316 /* BookManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookManageView.swift; sourceTree = "<group>"; };
 		048C72632BD7909E00865316 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
 		048C72652BD7983B00865316 /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		048C72692BD7D6BD00865316 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -81,11 +81,16 @@
 		048C72802BD9529A00865316 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		048C72952BDAB26D00865316 /* CountBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountBoxView.swift; sourceTree = "<group>"; };
 		048C72972BDB609500865316 /* BookAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAddView.swift; sourceTree = "<group>"; };
-		3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		048C72B52BDBE9CE00865316 /* UserSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchBar.swift; sourceTree = "<group>"; };
 		048C72B72BDCCB2E00865316 /* UserCSChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCSChatView.swift; sourceTree = "<group>"; };
 		048C72BD2BDCE99600865316 /* HtmlDocUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlDocUploadView.swift; sourceTree = "<group>"; };
 		048C72C12BDD4FC400865316 /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
+		048C72CE2BDF3F7300865316 /* HtmlLoadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlLoadService.swift; sourceTree = "<group>"; };
+		048C72D02BDF659200865316 /* ComplainVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplainVIew.swift; sourceTree = "<group>"; };
+		048C72D62BE1165300865316 /* AddBookSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookSearchView.swift; sourceTree = "<group>"; };
+		048C72D82BE1166D00865316 /* AddBookWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookWriteView.swift; sourceTree = "<group>"; };
+		048C72DA2BE12A4600865316 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
+		3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBillionaireAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookBillionaireAdminApp.swift; sourceTree = "<group>"; };
 		EF0F74A32BBCF80C00E37D0D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 				048C72772BD93B9A00865316 /* QnAService.swift */,
 				048C727A2BD93D6A00865316 /* NoticeService.swift */,
 				048C72C12BDD4FC400865316 /* UploadService.swift */,
+				048C72CE2BDF3F7300865316 /* HtmlLoadService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -166,6 +172,7 @@
 				048C72712BD8FAB300865316 /* BookGridCellInfo.swift */,
 				048C72952BDAB26D00865316 /* CountBoxView.swift */,
 				048C72B52BDBE9CE00865316 /* UserSearchBar.swift */,
+				048C72DA2BE12A4600865316 /* UserRow.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -174,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				048C72692BD7D6BD00865316 /* UserListView.swift */,
-				048C72482BD40ADD00865316 /* UserManageView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -182,8 +188,7 @@
 		048C72912BDAB0E800865316 /* Book */ = {
 			isa = PBXGroup;
 			children = (
-				048C726F2BD8F8C800865316 /* CategroyEditView.swift */,
-				048C725D2BD7461200865316 /* BookManageView.swift */,
+				048C72D52BE1162F00865316 /* EditModalView */,
 				048C72632BD7909E00865316 /* BookListView.swift */,
 				048C72972BDB609500865316 /* BookAddView.swift */,
 			);
@@ -201,7 +206,7 @@
 		048C72A42BDB714E00865316 /* CS */ = {
 			isa = PBXGroup;
 			children = (
-				048C72B12BDBE40100865316 /* ComplainVIew.swift */,
+				048C72D02BDF659200865316 /* ComplainVIew.swift */,
 				048C72732BD9256F00865316 /* NoticeView.swift */,
 				040216782BCE19D500A7C922 /* QnAView.swift */,
 				048C72B72BDCCB2E00865316 /* UserCSChatView.swift */,
@@ -220,7 +225,16 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-
+		048C72D52BE1162F00865316 /* EditModalView */ = {
+			isa = PBXGroup;
+			children = (
+				048C726F2BD8F8C800865316 /* CategroyEditView.swift */,
+				048C72D62BE1165300865316 /* AddBookSearchView.swift */,
+				048C72D82BE1166D00865316 /* AddBookWriteView.swift */,
+			);
+			path = EditModalView;
+			sourceTree = "<group>";
+		};
 		3548B1DC2BDE29E400A87844 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,17 +366,18 @@
 				048C72B62BDBE9CE00865316 /* UserSearchBar.swift in Sources */,
 				048C72BE2BDCE99600865316 /* HtmlDocUploadView.swift in Sources */,
 				0402167B2BCE1A6900A7C922 /* SettingView.swift in Sources */,
+				048C72CF2BDF3F7300865316 /* HtmlLoadService.swift in Sources */,
 				040216772BCE19A300A7C922 /* DashBoardView.swift in Sources */,
-				048C72B22BDBE40100865316 /* ComplainVIew.swift in Sources */,
 				048C72562BD6337700865316 /* SideBarView.swift in Sources */,
 				EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */,
 				048C72642BD7909E00865316 /* BookListView.swift in Sources */,
 				048C72422BD4059200865316 /* UserService.swift in Sources */,
 				048C72B82BDCCB2E00865316 /* UserCSChatView.swift in Sources */,
+				048C72D72BE1165300865316 /* AddBookSearchView.swift in Sources */,
 				048C726A2BD7D6BD00865316 /* UserListView.swift in Sources */,
+				048C72DB2BE12A4600865316 /* UserRow.swift in Sources */,
 				048C724C2BD421B000865316 /* AccentButtonStyle.swift in Sources */,
 				048C72522BD6291400865316 /* SideBarGroup.swift in Sources */,
-				048C725E2BD7461200865316 /* BookManageView.swift in Sources */,
 				048C72782BD93B9A00865316 /* QnAService.swift in Sources */,
 				048C72742BD9256F00865316 /* NoticeView.swift in Sources */,
 				0402167E2BCE5CBB00A7C922 /* QnA.swift in Sources */,
@@ -371,7 +386,8 @@
 				040216792BCE19D500A7C922 /* QnAView.swift in Sources */,
 				048C72662BD7983B00865316 /* ImageCacheService.swift in Sources */,
 				048C72702BD8F8C800865316 /* CategroyEditView.swift in Sources */,
-				048C72492BD40ADD00865316 /* UserManageView.swift in Sources */,
+				048C72D12BDF659200865316 /* ComplainVIew.swift in Sources */,
+				048C72D92BE1166D00865316 /* AddBookWriteView.swift in Sources */,
 				048C727B2BD93D6A00865316 /* NoticeService.swift in Sources */,
 				048C72982BDB609500865316 /* BookAddView.swift in Sources */,
 				048C72502BD628E400865316 /* SideBarService.swift in Sources */,
@@ -513,6 +529,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookBillionaireAdmin/Info.plist;
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -522,7 +539,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -553,6 +570,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookBillionaireAdmin/Info.plist;
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -562,7 +580,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";

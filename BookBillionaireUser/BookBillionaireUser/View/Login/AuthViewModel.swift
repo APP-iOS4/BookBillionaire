@@ -14,7 +14,7 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
     static let shared = AuthViewModel()
     
     @Published public var state: AuthState = .loggedOut
-
+    @Published var errorMessage: String?  // Add this to handle error messages
     let signInMethod: SignInMethod = .email
     var currentUser: User? {
             if let user = Auth.auth().currentUser {
@@ -99,16 +99,22 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
         if let email = email, let password = password {
             Auth.auth().signIn(withEmail: email, password: password) { result, error in
                 if let error = error {
+                    // Update to handle the error by setting the errorMessage
+                    DispatchQueue.main.async {
+                        self.errorMessage = "아이디/패스워드가 일치 하지 않습니다."
+                    }
                     print("error: \(error.localizedDescription)")
                     return
                 }
-                
+
                 if result != nil {
                     self.state = .loggedIn
+                    // Clear the error message upon successful login
+                    DispatchQueue.main.async {
+                        self.errorMessage = nil
+                    }
                     print("사용자 이메일: \(String(describing: result?.user.email))")
-                    print("사용자 이름: \(String(describing: result?.user.displayName))") //nil 리턴
-                } else {
-
+                    print("사용자 이름: \(String(describing: result?.user.displayName))")
                 }
             }
         }
@@ -156,9 +162,11 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
     }
     
     // 이메일(식별자) 중복 체크
-    func checkEmailDuplication(_ email: String, completion: @escaping (Bool) -> Void) {
+    func checkEmailDuplication(_ email: String, excludingIdentifier identifier: String? = nil, completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
-        db.collection("User").whereField("emailEqualtoAuth", isEqualTo: email).getDocuments { snapshot, error in
+        let query = db.collection("User").whereField("emailEqualToAuth", isEqualTo: email)
+        
+        query.getDocuments { snapshot, error in
             if let error = error {
                 print("Error checking email duplication: \(error.localizedDescription)")
                 completion(false)
@@ -166,19 +174,31 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
             }
             
             if let snapshot = snapshot, !snapshot.isEmpty {
-                // 이미 사용 중인 이메일이 존재
-                completion(false)
+                // 검색된 문서 중에서 식별자가 일치하지 않는 문서만 고려
+                let documents = snapshot.documents.filter { document in
+                    return identifier == nil || document.documentID != identifier
+                }
+                
+                if !documents.isEmpty {
+                    // 제외된 식별자를 제외하고 사용 중인 이메일이 존재
+                    completion(false)
+                } else {
+                    // 사용 가능한 이메일
+                    completion(true)
+                }
             } else {
                 // 사용 가능한 이메일
                 completion(true)
             }
         }
     }
-    
+
     // 닉네임 중복 체크
-    func checkNicknameDuplication(_ nickname: String, completion: @escaping (Bool) -> Void) {
+    func checkNicknameDuplication(_ nickname: String, excludingIdentifier identifier: String? = nil, completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
-        db.collection("User").whereField("nickname", isEqualTo: nickname).getDocuments { snapshot, error in
+        let query = db.collection("User").whereField("nickname", isEqualTo: nickname)
+        
+        query.getDocuments { snapshot, error in
             if let error = error {
                 print("Error checking nickname duplication: \(error.localizedDescription)")
                 completion(false)
@@ -186,13 +206,50 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
             }
             
             if let snapshot = snapshot {
-                if !snapshot.isEmpty {
-                    // 중복된 닉네임이 존재
+                let documents = snapshot.documents.filter { document in
+                    return identifier == nil || document.documentID != identifier
+                }
+                
+                if !documents.isEmpty {
+                    // 제외된 식별자를 제외하고 중복된 닉네임이 존재
                     completion(false)
                 } else {
                     // 중복된 닉네임이 존재하지 않음
                     completion(true)
                 }
+            } else {
+                // 중복된 닉네임이 존재하지 않음
+                completion(true)
+            }
+        }
+    }
+    
+    func sendEmailVerification(newEmail: String, completion: @escaping (Bool) -> Void) {
+        guard let user = currentUser else {
+            print("No user is signed in.")
+            completion(false)
+            return
+        }
+
+        user.sendEmailVerification(beforeUpdatingEmail: newEmail, completion: { error in
+            if let error = error {
+                print("Error sending verification email: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                print("Verification email sent successfully to \(newEmail)")
+                completion(true)
+            }
+        })
+    }
+
+    func updateUserPassword(newPassword: String, completion: @escaping (Bool) -> Void) {
+        currentUser?.updatePassword(to: newPassword) { error in
+            if let error = error {
+                print("Error updating password: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                print("Password updated successfully")
+                completion(true)
             }
         }
     }

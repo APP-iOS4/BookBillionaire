@@ -33,7 +33,6 @@ class UserService: ObservableObject {
         } catch {
             print("Error fetching documents: \(error)")
         }
-        
     }
     
     /// 유저의 책정보 등록(관리용)
@@ -59,6 +58,17 @@ class UserService: ObservableObject {
         Task {
             await self.loadUsers()
         }
+    }
+    
+    // 유저 삭제용
+    func deleteUser(_ user: User) async {
+        do {
+            try await allUserRef.document(user.id).delete()
+            print("삭제완료")
+        } catch {
+            print("\(#function) Error removing document : \(error)")
+        }
+        self.fetchUsers()
     }
 }
 

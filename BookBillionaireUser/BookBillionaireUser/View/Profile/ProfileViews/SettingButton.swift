@@ -64,7 +64,7 @@ struct SettingButton: View {
             isGoToQandA = true
         case .policy:
             Task {
-                let htmlFiles = await htmlLoadService.loadHtml(file: .privatePolicy)
+                let htmlFiles = htmlLoadService.privatePolicy
                 if let privateFile = htmlFiles.first {
                     policyUrl = privateFile.url
                     isGoToPolicy = true
@@ -72,7 +72,7 @@ struct SettingButton: View {
             }
         case .termsOfouse:
             Task {
-                let htmlFiles = await htmlLoadService.loadHtml(file: .termsOfUse)
+                let htmlFiles = htmlLoadService.termsOfUse
                 if let termsFile = htmlFiles.first {
                     termsUrl = termsFile.url
                     isGoToTerms = true

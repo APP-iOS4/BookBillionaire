@@ -44,6 +44,7 @@ struct BookBillionaireUserApp: App {
                     await bookService.loadBooks()
                     await userService.loadUsers()
                     await rentalService.loadRentals()
+                    await htmlLoadService.fetchAllDocs()
                 }
         }
     }

@@ -12,95 +12,119 @@ import FirebaseStorage
 
 struct EditProfileView: View {
     @Binding var user: User
+    @Binding var selectedImage: UIImage?
+    
     @EnvironmentObject var userService: UserService
+    @Environment(\.dismiss) private var dismiss
+    
     @State var isShowingDialog: Bool = false
     @State private var isShowingPhotosPicker: Bool = false
-    @Binding var selectedImage: UIImage?
     @State private var selectedItem: PhotosPickerItem?
-    @Environment(\.dismiss) private var dismiss
-    @State var tempNickname: String = ""
     @State var tempAddress: String = ""
+    
+    @State private var nameText = ""
+    @State private var emailText = ""
+    @State private var passwordText = ""
+    @State private var passwordConfirmText = ""
+    @State private var nicknameValidated = false
+    @State private var emailValidated = false
+    @State private var disableControlls: Bool = false
+    
+    @StateObject private var locationManager = LocationManager()
+    
+    
     //    @State var imageUrl: URL?
     
     var body: some View {
-        VStack(alignment: .center, spacing: 30) {
-            Button {
-                isShowingDialog.toggle()
-            } label: {
-                ProfilePhoto(user: user, selectedImage: $selectedImage)
-                    .overlay(OverlayImage(imageName: "camera.circle.fill"), alignment: .bottomTrailing)
-            }
-            
-            VStack {
-                HStack {
-                    Text("닉네임")
-                        .font(.caption)
-                        .foregroundStyle(Color.gray)
-                    Spacer()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 10) {
+                Button {
+                    isShowingDialog.toggle()
+                } label: {
+                    ProfilePhoto(user: user, selectedImage: $selectedImage)
+                        .overlay(OverlayImage(imageName: "camera.circle.fill"), alignment: .bottomTrailing)
                 }
-                TextField("닉네임을 입력해주세요.", text: $tempNickname)
-                    .textFieldStyle(.roundedBorder)
-            }
-            
-            VStack {
+                
+                SignUpDetailView(nameText: $nameText, emailText: $emailText, passwordText: $passwordText, passwordConfirmText: $passwordConfirmText, nicknameValidated: $nicknameValidated, emailValidated: $emailValidated, disableControlls: $disableControlls)
                 HStack {
                     Text("주소")
-                        .font(.caption)
-                        .foregroundStyle(Color.gray)
+                        .foregroundStyle(.primary)
                     Spacer()
+                    Button(action: {
+                        locationManager.requestLocation()
+                        tempAddress = removeDuplicateWords(from: locationManager.currentAddress)
+                    }, label: {
+                        Text("주소인증")
+                            .foregroundColor(.primary)
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(.primary)
+                    })
+                    .padding(.trailing, 15)
                 }
                 TextField("주소를 입력해주세요.", text: $tempAddress)
-                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                    .background(.thinMaterial)
+                    .cornerRadius(10)
+                    .textInputAutocapitalization(.none)
+                    .autocapitalization(.none)
+                    .disabled(true)
             }
-            
-            Spacer()
-        }
-        .padding()
-        .onAppear {
-            tempNickname = user.nickName
-            tempAddress = user.address
-        }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    user.nickName = tempNickname
-                    user.address = tempAddress
-                    uploadPhoto()
-                    updateMyProfile()
-                    dismiss()
-                } label: {
-                    Text("저장")
+            .padding()
+            .onAppear {
+                nameText = user.nickName
+                emailText = user.email
+                tempAddress = user.address
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        user.nickName = nameText
+                        user.address = tempAddress
+                        uploadPhoto()
+                        updateMyProfile()
+                        dismiss()
+                    } label: {
+                        Text("저장")
+                    }
                 }
             }
-        }
-        .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItem, matching: .images)
-        .confirmationDialog("프로필", isPresented: $isShowingDialog, actions: {
-            Button{
-                isShowingPhotosPicker.toggle()
-            } label: {
-                Text("앨범에서 사진 선택")
-            }
-            
-            Button{
-                selectedItem = nil
-                selectedImage = UIImage(named: "defaultUser1")
-            } label: {
-                Text("기본 이미지로 변경")
-            }
-        }, message: {
-            Text("프로필 사진 설정")
-        })
-        .onChange(of: selectedItem) { _ in
-            Task {
-                if let selectedItem,
-                   let data = try? await selectedItem.loadTransferable(type: Data.self) {
-                    if let image = UIImage(data: data) {
-                        selectedImage = image
+            .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItem)
+            .confirmationDialog("프로필", isPresented: $isShowingDialog, actions: {
+                Button{
+                    isShowingPhotosPicker.toggle()
+                } label: {
+                    Text("앨범에서 사진 선택")
+                }
+                
+                Button{
+                    selectedItem = nil
+                    selectedImage = UIImage(named: "defaultUser1")
+                } label: {
+                    Text("기본 이미지로 변경")
+                }
+            }, message: {
+                Text("프로필 사진 설정")
+            })
+            .onChange(of: selectedItem) { _ in
+                Task {
+                    if let selectedItem,
+                       let data = try? await selectedItem.loadTransferable(type: Data.self) {
+                        if let image = UIImage(data: data) {
+                            selectedImage = image
+                        }
                     }
                 }
             }
         }
     }
+    
+    func removeDuplicateWords(from text: String) -> String {
+        let words = text.components(separatedBy: " ")
+        var seenWords = Set<String>()
+        let filteredWords = words.filter { seenWords.insert($0).inserted }
+        return filteredWords.joined(separator: " ")
+    }
+    
     private func uploadPhoto() {
         guard let selectedItem = selectedItem else {
             return
@@ -147,7 +171,20 @@ struct EditProfileView: View {
     private func updateMyProfile() {
         Task {
             if let currentUser = AuthViewModel.shared.currentUser {
-                await userService.updateUserByID(currentUser.uid, nickname: tempNickname, imageUrl: user.image ?? "defaultUser", address: user.address)
+                // 아이디/패스워드 변경 로직
+                AuthViewModel.shared.sendEmailVerification(newEmail: emailText) { success in
+                    if success {
+                        print("Please check your email to verify the new address.")
+                    }
+                }
+                AuthViewModel.shared.updateUserPassword(newPassword: passwordText) { success in
+                    if success {
+                        print("Password updated.")
+                    }
+                }
+                
+                // 파이어베이스 다큐먼트 변경 로직
+                await userService.updateUserByID(currentUser.uid, nickname: nameText, imageUrl: user.image ?? "defaultUser", address: user.address, emailEqualtoAuth: emailText)
             }
         }
     }
