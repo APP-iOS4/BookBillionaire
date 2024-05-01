@@ -219,20 +219,20 @@ class ChatListViewModel: ObservableObject {
     }
     
     /// Promise 컬렉션 약속 일정 저장하기
-    func createPromise(booktitle: String, bookId: String, ownerId: String, senderId: String, makeDate: Date, selectedTime: Date, selectedDate: Date) {
+    func createPromise(booktitle: String, bookId: String, ownerId: String, senderId: String, createAt: Date, selectedTime: Date, selectedDate: Date) {
         let promiseRef = db.collection("promises").document()
         
         let promise: [String: Any] = [
             "booktitle": booktitle,
             "bookId": bookId,
             "users": [ownerId, senderId],
-            "makeDate": makeDate,
+            "createAt": createAt,
             "promiseDate": selectedDate,
             "promiseTime": selectedTime
         ]
         
         promiseRef.setData(promise) { (error) in
-            if let error = error {
+            if error != nil {
                 print("Promise 문서 생성 중 오류 발생")
             } else {
                 print("Promise 문서 생성 완료")
@@ -241,18 +241,18 @@ class ChatListViewModel: ObservableObject {
     }
     
     /// Complain 컬렉션 보내기
-    func addComplaint(bookId: String, ownerId: String, senderId: String, makeDate: Date, reason: String) {
+    func addComplaint(bookId: String, ownerId: String, senderId: String, createAt: Date, reason: String) {
         let complainRef = db.collection("complain").document()
         
         let data: [String: Any] = [
             "bookId": bookId,
             "users": [ownerId, senderId],
-            "makeDate": makeDate,
+            "createAt": createAt,
             "reason": reason
         ]
         
         complainRef.setData(data) { error in
-            if let error = error {
+            if error != nil {
                 print("Complain 문서 생성 중 오류 발생")
             } else {
                 print("Complain 문서 생성 완료")
@@ -260,5 +260,26 @@ class ChatListViewModel: ObservableObject {
         }
     }
 
-
+    /// book.Id로 좌표를 불러오는 메서드
+    func fetchLatLongForBookId(_ bookId: String, completion: @escaping (Double?, Double?) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("rentals")
+            .whereField("bookID", isEqualTo: bookId)
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("불러오기 실패")
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents, !documents.isEmpty else {
+                    return
+                }
+                
+                if let latitude = documents.first?.data()["latitude"] as? Double,
+                   let longitude = documents.first?.data()["longitude"] as? Double {
+                    completion(latitude, longitude)
+                } else {
+                }
+            }
+    }
 }

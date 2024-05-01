@@ -187,7 +187,7 @@ struct ComplainView: View {
                 }
                 showAlert = true
                 
-                roomVM.addComplaint(bookId: book.id, ownerId: room.users[0], senderId: room.users[1], makeDate: Date(), reason: reason)
+                roomVM.addComplaint(bookId: book.id, ownerId: room.users[0], senderId: room.users[1], createAt: Date(), reason: reason)
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("신고하기")

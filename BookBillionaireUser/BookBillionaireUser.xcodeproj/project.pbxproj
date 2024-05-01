@@ -127,7 +127,6 @@
 		0882603D2BBD2AC3007BEA25 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseConfirmView.swift; sourceTree = "<group>"; };
-		089F0B8F2BDF9A4100760134 /* BookInfoBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoBubble.swift; sourceTree = "<group>"; };
 		089F0B912BDF9AC400760134 /* MeetingMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingMapView.swift; sourceTree = "<group>"; };
 		08BA5F8B2BE1DC5800DAA991 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../../Desktop/key.plist; sourceTree = "<group>"; };
 		08BA5F8C2BE1DC5800DAA991 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -263,7 +262,6 @@
 			children = (
 				EF0F74B82BBCFA6200E37D0D /* ChatView.swift */,
 				08C46D842BC2D7FA00DB6D1D /* ChatBubble.swift */,
-				089F0B8F2BDF9A4100760134 /* BookInfoBubble.swift */,
 			);
 			path = ChatRoom;
 			sourceTree = "<group>";

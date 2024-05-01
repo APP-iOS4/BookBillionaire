@@ -78,7 +78,7 @@ struct PromiseConfirmView: View {
             Spacer()
             
             Button("약속 잡기") {
-                roomVM.createPromise(booktitle: book.title, bookId: book.id, ownerId: room.users[0], senderId: room.users[1], makeDate: Date(), selectedTime: selectedTime, selectedDate: selectedDate)
+                roomVM.createPromise(booktitle: book.title, bookId: book.id, ownerId: room.users[0], senderId: room.users[1], createAt: Date(), selectedTime: selectedTime, selectedDate: selectedDate)
                 presentationMode.wrappedValue.dismiss()
                 showAlert = true
             }
