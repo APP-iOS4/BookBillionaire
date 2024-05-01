@@ -12,6 +12,9 @@ import BookBillionaireCore
 class BookService: ObservableObject {
     @Published var books: [Book] = []
     private let bookRef = Firestore.firestore().collection("books")
+    // 페이지네이션 필요 변수
+    private var nextDocument: DocumentSnapshot? // 다음 페이지의 시작점을 추적하는 변수
+    var isLastPage: Bool = false // 현재 페이지가 마지막 페이지인지 여부를 추적하는 변수
     
     /// 책을 등록하는 함수
     func registerBook(_ book: Book) -> Bool {
@@ -32,23 +35,33 @@ class BookService: ObservableObject {
     
     /// 유저들이 등록한 모든 책을 다 가져오는 함수
     func loadBooks() async {
-        do {
-            let querySnapshot = try await bookRef.getDocuments()
-            DispatchQueue.main.sync {
-                books = querySnapshot.documents.compactMap { document -> Book? in
-                    do {
-                        let book = try document.data(as: Book.self)
-                        return book
-                    } catch {
-                        print("Error decoding book: \(error)")
-                        return nil
+            guard isLastPage == false else { return } // 현재 페이지가 마지막 페이지라면 API 호출 ㄴㄴ
+            do {
+                var query = bookRef.limit(to: 10) //  한 번에 최대 10권의 책을 가져옴
+                if let nextDocument = nextDocument {
+                    query = query.start(afterDocument: nextDocument) // 다음 페이지의 시작점을 설정
+                }
+                let querySnapshot = try await query.getDocuments()
+                DispatchQueue.main.sync {
+                    books += querySnapshot.documents.compactMap { document -> Book? in
+                        do {
+                            let book = try document.data(as: Book.self) // 각 문서를 Book 객체로 변환
+                            return book
+                        } catch {
+                            print("Error decoding book: \(error)")
+                            return nil
+                        }
+                    }
+                    if querySnapshot.documents.isEmpty {
+                        isLastPage = true // 문서가 더 이상 없다면, 현재 페이지를 마지막 페이지로 설정
+                    } else {
+                        nextDocument = querySnapshot.documents.last // 다음 페이지의 시작점을 업데이트
                     }
                 }
+            } catch {
+                print("Error fetching documents: \(error)")
             }
-        } catch {
-            print("Error fetching documents: \(error)")
         }
-    }
     
     /// 책들 모두 패치
     func fetchBooks() {

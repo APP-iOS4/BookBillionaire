@@ -17,6 +17,8 @@ struct RentalBookDetailView: View {
     @State private var bookImageUrl: URL?
     @State private var userImageUrl: URL?
     @State private var loadedImage: UIImage?
+    @State private var isShowingReturnSheet: Bool = false
+    @State private var isShowingExtensionSheet: Bool = false
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy.MM.dd"
@@ -43,12 +45,12 @@ struct RentalBookDetailView: View {
                     
                 HStack {
                     Button("대여 연장") {
-                        
+                        isShowingExtensionSheet.toggle()
                     }
                     .buttonStyle(WhiteButtonStyle(height: 45))
                     
                     Button("대여 반납") {
-                        
+                        isShowingReturnSheet.toggle()
                     }
                     .buttonStyle(AccentButtonStyle(height: 45))
                 }
@@ -144,6 +146,14 @@ struct RentalBookDetailView: View {
                 }
             }
             .padding()
+        }
+        .sheet(isPresented: $isShowingExtensionSheet) {
+            RentalExtensionSheet(rental: rental, isShowingExtensionSheet: $isShowingExtensionSheet)
+                .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $isShowingReturnSheet) {
+            RentalReturnSheet(rental: rental, isShowingReturnSheet: $isShowingReturnSheet)
+                .presentationDetents([.medium])
         }
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)

@@ -44,29 +44,28 @@ struct SignUpDetailView: View {
                     .textInputAutocapitalization(.never)
                     .disabled(disableControlls)
                 Button(action: {
-                    if !nameText.isEmpty {
-                        if containsSpecialCharacters(nameText) {
-                            nicknameErrorTextColor = .red
-                            nicknameErrorText = "띄어쓰기 및 특수문자 입력이 제한됩니다."
-                            nicknameValidated = false
-                        } else {
-                            let UserUID = AuthViewModel.shared.state == .loggedIn ? AuthViewModel.shared.currentUser?.uid : nil
-                            print("😀😀😀😀UserUID: \(String(describing: UserUID))")
-                            authViewModel.checkNicknameDuplication(nameText, excludingIdentifier: UserUID) { isUnique in
-                                if !isUnique {
-                                    print("닉네임이 중복됩니다.")
-                                    nicknameErrorTextColor = .red
-                                    nicknameErrorText = "닉네임이 중복됩니다. 다른 닉네임을 사용해주세요."
-                                    nicknameValidated = false
-                                } else {
-                                    print("닉네임이 중복되지 않습니다.")
-                                    nicknameErrorTextColor = .blue
-                                    nicknameErrorText = "사용 가능한 닉네임 입니다."
-                                    nicknameValidated = true
-                                }
+                    if nameText.isEmpty || containsSpecialCharacters(nameText) {
+                        nicknameErrorTextColor = .red
+                        nicknameErrorText = "빈 값, 띄어쓰기 및 특수문자 입력이 제한됩니다."
+                        nicknameValidated = false
+                    } else {
+                        let UserUID = AuthViewModel.shared.state == .loggedIn ? AuthViewModel.shared.currentUser?.uid : nil
+                        print("😀😀😀😀UserUID: \(String(describing: UserUID))")
+                        authViewModel.checkNicknameDuplication(nameText, excludingIdentifier: UserUID) { isUnique in
+                            if !isUnique {
+                                print("닉네임이 중복됩니다.")
+                                nicknameErrorTextColor = .red
+                                nicknameErrorText = "닉네임이 중복됩니다. 다른 닉네임을 사용해주세요."
+                                nicknameValidated = false
+                            } else {
+                                print("닉네임이 중복되지 않습니다.")
+                                nicknameErrorTextColor = .blue
+                                nicknameErrorText = "사용 가능한 닉네임 입니다."
+                                nicknameValidated = true
                             }
                         }
                     }
+                    
                 }, label: {
                     Text("중복체크")
                         .foregroundColor(.primary)
@@ -94,10 +93,11 @@ struct SignUpDetailView: View {
                         emailErrorText2 = ""
                         emailValidated = false
                     })
-                    .disabled(disableControlls)
+                    .disabled(AuthViewModel.shared.currentUser?.uid.isEmpty == true)
                 Button(action: {
-                    if !signUpView.isValidEmail(emailText) {
-                        emailErrorText = "올바른 이메일 형식이 아닙니다."
+                    if emailText.isEmpty || !signUpView.isValidEmail(emailText) {
+                        isEmailError = true
+                        emailErrorText = "빈 값이거나 올바른 이메일 형식이 아닙니다."
                         emailErrorText2 = ""
                         emailValidated = false
                     } else {

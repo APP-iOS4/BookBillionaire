@@ -48,7 +48,14 @@ struct RentalBookListView: View {
                                     RentalBookDetailView(book: book, rental: rental, user: userService.loadUserByID(book.ownerID))
                                     .toolbar(.hidden, for: .tabBar)
                                 } label: {
-                                    BookItem(book: book)
+                                    HStack {
+                                        BookItem(book: book)
+                                        Text(returnDateText(rental.rentalEndDay))
+                                            .font(.subheadline)
+                                            .bold()
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.5)
+                                    }
                                 }
                             }
                         }
@@ -64,6 +71,26 @@ struct RentalBookListView: View {
         .onAppear {
             rentalService.fetchRentals()
             print("\(rentalBooks)")
+        }
+    }
+    
+    // 대여 반납일 함수
+    func returnDateText(_ returnDate: Date) -> String {
+        let calendar = Calendar.current
+        // 현재 날짜 반환
+        let now = calendar.startOfDay(for: Date())
+        // 대여 반납 날짜 반환
+        let returnDay = calendar.startOfDay(for: returnDate)
+        // 두 날짜 간의 차이를 일 단위로 계산
+        let components = calendar.dateComponents([.day], from: now, to: returnDay)
+        let remainingDays = components.day ?? 0
+        // 기간에 따른 텍스트 조건
+        if remainingDays > 0 {
+            return "D-\(remainingDays)"
+        } else if remainingDays == 0 {
+            return "오늘 반납일입니다"
+        } else {
+            return "반납일이 \(-remainingDays)일 지났습니다"
         }
     }
 }

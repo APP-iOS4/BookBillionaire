@@ -46,7 +46,6 @@
 		048C72D72BE1165300865316 /* AddBookSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72D62BE1165300865316 /* AddBookSearchView.swift */; };
 		048C72D92BE1166D00865316 /* AddBookWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72D82BE1166D00865316 /* AddBookWriteView.swift */; };
 		048C72DB2BE12A4600865316 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C72DA2BE12A4600865316 /* UserRow.swift */; };
-		3548B1E02BDE2C3B00A87844 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */; };
 		EF0F74A22BBCF80C00E37D0D /* BookBillionaireAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */; };
 		EF0F74A42BBCF80C00E37D0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F74A32BBCF80C00E37D0D /* ContentView.swift */; };
 		EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF0F74A52BBCF80E00E37D0D /* Assets.xcassets */; };
@@ -90,7 +89,6 @@
 		048C72D62BE1165300865316 /* AddBookSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookSearchView.swift; sourceTree = "<group>"; };
 		048C72D82BE1166D00865316 /* AddBookWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookWriteView.swift; sourceTree = "<group>"; };
 		048C72DA2BE12A4600865316 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
-		3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF0F749E2BBCF80C00E37D0D /* BookBillionaireAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBillionaireAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0F74A12BBCF80C00E37D0D /* BookBillionaireAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookBillionaireAdminApp.swift; sourceTree = "<group>"; };
 		EF0F74A32BBCF80C00E37D0D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -264,7 +262,6 @@
 		EF0F74A02BBCF80C00E37D0D /* BookBillionaireAdmin */ = {
 			isa = PBXGroup;
 			children = (
-				3548B1DF2BDE2C3B00A87844 /* GoogleService-Info.plist */,
 				048C72792BD93C6700865316 /* Info.plist */,
 				040216752BCE199500A7C922 /* Views */,
 				048C72442BD406EB00865316 /* Service */,
@@ -349,7 +346,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0F74A62BBCF80E00E37D0D /* Assets.xcassets in Resources */,
-				3548B1E02BDE2C3B00A87844 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

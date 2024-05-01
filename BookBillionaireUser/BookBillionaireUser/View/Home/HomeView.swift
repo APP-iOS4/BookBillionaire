@@ -36,29 +36,28 @@ struct HomeView: View {
                     }
                 }
                 //스크롤 위로 이동 버튼
-                    Image(systemName: "arrow.up")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 30, height: 30)
-                        .padding(10)
-                        .background(Color.accentColor)
-                        .foregroundStyle(.white)
-                        .clipShape(Circle())
-                        .onTapGesture {
-                            scrollView.scrollTo(scrollID, anchor: .top)
-                        }
-                        .offset(x: UIScreen.main.bounds.width/2 - 40, y: UIScreen.main.bounds.height/2 - 130)
-                }
-        }
-        .padding()
-        .onAppear {
-            userService.fetchUsers()
-            Task {
-                await bookService.loadBooks()
+                Image(systemName: "arrow.up")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30, height: 30)
+                    .padding(10)
+                    .background(Color.accentColor.opacity(0.8))
+                    .foregroundStyle(.white)
+                    .clipShape(Circle())
+                    .onTapGesture {
+                        scrollView.scrollTo(scrollID, anchor: .top)
+                    }
+                    .offset(x: UIScreen.main.bounds.width/2 - 40, y: UIScreen.main.bounds.height/2 - 130)
             }
         }
+        .padding()
         .onReceive(AuthViewModel.shared.$state) { _ in
             userService.currentUser = userService.loadUserByID(authViewModel.currentUser?.uid ?? "")
+        }
+  
+        .refreshable {
+            userService.fetchUsers()
+            bookService.fetchBooks()
         }
     }
 }
@@ -139,10 +138,18 @@ extension HomeView {
                         .background(Color.gray)
                         .padding(.vertical, 10)
                 }
-                .navigationDestination(for: Book.self) { book in
-                    BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: BookDetailViewModel(), selectedTab: $selectedTab)
+                if !bookService.isLastPage { // 추가적인 데이터가 있을 때만 보이도록
+                    // 불러오는거 딜레이 걸리는거 ProgressView 처리
+                    ProgressView()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                bookService.fetchBooks()
+                            }
+                        }
                 }
-                
+            }
+            .navigationDestination(for: Book.self) { book in
+                BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: BookDetailViewModel(), selectedTab: $selectedTab)
             }
         }
     }
