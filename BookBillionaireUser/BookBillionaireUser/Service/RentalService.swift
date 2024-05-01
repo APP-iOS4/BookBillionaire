@@ -49,6 +49,7 @@ class RentalService: ObservableObject {
            return rentaldays
        }
     
+    // 렌탈안에 정보를 가져오고자 하는 bookID를 찾는 함수
     func getRentalID(from bookID: String) async -> String? {
         let querySnapshot = try? await rentalRef.whereField("bookID", isEqualTo: bookID).getDocuments()
         return querySnapshot?.documents.first?.documentID
