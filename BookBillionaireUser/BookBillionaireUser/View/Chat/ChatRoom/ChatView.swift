@@ -8,29 +8,32 @@
 import SwiftUI
 import Combine
 import BookBillionaireCore
+import PhotosUI
+import FirebaseStorage
 
 struct ChatView: View {
     let room: RoomViewModel
     
     @StateObject private var messageListVM = ChatViewModel()
     @State var messageModel: Message = Message(message: "", senderName: "", roomId: "", timestamp: Date())
-    @State private var promiseViewShowing = false
     @State var messageText: String = ""
     @State private var cancellables: AnyCancellable?
-    @State private var plusItemShowing = false
+    @State private var selectedItem: PhotosPickerItem?
+    @State private var selectedImage: UIImage?
+    
     @State private var isPresentedExitAlert = false
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var userService : UserService
+    @EnvironmentObject var bookService : BookService
     
     var username: String? = AuthViewModel.shared.currentUser?.displayName
     
     var body: some View {
         VStack {
-            Divider()
             
             promiseBanner
                 .padding(.vertical, 10)
-            
-            Divider()
+                .padding(.top, 10)
             
             chatBubble
                 .padding(.top, 5)
@@ -39,29 +42,33 @@ struct ChatView: View {
             
             messageTextField
             
-            if plusItemShowing {
-                ChatPlusItem(message: $messageModel, messageText: $messageText, messageListVM: messageListVM)
-                    .padding(.bottom, 50)
-                    .padding(.top, 30)
-            }
         }
-        .navigationTitle(getUserName())
+        .navigationTitle(Text(roomName(users: room.room.users)))
         .navigationBarItems(trailing:
                                 exitView
         )
     }
     
+    private func roomName(users: [String]) -> String {
+        for user in users {
+            if user != userService.currentUser.id {
+                return userService.loadUserByID(user).nickName
+            }
+        }
+        return "사용자 이름없음"
+    }
+    
     private func getUserName() -> String {
-           guard let currentUser = AuthViewModel.shared.currentUser else {
-               return ""
-           }
-
-           if currentUser.displayName == room.receiverName {
-               return currentUser.displayName ?? ""
-           } else {
-               return room.receiverName
-           }
-       }
+        guard let currentUser = username else {
+            return ""
+        }
+        
+        if currentUser == room.receiverName {
+            return currentUser
+        } else {
+            return room.receiverName
+        }
+    }
     
     private func sendMessage() {
         let messageVS = Message(message: messageText, senderName: username ?? "", roomId: room.roomId, timestamp: Date(), imageUrl: messageModel.imageUrl)
@@ -73,77 +80,34 @@ struct ChatView: View {
     
     // MARK: - 상단 약속 잡기 배너
     private var promiseBanner: some View {
-        VStack {
-            HStack(alignment: .center) {
-                AsyncImage(url: URL(string:
-                                        "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F1103577%3Ftimestamp%3D20221025123259"
-                                   )) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 85, height: 100)
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.accentColor, lineWidth: 1)
-                )
-                .padding(.leading, 25)
-                .padding(.trailing, 10)
+        HStack(spacing: 0) {
+            Button {
                 
-                VStack(alignment: .leading) {
-                    
-                    Text("Clean Code(클린 코드)")
-                        .font(.headline)
-                        .bold()
-                    
-                    Text("『Clean Code(클린 코드)』은 오브젝트 멘토(Object Mentor)의 동료들과 힘을 모아 ‘개발하며’ 클린 코드를 만드는 최상의 애자일 기법을 소개하고 있다. 소프트웨어 장인 정신의 가치를 심어 주며 프로그래밍 실력을 높여줄 것이다. 여러분이 노력만 한다면. 어떤 노력이 필요하냐고? 코드를 읽어야 한다. 아주 많은 코드를. 그리고 코드를 읽으면서 그 코드의 무엇이 옳은지, 그른지 생각도 해야 한다. 좀 더 중요하게는 전문가로서 자신이 지니는 가치")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                        .lineLimit(2)
-                    
-                    HStack {
-                        Button("위치 확인") {
-                            // 장소 확인하는 버튼
-                        }
-                        .padding(7)
-                        .padding(.horizontal, 17)
-                        .font(.callout)
-                        .foregroundColor(Color(UIColor.label))
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.accent, lineWidth: 1.5))
-                        
-                        Spacer()
-                        
-                        Button("약속 잡기") {
-                            // 약속 잡기 뷰로 이동
-                            // promiseViewShowing.toggle()
-                            //            hideKeyboard()
-                            //        } label: {
-                            ////            NavigationLink(destination: PromiseConfirmView(user: User, book: <#Book#>)) {
-                            ////                Text("약속잡기")
-                            //            }
-                            
-                        }
-                        .padding(7)
-                        .padding(.horizontal, 17)
-                        .font(.callout)
-                        .foregroundColor(Color(UIColor.label))
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.accent, lineWidth: 1.5))
-                        
-                        Spacer()
-                    }
-                }
-                .padding(.trailing, 16)
-                
-                Spacer()
-                
+            } label: {
+                Text("위치확인")
+                    .font(.subheadline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
             }
-            .frame(height: 120)
+            
+            NavigationLink(destination: PromiseConfirmView(user: room.room.book.ownerNickname, room: room, book: room.room.book)) {
+                Text("약속잡기")
+                    .font(.system(size: 15))
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
+            }
+            
+            NavigationLink(destination: ComplainView(user: room.room.book.ownerNickname, room: room)) {
+                Text("신고하기")
+                    .font(.system(size: 15))
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
+            }
         }
+        .frame(maxHeight: 20)
     }
     
     // MARK: - 채팅 메세지 버블
@@ -161,7 +125,7 @@ struct ChatView: View {
                         }
                         .rotationEffect(Angle(degrees: 180))
                         .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-                        .padding(.vertical, 200)
+                        .padding(.vertical, 250)
                     }
                 } else {
                     LazyVStack {
@@ -228,16 +192,49 @@ struct ChatView: View {
         }
     }
     
-    // MARK: - 채팅 입력 텍스트필드
+    // MARK: - 채팅 입력 텍스트필드 + 사진 보내기 버튼
     private var messageTextField: some View {
         HStack {
-            Image(systemName: plusItemShowing ? "xmark" : "plus")
-                .foregroundStyle(.accent)
-                .onTapGesture {
-                    plusItemShowing.toggle()
+            GridRow {
+                Button {
                     hideKeyboard()
+                } label: {
+                    PhotosPicker(selection: $selectedItem, matching: .images) {
+                        Image(systemName: "photo.fill")
+                            .resizable()
+                            .frame(width: 27, height: 20)
+                            .foregroundStyle(Color.accentColor)
+                            .padding(.horizontal, 10)
+                    }
                 }
-                .padding(.horizontal, 10)
+                .onChange(of: selectedItem) { _ in
+                    Task {
+                        if let selectedItem,
+                           let data = try? await selectedItem.loadTransferable(type: Data.self) {
+                            if let image = UIImage(data: data) {
+                                selectedImage = image
+                                
+                                messageListVM.uploadPhoto(selectedImage: selectedImage) { imageURL in
+                                    if let imageURL = imageURL {
+                                        print("업로드 이미지 URL 받아오기 성공: \(imageURL) 🎉")
+                                        // 메세지 텍스트 필드로 url 전달
+                                        messageModel.imageUrl = imageURL
+                                        
+                                        if let urlString = messageModel.imageUrl?.absoluteString {
+                                            messageText = urlString
+                                            print("22=============\(String(describing: messageModel.imageUrl))")
+                                        }
+                                    } else {
+                                        // 이미지 업로드에 실패한 경우 또는 다운로드 URL을 가져오는 데 실패한 경우
+                                        print("업로드 이미지 URL 다운로드를 실패했습니다 🥲")
+                                    }
+                                }
+                            }
+                        }
+                        selectedItem = nil
+                    }
+                }
+            }
             
             TextField("메세지를 입력하세요.", text: $messageText)
                 .padding(10)
@@ -309,6 +306,6 @@ private func formatDate(_ date: Date) -> String {
     return dateFormatter.string(from: date)
 }
 
-#Preview {
-    ChatView(room: RoomViewModel(room: ChatRoom(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "", users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"])))
-}
+//#Preview {
+//    ChatView(room: RoomViewModel(room: ChatRoom(receiverName: "최준영", lastTimeStamp: Date(), lastMessage: "", users: ["985ZXtyszUYU9RCKYOaPZYALMyn1","f2tWX84q9Igvg2hpQogOhtvffkO2"], usersUnreadCountInfo: [:])))
+//}

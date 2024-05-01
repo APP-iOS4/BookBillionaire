@@ -1,6 +1,6 @@
 //
-//  HtmlLoadServicee.swift
-//  BookBillionaireUser
+//  HtmlLoadService.swift
+//  BookBillionaireAdmin
 //
 //  Created by YUJIN JEON on 4/29/24.
 //
@@ -22,7 +22,7 @@ class HtmlLoadServicee: ObservableObject {
                         let file = try document.data(as: FileTypeHtml.self)
                         return file
                     } catch {
-                        print("Error decoding book: \(error)")
+                        print("Error decoding HtmlFile: \(error)")
                         return nil
                     }
                 }

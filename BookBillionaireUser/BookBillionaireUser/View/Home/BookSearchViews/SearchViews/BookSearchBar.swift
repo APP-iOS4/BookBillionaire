@@ -12,10 +12,14 @@ struct BookSearchBar: View {
     @State var isSearching = false
     @Binding var searchBookText: String
     @Binding var filteredBooks: [Book]
-    @StateObject private var bookDetailViewModel = BookDetailViewModel(book: Book(), user: User(), rental: Rental(), rentalService: RentalService())
     @StateObject private var searchViewModel = SearchViewModel()
     @EnvironmentObject var userService: UserService
     @Binding var selectedTab: ContentView.Tab
+    @State private var currentPage = 1
+    let itemsPerPage = 10
+    private var currentRange: Range<Int> {
+        (currentPage - 1) * itemsPerPage ..< min(currentPage * itemsPerPage, filteredBooks.count)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -60,7 +64,6 @@ struct BookSearchBar: View {
                 } label: {
                     Image(systemName: "magnifyingglass")
                 }
-                
             }
             .padding(.bottom, 20)
             
@@ -89,8 +92,8 @@ struct BookSearchBar: View {
             } else {
                 recentSearchList
             }
-
-           
+            
+            
         }
         .navigationTitle("책 검색하기")
     }
@@ -110,11 +113,11 @@ extension BookSearchBar {
                 HStack {
                     Text("최근 검색어")
                         .font(.title3)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                     Spacer()
                     Text("전체 삭제")
                         .font(.body)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                         .onTapGesture {
                             searchViewModel.removeAllSearchHistory()
                             searchViewModel.searchBookText = ""
@@ -152,18 +155,36 @@ extension BookSearchBar {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text("검색된 책 목록")
+                    Text("검색된 책 목록 (\(filteredBooks.count)개)")
                         .font(.title3)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                     Spacer()
+                    
+                    HStack {
+                        Button {
+                            if currentPage > 1 {
+                                currentPage -= 1
+                            }
+                        } label: {
+                            Text("이전")
+                        }
+                        .disabled(currentPage == 1)
+                        
+                        Button {
+                            if filteredBooks.count > currentPage * itemsPerPage {
+                                currentPage += 1
+                            }
+                        } label: {
+                            Text("다음")
+                        }
+                        .disabled(filteredBooks.count <= currentPage * itemsPerPage)
+                    }
                 }
                 
                 if !filteredBooks.isEmpty {
-                    ForEach(filteredBooks) { book in
+                    ForEach(filteredBooks[currentRange]) { book in
                         NavigationLink {
-                            let bookDetailViewModel = BookDetailViewModel(book: book, user: userService.loadUserByID(book.ownerID), rental: Rental(), rentalService: RentalService())
-                            
-                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: bookDetailViewModel, selectedTab: $selectedTab)
+                            BookDetailView(book: book, user: userService.loadUserByID(book.ownerID), bookDetailViewModel: BookDetailViewModel(), selectedTab: $selectedTab)
                         } label: {
                             BookItem(book: book)
                         }

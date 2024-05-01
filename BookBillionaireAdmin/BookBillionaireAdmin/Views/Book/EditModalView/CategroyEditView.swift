@@ -9,7 +9,6 @@ import SwiftUI
 import BookBillionaireCore
 
 struct CategroyEditView: View {
-    
     @Binding var books: [Book]
     @State var bookCategory: BookCategory = .hometown
     @EnvironmentObject var bookService: BookService
