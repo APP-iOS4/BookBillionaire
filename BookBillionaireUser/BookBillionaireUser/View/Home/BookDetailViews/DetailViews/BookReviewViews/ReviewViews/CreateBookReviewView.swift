@@ -36,7 +36,7 @@ struct CreateBookReviewView: View {
             HStack {
                 Image(systemName: photoItemShowing ? "xmark" : "plus")
                     .padding(.horizontal, 10)
-                    .foregroundStyle(.accent)
+                    .foregroundStyle(Color.accentColor)
                     .onTapGesture {
                         photoItemShowing.toggle()
                     }

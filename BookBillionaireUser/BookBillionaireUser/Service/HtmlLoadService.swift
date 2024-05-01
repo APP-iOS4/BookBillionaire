@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import BookBillionaireCore
 
-class HtmlLoadServicee: ObservableObject {
+class HtmlLoadService: ObservableObject {
     @Published var privatePolicy: [FileTypeHtml] = []
     @Published var termsOfUse: [FileTypeHtml] = []
     

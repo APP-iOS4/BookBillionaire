@@ -113,11 +113,11 @@ extension BookSearchBar {
                 HStack {
                     Text("최근 검색어")
                         .font(.title3)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                     Spacer()
                     Text("전체 삭제")
                         .font(.body)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                         .onTapGesture {
                             searchViewModel.removeAllSearchHistory()
                             searchViewModel.searchBookText = ""
@@ -157,7 +157,7 @@ extension BookSearchBar {
                 HStack {
                     Text("검색된 책 목록 (\(filteredBooks.count)개)")
                         .font(.title3)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                     Spacer()
                     
                     HStack {

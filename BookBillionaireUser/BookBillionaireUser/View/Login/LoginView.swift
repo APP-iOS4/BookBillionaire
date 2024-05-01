@@ -7,7 +7,7 @@ struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var authViewModelGoogle: AuthViewModelGoogle
     @EnvironmentObject var userService: UserService
-    @EnvironmentObject var htmlService: HtmlLoadServicee
+    @EnvironmentObject var htmlService: HtmlLoadService
     @Environment(\.dismiss) private var dismiss
     
     @State var emailText: String = ""
@@ -121,6 +121,6 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(isPresentedLogin: .constant(true))
-            .environmentObject(HtmlLoadServicee())
+            .environmentObject(HtmlLoadService())
     }
 }

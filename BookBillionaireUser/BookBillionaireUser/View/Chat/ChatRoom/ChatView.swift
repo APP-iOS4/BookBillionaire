@@ -86,7 +86,6 @@ struct ChatView: View {
             } label: {
                 Text("위치확인")
                     .font(.subheadline)
-                    .foregroundStyle(.bbfont)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
@@ -95,7 +94,6 @@ struct ChatView: View {
             NavigationLink(destination: PromiseConfirmView(user: room.room.book.ownerNickname, room: room, book: room.room.book)) {
                 Text("약속잡기")
                     .font(.system(size: 15))
-                    .foregroundStyle(.bbfont)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
@@ -104,7 +102,6 @@ struct ChatView: View {
             NavigationLink(destination: ComplainView(user: room.room.book.ownerNickname, room: room)) {
                 Text("신고하기")
                     .font(.system(size: 15))
-                    .foregroundStyle(.bbfont)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
@@ -206,7 +203,7 @@ struct ChatView: View {
                         Image(systemName: "photo.fill")
                             .resizable()
                             .frame(width: 27, height: 20)
-                            .foregroundStyle(.accent)
+                            .foregroundStyle(Color.accentColor)
                             .padding(.horizontal, 10)
                     }
                 }

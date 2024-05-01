@@ -45,7 +45,7 @@ struct ComplainView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .resizable()
                                     .frame(width: 25, height: 25, alignment: .center)
-                                    .foregroundStyle(.accent)
+                                    .foregroundStyle(Color.accentColor)
                             } else {
                                 Image(systemName: "circle")
                                     .resizable()
@@ -72,7 +72,7 @@ struct ComplainView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .resizable()
                                     .frame(width: 25, height: 25, alignment: .center)
-                                    .foregroundStyle(.accent)
+                                    .foregroundStyle(Color.accentColor)
                             } else {
                                 Image(systemName: "circle")
                                     .resizable()
@@ -99,7 +99,7 @@ struct ComplainView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .resizable()
                                     .frame(width: 25, height: 25, alignment: .center)
-                                    .foregroundStyle(.accent)
+                                    .foregroundStyle(Color.accentColor)
                             } else {
                                 Image(systemName: "circle")
                                     .resizable()
@@ -126,7 +126,7 @@ struct ComplainView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .resizable()
                                     .frame(width: 25, height: 25, alignment: .center)
-                                    .foregroundStyle(.accent)
+                                    .foregroundStyle(Color.accentColor)
                             } else {
                                 Image(systemName: "circle")
                                     .resizable()
