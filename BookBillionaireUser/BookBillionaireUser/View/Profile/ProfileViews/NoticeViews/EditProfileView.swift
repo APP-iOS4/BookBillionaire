@@ -147,7 +147,7 @@ struct EditProfileView: View {
     private func updateMyProfile() {
         Task {
             if let currentUser = AuthViewModel.shared.currentUser {
-                await userService.updateUserByID(currentUser.uid, nickname: tempNickname, imageUrl: user.image ?? "defaultUser", address: user.address)
+                await userService.updateUserByID(currentUser.uid, nickname: tempNickname, imageUrl: user.image ?? "defaultUser", address: user.address, emailEqualtoAuth: user.email)
             }
         }
     }
