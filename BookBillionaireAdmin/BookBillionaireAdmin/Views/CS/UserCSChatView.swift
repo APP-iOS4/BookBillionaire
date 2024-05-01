@@ -16,7 +16,7 @@ struct UserCSChatView: View {
             HStack(spacing: 0) {
                 ZStack{
                     Rectangle()
-                        .fill(Color.red)
+                        .fill(Color.bbBGcolor)
                         .frame(width: geometry.size.width / 3)
                     VStack{
                         UserSearchBar(result: $result)
@@ -34,7 +34,7 @@ struct UserCSChatView: View {
                 }
                 ZStack{
                     Rectangle()
-                        .fill(Color.blue)
+                        .fill(Color.bbBGcolor)
                         .frame(width: 2 * geometry.size.width / 3)
                 }
             }

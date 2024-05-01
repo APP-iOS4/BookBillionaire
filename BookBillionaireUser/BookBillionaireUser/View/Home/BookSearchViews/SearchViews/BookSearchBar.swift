@@ -14,7 +14,9 @@ struct BookSearchBar: View {
     @Binding var filteredBooks: [Book]
     @StateObject private var searchViewModel = SearchViewModel()
     @EnvironmentObject var userService: UserService
+    @EnvironmentObject var bookService: BookService
     @Binding var selectedTab: ContentView.Tab
+    // 검색관련 리스트 한 페이지 당 최대 10
     @State private var currentPage = 1
     let itemsPerPage = 10
     private var currentRange: Range<Int> {
@@ -53,7 +55,7 @@ struct BookSearchBar: View {
                         searchViewModel.saveSearchHistory()
                         
                         Task {
-                            let searchResults = await searchViewModel.searchBooksByTitle(title: searchViewModel.searchBookText)
+                            let searchResults = await bookService.searchBooksByTitle(title: searchViewModel.searchBookText)
                             DispatchQueue.main.async {
                                 self.filteredBooks = searchResults // filteredBooks에 결과 할당
                                 self.isSearching = true
@@ -105,6 +107,7 @@ struct BookSearchBar: View {
         .environmentObject(UserService())
 }
 
+//MARK: - 최근 검색어 리스트
 extension BookSearchBar {
     var recentSearchList: some View {
         ScrollView(showsIndicators: false) {
@@ -113,11 +116,11 @@ extension BookSearchBar {
                 HStack {
                     Text("최근 검색어")
                         .font(.title3)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                     Spacer()
                     Text("전체 삭제")
                         .font(.body)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                         .onTapGesture {
                             searchViewModel.removeAllSearchHistory()
                             searchViewModel.searchBookText = ""
@@ -149,7 +152,7 @@ extension BookSearchBar {
         }
     }
 }
-
+//MARK: - 검색된 책 목록
 extension BookSearchBar {
     var bookSearchList: some View {
         ScrollView(showsIndicators: false) {
@@ -157,7 +160,7 @@ extension BookSearchBar {
                 HStack {
                     Text("검색된 책 목록 (\(filteredBooks.count)개)")
                         .font(.title3)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                     Spacer()
                     
                     HStack {

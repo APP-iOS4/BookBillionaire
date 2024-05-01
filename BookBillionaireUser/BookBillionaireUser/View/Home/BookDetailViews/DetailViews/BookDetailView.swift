@@ -32,14 +32,12 @@ struct BookDetailView: View {
     @State private var isChatViewPresented = false
     @Binding var selectedTab: ContentView.Tab
     @State private var chatRoomId: String?
-//    @State private var bookInfoBubble: BookInfoBubble = BookInfoBubble()
+    
     
     var body: some View {
-        ScrollView {
+        ScrollView(.vertical, showsIndicators: false) {
             bookDetailImage
-                .frame(height: 333)
-                .padding(.top, 30)
-            
+                .padding(.bottom, 100)
             VStack(alignment: .leading) {
                 bookTitleView
                 // 채팅하기 버튼 채팅방으로 이동
@@ -135,45 +133,47 @@ struct BookDetailView: View {
                 }
             }
         }
+        .ignoresSafeArea(.all, edges: .top)
     }
-    
+    // 디테일 뷰에 표시될 대여기간 표시
     func fetchRentalInfo(from bookID: String) async {
         if let rentalID = await rentalService.getRentalID(from: bookID) {
             let (startDate, endDate) = await rentalService.getRentalDay(rentalID)
             bookDetailViewModel.rentalTime = (startDate, endDate)
         }
     }
-
+    
 }
 
 #Preview {
     let book = Book(ownerID: "", ownerNickname: "", title: "브라질에서 주식을 사라 비가 내리면", contents: "줄거리", authors: [""], translators: ["야호"], rentalState: .rentalAvailable)
     let user = User(nickName: "닉네임", address: "주소", email: "aaa@gmail.com")
+    
+    
+    return BookDetailView(book: book, user: user, bookDetailViewModel: BookDetailViewModel(), selectedTab: .constant(.home))
+        .environmentObject(AuthViewModel())
+        .environmentObject(UserService())
+        .environmentObject(RentalService())
+        .navigationBarTitleDisplayMode(.inline)
+}
 
-       
-       return BookDetailView(book: book, user: user, bookDetailViewModel: BookDetailViewModel(), selectedTab: .constant(.home))
-           .environmentObject(AuthViewModel())
-           .environmentObject(UserService())
-           .environmentObject(RentalService())
-           .navigationBarTitleDisplayMode(.inline)
-   }
-
+//MARK: - 상단의 책 이미지
 extension BookDetailView {
     var bookDetailImage: some View {
-        ZStack{
+        GeometryReader { geometry in
             if let url = imageUrl, !url.absoluteString.isEmpty {
                 if let loadedImage = loadedImage {
                     Image(uiImage: loadedImage)
-                        .resizable(resizingMode: .stretch)
-                        .ignoresSafeArea()
+                        .resizable()
                         .blur(radius: 8.0, opaque: true)
+                        .frame(width:geometry.size.width, height: geometry.size.height)
                         .background(Color.gray)
                 } else {
                     Image("default")
-                        .resizable(resizingMode: .stretch)
-                        .ignoresSafeArea()
+                        .resizable()
                         .blur(radius: 8.0, opaque: true)
                         .background(Color.gray)
+                        .frame(width:geometry.size.width, height: geometry.size.height)
                         .onAppear {
                             ImageCache.shared.getImage(for: url) { image in
                                 loadedImage = image
@@ -182,37 +182,39 @@ extension BookDetailView {
                 }
             } else {
                 Image("default")
-                    .resizable(resizingMode: .stretch)
-                    .ignoresSafeArea()
+                    .resizable()
                     .blur(radius: 8.0, opaque: true)
+                    .frame(width:geometry.size.width, height: geometry.size.height)
                     .background(Color.gray)
             }
-            
-            VStack(alignment: .center){
-                UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
-                    .frame(height: 300)
-                    .foregroundStyle(colorScheme == .dark ? .black : .white)
-                    .padding(.top, 300)
-            }
-            
-            GeometryReader { geometry in
-                if let image = loadedImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: 200, height: 300)
-                        .background(Color.gray)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                } else {
-                    Image(uiImage: UIImage(named: "default") ?? UIImage())
-                        .resizable()
-                        .frame(width: 200, height: 300)
-                        .background(Color.gray)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+            ZStack{
+                VStack(alignment: .center){
+                    UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 25.0, topTrailing: 25.0))
+                        .frame(height: 150)
+                        .foregroundStyle(colorScheme == .dark ? .black : .white)
+                }
+                
+                GeometryReader { geometry in
+                    if let image = loadedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 200, height: 300)
+                            .background(Color.gray)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
+                    } else {
+                        Image(uiImage: UIImage(named: "default") ?? UIImage())
+                            .resizable()
+                            .frame(width: 200, height: 300)
+                            .background(Color.gray)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
+                    }
                 }
             }
+            .position(x: geometry.size.width / 2, y: geometry.size.height)
         }
+        .frame(height: UIScreen.main.bounds.height / 2) // screen size
         .onAppear {
             // 앞글자에 따라 imageURL에 할당하는 조건
             if book.thumbnail.hasPrefix("http://") || book.thumbnail.hasPrefix("https://") {
@@ -232,6 +234,7 @@ extension BookDetailView {
     }
 }
 
+//MARK: - 책 이름, 대여 상태, 즐겨찾기
 extension BookDetailView {
     var bookTitleView: some View {
         HStack(alignment: .center){
@@ -262,6 +265,8 @@ extension BookDetailView {
         }
     }
 }
+
+//MARK: - 기본 정보 섹션
 extension BookDetailView {
     var bookDetailInfo: some View {
         VStack(alignment: .leading) {

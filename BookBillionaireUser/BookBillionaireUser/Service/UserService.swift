@@ -58,7 +58,7 @@ class UserService: ObservableObject {
             print("\(#function) 유저정보에서 책 ID를 제거하는 걸 실패했음☄️ \(error)")
         }
     }
-
+    
     /// 유저 ID로 유저 정보를 불러오는 함수
     func loadUserByID(_ UserID: String) -> User {
         return users.filter { $0.id == UserID }.first ?? User()
@@ -71,11 +71,12 @@ class UserService: ObservableObject {
         }
     }
     
-    func updateUserByID(_ userID: String, nickname: String, imageUrl: String, address: String) async {
+    func updateUserByID(_ userID: String, nickname: String, imageUrl: String, address: String, emailEqualtoAuth: String) async {
         let userRef = allUserRef.document(userID)
         do {
             try await userRef.updateData([
                 "nickname": nickname,
+                "emailEqualtoAuth": emailEqualtoAuth,
                 "profileImage": imageUrl,
                 "address": address
             ])
@@ -120,7 +121,7 @@ class UserService: ObservableObject {
             return nil
         }
     }
-    
+    // 즐겨찾기의 체크 여부
     func checkFavoriteStatus(bookID: String) async -> Bool {
         let userRef = allUserRef.document(currentUser.id)
         do {
@@ -136,7 +137,7 @@ class UserService: ObservableObject {
             return false
         }
     }
-    
+    // 즐겨찾기 개수 Int로 반환해서 카운트를 가져옴
     func getFavoriteBooksCount(userID: String) async -> Int {
         let userRef = allUserRef.document(currentUser.id)
         do {
@@ -152,6 +153,7 @@ class UserService: ObservableObject {
         }
     }
     
+    // 즐겨찾기한 책의 이미지 불러오는 함수 -> 이건 사용 안하고있는데 일단 냅둠
     func getFavoriteBooksImages(userID: String) async -> [String: URL] {
         var images: [String: URL] = [:]
         let userRef = allUserRef.document(currentUser.id)
@@ -179,7 +181,7 @@ class UserService: ObservableObject {
         return images
     }
     
-
+    // 보유한 도서 개수를 Int로 반환해서 카운트를 가져옴
     func getMyBookCount(userID: String) async -> Int {
         let userRef = allUserRef.document(currentUser.id)
         do {
@@ -195,8 +197,8 @@ class UserService: ObservableObject {
             return 0
         }
     }
-
-
+    
+    
 }
 
 

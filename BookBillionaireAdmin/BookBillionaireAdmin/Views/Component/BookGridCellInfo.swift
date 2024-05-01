@@ -22,7 +22,7 @@ struct BookGridCellInfo: View {
                 Capsule()
                     .stroke(Color.accentColor)
                     .frame(height: 25)
-                Text( book.bookCategory?.buttonTitle ?? "카테고리 미설정")
+                Text( book.bookCategory?.buttonTitle ?? "미설정")
                     .padding(.horizontal)
             }
             .fixedSize()

@@ -16,7 +16,7 @@ struct ComplainView: View {
             HStack(spacing: 0) {
                 ZStack{
                     Rectangle()
-                        .fill(Color.red)
+                        .fill(Color.bbBGcolor)
                         .frame(width: geometry.size.width / 3)
                     VStack{
                         
@@ -24,10 +24,16 @@ struct ComplainView: View {
                 }
                 ZStack{
                     Rectangle()
-                        .fill(Color.blue)
+                        .fill(Color.bbBGcolor)
                         .frame(width: 2 * geometry.size.width / 3)
                 }
             }
-        }
+        }.navigationTitle(topic.name)
+    }
+}
+
+#Preview {
+    NavigationStack{
+        ComplainView(topic:  Topic(name: "신고 유저 관리", Icon: "exclamationmark.triangle.fill", topicTitle: .complain))
     }
 }

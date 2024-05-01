@@ -63,8 +63,8 @@ class BookService: ObservableObject {
     }
     
     /// 책 ID로 책을 필터링 하는 함수
-    func filterByBookID(_ bookID: String) -> [Book] {
-        return books.filter { $0.id == bookID }
+    func filterByBookID(_ bookID: String) -> Book? {
+        return books.first { $0.id == bookID }
     }
     
     /// 카테고리 별 책 리스트 나열
@@ -118,12 +118,46 @@ class BookService: ObservableObject {
                 "contents" : book.contents,
                 "thumbnail" : book.thumbnail,
                 "title" : book.title,
-                "rentalState" : book.rentalState.rawValue
+                "rentalState" : book.rentalState.rawValue,
+                "rental" : book.rental
             ])
             print("책 변경 성공")
         } catch let error {
             print("Error updating book: \(error)")
         }
         self.fetchBooks()
+    }
+    
+    // 책 검색 필터 (서치바)
+    func searchBooksByTitle(title: String) async -> [Book] {
+        var searchResult: [Book] = []
+        do {
+            let querySnapshot = try await bookRef.getDocuments()
+            searchResult = querySnapshot.documents.compactMap { document -> Book? in
+                do {
+                    let book = try document.data(as: Book.self)
+                    // 책 제목에 검색어의 각 문자를 포함하는지 확인
+                    let titleCharacters = Array(title)
+                    
+                    let contained = titleCharacters.allSatisfy { character in
+                        return (book.title).localizedCaseInsensitiveContains(String(character))
+                    }
+                    
+                    if contained {
+                        return book
+                    } else {
+                        return nil
+                    }
+                } catch {
+                    print("디코딩 오류: \(error)")
+                    return nil
+                }
+            }
+            print("검색 결과: \(searchResult)")
+            print("부분 일치 검색 결과: \(searchResult)")
+        } catch {
+            print("문서를 가져오는 중에 오류가 발생했습니다: \(error)")
+        }
+        return searchResult
     }
 }

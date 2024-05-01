@@ -23,10 +23,6 @@ struct NoticeView: View {
 //
 //                    }
                 }
-                TextEditor(text: .constant("Placeholder"))
-                Button("QnA 등록하기") {
-                    noticeService.registerNotice(notice)
-                }
             }
         }
         .navigationTitle(topic.name)

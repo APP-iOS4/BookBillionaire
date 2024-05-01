@@ -15,7 +15,7 @@ struct HomeView: View {
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var authViewModel: AuthViewModel
     @Binding var selectedTab: ContentView.Tab
-    @Namespace private var scrollID
+    @Namespace private var scrollID // 스크롤 이동할 위치 찍어주기
     var filteredBooks: [Book] {
         return bookService.filterByCategory(menuTitle)
     }
@@ -32,23 +32,23 @@ struct HomeView: View {
                             .id(scrollID)
                         menuScrollView
                             .padding(.vertical, 20)
-                        
                         bookListView
                     }
                 }
-                Image(systemName: "arrow.up")
-                    .resizable()
-                    .frame(width: 10, height: 10)
-                    .padding()
-                    .background(Color.gray.opacity(0.8))
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-                    .clipShape(Circle())
-                    .onTapGesture {
-                        scrollView.scrollTo(scrollID, anchor: .top)
-                    }
-                    .offset(x: UIScreen.main.bounds.width/2 - 40, y: UIScreen.main.bounds.height/2 - 130)
-            }
+                //스크롤 위로 이동 버튼
+                    Image(systemName: "arrow.up")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .padding(10)
+                        .background(Color.accentColor)
+                        .foregroundStyle(.white)
+                        .clipShape(Circle())
+                        .onTapGesture {
+                            scrollView.scrollTo(scrollID, anchor: .top)
+                        }
+                        .offset(x: UIScreen.main.bounds.width/2 - 40, y: UIScreen.main.bounds.height/2 - 130)
+                }
         }
         .padding()
         .onAppear {
@@ -70,7 +70,7 @@ struct HomeView: View {
         .environmentObject(AuthViewModel())
 }
 
-
+//MARK: - 헤더
 extension HomeView {
     var headerView: some View {
         HStack(alignment: .center) {
@@ -89,7 +89,7 @@ extension HomeView {
         }
     }
 }
-
+//MARK: - 메뉴 버튼
 extension HomeView {
     var menuScrollView: some View {
         ScrollViewReader { proxy in
@@ -115,7 +115,7 @@ extension HomeView {
         }
     }
 }
-
+//MARK: - 카테고리별 메뉴 리스트
 extension HomeView {
     var bookListView: some View {
         VStack(alignment: .leading) {

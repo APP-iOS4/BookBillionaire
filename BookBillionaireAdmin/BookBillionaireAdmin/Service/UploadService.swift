@@ -46,7 +46,7 @@ class UploadService : ObservableObject {
         // StorageReference 인스턴스 생성
         let storageRef = storage.reference().child("\(subject.rawValue)/\(localFile.lastPathComponent)")
         storageRef.getMetadata{ (metadata, error) in
-            if let error = error {
+            if error != nil {
                 // Uh-oh, an error occurred!
             } else {
                 // Metadata is nil if the file does not exist
@@ -76,6 +76,12 @@ class UploadService : ObservableObject {
                             }
                         }
                     }
+                    uploadTask.observe(.progress) { (snapshot) in
+                            print((snapshot.progress?.fractionCompleted ?? 0) * 100.0)
+                            if snapshot.status == .success || snapshot.status == .failure {
+                                uploadTask.removeAllObservers(for: .progress)
+                            }
+                        }
                 }
             }
         }

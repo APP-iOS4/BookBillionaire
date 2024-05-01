@@ -160,7 +160,7 @@ struct BookInfoAddView: View {
     }
 }
 
-#Preview {
-    BookInfoAddView(book: .constant(Book()), selectedImage: .constant(UIImage(resource: .default)))
-}
+//#Preview {
+//    BookInfoAddView(book: .constant(Book()), selectedImage: .constant(UIImage(resource: .default)))
+//}
 
