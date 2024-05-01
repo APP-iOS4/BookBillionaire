@@ -84,7 +84,7 @@ struct ProfileView: View {
     }
     func logout() {
         do {
-            try Auth.auth().signOut()
+            AuthViewModel.shared.signOut()
             authViewModel.state = .loggedOut // 로그아웃 상태로 변경
             userEmail = nil // 이메일 초기화
             userUID = nil // UID 초기화
