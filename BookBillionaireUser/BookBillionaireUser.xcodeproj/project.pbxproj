@@ -96,6 +96,11 @@
 		EF1AA4E62BBE7BC700B248A7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4E52BBE7BC700B248A7 /* FirebaseAuthCombine-Community */; };
 		EF1AA4EA2BBE7BC700B248A7 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4E92BBE7BC700B248A7 /* FirebaseFirestoreCombine-Community */; };
 		EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */; };
+		EF6BA8D62BE1DDC300253D5C /* OverlayImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF32242BCCDF5400DA478F /* OverlayImage.swift */; };
+		EF6BA8D92BE1DE4300253D5C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF6BA8D72BE1DE4300253D5C /* GoogleService-Info.plist */; };
+		EF6BA8DA2BE1DE4300253D5C /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF6BA8D82BE1DE4300253D5C /* key.plist */; };
+		EF6BA8DC2BE1DFE600253D5C /* RentalReturnSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BA8DB2BE1DFE600253D5C /* RentalReturnSheet.swift */; };
+		EF6BA8DE2BE1E00500253D5C /* RentalExtensionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BA8DD2BE1E00500253D5C /* RentalExtensionSheet.swift */; };
 		EF6C38A32BCFD3ED00098E18 /* RentalCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C38A22BCFD3ED00098E18 /* RentalCreateView.swift */; };
 		EF6C38A52BCFE60D00098E18 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C38A42BCFE60D00098E18 /* MapView.swift */; };
 		EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7A2B942BBF99A00068D100 /* CameraView.swift */; };
@@ -191,6 +196,10 @@
 		EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookListView.swift; sourceTree = "<group>"; };
 		EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreateView.swift; sourceTree = "<group>"; };
+		EF6BA8D72BE1DE4300253D5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF6BA8D82BE1DE4300253D5C /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = key.plist; sourceTree = "<group>"; };
+		EF6BA8DB2BE1DFE600253D5C /* RentalReturnSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalReturnSheet.swift; sourceTree = "<group>"; };
+		EF6BA8DD2BE1E00500253D5C /* RentalExtensionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalExtensionSheet.swift; sourceTree = "<group>"; };
 		EF6C38A22BCFD3ED00098E18 /* RentalCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCreateView.swift; sourceTree = "<group>"; };
 		EF6C38A42BCFE60D00098E18 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EF7A2B942BBF99A00068D100 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -616,6 +625,8 @@
 			children = (
 				EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */,
 				EFFF88502BDA333E00676424 /* RentalBookDetailView.swift */,
+				EF6BA8DB2BE1DFE600253D5C /* RentalReturnSheet.swift */,
+				EF6BA8DD2BE1E00500253D5C /* RentalExtensionSheet.swift */,
 			);
 			path = RentalBookListView;
 			sourceTree = "<group>";
@@ -681,6 +692,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
@@ -779,6 +793,7 @@
 				04A59A912BBFCF6A009FBF6E /* APISearchView.swift in Sources */,
 				35EAF2112BCF67F80051B38B /* BookDetailOwnerRowView.swift in Sources */,
 				35F057072BDB857600409B21 /* NoticeView.swift in Sources */,
+				EF6BA8DC2BE1DFE600253D5C /* RentalReturnSheet.swift in Sources */,
 				04A59A982BC19813009FBF6E /* AccentButtonStyle.swift in Sources */,
 				EFFF88512BDA333E00676424 /* RentalBookDetailView.swift in Sources */,
 				35EAF2122BCF67F80051B38B /* BookDetailReviewView.swift in Sources */,
@@ -807,6 +822,7 @@
 				EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */,
 				8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */,
 				8C85928D2BBD23BD0082C8B8 /* SignUpView.swift in Sources */,
+				EF6BA8DE2BE1E00500253D5C /* RentalExtensionSheet.swift in Sources */,
 				8C85928E2BBD23BD0082C8B8 /* LoginView.swift in Sources */,
 				EF0F74882BBCF7C500E37D0D /* BookBillionaireUserApp.swift in Sources */,
 				353704572BCD183D00E6F531 /* CustomAlert.swift in Sources */,
