@@ -25,7 +25,7 @@ struct HomeView: View {
             ZStack {
                 VStack {
                     headerView
-                    ScrollView(showsIndicators: true) {
+                    ScrollView(showsIndicators: false) {
                         HomeBanner()
                             .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 500 : 200)
                             .padding(.top)
