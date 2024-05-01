@@ -12,7 +12,6 @@ struct LoginView: View {
     
     @State var emailText: String = ""
     @State var passwordText: String = ""
-#endif
     
     @Binding var isPresentedLogin: Bool
     @State private var isSignUpScreen: Bool = false

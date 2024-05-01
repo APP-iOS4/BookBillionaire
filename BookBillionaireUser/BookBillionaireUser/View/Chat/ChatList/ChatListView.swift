@@ -89,7 +89,7 @@ struct RoomCellView: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("<\(room.room.book.title)>")
                         .lineLimit(1)
-                        //.foregroundStyle(.black)
+                        .foregroundStyle(.bbfont)
                         .font(.system(size: 14))
                     
                     HStack {
