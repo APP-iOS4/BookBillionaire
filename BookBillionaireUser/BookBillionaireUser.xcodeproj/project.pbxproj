@@ -76,9 +76,7 @@
 		8C1E20F12BC7AE8900D92E95 /* AuthViewModelGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */; };
 		8C1E20F32BC7AF0D00D92E95 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */; };
 		8C47EADB2BDF359200037CDB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C47EADA2BDF359200037CDB /* LocationManager.swift */; };
-		8C47EAEC2BE1E29200037CDB /* AuthViewModelApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C47EAEB2BE1E29200037CDB /* AuthViewModelApple.swift */; };
 		8C47EAEE2BE1E2B000037CDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C47EAED2BE1E2B000037CDB /* GoogleService-Info.plist */; };
-		8C47EAF02BE1E2BA00037CDB /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C47EAEF2BE1E2BA00037CDB /* key.plist */; };
 		8C5748B32BD886EE00F2554D /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B02BD886EE00F2554D /* BarcodeScannerViewController.swift */; };
 		8C5748B42BD886EE00F2554D /* CaemraBarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B12BD886EE00F2554D /* CaemraBarcodeScanner.swift */; };
 		8C5748B62BD8870400F2554D /* SignUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5748B52BD8870400F2554D /* SignUpDetailView.swift */; };
@@ -96,11 +94,10 @@
 		EF1AA4E62BBE7BC700B248A7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4E52BBE7BC700B248A7 /* FirebaseAuthCombine-Community */; };
 		EF1AA4EA2BBE7BC700B248A7 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA4E92BBE7BC700B248A7 /* FirebaseFirestoreCombine-Community */; };
 		EF1AA4F22BBE81FD00B248A7 /* BookCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */; };
-		EF6BA8D62BE1DDC300253D5C /* OverlayImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF32242BCCDF5400DA478F /* OverlayImage.swift */; };
-		EF6BA8D92BE1DE4300253D5C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF6BA8D72BE1DE4300253D5C /* GoogleService-Info.plist */; };
-		EF6BA8DA2BE1DE4300253D5C /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF6BA8D82BE1DE4300253D5C /* key.plist */; };
 		EF6BA8DC2BE1DFE600253D5C /* RentalReturnSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BA8DB2BE1DFE600253D5C /* RentalReturnSheet.swift */; };
 		EF6BA8DE2BE1E00500253D5C /* RentalExtensionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BA8DD2BE1E00500253D5C /* RentalExtensionSheet.swift */; };
+		EF6BA8E02BE287CC00253D5C /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF6BA8DF2BE287CC00253D5C /* key.plist */; };
+		EF6BA8E22BE2880600253D5C /* AuthViewModelApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BA8E12BE2880600253D5C /* AuthViewModelApple.swift */; };
 		EF6C38A32BCFD3ED00098E18 /* RentalCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C38A22BCFD3ED00098E18 /* RentalCreateView.swift */; };
 		EF6C38A52BCFE60D00098E18 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6C38A42BCFE60D00098E18 /* MapView.swift */; };
 		EF7A2B952BBF99A00068D100 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7A2B942BBF99A00068D100 /* CameraView.swift */; };
@@ -108,7 +105,6 @@
 		EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C83092BBE63B6009D59FB /* BookInfoAddView.swift */; };
 		EF8178CD2BBD749700ADAE2E /* RentalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8178CC2BBD749700ADAE2E /* RentalInfoView.swift */; };
 		EF88A1842BC4E6AC00E0EEAA /* BookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF88A1832BC4E6AC00E0EEAA /* BookItem.swift */; };
-		EFE1D8172BDF2DD5005268F1 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		EFF5583A2BCABF9E003DC096 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF558392BCABF9E003DC096 /* Toast.swift */; };
 		EFFF88512BDA333E00676424 /* RentalBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF88502BDA333E00676424 /* RentalBookDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -135,7 +131,6 @@
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseConfirmView.swift; sourceTree = "<group>"; };
 		089F0B912BDF9AC400760134 /* MeetingMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingMapView.swift; sourceTree = "<group>"; };
-		08BA5F902BE1DF0400DAA991 /* AuthViewModelApple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewModelApple.swift; path = ../../../../../../../Downloads/AuthViewModelApple.swift; sourceTree = "<group>"; };
 		08C46D7C2BC2D40700DB6D1D /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		08C46D7E2BC2D4A700DB6D1D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		08C46D802BC2D61300DB6D1D /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
@@ -174,9 +169,7 @@
 		8C1E20F22BC7AF0D00D92E95 /* AuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		8C47EADA2BDF359200037CDB /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8C47EADE2BDF42AA00037CDB /* BookBillionaireUser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookBillionaireUser.entitlements; sourceTree = "<group>"; };
-		8C47EAEB2BE1E29200037CDB /* AuthViewModelApple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewModelApple.swift; path = ../../../../../../../Downloads/AuthViewModelApple.swift; sourceTree = "<group>"; };
 		8C47EAED2BE1E2B000037CDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8C47EAEF2BE1E2BA00037CDB /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../../Downloads/key.plist; sourceTree = "<group>"; };
 		8C5748B02BD886EE00F2554D /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		8C5748B12BD886EE00F2554D /* CaemraBarcodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaemraBarcodeScanner.swift; sourceTree = "<group>"; };
 		8C5748B52BD8870400F2554D /* SignUpDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpDetailView.swift; sourceTree = "<group>"; };
@@ -196,10 +189,10 @@
 		EF0F74D32BBD472D00E37D0D /* RentalBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalBookListView.swift; sourceTree = "<group>"; };
 		EF0F74D52BBD6FF600E37D0D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		EF1AA4F12BBE81FD00B248A7 /* BookCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreateView.swift; sourceTree = "<group>"; };
-		EF6BA8D72BE1DE4300253D5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EF6BA8D82BE1DE4300253D5C /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = key.plist; sourceTree = "<group>"; };
 		EF6BA8DB2BE1DFE600253D5C /* RentalReturnSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalReturnSheet.swift; sourceTree = "<group>"; };
 		EF6BA8DD2BE1E00500253D5C /* RentalExtensionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalExtensionSheet.swift; sourceTree = "<group>"; };
+		EF6BA8DF2BE287CC00253D5C /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../key.plist; sourceTree = "<group>"; };
+		EF6BA8E12BE2880600253D5C /* AuthViewModelApple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModelApple.swift; sourceTree = "<group>"; };
 		EF6C38A22BCFD3ED00098E18 /* RentalCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCreateView.swift; sourceTree = "<group>"; };
 		EF6C38A42BCFE60D00098E18 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EF7A2B942BBF99A00068D100 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -509,7 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				8C47EAED2BE1E2B000037CDB /* GoogleService-Info.plist */,
-				8C47EAEF2BE1E2BA00037CDB /* key.plist */,
+				EF6BA8DF2BE287CC00253D5C /* key.plist */,
 				8C47EADE2BDF42AA00037CDB /* BookBillionaireUser.entitlements */,
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
@@ -568,7 +561,7 @@
 				8C8592892BBD23BC0082C8B8 /* AuthViewModel.swift */,
 				04A59AB32BC4FDE0009FBF6E /* UnlogginedView.swift */,
 				8C1E20F02BC7AE8900D92E95 /* AuthViewModelGoogle.swift */,
-				8C47EAEB2BE1E29200037CDB /* AuthViewModelApple.swift */,
+				EF6BA8E12BE2880600253D5C /* AuthViewModelApple.swift */,
 				8C5748B52BD8870400F2554D /* SignUpDetailView.swift */,
 			);
 			path = Login;
@@ -731,7 +724,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				048C72E52BE1CC0200865316 /* Assets.xcassets in Resources */,
-				8C47EAF02BE1E2BA00037CDB /* key.plist in Resources */,
+				EF6BA8E02BE287CC00253D5C /* key.plist in Resources */,
 				8C47EAEE2BE1E2B000037CDB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -779,8 +772,6 @@
 				35EAF2182BCF67FE0051B38B /* Reviews.swift in Sources */,
 				EF7C830A2BBE63B6009D59FB /* BookInfoAddView.swift in Sources */,
 				8C47EADB2BDF359200037CDB /* LocationManager.swift in Sources */,
-				EFE1D8172BDF2DD5005268F1 /* (null) in Sources */,
-				8C47EAEC2BE1E29200037CDB /* AuthViewModelApple.swift in Sources */,
 				04A59A922BBFCF6A009FBF6E /* APISearchListRowView.swift in Sources */,
 				04A59A992BC19813009FBF6E /* WhiteButtonStyle.swift in Sources */,
 				EF0F748A2BBCF7C500E37D0D /* ContentView.swift in Sources */,
@@ -811,6 +802,7 @@
 				35FCF1182BD76D3900A49EFD /* HomeBanner.swift in Sources */,
 				EF0F74D22BBD38FA00E37D0D /* MyBookListView.swift in Sources */,
 				35082EFC2BCCDF140008AA90 /* SearchViewModel.swift in Sources */,
+				EF6BA8E22BE2880600253D5C /* AuthViewModelApple.swift in Sources */,
 				04A59AB42BC4FDE0009FBF6E /* UnlogginedView.swift in Sources */,
 				35F057032BDB837000409B21 /* NoticeItem.swift in Sources */,
 				048C72E02BE1C48600865316 /* HtmlLoadService.swift in Sources */,
@@ -982,7 +974,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TeamBB.BookBillionaireUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1021,7 +1013,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TeamBB.BookBillionaireUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
