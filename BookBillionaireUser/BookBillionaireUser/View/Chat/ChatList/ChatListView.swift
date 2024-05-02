@@ -112,7 +112,7 @@ struct RoomCellView: View {
         .padding(.horizontal, 15)
         
         Divider()
-        
+    
     }
     
     func roomName(users: [String]) -> String {
