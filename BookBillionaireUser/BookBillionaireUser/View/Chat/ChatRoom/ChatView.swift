@@ -33,8 +33,7 @@ struct ChatView: View {
         VStack {
             
             promiseBanner
-                .padding(.vertical, 10)
-                .padding(.top, 10)
+                .padding(.bottom, 5)
             
             chatBubble
                 .padding(.top, 5)
@@ -81,35 +80,37 @@ struct ChatView: View {
     
     // MARK: - 상단 약속 잡기 배너
     private var promiseBanner: some View {
-        HStack(spacing: 0) {
-            NavigationLink(destination: MeetingMapView(book: room.room.book, roomVM: roomVM)) {
-                Text("위치확인")
-                    .font(.subheadline)
-                    .foregroundStyle(.bbfont)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
+        VStack {
+            Divider()
+            HStack(spacing: 0) {
+                NavigationLink(destination: MeetingMapView(book: room.room.book, roomVM: roomVM)) {
+                    Text("위치확인")
+                        .font(.subheadline)
+                        .foregroundStyle(.bbfont)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                }
+                Divider()
+                NavigationLink(destination: PromiseConfirmView(user: room.room.book.ownerNickname, room: room, roomVM: roomVM, book: room.room.book)) {
+                    Text("약속잡기")
+                        .font(.subheadline)
+                        .foregroundStyle(.bbfont)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                }
+                Divider()
+                NavigationLink(destination: ComplainView(user: room.room.book.ownerNickname, room: room, roomVM: roomVM, book: room.room.book)) {
+                    Text("신고하기")
+                        .font(.subheadline)
+                        .foregroundStyle(.bbfont)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                }
             }
-            
-            NavigationLink(destination: PromiseConfirmView(user: room.room.book.ownerNickname, room: room, roomVM: roomVM, book: room.room.book)) {
-                Text("약속잡기")
-                    .font(.subheadline)
-                    .foregroundStyle(.bbfont)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
-            }
-            
-            NavigationLink(destination: ComplainView(user: room.room.book.ownerNickname, room: room, roomVM: roomVM, book: room.room.book)) {
-                Text("신고하기")
-                    .font(.subheadline)
-                    .foregroundStyle(.bbfont)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(RoundedRectangle(cornerRadius: 0).strokeBorder())
-            }
+            .frame(maxHeight: 20)
+            .padding(.vertical, 10)
+            Divider()
         }
-        .frame(maxHeight: 20)
     }
     
     // MARK: - 채팅 메세지 버블

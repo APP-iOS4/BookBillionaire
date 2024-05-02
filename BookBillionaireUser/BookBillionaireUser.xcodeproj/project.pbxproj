@@ -39,8 +39,8 @@
 		088260462BBD2B85007BEA25 /* PromiseConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */; };
 		089F0B922BDF9AC400760134 /* MeetingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F0B912BDF9AC400760134 /* MeetingMapView.swift */; };
 		08BA5F8F2BE1DE1300DAA991 /* OverlayImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCF32242BCCDF5400DA478F /* OverlayImage.swift */; };
-		08BA5F942BE28F9600DAA991 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08BA5F922BE28F9600DAA991 /* GoogleService-Info.plist */; };
-		08BA5F952BE28F9600DAA991 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08BA5F932BE28F9600DAA991 /* key.plist */; };
+		08BA5F982BE31C5000DAA991 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08BA5F962BE31C5000DAA991 /* GoogleService-Info.plist */; };
+		08BA5F992BE31C5000DAA991 /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08BA5F972BE31C5000DAA991 /* key.plist */; };
 		08C46D7D2BC2D40700DB6D1D /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D7C2BC2D40700DB6D1D /* ChatRoom.swift */; };
 		08C46D7F2BC2D4A700DB6D1D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D7E2BC2D4A700DB6D1D /* Message.swift */; };
 		08C46D812BC2D61300DB6D1D /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C46D802BC2D61300DB6D1D /* ChatListViewModel.swift */; };
@@ -131,8 +131,8 @@
 		0882603F2BBD2B0C007BEA25 /* ComplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplainView.swift; sourceTree = "<group>"; };
 		088260452BBD2B85007BEA25 /* PromiseConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseConfirmView.swift; sourceTree = "<group>"; };
 		089F0B912BDF9AC400760134 /* MeetingMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingMapView.swift; sourceTree = "<group>"; };
-		08BA5F922BE28F9600DAA991 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		08BA5F932BE28F9600DAA991 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = ../../../../../Desktop/key.plist; sourceTree = "<group>"; };
+		08BA5F962BE31C5000DAA991 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/BookBillionaire 백업/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		08BA5F972BE31C5000DAA991 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = key.plist; path = "../../../../../Desktop/BookBillionaire 백업/key.plist"; sourceTree = "<group>"; };
 		08C46D7C2BC2D40700DB6D1D /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		08C46D7E2BC2D4A700DB6D1D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		08C46D802BC2D61300DB6D1D /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
@@ -505,8 +505,8 @@
 				04A59A8D2BBFCF3E009FBF6E /* SearchAPI */,
 				04A59A3E2BBD29A5009FBF6E /* Service */,
 				8C76334E2BBD3DCF002EF297 /* Info.plist */,
-				08BA5F922BE28F9600DAA991 /* GoogleService-Info.plist */,
-				08BA5F932BE28F9600DAA991 /* key.plist */,
+				08BA5F962BE31C5000DAA991 /* GoogleService-Info.plist */,
+				08BA5F972BE31C5000DAA991 /* key.plist */,
 				EF0F74872BBCF7C500E37D0D /* BookBillionaireUserApp.swift */,
 				EF0F74B02BBCF99000E37D0D /* View */,
 				EF0F748B2BBCF7C700E37D0D /* Assets.xcassets */,
@@ -724,8 +724,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				048C72E52BE1CC0200865316 /* Assets.xcassets in Resources */,
-				08BA5F952BE28F9600DAA991 /* key.plist in Resources */,
-				08BA5F942BE28F9600DAA991 /* GoogleService-Info.plist in Resources */,
+				08BA5F992BE31C5000DAA991 /* key.plist in Resources */,
+				08BA5F982BE31C5000DAA991 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
