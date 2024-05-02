@@ -233,7 +233,7 @@ class AuthViewModel: ObservableObject, AuthViewModelProtocol {
         
         // 정상 작동하지 않음
         user.updateEmail(to: newEmail) { error in
-            if let error = error {
+            if error != nil {
                 completion(false)
             } else {
                 completion(true)
